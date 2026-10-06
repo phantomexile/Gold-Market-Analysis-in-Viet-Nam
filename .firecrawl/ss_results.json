@@ -1,0 +1,803 @@
+{
+  "q1_safe_haven": {
+    "count": 15,
+    "query": "gold safe haven asset crisis financial market",
+    "papers": [
+      {
+        "paperId": "ffb54ebcd5479ee8c61e1c109cd29e37bc809431",
+        "url": "https://www.semanticscholar.org/paper/ffb54ebcd5479ee8c61e1c109cd29e37bc809431",
+        "title": "Comparative Study on the Safe-Haven Asset Characteristics of Bitcoin and Gold",
+        "venue": "Journal of Modern Accounting and Auditing",
+        "year": 2025,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "https://www.davidpublisher.com/Public/uploads/Contribute/6940abdce641e.pdf",
+          "status": "GOLD",
+          "license": "CCBYNC",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.17265/1548-6583/2025.04.004?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.17265/1548-6583/2025.04.004, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2399482304",
+            "name": "Zuoqi Guo"
+          }
+        ],
+        "abstract": "With the increasingly turbulent political situation and the outbreak of public health events without warning, it will not only affect people’s physical health, but also affect the global financial market, causing the market to fall into a huge crisis, thus leading to a continued decline in the worldwide economy. During periods of financial market turmoil, many investors fall into panic and urgently need a “haven” to protect their assets. With the rise of the digital economy, gold no longer seems to be the only safe-haven option. Bitcoin has gradually entered the investors’ field of vision. Some investors believe that Bitcoin can become an emerging safe-haven asset that is as important as or surpasses gold. Based on an analysis of the safe-haven properties of Bitcoin and gold during major political and historical events and public health events, this article will clarify which of the two is more suitable as a reliable contemporary safe-haven asset and provide advice to investors."
+      },
+      {
+        "paperId": "3e7be9f0d7dacf5ce2d6cf894104157d95754e4c",
+        "url": "https://www.semanticscholar.org/paper/3e7be9f0d7dacf5ce2d6cf894104157d95754e4c",
+        "title": "Safe haven or risky bet? A study of gold prices during Indian stock market volatility",
+        "venue": "Economy",
+        "year": 2025,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "https://asianonlinejournals.com/index.php/Economy/article/download/7726/3349",
+          "status": "GOLD",
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.20448/economy.v12i2.7726?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.20448/economy.v12i2.7726, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "144934038",
+            "name": "Amalendu Bhunia"
+          },
+          {
+            "authorId": "2389994215",
+            "name": "Amit Das"
+          }
+        ],
+        "abstract": "The purpose of this study was to investigate whether gold served as a safe haven or a risky asset during periods of heightened volatility in the Indian stock market. Given India’s cultural and economic attachment to gold, this study explored the dynamic relationship between gold prices and stock market fluctuations, particularly during times of financial uncertainty. Using daily data from 2005 to 2023, the research employed GARCH (1,1), EGARCH (1,1), and DCC-GARCH models to analyze both the unconditional and time-varying correlations between gold returns and Nifty 50 returns. The findings revealed that gold exhibited significant safe-haven characteristics during extreme market downturns, offering protection to investors against stock market losses, with strong volatility persistence in both markets and significant leverage effects in the stock market. The DCC-GARCH model showed that gold exhibited a negative correlation with equities, particularly during periods of global financial crisis (2008–09), COVID-19 crash (2020), and Russia-Ukraine conflict (2022), confirming its role as a safe haven. The practical implications of this study are particularly relevant for investors, portfolio managers, and policymakers. Investors can use gold as an effective diversification tool to mitigate stock market risk, while policymakers can monitor gold price movements as indicators of investor sentiment and financial stability. The study contributed to the understanding of gold’s dual role in the Indian financial system as both a safe-haven asset and a speculative instrument, depending on market conditions."
+      },
+      {
+        "paperId": "62d1c6837d91b8174ae0332f19589cd757ff13df",
+        "url": "https://www.semanticscholar.org/paper/62d1c6837d91b8174ae0332f19589cd757ff13df",
+        "title": "The roles of gold, US dollar, and bitcoin as safe-haven assets in times of crisis",
+        "venue": "Cogent Economics &amp; Finance",
+        "year": 2024,
+        "citationCount": 23,
+        "openAccessPdf": {
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23322039.2024.2322876?needAccess=true",
+          "status": "GOLD",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1080/23322039.2024.2322876?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1080/23322039.2024.2322876, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2290347339",
+            "name": "Van Le Thi Thuy"
+          },
+          {
+            "authorId": "32755160",
+            "name": "Tran Thi Kim Oanh"
+          },
+          {
+            "authorId": "2290334252",
+            "name": "Nguyen Thi Hong Ha"
+          }
+        ],
+        "abstract": "Abstract Using the GJR-GARCH method, this study examines the safe-haven role of gold, US dollar, and Bitcoin over a period including the global financial crisis, the COVID-19 pandemic and the Russia-Ukraine conflict from 3 April 2006 to 19 May 2023. The study supports the hypothesis that the safe-haven role of assets changes over periods of crisis. Specifically, gold loses its role as a safe-haven asset during the COVID-19 pandemic, but this role has been restored in the Dutch, US and German markets during the Russia-Ukraine conflict. Similarly, Bitcoin is not a safe-haven asset during the COVID-19 pandemic but is a strong safe-haven asset for the stock markets of some European countries, and a weak safe-haven asset for China when the Russia-Ukraine conflict occurred. Only the USD acts as a stable safe-haven asset through periods of crisis. However, this role is weakened in Russia. These results partly help investors and portfolio managers choose a safe haven for their assets, especially during volatile market periods. Impact Statement Investors often want to protect their assets by diversifying their investment portfolios or using risk prevention tools. Especially when the financial market encounters instability caused by the crisis, investors tend to look for safe-haven assets such as precious metals, foreign currencies, and cryptocurrencies. This study re-evaluates the safe-haven role of gold, USD, and Bitcoin during the Russia-Ukraine conflict, then compares the research results with two previous crises, GFC 2008 and the COVID-19 pandemic. Research results help investors choose appropriate assets during market volatility."
+      },
+      {
+        "paperId": "eb9261fbc2a0a9c71d9ea6512be1b982f2fad196",
+        "url": "https://www.semanticscholar.org/paper/eb9261fbc2a0a9c71d9ea6512be1b982f2fad196",
+        "title": "Risk mitigation in a volatile US equity market: A comparative analysis of hedging with index futures and investing in gold as a safe haven",
+        "venue": "Przegląd Statystyczny. Statistical Review",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "http://ps.stat.gov.pl/PS/2026/2/gus_ps_2026_02_krzysztof_echaust_agnieszka_lach_risk_mitigation_in_a_volatile_US_equity_market.pdf",
+          "status": "GOLD",
+          "license": "CCBYSA",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.59139/ps.2026.02.3?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.59139/ps.2026.02.3, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2097209083",
+            "name": "Krzysztof Echaust"
+          },
+          {
+            "authorId": "2322924645",
+            "name": "Agnieszka Lach"
+          }
+        ],
+        "abstract": "The aim of this paper is to compare two alternative strategies for protecting a US stock market portfolio against market risk during four major stock market crashes: the Global Financial Crisis, the European Sovereign Debt Crisis, the COVID-19 pandemic and the Russia-Ukraine war. Hedging with the S&P 500 index futures is compared with investing in gold as a safe haven based on the risk minimisation criterion. The effectiveness of the protection strategies is verified for portfolios that differ in terms of the number of constituents which range from single-asset to well-diversified portfolios. The results vary depending on the specific crisis, portfolio size and time horizon. However, hedging with index futures tended to provide more effective long-term protection, particularly for larger portfolios."
+      },
+      {
+        "paperId": "f0ad8011cc3951b96d7588885cf5d0bd3cc80bda",
+        "url": "https://www.semanticscholar.org/paper/f0ad8011cc3951b96d7588885cf5d0bd3cc80bda",
+        "title": "How has the relationship between safe haven assets and the US stock market changed after the global financial crisis?",
+        "venue": "",
+        "year": 2021,
+        "citationCount": 7,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/J.INTFIN.2021.101351?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/J.INTFIN.2021.101351, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2056548088",
+            "name": "Y. Sakurai"
+          }
+        ],
+        "abstract": "Abstract In this paper, I investigate how the relationship between safe haven assets and the US stock market has changed since the global financial crisis. To do so, I propose a new concept of bear-market correlation which allows us to see the effectiveness of the safe haven asset as a hedge and portfolio diversification tool. I compute the bear-market correlation of five safe haven assets during two sample periods, pre-financial crisis (1995–2009) and post-financial crisis (2010–2018). My findings are as follows: First, I find that the empirical bear-market correlations are not explained by multivariate normal and t-distributions. Second, I document that the bear-market correlations of both the Japanese yen and gold show notable changes after the crisis. Third, I estimate a multivariate normal mixture, a multivariate t-distribution mixture, and a generalized dynamic conditional correlation model. I document that these mixture models outperform the dynamic conditional correlation model in most cases. Finally, I discuss the economic impact of failing to capture the bear-market correlation for portfolio optimization."
+      },
+      {
+        "paperId": "88d878a558f8b50aff048715bfe05269957ff31f",
+        "url": "https://www.semanticscholar.org/paper/88d878a558f8b50aff048715bfe05269957ff31f",
+        "title": "The Safe Heaven Appeal of Gold: A Comparative Analysis of Gold Price and Nifty50 Index during Financial Crises",
+        "venue": "International Journal of Emerging Knowledge Studies",
+        "year": 2024,
+        "citationCount": 1,
+        "openAccessPdf": {
+          "url": "",
+          "status": "CLOSED",
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.70333/ijeks-03-09-045?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.70333/ijeks-03-09-045, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2332829776",
+            "name": "G. Kumar"
+          },
+          {
+            "authorId": "2332619109",
+            "name": "D. Saluja"
+          }
+        ],
+        "abstract": "The historical view of gold as a trustworthy investment has made it a popular choice as a place of refuge resource during seasons of financial strife. This study looks at how the bullion market responds to financial crises and how the perceived safety of gold during a period of uncertainty affects market behaviour. This research looks at how gold prices, investor actions, and market liquidity have changed throughout various economic downturns, like the Coronavirus pandemic and the 2008 monetary emergency. The paper evaluates the effect of gold's safe-haven status on market performance and investor trust using both quantitative and qualitative methods. The findings show that although demand for gold rises during times of crisis, other factors like market speculation, fluctuations in interest rates, and changes in currency values also have an impact on price movements of gold. The study highlights the complex relationship that exists between the market dynamics of gold and its role as a protective asset, providing a comprehensive understanding of the metal's behaviour during financial instability. These findings offer insightful guidance for investors and policymakers navigating economic downturns and add to the larger discussion on asset diversification and risk management techniques."
+      },
+      {
+        "paperId": "ebad087ec49c8a60eeeb8713e2894d35c7988ab7",
+        "url": "https://www.semanticscholar.org/paper/ebad087ec49c8a60eeeb8713e2894d35c7988ab7",
+        "title": "Global uncertainty and potential shelters: gold, bitcoin, and currencies as weak and strong safe havens for main world stock markets",
+        "venue": "Financial Innovation",
+        "year": 2024,
+        "citationCount": 27,
+        "openAccessPdf": {
+          "url": "https://jfin-swufe.springeropen.com/counter/pdf/10.1186/s40854-023-00589-w",
+          "status": "GOLD",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1186/s40854-023-00589-w?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1186/s40854-023-00589-w, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "1398236357",
+            "name": "Ewa Feder-Sempach"
+          },
+          {
+            "authorId": "104345376",
+            "name": "Piotr Szczepocki"
+          },
+          {
+            "authorId": "1395026743",
+            "name": "Joanna Bogołębska"
+          }
+        ],
+        "abstract": "This article investigates five safe-haven asset responses from 2014 to 2022, including the unprecedented COVID-19 crisis, Russian invasion of Ukraine, and sharp US interest rate increases of 2015 and 2022. We apply the unique approach of the multivariate factor stochastic volatility (MSV) model, which is extremely efficient for financial market analysis and allows us to conduct dynamic factor analysis of safe-haven relationships that cannot be observed directly. The research sample consists of five prospective safe-haven assets—gold, bitcoin, the euro, the Japanese yen, and the Swiss franc—and five primary world stock market indices—the S&P 500, Financial Times Stock Exchange (FTSE) 100, DAX, STOXX Europe 600, and Nikkei 225. Our findings are useful for investors searching for the best safe-haven assets among gold, bitcoin, and currencies to hedge against financial turmoil in global stock markets. Our unique findings suggest that safe-haven effects work differently for gold and the yen; that is, the Japanese yen acts as the strongest safe haven across all stock indices. Bitcoin is not a strong safe-haven currency since it has zero days of negative correlations with the considered stock indices, but it is a weak safe-haven during times of financial distress. Consequently, we state that strong and weak safe-haven properties vary across time and place. The novelty of our study lies in the methodological complexity of the MSV model (used for the first time to find the best safe-haven asset properties), dynamic factor analysis, a long-term research sample covering the Russian invasion of Ukraine in 2022, and an international investor perspective focusing on the world’s leading stock markets. We extend earlier studies by analyzing the interrelations of the world’s leading stock market indices with five potential safe-haven assets during the long period of 2014–2022 and using a unique dynamic factor analysis to show the differentiated behaviors of the Japanese yen and gold. Additionally, the main innovative contribution is a new framework of weak and strong safe-haven asset classifications not previously applied in the literature."
+      },
+      {
+        "paperId": "59dd36991e27ac7c4f6d9e5609d00504306aa3ae",
+        "url": "https://www.semanticscholar.org/paper/59dd36991e27ac7c4f6d9e5609d00504306aa3ae",
+        "title": "Machine Learning Assessment of Golds Safe-Haven Role During Market Crises",
+        "venue": "Advances in Economics, Management and Political Sciences",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "https://aemps.ewapub.com/article/view/31134.pdf",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.54254/2754-1169/2026.ld31134?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.54254/2754-1169/2026.ld31134, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2350320138",
+            "name": "Yuqian Xue"
+          }
+        ],
+        "abstract": "For a long time, during periods of financial tightening, gold has been regarded as a defensive asset, although its safe-haven attribute varies with market conditions. This study employed the daily price data of gold and the S&P 500 index from 1990 to 2023 to analyze the dynamic relationship between gold and the stock market. Linear regression, decision tree regression, and random forest regression models are adopted to test whether gold can have safe-haven properties during market contraction periods. Through data cleaning and daily earnings calculation, the results show that during periods of market stability, the correlation between gold and the stock market is not obvious. However, during major crises such as the 2008 global financial crisis and the COVID-19 pandemic, the correlation between gold and the stock market has significantly increased. Among the several types of models tested, random forest regression performed the best because this model can more effectively capture nonlinear changes in market behavior, which are often overlooked in traditional linear changes."
+      },
+      {
+        "paperId": "03e55883a39c4a7ad792ea8f2527a4f74e9fc93f",
+        "url": "https://www.semanticscholar.org/paper/03e55883a39c4a7ad792ea8f2527a4f74e9fc93f",
+        "title": "Safe Havens in Turbulent Times: Assessing the Role of Gold and the USD Against Global Stock Market Indices",
+        "venue": "Journal of Risk and Financial Management",
+        "year": 2026,
+        "citationCount": 1,
+        "openAccessPdf": {
+          "url": "https://www.mdpi.com/1911-8074/19/5/308/pdf?version=1777106749",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.3390/jrfm19050308?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.3390/jrfm19050308, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "119088661",
+            "name": "Mukhriz Izraf Azman Aziz"
+          },
+          {
+            "authorId": "92749786",
+            "name": "Daouia Chebab"
+          },
+          {
+            "authorId": "123090584",
+            "name": "Baliira Kalyebara"
+          },
+          {
+            "authorId": "104443122",
+            "name": "Safwan Mohd Nor"
+          }
+        ],
+        "abstract": "This study investigates the roles gold and the US dollar play as safe-haven, hedging, or diversifier assets relating to six important financial stock market indices: the S&P 500, FTSE 100, Hang Seng, CAC 40 (Paris), Shanghai Composite Index, and Nikkei 225. This paper applies the bivariate dynamic copula technique and the DCC-GARCH econometric advanced methods from January 2013 to July 2024 by focusing on four serious market crashes: the Chinese stock market meltdown (2015–2016), the trade war between the US and China (2018–2020), the COVID-19 pandemic (2020–2022), and the conflict between Russia and Ukraine (2022–2024). The results show that the US dollar displays reliable hedging and safe-haven characteristics with strong evidence mainly for its role as a safe-haven asset against the FTSE 100, Hang Seng, and S&P 500. Our findings support the idea that the US dollar serves consistently as a safe-haven asset. In contrast, gold showcased a twofold function, serving as a hedge for the FTSE 100 and the S&P 500 during crisis times and acting as a diversifier for the CAC 40 and the Shanghai Composite Index in times of market stability. This dynamic was specifically noticeable in the COVID-19 period, when gold’s hedging properties were outstanding and its role as a diversifier became more pronounced in the Paris and Shanghai markets. Our results suggest that the consistent reliability of the US dollar as a safe-haven asset combined with gold’s dual role presents a compelling argument for including both in well-diversified portfolios. This strategy enables investors to mitigate risk and safeguard their wealth, especially during periods of financial market volatility."
+      },
+      {
+        "paperId": "678fc8e8beafb9feda668ff84f3800828f267237",
+        "url": "https://www.semanticscholar.org/paper/678fc8e8beafb9feda668ff84f3800828f267237",
+        "title": "A Hybrid Machine Learning Framework for Systemic Financial Crisis Detection and Dynamic Asset Allocation",
+        "venue": "International Scientific Journal of Engineering and Management",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.55041/isjem06754?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.55041/isjem06754, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2398449045",
+            "name": "T. Shubham"
+          }
+        ],
+        "abstract": "Abstract:\n\nPredicting systemic financial crises and executing optimal asset reallocation during severe market stress remains a formidable challenge in algorithmic trading and quantitative risk management. Traditional classification models frequently fail in these environments due to high false-positive rates (the “boy who cried wolf” paradigm) and severe class imbalance, which often manifests as a rigid bias toward historically dominant safe havens like Gold. This paper proposes a personal-level, non-commercial Hybrid Machine Learning pipeline designed to resolve these structural flaws. The architecture consists of two stages: a Random Forest Classifier trained to detect Black Swan events using a refined set of 11 macroeconomic indicators, and a Multi-Output Random Forest Regressor that forecasts the 3-month expected returns of four primary asset classes (S&P 500, Gold, US Dollar, and 10-Year Treasury Bonds). By forecasting exact percentage returns rather than categorising “winning” assets, the framework natively circumvents safe-haven bias without relying on synthetic data generation techniques such as SMOTE. Stress testing against historical scenarios, including the 2020 pandemic crash and theoretical deflationary liquidity crunches, demonstrates that the model executes highly rational, dynamic reallocations. Validated through strict time-series cross-validation over a 26-year timeline, the framework effectively preserves capital while maintaining a near-zero false-positive detection threshold.\n\nKeywords: Black Swan Detection · Random Forest · Multi-Output Regression · Asset Allocation · Systemic Risk · Macroeconomic Indicators · Quantitative Finance · Walk-Forward Validation"
+      },
+      {
+        "paperId": "21e265cbe93a65f820226c1d0e8b3710faacca00",
+        "url": "https://www.semanticscholar.org/paper/21e265cbe93a65f820226c1d0e8b3710faacca00",
+        "title": "Hedge and safe haven properties during COVID-19: Evidence from Bitcoin and gold",
+        "venue": "Quarterly Review of Economics and Finance",
+        "year": 2021,
+        "citationCount": 191,
+        "openAccessPdf": {
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8648322",
+          "status": "GREEN",
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC8648322, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2036970190",
+            "name": "Rahma Chemkha"
+          },
+          {
+            "authorId": "2581801",
+            "name": "Ahmed BenSaïda"
+          },
+          {
+            "authorId": "2822492",
+            "name": "Ahmed Ghorbel"
+          },
+          {
+            "authorId": "9212072",
+            "name": "T. Tayachi"
+          }
+        ],
+        "abstract": "The COVID-19 pandemic has caused an unprecedented human and health crisis. The measures taken to contain the damage caused a global economic slowdown. Investors face liquidity pressures resulting from the general downturn in the financial markets, and might change their risk appetite. This paper reassesses the safe haven property of gold as a traditional asset, and Bitcoin which is gradually imposing itself as a new class of asset with unique characteristics. The empirical results, applied on major world stock market indices and currencies, and based on the multivariate asymmetric dynamic conditional correlation model, show the effectiveness of Bitcoin and gold as hedging assets in reducing the risk of international portfolios. Moreover, the analysis provides evidence that during the COVID-19 pandemic, gold is a weak safe haven for the considered assets, while Bitcoin cannot provide shelter due to its increased variability."
+      },
+      {
+        "paperId": "b6e76b69ab6051932456ea7ac98335af553c68b7",
+        "url": "https://www.semanticscholar.org/paper/b6e76b69ab6051932456ea7ac98335af553c68b7",
+        "title": "Does the crisis period affect the properties of various financial assets: evidence from G7, BRIC, GCC countries",
+        "venue": "Cogent Business &amp; Management",
+        "year": 2025,
+        "citationCount": 6,
+        "openAccessPdf": {
+          "url": "https://doi.org/10.1080/23311975.2025.2451132",
+          "status": "GOLD",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1080/23311975.2025.2451132?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1080/23311975.2025.2451132, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2340034834",
+            "name": "Marwa Eleuch"
+          },
+          {
+            "authorId": "2264195142",
+            "name": "Nada Souissi"
+          },
+          {
+            "authorId": "2340034825",
+            "name": "Mourad Mroua"
+          }
+        ],
+        "abstract": "Abstract This paper investigates the role of various financial assets as diversifiers, hedges, and safe havens using the dynamic conditional correlation-GARCH and quantile regression models, for the period from August, 10 2015 to June, 5 2024 for the case of G7, BRIC, and GCC countries. Results show that gold’s robust safe-haven status, alongside commodities like oil, gas, and wheat, which exhibit varying degrees of resilience in turbulent market conditions. Our findings identify the G7 and BRIC indices as strong safe havens, contrasting with the clean energy index, which shows limited safe-haven properties during crises. This research provides critical insights into asset behavior under extreme market volatility, offering practical implications for investment strategies and risk management by highlight the strategic decisions for asset allocation during uncertain financial periods."
+      },
+      {
+        "paperId": "eef2711b1af647aee0c04366048de4df9a018d77",
+        "url": "https://www.semanticscholar.org/paper/eef2711b1af647aee0c04366048de4df9a018d77",
+        "title": "The Relationship Between Gold Prices and Stock Market Performance: Evidence from Emerging Economies",
+        "venue": "International Journal of Latest Technology in Engineering Management &amp; Applied Science",
+        "year": 2025,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "https://doi.org/10.51583/ijltemas.2025.140400018",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.51583/ijltemas.2025.140400018?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.51583/ijltemas.2025.140400018, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2361829295",
+            "name": "DR K LAKSHMANA RAO"
+          },
+          {
+            "authorId": "2361829163",
+            "name": "MADEM KISHORE"
+          },
+          {
+            "authorId": "2361829303",
+            "name": "Dr KANDULA ANJANEYULU"
+          },
+          {
+            "authorId": "2361844405",
+            "name": "DR KATADI HARI KISHAN"
+          },
+          {
+            "authorId": "2361846453",
+            "name": "DR SVGVA PRASAD"
+          }
+        ],
+        "abstract": "Abstract: This study investigates the relationship between gold prices and stock market performance in India and other emerging markets (Brazil, China, South Africa), focusing on gold’s role as a safe-haven asset during economic crises. Employing a mixed-methods approach, we combine quantitative time-series analysis (2000–2025) with qualitative insights from investor surveys. Econometric models, including Vector Autoregression (VAR), Granger Causality tests, and predictive machine learning models, were applied to examine interdependencies between stock market indices (e.g., BSE Sensex, NSE Nifty 50, and international indices) and gold prices. The study also explores the impact of digital gold investments, technological advancements, and macroeconomic factors (interest rates, currency fluctuations, geopolitical events) on traditional gold investment behaviours. Findings confirm gold’s role as a hedge during financial crises (e.g., 2008 global financial crisis, COVID-19 pandemic), though its effectiveness varies across markets and conditions. Predictive models offer practical tools for forecasting gold price movements, benefiting investors and policymakers in volatile markets."
+      },
+      {
+        "paperId": "bc9783bfff22f0d796ba43785e13903b7f74873f",
+        "url": "https://www.semanticscholar.org/paper/bc9783bfff22f0d796ba43785e13903b7f74873f",
+        "title": "Is gold still a safe haven for stock markets? New insights through the tail thickness of portfolio return distributions",
+        "venue": "Research In International Business and Finance",
+        "year": 2022,
+        "citationCount": 18,
+        "openAccessPdf": {
+          "url": "https://doi.org/10.1016/j.ribaf.2022.101788",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.ribaf.2022.101788?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.ribaf.2022.101788, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2097209083",
+            "name": "Krzysztof Echaust"
+          },
+          {
+            "authorId": "138280905",
+            "name": "M. Just"
+          }
+        ],
+        "abstract": "This study examines the safe-haven property of gold during two deep financial crashes: the global financial crisis (GFC) and the coronavirus disease 2019 (COVID-19) pandemic. Applying extreme value theory, we analyze the tail behavior of the returns of 46 stock indices sorted by geographic location and level of market development and then investigate these portfolios with various gold allocations. We focus on changes in the tail thickness of the portfolio return distribution as an effect of an increased gold allocation. The COVID-19 crisis exhibited heavier lower tails of the stock indices than the GFC. During the GFC, gold enabled heavy Fréchet-type tails to change into thin Gumbel-type tails, whereas during the COVID-19 crash, the tails remained heavy, even after hedging. Thus, gold acted as a safe-haven asset, significantly decreasing extreme downside risk during the GFC, but the same result cannot be confirmed for the COVID-19 pandemic. © 2022 The Authors"
+      },
+      {
+        "paperId": "8ca2644ee062b0d98edeb59cb052610bda2d7987",
+        "url": "https://www.semanticscholar.org/paper/8ca2644ee062b0d98edeb59cb052610bda2d7987",
+        "title": "The Safe Haven Property of Gold in Turkish Financial Markets: An Investigation of the Global Financial Crisis",
+        "venue": "",
+        "year": 2014,
+        "citationCount": 5,
+        "openAccessPdf": {
+          "url": "https://doi.org/10.21773/boun.28.2.5",
+          "status": "BRONZE",
+          "license": null,
+          "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.21773/BOUN.28.2.5?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.21773/BOUN.28.2.5, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "77852473",
+            "name": "G. Gencer"
+          },
+          {
+            "authorId": "119177458",
+            "name": "Zafer Musoglu"
+          }
+        ],
+        "abstract": null
+      }
+    ]
+  },
+  "q2_emerging": {
+    "count": 15,
+    "query": "gold demand emerging markets inflation monetary stress",
+    "papers": [
+      {
+        "paperId": "a2126205f05222520f6aa27910c651f8e16975c4",
+        "url": "https://www.semanticscholar.org/paper/a2126205f05222520f6aa27910c651f8e16975c4",
+        "title": "The Impact of Inflation on Household Consumption: An Econometric Analysis from Emerging Markets",
+        "venue": "OTS Canadian Journal",
+        "year": 2025,
+        "citationCount": 21,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.58840/jfcapb20?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.58840/jfcapb20, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2360773683",
+            "name": "Noah Tremblay"
+          }
+        ],
+        "abstract": "This study investigates the relationship between inflation and household consumption in emerging market economies. Using panel data from ten countries between 2000 and 2022, the analysis employs fixed-effects and random-effects models to identify how changes in consumer prices affect household spending patterns. The results indicate a statistically significant negative relationship between inflation and household consumption, suggesting that inflationary pressures reduce real purchasing power and constrain consumer demand. These findings have implications for monetary policy design and fiscal intervention in inflation-prone economies."
+      },
+      {
+        "paperId": "484b7f07a59b888ae91c123ca35fdd384492a57c",
+        "url": "https://www.semanticscholar.org/paper/484b7f07a59b888ae91c123ca35fdd384492a57c",
+        "title": "Gold Price Inflation and Its Implications for Financial Markets: Strategies for Mitigation",
+        "venue": "Advances in Economics, Management and Political Sciences",
+        "year": 2024,
+        "citationCount": 3,
+        "openAccessPdf": {
+          "url": "https://aemps.ewapub.com/article/view/16287.pdf",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.54254/2754-1169/119/20242530?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.54254/2754-1169/119/20242530, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2328800541",
+            "name": "Xinyi Chang"
+          }
+        ],
+        "abstract": "Abstract: Gold prices are among the most important indicators in the global financial market. The international gold price has continued to rise in recent years, repeatedly setting new records, accompanied by a boom in gold consumption and investment. The rapid rise in gold prices is due to a combination of factors. Supply and demand, economic conditions, and geopolitical events can lead to price fluctuations. Among them, economic conditions depend on monetary policy, inflation expectations, and market volatility, which may affect the trend of gold prices. The rise in gold prices has exacerbated market volatility and put higher demands on risk management for financial institutions. At the same time, the rise in gold prices has also affected the entire financial industry and changed traditional asset allocation strategies. This article examines the influence of increasing gold prices on the financial market and proposes potential preventive measures or solutions through a survey of literatures, theoretical analysis and logical reasoning. At the same time, this can help financial traders plan their funds reasonably, reduce the impact of inflation and currency devaluation, and better cope with changes in international trade and exchange rates, thus allowing the financial market to operate better."
+      },
+      {
+        "paperId": "0e124c41245e9758ee2a7e16cc89e62c82c982ef",
+        "url": "https://www.semanticscholar.org/paper/0e124c41245e9758ee2a7e16cc89e62c82c982ef",
+        "title": "Fiscal and Monetary Policy Coordination in African Emerging Markets: Macroeconomic Performance During Crisis Periods",
+        "venue": "Journal of Applied Economic Sciences",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "https://ritha.eu/storage/2065/2_jaes_Mbulawa,-S-&-Sekwati,-L.pdf",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.57017/jaes.v21.3(93).02?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.57017/jaes.v21.3(93).02, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "108706937",
+            "name": "Strike Mbulawa"
+          },
+          {
+            "authorId": "119453203",
+            "name": "L. Sekwati"
+          }
+        ],
+        "abstract": "Whilst there is consensus on the importance of monetary and fiscal policy in emerging market economies (EMEs), their impact on inflation, and growth dynamics during crisis periods is still not clear. This study examines the impact of fiscal and monetary policy on macroeconomic performance indicators (output gap, inflation, and real GDP growth), with a focus on the role of their coordination during crisis periods. The study uses fixed-effects models and annual data from 17 emerging market African economies for the period 1989 to 2023. Empirical findings demonstrate that policy coordination significantly shapes macroeconomic outcomes, though effects vary by policy instrument and target variable. Fiscal-monetary coordination marginally improves the output gap, suggesting the importance of policy alignment to stabilize demand. High monetary policy rates coincide with fiscal deficits, high inflation and hence policy conflict. Whilst policy coordination can effectively manage short term demand, via the output gap, results show that it is less effective in influencing long-term supply-side growth. Public debt is negatively associated with both output gap and output growth, confirming the debt overhang hypothesis in emerging markets. Finally, results show that exchange rate appreciation is linked to lower inflation and smaller output gap, likely through imported disinflation. This study recommends that policy makers undertake synchronized, countercyclical policy frameworks and strengthen institutional capacity to deal with complex policy trade-offs during crisis periods.Copyright© 2026 The Author(s). This article is distributed under the terms of the license CC-BY 4.0., which permits any further distribution in any medium, provided the original work is properly cited.Article’s History: Received 5th of March, 2026; Revised 14th of April, 2026; Accepted 12th of May, 2026; Available online: 30th of June, 2026. Published as research article in the Volume XXI, Summer, Issue 3(93), 2026."
+      },
+      {
+        "paperId": "b072a8a45b1d8b9ef276ccdbdba14c1babef44ff",
+        "url": "https://www.semanticscholar.org/paper/b072a8a45b1d8b9ef276ccdbdba14c1babef44ff",
+        "title": "FISCAL POLICY EFFECTIVENESS AND INFLATION DYNAMICS: EVIDENCE FROM EMERGING ASIAN ECONOMIES",
+        "venue": "Journal of applied finance and economic policy",
+        "year": 2025,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "https://journals.ifasra.com/index.php/jafep/article/download/42/50",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.66795/jafep42?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.66795/jafep42, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2444426895",
+            "name": "Hamza Qureshi"
+          },
+          {
+            "authorId": "2444164683",
+            "name": "Sana Javed"
+          }
+        ],
+        "abstract": "This study examines how effective fiscal policy is in shaping inflation  dynamics across emerging Asian economies, focusing on the channels through  which government spending, taxation, deficits, and public debt interact with prices.  Using a comparative macroeconomic framework grounded in fiscal theory,  Phillips-curve mechanisms, and open-economy transmission, the paper synthesizes  evidence showing that fiscal expansions can raise inflation when demand is near  capacity, when exchange-rate pass-through is strong, or when monetary policy  credibility is weakened by fiscal stress (“fiscal dominance”). We highlight  heterogeneity across emerging Asia based on institutions, debt structure, subsidy  regimes, and inflation-targeting strength. The findings suggest that fiscal policy  can stabilize growth in downturns, but its inflation impact depends on financing  composition (domestic vs. external), the credibility of fiscal rules, and coordination  with monetary policy. Policy implications emphasize medium-term fiscal  frameworks, targeted subsidies, improved revenue mobilization, and debt  management strategies to preserve price stability "
+      },
+      {
+        "paperId": "76b8a9bb361f3edce95db425ce832870ddb7ba1c",
+        "url": "https://www.semanticscholar.org/paper/76b8a9bb361f3edce95db425ce832870ddb7ba1c",
+        "title": "Household Consumption Under Inflationary Pressures: Insights from Emerging Markets",
+        "venue": "OTS Canadian Journal",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.58840/q7ek1x30?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.58840/q7ek1x30, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2436594003",
+            "name": "Logan Charbonneau"
+          }
+        ],
+        "abstract": "This paper explores how rising price levels influence patterns of household expenditure in emerging economies. Utilizing a panel dataset covering ten nations from 2000 to 2022, the study applies econometric techniques—including fixed-effects and random-effects estimations—to evaluate the effect of inflationary movements on consumer spending behaviour. The findings demonstrate a clear inverse association between inflation and household outlays, showing that persistent increases in prices diminish real income capacity and limit demand for goods and services. These results carry important implications for economic governance, particularly in the formulation of monetary strategies and fiscal policies aimed at protecting household welfare in inflation-sensitive markets."
+      },
+      {
+        "paperId": "041b3327f6910844a78af351560e970fb36e9931",
+        "url": "https://www.semanticscholar.org/paper/041b3327f6910844a78af351560e970fb36e9931",
+        "title": "Inflationary Pressures and Consumer Spending Behavior: Empirical Insights from Emerging Markets",
+        "venue": "OTS Canadian Journal",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.58840/fc7jd745?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.58840/fc7jd745, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2083077611",
+            "name": "E. Nováková"
+          }
+        ],
+        "abstract": "This paper explores how rising price levels influence patterns of household expenditure in emerging economies. Utilizing a panel dataset covering ten nations from 2000 to 2022, the study applies econometric techniques—including fixed-effects and random-effects estimations—to evaluate the effect of inflationary movements on consumer spending behaviour. The findings demonstrate a clear inverse association between inflation and household outlays, showing that persistent increases in prices diminish real income capacity and limit demand for goods and services. These results carry important implications for economic governance, particularly in the formulation of monetary strategies and fiscal policies aimed at protecting household welfare in inflation-sensitive markets."
+      },
+      {
+        "paperId": "915eedcc2ef1c760f5702bcff741fa18234bf926",
+        "url": "https://www.semanticscholar.org/paper/915eedcc2ef1c760f5702bcff741fa18234bf926",
+        "title": "Is interest rate hiking a recipe for missing several goals of monetary policy—beating inflation, preserving financial stability, and keeping up output growth?",
+        "venue": "Eurasian Economic Review",
+        "year": 2024,
+        "citationCount": 5,
+        "openAccessPdf": {
+          "url": "https://link.springer.com/content/pdf/10.1007/s40822-023-00256-6.pdf",
+          "status": "HYBRID",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1007/s40822-023-00256-6?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1007/s40822-023-00256-6, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2284556626",
+            "name": "Dorothea Schäfer"
+          },
+          {
+            "authorId": "2275493565",
+            "name": "Willi Semmler"
+          }
+        ],
+        "abstract": "After the corona crisis, and even more so when the war in Ukraine struck, the price levels of all goods in the US and Europe rose surprisingly quickly and persistently. The FED began in March 2022 and the ECB in July 2022 with historically unique interest rate increases to combat the wage-price spiral that had not yet begun. In this article we show that energy, commodities and food were the main drivers of inflation. For this reason, central banks' goal of weakening demand for labor through historically large interest rate hikes seems unwise. We argue that the current measures cannot achieve all of their objectives: slowing inflation, stabilizing financial markets and sustaining growth. If interest rates remain high, but external forces emerge with a lasting effect and keep inflation rates high, especially in smaller emerging countries, it will be difficult to counteract this on a country or regional basis through high interest rate policy and national control of the price- and wage-Phillips curve. Significant negative side effects of interest rate hikes increase the risk of not making the necessary investments and, in particular, weaken the bargaining power of particularly vulnerable employment groups. Other tools are needed to curb inflation and keep it under control, for example more investment in sectors with supply disruptions and a massive expansion of investment in renewable energy."
+      },
+      {
+        "paperId": "22883e73b8381f8f994265bea5e15cc92c05d373",
+        "url": "https://www.semanticscholar.org/paper/22883e73b8381f8f994265bea5e15cc92c05d373",
+        "title": "Econometric Analysis of Inflation Dynamics in Digital Payment Ecosystems in Emerging Markets",
+        "venue": "Journal of Applied Econometric",
+        "year": 2025,
+        "citationCount": 1,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.64910/journaljoae.v1i1.2?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.64910/journaljoae.v1i1.2, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2274985481",
+            "name": "Akhmad Syafi’i"
+          }
+        ],
+        "abstract": "Inflation in emerging markets is becoming a serious challenge in the face of rapid digital transformation, especially with the increasing use of digital payments changing consumption patterns and financial transactions. Within this ecosystem, digital payment services such as mobile banking and e-wallets open up wider economic access, but they also raise concerns about their impact on inflation stability, particularly in countries with macroeconomic vulnerabilities. This study aims to analyze the influence of the digital payment ecosystem on inflation dynamics in emerging markets, using dynamic panel econometric analysis with data samples from 20 developing countries in the period 2015–2023. Key variables include digital payment penetration rates, annual inflation, as well as control indicators such as GDP growth, unemployment rates, and interest rates. The results show that the adoption of digital payments has a significant impact on inflation dynamics, where the increased use of digital payments tends to accelerate the inflation response to changes in demand and prices. In addition, in countries with immature financial systems, the high penetration of digital payments amplifies inflationary volatility, demonstrating the need for adaptive monetary supervision. These findings provide insight for policymakers on the importance of balancing digital financial innovation with monetary policy to maintain economic stability"
+      },
+      {
+        "paperId": "0f02b40746cb202b6e3e3a8fd22088e7b7570a3b",
+        "url": "https://www.semanticscholar.org/paper/0f02b40746cb202b6e3e3a8fd22088e7b7570a3b",
+        "title": "Rising Prices and Living Standards: Household Consumption Adjustments in Emerging Markets",
+        "venue": "OTS Canadian Journal",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.58840/qba48f87?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.58840/qba48f87, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2405020339",
+            "name": "Noah Julien Moreau"
+          }
+        ],
+        "abstract": "This paper examines how inflation influences household consumption behavior across emerging market economies. Drawing on a balanced panel dataset covering ten countries over the period 2000–2022, the study applies panel econometric techniques, including fixed-effects and random-effects estimations, to assess the sensitivity of household expenditure to price level fluctuations. The empirical findings reveal a robust and inverse association between inflation and household consumption, indicating that rising prices erode real income and dampen consumer spending. The results underscore the vulnerability of household demand to inflationary shocks and highlight the importance of coordinated monetary and fiscal policies aimed at preserving purchasing power and sustaining consumption-led growth in emerging economies."
+      },
+      {
+        "paperId": "9f0004a2e3eb5850cb22e54d68e52b72ae13e276",
+        "url": "https://www.semanticscholar.org/paper/9f0004a2e3eb5850cb22e54d68e52b72ae13e276",
+        "title": "U.S. Monetary Policy Spillovers to Emerging Markets: Both Shocks and Vulnerabilities Matter",
+        "venue": "Social Science Research Network",
+        "year": 2021,
+        "citationCount": 37,
+        "openAccessPdf": {
+          "url": "https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr972.pdf",
+          "status": "GREEN",
+          "license": "mit",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.2139/ssrn.3875652?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.2139/ssrn.3875652, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2109162681",
+            "name": "Shaghil Ahmed"
+          },
+          {
+            "authorId": "40573663",
+            "name": "Ozge Akinci"
+          },
+          {
+            "authorId": "16319246",
+            "name": "A. Queraltó"
+          }
+        ],
+        "abstract": "Using a macroeconomic model, we explore how sources of shocks and vulnerabilities matter for the transmission of U.S. monetary changes to emerging market economies (EMEs). We utilize a calibrated two-country New Keynesian model with financial frictions, partly-dollarized balance sheets, and imperfectly anchored inflation expectations. Contrary to other recent studies that also emphasize the sources of shocks, our approach allows the quantification of effects on real macroeconomic variables as well, in addition to financial spillovers. Moreover, we model the most relevant vulnerabilities structurally. We show that higher U.S. interest rates arising from stronger U.S. aggregate demand generate modestly positive spillovers to economic activity in EMEs with stronger fundamentals, but can be adverse for vulnerable EMEs. In contrast, U.S. monetary tightenings driven by a more-hawkish policy stance cause a substantial slowdown in activity in all EMEs. Our model also captures the challenging policy tradeos that EME central banks face. We show that these tradeoffs are more favorable when inflation expectations are well anchored."
+      },
+      {
+        "paperId": "fac2a598cfbc1a41e421f83fea478b40cbc57aa4",
+        "url": "https://www.semanticscholar.org/paper/fac2a598cfbc1a41e421f83fea478b40cbc57aa4",
+        "title": "The impact of commodity prices on developed and emerging financial markets during COVID-19 pandemic and Russia–Ukraine war: evidence from the Dynamic ARDL approach",
+        "venue": "SN Business & Economics",
+        "year": 2025,
+        "citationCount": 3,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1007/s43546-025-00846-3?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1007/s43546-025-00846-3, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2261642530",
+            "name": "Mohammed Amine Mouffok"
+          },
+          {
+            "authorId": "2261644597",
+            "name": "Omar Mouffok"
+          },
+          {
+            "authorId": "2261643123",
+            "name": "Wassila Bouabdallah"
+          }
+        ],
+        "abstract": null
+      },
+      {
+        "paperId": "4d5c1202a675e3b257c299212b846ca4ccbd1530",
+        "url": "https://www.semanticscholar.org/paper/4d5c1202a675e3b257c299212b846ca4ccbd1530",
+        "title": "Lessons From Unconventional Monetary Policy for Small Open Economies and Emerging Markets",
+        "venue": "",
+        "year": 2022,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://www.kansascityfed.org/Jackson%20Hole/documents/9046/S7.20220819_Speech_Rhee.pdf, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "118595936",
+            "name": "D. Laxton"
+          },
+          {
+            "authorId": "50464013",
+            "name": "C. Rhee"
+          }
+        ],
+        "abstract": null
+      },
+      {
+        "paperId": "82b48f0ccb76f349292d778caede685401767bf6",
+        "url": "https://www.semanticscholar.org/paper/82b48f0ccb76f349292d778caede685401767bf6",
+        "title": "Monetary Policy Under Geopolitical Stress: The U.S. Federal Reserve, U.S.–Iran War Dynamics, & Global Economic Instability",
+        "venue": "Journal of World Economic Research",
+        "year": 2026,
+        "citationCount": 0,
+        "openAccessPdf": {
+          "url": "http://article.sciencepg.com/pdf/j.jwer.20261501.14",
+          "status": "GOLD",
+          "license": "CCBY",
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.11648/j.jwer.20261501.14?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.11648/j.jwer.20261501.14, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "1661108803",
+            "name": "Ukpong Johnson"
+          }
+        ],
+        "abstract": "The contemporary global economy is increasingly shaped by the intersection of geopolitical tensions and monetary policy, creating complex challenges for macroeconomic stability. This study examines the interplay between the U.S.–Iran conflict and the Federal Reserve’s policy responses, with a focus on energy markets, inflation, and global financial spillovers. Using secondary data from international financial institutions—including the IMF, World Bank, and IEA—and an event-based analytical framework, the research investigates the transmission of war-induced energy shocks and their amplification through U.S. monetary policy. Empirical evidence indicates that oil price surges, driven by geopolitical uncertainty, have significantly elevated inflation across both advanced and emerging economies, disproportionately affecting low-income households and oil-importing countries. Concurrently, Federal Reserve interest rate adjustments generate global spillover effects, influencing capital flows, exchange rates, and financial market volatility, particularly in emerging and developing economies. The study highlights the compounding nature of these shocks, showing how monetary policy trade-offs are intensified in the presence of geopolitical risk and supply-side constraints. Findings underscore the critical role of global financial integration in propagating instability and demonstrate the asymmetric vulnerability of emerging markets to exogenous shocks. The paper concludes with policy implications for managing the dual challenge of inflation containment and growth support, emphasizing the need for coordinated macroeconomic strategies and robust risk mitigation frameworks. By integrating geopolitical risk and monetary policy analysis, the study contributes to the literature on the political economy of global macro-financial stability in an era of heightened uncertainty."
+      },
+      {
+        "paperId": "9e7db36ca6bd952daaa94e62029b6d1c931cb077",
+        "url": "https://www.semanticscholar.org/paper/9e7db36ca6bd952daaa94e62029b6d1c931cb077",
+        "title": "Wage-Price Spiral: The Interplay Between Labor Markets and Inflation",
+        "venue": "OTS Canadian Journal",
+        "year": 2025,
+        "citationCount": 13,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.58840/78jw3703?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.58840/78jw3703, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2366531621",
+            "name": "Dr. Olye Olamide"
+          }
+        ],
+        "abstract": "This article explores the dynamics of the wage-price spiral, a self-reinforcing mechanism wherein rising wages lead to increased prices, which in turn drive further wage demands. The study provides a comprehensive review of theoretical frameworks, historical examples, and post-pandemic labor market shifts, focusing on how wage-setting behavior and inflation expectations interact across different institutional settings. Using a macroeconomic lens, the research analyzes both advanced and emerging economies, paying particular attention to labor force participation, foreign direct investment, and trade openness in shaping inflationary outcomes. The findings emphasize the importance of credible monetary policy, coordinated wage bargaining, and macroeconomic resilience in managing inflation. The article concludes by offering policy recommendations tailored to Vietnam’s economic context, grounded in econometric evidence such as OLS regression, Granger causality, and cointegration analysis."
+      },
+      {
+        "paperId": "ef2b158a556172d95666f8d1f35e6ff7a976eb22",
+        "url": "https://www.semanticscholar.org/paper/ef2b158a556172d95666f8d1f35e6ff7a976eb22",
+        "title": "Impact of Oil Price Fluctuations on Inflation and Stock Markets in Oil-Importing Economies",
+        "venue": "INTERNATIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+        "year": 2025,
+        "citationCount": 1,
+        "openAccessPdf": {
+          "url": "",
+          "status": null,
+          "license": null,
+          "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.55041/ijsrem51485?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.55041/ijsrem51485, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "2353867771",
+            "name": "Om Chandan Hangal"
+          },
+          {
+            "authorId": "2372668202",
+            "name": "D. R"
+          }
+        ],
+        "abstract": "Oil remains one of the most pivotal and widely traded commodities in the global economy, with its price highly susceptible to fluctuations driven by complex interactions among supply-demand dynamics, geopolitical tensions, speculative activities, and broader macroeconomic trends. For oil-importing nations—many of which are emerging or developing economies—such volatility poses acute economic challenges, magnifying inflationary pressures and destabilizing financial markets. This study investigates the impact of global oil price shocks on two critical macroeconomic variables: inflation and stock market performance in oil-importing countries. While extensive research has explored these linkages in the context of oil-exporting or advanced economies, empirical evidence focusing on oil-dependent importers remains relatively sparse.\n\nIn light of recent global disruptions—including the COVID-19 pandemic, the Russia–Ukraine conflict, and OPEC+ production adjustments—understanding these dynamics has become increasingly urgent. Additionally, the global transition toward sustainable energy introduces further complexities in assessing oil's macro-financial implications. By analyzing the transmission of oil price shocks to consumer prices and equity markets, this study aims to fill a clear gap in the literature, offering nuanced insights into how external energy price movements permeate domestic economies with limited fiscal and monetary buffers.\n\nThe findings hold significant relevance for multiple stakeholders: investors seeking effective hedging strategies against oil-driven risks; policymakers striving to uphold price stability amid volatile energy markets; corporations in energy-intensive sectors managing input cost variability; and academics developing models to better capture macro-financial linkages in oil-importing contexts. Ultimately, this research underscores the necessity for more resilient policy frameworks and investment approaches that can navigate the multifaceted challenges posed by global oil price volatility."
+      }
+    ]
+  },
+  "q3_vietnam": {
+    "count": 1,
+    "query": "Vietnam gold SJC premium State Bank auction",
+    "papers": [
+      {
+        "paperId": "3c935379160c3c36a94f9a452a3114d2c51c5aed",
+        "url": "https://www.semanticscholar.org/paper/3c935379160c3c36a94f9a452a3114d2c51c5aed",
+        "title": "Nationalizing gold: The Vietnamese SJC gold bar and the Indian Gold Coin",
+        "venue": "",
+        "year": 2018,
+        "citationCount": 9,
+        "openAccessPdf": {
+          "url": "",
+          "status": "CLOSED",
+          "license": null,
+          "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1002/SEA2.12119?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1002/SEA2.12119, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+        },
+        "authors": [
+          {
+            "authorId": "46886142",
+            "name": "Allison Truitt"
+          }
+        ],
+        "abstract": null
+      }
+    ]
+  },
+  "q4_volatility": {
+    "count": 0,
+    "query": "gold price volatility crisis risk premium tail event",
+    "papers": [],
+    "error": "all attempts failed"
+  },
+  "q5_behavioral": {
+    "count": 0,
+    "query": "gold store value informal savings emerging market currency devaluation",
+    "papers": [],
+    "error": "all attempts failed"
+  }
+}

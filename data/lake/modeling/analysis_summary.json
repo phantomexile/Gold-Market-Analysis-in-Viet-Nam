@@ -1,0 +1,454 @@
+{
+  "generated_at": "2026-07-15T18:09:01.954783",
+  "rows": 5485,
+  "date_min": "2011-07-06",
+  "date_max": "2026-07-11",
+  "premium_missing_rate": 0.0,
+  "deposit_rate_feature": "excluded_no_historical_asof_rate",
+  "deposit_rate_non_null_values": 0,
+  "blockers": [
+    "VECM cointegration screen did_not_pass; VECM forecast not promoted in v1 notebook.",
+    "Data diagnostics: {\"raw_news_headline_rows\": 3441, \"raw_news_headline_unique_days\": 702, \"raw_news_headline_coverage\": 0.12798541476754785, \"raw_news_modeling_status\": \"included_event_date_asof_lagged\", \"raw_news_leakage_caveat\": \"Google RSS was backfilled in 2026; event_date is treated as article publication date and lagged t-1, but strict real-time crawl availability is not proven.\"}"
+  ],
+  "target_non_null": {
+    "net_return_21d": 5464,
+    "net_return_63d": 5422,
+    "net_return_105d": 5380
+  },
+  "leaderboard": [
+    {
+      "model": "sarimax_exog",
+      "horizon_days": 21,
+      "mae": 0.02314053357799904,
+      "rmse": 0.03512220408831064,
+      "directional_accuracy": 0.5630136986301371,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "historical_median_return",
+      "horizon_days": 21,
+      "mae": 0.03206395465431314,
+      "rmse": 0.04494383691630801,
+      "directional_accuracy": 0.5901354366528643,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "historical_mean_return",
+      "horizon_days": 21,
+      "mae": 0.032253550089393505,
+      "rmse": 0.04510574595853728,
+      "directional_accuracy": 0.5901354366528643,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "naive_zero_return",
+      "horizon_days": 21,
+      "mae": 0.032651865178550996,
+      "rmse": 0.045397924345039205,
+      "directional_accuracy": 0.01505352197020735,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "elastic_net",
+      "horizon_days": 21,
+      "mae": 0.04345007016777662,
+      "rmse": 0.05504301370803383,
+      "directional_accuracy": 0.486820009639339,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "xgboost_mean",
+      "horizon_days": 21,
+      "mae": 0.04720708486461989,
+      "rmse": 0.05823362823713125,
+      "directional_accuracy": 0.5972611275925422,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "ridge",
+      "horizon_days": 21,
+      "mae": 0.05046800640701163,
+      "rmse": 0.06310840032967191,
+      "directional_accuracy": 0.4898271156970201,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "catboost_mean",
+      "horizon_days": 21,
+      "mae": 0.0533655875380777,
+      "rmse": 0.06414453830380286,
+      "directional_accuracy": 0.5768854166256272,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "lightgbm_mean",
+      "horizon_days": 21,
+      "mae": 0.05698056901141399,
+      "rmse": 0.06735516813181837,
+      "directional_accuracy": 0.591321049085773,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "random_forest",
+      "horizon_days": 21,
+      "mae": 0.06213825125492323,
+      "rmse": 0.07163311375721772,
+      "directional_accuracy": 0.6181375194855168,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "catboost_q10",
+      "horizon_days": 21,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.012800172259141892
+    },
+    {
+      "model": "lightgbm_q10",
+      "horizon_days": 21,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.013980199017484436
+    },
+    {
+      "model": "sklearn_gbr_q05",
+      "horizon_days": 21,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.006913063530008868
+    },
+    {
+      "model": "sklearn_gbr_q10",
+      "horizon_days": 21,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.01102567936286669
+    },
+    {
+      "model": "sklearn_gbr_q50",
+      "horizon_days": 21,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.021527423549629394
+    },
+    {
+      "model": "sklearn_gbr_q90",
+      "horizon_days": 21,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.009729216448613194
+    },
+    {
+      "model": "naive_zero_return",
+      "horizon_days": 63,
+      "mae": 0.07147498831607216,
+      "rmse": 0.08510922648219033,
+      "directional_accuracy": 0.012196985918386177,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "historical_mean_return",
+      "horizon_days": 63,
+      "mae": 0.07261718969704177,
+      "rmse": 0.08616571827061462,
+      "directional_accuracy": 0.5568055765906444,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "historical_median_return",
+      "horizon_days": 63,
+      "mae": 0.0728464003653714,
+      "rmse": 0.08661819689782102,
+      "directional_accuracy": 0.4309974374909694,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "elastic_net",
+      "horizon_days": 63,
+      "mae": 0.09448937016047385,
+      "rmse": 0.1125102315784734,
+      "directional_accuracy": 0.45351818389135795,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "xgboost_mean",
+      "horizon_days": 63,
+      "mae": 0.09540342440604743,
+      "rmse": 0.1097623508657756,
+      "directional_accuracy": 0.3020289866425735,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "sarimax_exog",
+      "horizon_days": 63,
+      "mae": 0.09699490215032319,
+      "rmse": 0.11169075794728936,
+      "directional_accuracy": 0.35753424657534244,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "lightgbm_mean",
+      "horizon_days": 63,
+      "mae": 0.09984669621080741,
+      "rmse": 0.11476023924564838,
+      "directional_accuracy": 0.2734685004621917,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "ridge",
+      "horizon_days": 63,
+      "mae": 0.10019257799770712,
+      "rmse": 0.120089571741297,
+      "directional_accuracy": 0.45677472029134614,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "catboost_mean",
+      "horizon_days": 63,
+      "mae": 0.10266221769664934,
+      "rmse": 0.11719821231725892,
+      "directional_accuracy": 0.3308474210400792,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "random_forest",
+      "horizon_days": 63,
+      "mae": 0.10748347084160569,
+      "rmse": 0.12237104448381261,
+      "directional_accuracy": 0.30076657666550033,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "catboost_q10",
+      "horizon_days": 63,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.03504759608181251
+    },
+    {
+      "model": "lightgbm_q10",
+      "horizon_days": 63,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.03536476322263463
+    },
+    {
+      "model": "sklearn_gbr_q05",
+      "horizon_days": 63,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.021910400869011203
+    },
+    {
+      "model": "sklearn_gbr_q10",
+      "horizon_days": 63,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.032322300292579306
+    },
+    {
+      "model": "sklearn_gbr_q50",
+      "horizon_days": 63,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.04460017465848344
+    },
+    {
+      "model": "sklearn_gbr_q90",
+      "horizon_days": 63,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.025900872363425535
+    },
+    {
+      "model": "lightgbm_mean",
+      "horizon_days": 105,
+      "mae": 0.1026141022203801,
+      "rmse": 0.12355507861395462,
+      "directional_accuracy": 0.553873405762872,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "naive_zero_return",
+      "horizon_days": 105,
+      "mae": 0.10637878664849706,
+      "rmse": 0.12246469007396027,
+      "directional_accuracy": 0.0006849315068493151,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "historical_mean_return",
+      "horizon_days": 105,
+      "mae": 0.10705064370535071,
+      "rmse": 0.12337676320509319,
+      "directional_accuracy": 0.6237364194615022,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "sarimax_exog",
+      "horizon_days": 105,
+      "mae": 0.10725860451563632,
+      "rmse": 0.12093240469451313,
+      "directional_accuracy": 0.673972602739726,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "historical_median_return",
+      "horizon_days": 105,
+      "mae": 0.10765230236123774,
+      "rmse": 0.1239906951976737,
+      "directional_accuracy": 0.37557864903164856,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "random_forest",
+      "horizon_days": 105,
+      "mae": 0.11254305387230219,
+      "rmse": 0.13241470402021707,
+      "directional_accuracy": 0.553873405762872,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "xgboost_mean",
+      "horizon_days": 105,
+      "mae": 0.12057196359733247,
+      "rmse": 0.13855530588710752,
+      "directional_accuracy": 0.553873405762872,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "catboost_mean",
+      "horizon_days": 105,
+      "mae": 0.12223097285024946,
+      "rmse": 0.13978170705381202,
+      "directional_accuracy": 0.5497750451071343,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "ridge",
+      "horizon_days": 105,
+      "mae": 0.13129282131822775,
+      "rmse": 0.15373523907271372,
+      "directional_accuracy": 0.48213621967367987,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "elastic_net",
+      "horizon_days": 105,
+      "mae": 0.13848593394134096,
+      "rmse": 0.1551868818241644,
+      "directional_accuracy": 0.4635111031953145,
+      "pinball_loss": NaN
+    },
+    {
+      "model": "catboost_q10",
+      "horizon_days": 105,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.05467035537876609
+    },
+    {
+      "model": "lightgbm_q10",
+      "horizon_days": 105,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.05658586547919124
+    },
+    {
+      "model": "sklearn_gbr_q05",
+      "horizon_days": 105,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.03304155638554063
+    },
+    {
+      "model": "sklearn_gbr_q10",
+      "horizon_days": 105,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.04446123882207981
+    },
+    {
+      "model": "sklearn_gbr_q50",
+      "horizon_days": 105,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.06292553560571193
+    },
+    {
+      "model": "sklearn_gbr_q90",
+      "horizon_days": 105,
+      "mae": NaN,
+      "rmse": NaN,
+      "directional_accuracy": NaN,
+      "pinball_loss": 0.030891336325321154
+    }
+  ],
+  "decision_summary": [
+    {
+      "horizon_days": 21,
+      "phase": "test",
+      "signal_days": 18,
+      "observations": 365,
+      "avg_strategy_return": 0.0004940779112166623,
+      "avg_buy_day_return": 0.010018802088560097
+    },
+    {
+      "horizon_days": 21,
+      "phase": "validation",
+      "signal_days": 0,
+      "observations": 365,
+      "avg_strategy_return": 0.0,
+      "avg_buy_day_return": NaN
+    },
+    {
+      "horizon_days": 63,
+      "phase": "test",
+      "signal_days": 149,
+      "observations": 494,
+      "avg_strategy_return": -0.01491954995494572,
+      "avg_buy_day_return": -0.04946481662914889
+    },
+    {
+      "horizon_days": 63,
+      "phase": "validation",
+      "signal_days": 283,
+      "observations": 731,
+      "avg_strategy_return": -0.0023820641545701684,
+      "avg_buy_day_return": -0.006152964300320824
+    },
+    {
+      "horizon_days": 105,
+      "phase": "test",
+      "signal_days": 449,
+      "observations": 452,
+      "avg_strategy_return": 0.12706369565276399,
+      "avg_buy_day_return": 0.12791267357472005
+    },
+    {
+      "horizon_days": 105,
+      "phase": "validation",
+      "signal_days": 366,
+      "observations": 731,
+      "avg_strategy_return": 0.01185536415737437,
+      "avg_buy_day_return": 0.023678336609400722
+    }
+  ]
+}

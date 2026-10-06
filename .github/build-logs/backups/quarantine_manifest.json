@@ -1,0 +1,9 @@
+{
+  "quarantine_timestamp_utc": "2026-07-10T09:22:30.902237+00:00",
+  "source_file": "C:\\Users\\admin\\Documents\\Lab Workplace\\vn-gold-market-analysis\\data\\lake\\enriched\\master\\normalized\\gold_domestic_daily_panel.csv",
+  "backup_file": "C:\\Users\\admin\\Documents\\Lab Workplace\\vn-gold-market-analysis\\.github\\build-logs\\backups\\gold_domestic_daily_panel.b38e7b99.backup.csv",
+  "column_count": 18,
+  "byte_size": 37128700,
+  "sha256_full": "b38e7b991358a086b5121c3b63568fc13ef686e89fd714b75e1587ec4603915c",
+  "sha256_body": "1034c2e9fe7d3dd25c816c1d5bf85c0c97b4c7fbd6544bdfc3d5cccf8896c35d"
+}

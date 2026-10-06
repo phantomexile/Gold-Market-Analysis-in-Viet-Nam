@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-07-15T17:03:33.093705+00:00",
+  "rows": 3,
+  "date_min": "2026-07-16",
+  "date_max": "2026-07-16",
+  "synthetic_events_used": false,
+  "blockers": [],
+  "navigation_statuses": [
+    {
+      "seed_url": "https://sbv.gov.vn/vi/quan-ly-hoat-dong-ngoai-hoi-va-hoat-dong-kinh-doanh-vang",
+      "status": 200,
+      "links_seen": 506,
+      "candidate_links": 3,
+      "error": ""
+    },
+    {
+      "seed_url": "https://sbv.gov.vn/vi/",
+      "status": 200,
+      "links_seen": 416,
+      "candidate_links": 3,
+      "error": ""
+    }
+  ],
+  "output_csv": "C:\\Users\\admin\\Documents\\Lab Workplace\\vn-gold-market-analysis\\data\\lake\\events\\sbv_gold_policy_events.csv"
+}

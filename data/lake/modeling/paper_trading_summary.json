@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-07-15T18:13:02.621294+00:00",
+  "rows": 3,
+  "buy_rows": 1,
+  "open_rows": 1,
+  "closed_rows": 0,
+  "no_position_rows": 2,
+  "date_min": "2026-07-11",
+  "date_max": "2026-07-11",
+  "by_horizon": [
+    {
+      "horizon_days": 21,
+      "rows": 1,
+      "buy_rows": 0,
+      "open_rows": 0,
+      "closed_rows": 0,
+      "avg_realized_net_return": null,
+      "hit_rate": null
+    },
+    {
+      "horizon_days": 63,
+      "rows": 1,
+      "buy_rows": 0,
+      "open_rows": 0,
+      "closed_rows": 0,
+      "avg_realized_net_return": null,
+      "hit_rate": null
+    },
+    {
+      "horizon_days": 105,
+      "rows": 1,
+      "buy_rows": 1,
+      "open_rows": 1,
+      "closed_rows": 0,
+      "avg_realized_net_return": null,
+      "hit_rate": null
+    }
+  ],
+  "blockers": [
+    "No paper-trading trade has matured yet; realized performance is intentionally not calculated."
+  ]
+}

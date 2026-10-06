@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VN Gold Intelligence Terminal | Thị Trường Vàng Việt Nam</title>
+  <meta name="description" content="Dashboard trực quan hóa dữ liệu giá vàng SJC, chênh lệch nội - ngoại (SJC Premium), tỷ giá USD/VND và truyền dẫn giá toàn cầu (2011 - 2026).">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Top Terminal Header -->
+    <header class="terminal-header glass-panel" id="mainHeader">
+      <div class="brand-section">
+        <div class="brand-icon">⚜️</div>
+        <div class="brand-titles">
+          <h1>VN Gold Intelligence Terminal <span class="live-badge"><span class="live-pulse"></span>Live Lake</span></h1>
+          <p>Phân tích động lực giá vàng SJC, truyền dẫn quốc tế (GC=F) & phân rã Premium (2011 – 2026)</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btnRefreshData" class="btn btn-primary" title="Chạy cập nhật dữ liệu mới từ SJC và Yahoo Finance">
+          <span>⚡ Cập Nhật Dữ Liệu</span>
+        </button>
+        <button id="btnExportCsv" class="btn btn-secondary" title="Xuất dữ liệu hiển thị ra file CSV">
+          <span>📥 Xuất CSV</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards Ribbon -->
+    <section class="kpi-grid" id="kpiRibbon">
+      <!-- SJC Sell -->
+      <div class="kpi-card glass-panel gold" id="cardSjcSell">
+        <div class="kpi-header">
+          <span>SJC Bán Ra (Niêm Yết)</span>
+          <span class="kpi-badge">VND/lượng</span>
+        </div>
+        <div class="kpi-value" id="kpiSellPrice">—</div>
+        <div class="kpi-sub">
+          <span id="kpiSellChange" class="kpi-change">—</span>
+          <span id="lastUpdatedBadge">Đang tải...</span>
+        </div>
+      </div>
+
+      <!-- SJC Buy -->
+      <div class="kpi-card glass-panel gold" id="cardSjcBuy">
+        <div class="kpi-header">
+          <span>SJC Mua Vào</span>
+          <span class="kpi-badge">VND/lượng</span>
+        </div>
+        <div class="kpi-value" id="kpiBuyPrice">—</div>
+        <div class="kpi-sub">
+          <span>Khảo sát SJC Official</span>
+          <span>TP. Hồ Chí Minh</span>
+        </div>
+      </div>
+
+      <!-- Spread -->
+      <div class="kpi-card glass-panel rose" id="cardSpread">
+        <div class="kpi-header">
+          <span>Chênh Lệch Mua - Bán</span>
+          <span class="kpi-badge">Spread</span>
+        </div>
+        <div class="kpi-value" id="kpiSpread">—</div>
+        <div class="kpi-sub">
+          <span id="kpiSpreadPct">Tỷ lệ: —</span>
+          <span>Rủi ro thanh khoản</span>
+        </div>
+      </div>
+
+      <!-- Global Gold Converted -->
+      <div class="kpi-card glass-panel cyan" id="cardGlobalGold">
+        <div class="kpi-header">
+          <span>Vàng Thế Giới Quy Đổi</span>
+          <span class="kpi-badge">GC=F • FX</span>
+        </div>
+        <div class="kpi-value" id="kpiGlobalVnd">—</div>
+        <div class="kpi-sub">
+          <span id="kpiGlobalUsd">—</span>
+          <span>Theo tỷ giá thị trường</span>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="kpi-card glass-panel purple" id="cardPremium">
+        <div class="kpi-header">
+          <span>SJC Domestic Premium</span>
+          <span class="kpi-badge">Chênh Lệch</span>
+        </div>
+        <div class="kpi-value" id="kpiPremium">—</div>
+        <div class="kpi-sub">
+          <span id="kpiPremiumPct" class="kpi-change positive">—</span>
+          <span>Nội địa - Quốc tế</span>
+        </div>
+      </div>
+
+      <!-- USD/VND -->
+      <div class="kpi-card glass-panel emerald" id="cardFxRate">
+        <div class="kpi-header">
+          <span>Tỷ Giá USD / VND</span>
+          <span class="kpi-badge">Vietcombank</span>
+        </div>
+        <div class="kpi-value" id="kpiUsdVnd">—</div>
+        <div class="kpi-sub">
+          <span>Thị trường ngoại hối</span>
+          <span>Bán chuyển khoản</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Bar & Time Toolbar -->
+    <nav class="controls-toolbar glass-panel" id="controlsToolbar">
+      <!-- Chart View Tabs -->
+      <div class="view-tabs" id="viewTabs" role="tablist">
+        <button class="tab-btn active" data-tab="divergence" role="tab" id="tabDivergence">
+          <span>📊 So Sánh Giá SJC vs Thế Giới</span>
+        </button>
+        <button class="tab-btn" data-tab="premium" role="tab" id="tabPremium">
+          <span>🔥 Phân Rã Chênh Lệch (Premium)</span>
+        </button>
+        <button class="tab-btn" data-tab="spread" role="tab" id="tabSpread">
+          <span>⚖️ Spread Mua - Bán</span>
+        </button>
+        <button class="tab-btn" data-tab="macro" role="tab" id="tabMacro">
+          <span>🌐 Tương Quan Vĩ Mô & USD/VND</span>
+        </button>
+      </div>
+
+      <!-- Time Range Selectors -->
+      <div class="time-range-group" id="timeRangeGroup" role="group" aria-label="Khoảng thời gian">
+        <button class="range-btn" data-range="1M">1M</button>
+        <button class="range-btn" data-range="3M">3M</button>
+        <button class="range-btn" data-range="6M">6M</button>
+        <button class="range-btn active" data-range="1Y">1Y</button>
+        <button class="range-btn" data-range="3Y">3Y</button>
+        <button class="range-btn" data-range="5Y">5Y</button>
+        <button class="range-btn" data-range="ALL">15Y (ALL)</button>
+      </div>
+    </nav>
+
+    <!-- Main Chart Panel -->
+    <main class="chart-container-panel glass-panel" id="mainChartPanel">
+      <div class="chart-header">
+        <div class="chart-title-area">
+          <h2 id="chartTitle">📊 So Sánh Giá Vàng Trong Nước (SJC) vs Quốc Tế Quy Đổi</h2>
+          <p id="chartSubtitle" class="chart-subtitle">Phản ánh mức độ tách rời (decoupling) giữa vàng vật chất Việt Nam và giá thế giới (VND/lượng).</p>
+        </div>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="mainChartCanvas"></canvas>
+      </div>
+    </main>
+
+    <!-- Secondary Insights Section (2-Column Grid) -->
+    <section class="two-col-grid" id="insightsGrid">
+      <!-- Left: Key Historical Events & Policy Regime Overlay -->
+      <div class="glass-panel" style="padding: 24px;">
+        <div class="panel-title">
+          <span>🏛️ Các Mốc Sự Kiện & Chế Độ Thị Trường Quan Trọng</span>
+          <span style="font-size: 12px; color: var(--gold-light);">Regime Shift Panel</span>
+        </div>
+        <div class="event-list" id="eventListStream">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Right: Quantitative Premium Statistics -->
+      <div class="glass-panel" style="padding: 24px;">
+        <div class="panel-title">
+          <span>📈 Thống Kê Phân Rã Chênh Lệch</span>
+          <span style="font-size: 12px; color: var(--cyan-primary);">Analytics</span>
+        </div>
+        <table class="stats-table" id="analyticsTable">
+          <tbody>
+            <tr>
+              <td>Tổng số phiên giao dịch</td>
+              <td id="statTotalDays">—</td>
+            </tr>
+            <tr>
+              <td>Chênh lệch kỷ lục (ATH Premium)</td>
+              <td id="statAthPremium" style="color: var(--gold-light);">—</td>
+            </tr>
+            <tr>
+              <td>Ngày lập đỉnh chênh lệch</td>
+              <td id="statAthDate">—</td>
+            </tr>
+            <tr>
+              <td>Chênh lệch bình quân toàn kỳ</td>
+              <td id="statAvgPremium">—</td>
+            </tr>
+            <tr>
+              <td>Spread Mua-Bán trung bình</td>
+              <td id="statAvgSpread">—</td>
+            </tr>
+            <tr>
+              <td>Cơ chế quản lý hiện hành</td>
+              <td style="color: var(--emerald-success);">Nghị định 24/2012</td>
+            </tr>
+            <tr>
+              <td>Độ trễ dữ liệu thị trường Mỹ</td>
+              <td>Lag t-1 (Chống leakage)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Detailed Interactive Data Table -->
+    <section class="table-panel glass-panel" id="dataTablePanel">
+      <div class="table-toolbar">
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 16px; font-weight: 600;">📑 Bảng Tra Cứu Chuỗi Dữ Liệu Lịch Sử</h3>
+          <p style="color: var(--text-muted); font-size: 12px;">Đã kiểm định strict reliability (requested_date == business_date)</p>
+        </div>
+        <div class="search-input-wrapper">
+          <input type="text" id="tableSearch" class="search-input" placeholder="Tìm theo ngày (vd: 2026-10 hoặc 2024)...">
+        </div>
+      </div>
+
+      <div class="data-table-container">
+        <table class="data-table" id="sjcDataTable">
+          <thead>
+            <tr>
+              <th>Ngày</th>
+              <th>SJC Bán Ra</th>
+              <th>SJC Mua Vào</th>
+              <th>Spread (M/B)</th>
+              <th>Vàng TG ($/oz)</th>
+              <th>Vàng TG (VND/lượng)</th>
+              <th>SJC Premium</th>
+              <th>Chênh Lệch %</th>
+              <th>USD/VND</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span id="tableShowingText">Đang tải dữ liệu...</span>
+        <div class="page-controls">
+          <button id="prevPageBtn" class="page-btn">‹ Trước</button>
+          <span id="tablePageText" style="padding: 4px 8px; font-family: var(--font-mono);">Trang 1</span>
+          <button id="nextPageBtn" class="page-btn">Sau ›</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Custom JavaScript Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>

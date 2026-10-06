@@ -1,0 +1,55 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+.conda/
+
+# Local IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Runtime data folder is tracked when committing full dataset snapshots.
+# Keep local cleanup manual via git add/remove.
+*.sqlite
+*.db
+
+# Recovery / backup — local archival, never commit
+.recovery/
+
+# Data lake — runtime artifacts not tracked by default
+# Raw crawl IS tracked (commit separately)
+data/lake/**/manifests/
+data/lake/**/reports/
+data/lake/**/checkpoints/
+
+# Keep small committed examples/documentation under data if needed.
+!data/
+!data/README.md
+!data/samples/
+!data/samples/**
+
+# Agent/intermediate artifacts — never commit
+.cache/
+**/http_cache/
+tools/
+data/temp/
+data/experiments/
+Usersadmin.claudeprojectsC--Users-admin-Documents-Lab-Workplace-vn-gold-market-analysis*
+

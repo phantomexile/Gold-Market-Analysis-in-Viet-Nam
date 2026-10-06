@@ -1,0 +1,4 @@
+generated_at,snapshot_date,horizon_days,horizon_label,point_model,q10_model,train_rows,feature_count,predicted_net_return,q10_predicted_net_return,prob_return_positive,buy_signal,status
+2026-07-15T18:13:58.435185+00:00,2026-07-11,21,1 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5464,120,-0.04203499345944178,-0.06895852539023294,0.020098723144504005,False,ok
+2026-07-15T18:15:08.912665+00:00,2026-07-11,63,3 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5422,120,0.0003885454163742519,-0.12715059416193042,0.5064472149901444,False,ok
+2026-07-15T18:16:20.953867+00:00,2026-07-11,105,5 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5380,120,0.04895230468476492,-0.024455742093075997,0.986818967703216,True,ok

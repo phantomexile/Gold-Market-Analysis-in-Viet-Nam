@@ -1,0 +1,82 @@
+============================================================
+VIETNAM GOLD MARKET - FINAL DELIVERABLES REPORT
+Generated: 2026-07-13
+============================================================
+
+1. NEWS TEXT DATASET (news_raw_headlines_vietnam_gold.csv)
+----------------------------------------
+ Total headlines: 3,441
+ With body text: 2,910 (85%)
+ Body text length: median=3000 chars
+ Body text length: min=101, max=3000 chars
+ Month coverage: 108 months
+ Date range: 2010-11 -> 2026-07
+ Valid ISO dates: 3,441 (100%)
+
+2. EVENT DETECTION
+----------------------------------------
+ Price-action events (price_events.csv):
+ Total: 0
+ By type:
+
+ News-driven events (news_events.csv):
+ Total: 3363
+ By type (top 10):
+ gold_price_move: 1414
+ news_other: 1030
+ fx_shock: 190
+ policy_rate_global: 161
+ gold_price_up: 147
+ gold_price_down: 140
+ geopolitical: 128
+ sbv_policy: 82
+ macro_shock: 54
+ seasonal_tet: 15
+
+3. EVENT REGIME PANEL (gold_event_panel.csv)
+----------------------------------------
+ Total events: 3120
+ By type (top 15):
+ wedding_season: 1530
+ gold_price_move: 435
+ news_other: 320
+ tet_proximity: 240
+ gold_price_up: 98
+ fx_shock: 85
+ policy_rate_global: 80
+ gold_price_down: 80
+ geopolitical: 67
+ sbv_policy: 54
+ macro_shock: 35
+ geopolitical_crisis: 21
+ than_tai: 16
+ seasonal_tet: 14
+ eurozone_crisis: 12
+
+4. ENRICHED GOLD PRICES (pipeline_output_premium_enriched.csv)
+----------------------------------------
+ Total dates: 5,485
+ With premium: 3,772 (69%)
+
+5. MASTER PANEL
+----------------------------------------
+ global_reference_daily: 3,914 rows
+ gold_domestic_daily_panel: 111,942 rows
+ vn_macro_asof_panel: 36,705 rows
+
+6. OUTPUT FILES
+----------------------------------------
+ data/lake/news_raw_headlines_vietnam_gold.csv
+ -> 3,441 rows | NEWS TEXT DATA (raw headlines + body)
+ data/lake/news_events.csv
+ -> 3,363 rows | CLASSIFIED EVENTS from news
+ data/lake/gold_event_panel.csv
+ -> 3,120 rows | MASTER EVENT PANEL (calendar + news + price-action)
+ data/lake/price_events.csv
+ -> 0 rows | PRICE-ACTION EVENTS (2sigma/3sigma)
+ data/lake/pipeline_output_premium_enriched.csv
+ -> 5,485 rows | DOMESTIC GOLD + EXTERNAL FEATURES
+
+============================================================
+END OF REPORT
+============================================================

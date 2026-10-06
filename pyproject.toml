@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vn-gold-market-analysis"
+version = "0.1.0"
+description = "Vietnamese SJC gold market data collection, source reliability audit, and external feature probes."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "lxml>=5",
+  "requests>=2.31",
+  "pandas>=2.2",
+  "pyarrow>=15",
+  "openpyxl>=3.1",
+  "python-dotenv>=1.0",
+  "pydantic>=2",
+]
+
+[project.optional-dependencies]
+market = [
+  "yfinance>=0.2",
+  "vnstock>=4",
+]
+browser = [
+  "playwright>=1.49",
+  "DrissionPage>=4",
+]
+agentic = [
+  "crawl4ai>=0.9",
+  "openai>=2",
+  "yfinance>=0.2",
+  "vnstock>=4",
+  "playwright>=1.49",
+  "DrissionPage>=4",
+]
+dev = [
+  "pytest>=8",
+]
+modeling = [
+  "numpy>=1.26",
+  "scipy>=1.12",
+  "matplotlib>=3.8",
+  "seaborn>=0.13",
+  "scikit-learn>=1.4",
+  "statsmodels>=0.14",
+  "nbformat>=5.10",
+  "nbclient>=0.10",
+  "statsforecast>=1.7",
+  "mlforecast>=0.13",
+  "lightgbm>=4.3",
+  "xgboost>=2.0",
+  "catboost>=1.2",
+  "shap>=0.45",
+]
+deep-learning = [
+  "torch>=2.3",
+  "lightning>=2.2",
+  "pytorch-forecasting>=1.0",
+  "gluonts>=0.14",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

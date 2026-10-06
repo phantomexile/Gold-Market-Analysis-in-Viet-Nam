@@ -1,0 +1,10 @@
+CTL,SCHEMA,stable
+preset=build-log-replay-v1
+hashes=body-only
+dupes=drop-oldest
+workers=aligned
+ts=auto
+"build_id","source","status","entered_at","completed_at","worker","rows_in","rows_out","errors","notes","body_hash"
+"build-20260710-001","backfill_target","ok","2026-07-10T06:00:00Z","2026-07-10T06:01:23Z","BackfillWorker","287400","287400","0","Backfill target OK","0d44726b932e9a37b0f001f59e9d"
+"build-20260710-002","pipeline","ok","2026-07-10T06:30:00Z","","PipelineRunner","145206","145206","0","Master panel built","b6a6d1265ecaf62e8c8cbd916533"
+"build-20260710-003","stdin","ok","2026-07-10T07:00:00Z","2026-07-10T07:02:00Z","pipeline-2","500000","499950","50","Some warnings logged","917fe248e64457fce6c41dff8fb8"

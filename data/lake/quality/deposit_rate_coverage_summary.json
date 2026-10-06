@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-07-15T17:22:22.586738+00:00",
+  "as_of": "2026-07-16",
+  "retail_rows": 15,
+  "retail_valid_rows": 15,
+  "retail_banks": [
+    "vietinbank"
+  ],
+  "history_status": "forward_monitoring_only",
+  "sbv_policy_rates": {
+    "date": "2026-07-16",
+    "rows": 0,
+    "status": "blocked_no_verified_sbv_interest_rate_structure",
+    "blockers": [
+      "SBV discovery found no verified interest-rate structure; structure 137473 is central USD/VND FX."
+    ]
+  },
+  "source_statuses": [
+    {
+      "bank": "vietcombank",
+      "source_url": "https://www.vietcombank.com.vn/vi-VN/KHCN/Cong-cu-Tien-ich/KHCN---Lai-suat",
+      "status": "empty",
+      "rows": 0,
+      "error": ""
+    },
+    {
+      "bank": "vietinbank",
+      "source_url": "https://vietinbank.vn/vi/lai-suat-khcn",
+      "status": "ok",
+      "rows": 17,
+      "error": ""
+    },
+    {
+      "bank": "bidv",
+      "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
+      "status": "empty",
+      "rows": 0,
+      "error": ""
+    }
+  ],
+  "blockers": [
+    "SBV discovery found no verified interest-rate structure; structure 137473 is central USD/VND FX."
+  ]
+}

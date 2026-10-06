@@ -1,0 +1,109 @@
+sources:
+  - source: sjc_official_history
+    role: primary_historical_label
+    status: historical_valid
+    coverage: "7/7 matched; 7/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: true
+    requires_playwright: false
+    parser_status: ok
+    reliability_score: 1.00
+    notes: ""
+  - source: btmc_by_day
+    role: candidate
+    status: unstable
+    coverage: "0/7 matched; 0/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: not_available
+    reliability_score: 0.00
+    notes: "Use only if audit verifies requested_date == business_date."
+  - source: btmc_current
+    role: current_cross_check
+    status: current_only
+    coverage: "0/7 matched; 0/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: not_implemented
+    reliability_score: 0.00
+    notes: "Returns current business date for old requested dates or parser is current-only."
+  - source: doji_current
+    role: current_cross_check
+    status: current_only
+    coverage: "0/7 matched; 7/7 non_empty; 7 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: ok
+    reliability_score: 0.00
+    notes: "Returns current business date for old requested dates or parser is current-only."
+  - source: giavang_pnj_archive
+    role: archive_cross_check
+    status: manual_or_archive
+    coverage: "4/7 matched; 4/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: true
+    requires_playwright: false
+    parser_status: ok
+    reliability_score: 0.57
+    notes: ""
+  - source: giavang_sjc_archive
+    role: archive_cross_check
+    status: manual_or_archive
+    coverage: "5/7 matched; 5/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: true
+    requires_playwright: false
+    parser_status: ok
+    reliability_score: 0.71
+    notes: ""
+  - source: goldvn_24h_current
+    role: current_cross_check
+    status: current_only
+    coverage: "0/7 matched; 0/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: not_implemented
+    reliability_score: 0.00
+    notes: "Returns current business date for old requested dates or parser is current-only."
+  - source: phu_quy_current
+    role: current_cross_check
+    status: current_only
+    coverage: "0/7 matched; 0/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: not_implemented
+    reliability_score: 0.00
+    notes: "Returns current business date for old requested dates or parser is current-only."
+  - source: pnj_current
+    role: current_cross_check
+    status: current_only
+    coverage: "0/7 matched; 7/7 non_empty; 7 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: ok
+    reliability_score: 0.00
+    notes: "Returns current business date for old requested dates or parser is current-only."
+  - source: vietabank_current
+    role: current_cross_check
+    status: current_only
+    coverage: "0/7 matched; 0/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: not_implemented
+    reliability_score: 0.00
+    notes: "Returns current business date for old requested dates or parser is current-only."
+  - source: vnstock_gold_sjc
+    role: candidate
+    status: unstable
+    coverage: "0/7 matched; 0/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: false
+    requires_playwright: false
+    parser_status: not_available
+    reliability_score: 0.00
+    notes: "Optional; depends on vnstock module availability and function discovery."
+  - source: webgia_sjc_archive
+    role: archive_cross_check
+    status: manual_or_archive
+    coverage: "5/7 matched; 5/7 non_empty; 0 current_leak; 0 error"
+    supports_historical: true
+    requires_playwright: false
+    parser_status: ok
+    reliability_score: 0.71
+    notes: ""

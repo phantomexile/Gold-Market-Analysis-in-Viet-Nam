@@ -1,0 +1,13 @@
+coverage,notes,parser_status,reliability_score,requires_playwright,role,source,status,supports_historical
+7/7 matched; 7/7 non_empty; 0 current_leak; 0 error,,ok,1.0,False,primary_historical_label,sjc_official_history,historical_valid,True
+0/7 matched; 0/7 non_empty; 0 current_leak; 0 error,Use only if audit verifies requested_date == business_date.,not_available,0.0,False,candidate,btmc_by_day,unstable,False
+0/7 matched; 0/7 non_empty; 0 current_leak; 0 error,Returns current business date for old requested dates or parser is current-only.,not_implemented,0.0,False,current_cross_check,btmc_current,current_only,False
+0/7 matched; 7/7 non_empty; 7 current_leak; 0 error,Returns current business date for old requested dates or parser is current-only.,ok,0.0,False,current_cross_check,doji_current,current_only,False
+4/7 matched; 4/7 non_empty; 0 current_leak; 0 error,,ok,0.5714285714285714,False,archive_cross_check,giavang_pnj_archive,manual_or_archive,True
+5/7 matched; 5/7 non_empty; 0 current_leak; 0 error,,ok,0.7142857142857143,False,archive_cross_check,giavang_sjc_archive,manual_or_archive,True
+0/7 matched; 0/7 non_empty; 0 current_leak; 0 error,Returns current business date for old requested dates or parser is current-only.,not_implemented,0.0,False,current_cross_check,goldvn_24h_current,current_only,False
+0/7 matched; 0/7 non_empty; 0 current_leak; 0 error,Returns current business date for old requested dates or parser is current-only.,not_implemented,0.0,False,current_cross_check,phu_quy_current,current_only,False
+0/7 matched; 7/7 non_empty; 7 current_leak; 0 error,Returns current business date for old requested dates or parser is current-only.,ok,0.0,False,current_cross_check,pnj_current,current_only,False
+0/7 matched; 0/7 non_empty; 0 current_leak; 0 error,Returns current business date for old requested dates or parser is current-only.,not_implemented,0.0,False,current_cross_check,vietabank_current,current_only,False
+0/7 matched; 0/7 non_empty; 0 current_leak; 0 error,Optional; depends on vnstock module availability and function discovery.,not_available,0.0,False,candidate,vnstock_gold_sjc,unstable,False
+5/7 matched; 5/7 non_empty; 0 current_leak; 0 error,,ok,0.7142857142857143,False,archive_cross_check,webgia_sjc_archive,manual_or_archive,True

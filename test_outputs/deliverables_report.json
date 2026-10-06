@@ -1,0 +1,60 @@
+{
+  "generated": "2026-07-13",
+  "news_dataset": {
+    "total_headlines": 3441,
+    "with_body_text": 2910,
+    "body_text_coverage_pct": 84.6,
+    "month_coverage": 108,
+    "valid_dates": 3441
+  },
+  "event_detection": {
+    "price_events": {
+      "total": 0,
+      "by_type": {}
+    },
+    "news_events": {
+      "total": 3363,
+      "by_type": {
+        "gold_price_move": 1414,
+        "news_other": 1030,
+        "fx_shock": 190,
+        "policy_rate_global": 161,
+        "gold_price_up": 147,
+        "gold_price_down": 140,
+        "geopolitical": 128,
+        "sbv_policy": 82,
+        "macro_shock": 54,
+        "seasonal_tet": 15
+      }
+    }
+  },
+  "event_panel": {
+    "total": 3120,
+    "by_type": {
+      "wedding_season": 1530,
+      "gold_price_move": 435,
+      "news_other": 320,
+      "tet_proximity": 240,
+      "gold_price_up": 98,
+      "fx_shock": 85,
+      "policy_rate_global": 80,
+      "gold_price_down": 80,
+      "geopolitical": 67,
+      "sbv_policy": 54,
+      "macro_shock": 35,
+      "geopolitical_crisis": 21,
+      "than_tai": 16,
+      "seasonal_tet": 14,
+      "eurozone_crisis": 12
+    }
+  },
+  "enriched_gold": {
+    "total_dates": 5485,
+    "with_premium": 3772
+  },
+  "master_panel": {
+    "global_reference_daily": 3914,
+    "gold_domestic_daily_panel": 111942,
+    "vn_macro_asof_panel": 36705
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-07-15T17:02:35.045451+00:00",
+  "rows": 15,
+  "central_fx_structure_137473_verified": true,
+  "interest_rate_candidates": 0,
+  "gold_policy_candidates": 11,
+  "blockers": [
+    "No verified SBV deposit/interest-rate content structure found; structure 137473 is central USD/VND FX."
+  ],
+  "navigation_statuses": [
+    {
+      "seed_url": "https://sbv.gov.vn/vi/",
+      "status": "200",
+      "error": ""
+    },
+    {
+      "seed_url": "https://sbv.gov.vn/vi/bieu-do-ty-gia-trung-tam",
+      "status": "200",
+      "error": ""
+    },
+    {
+      "seed_url": "https://sbv.gov.vn/vi/quan-ly-hoat-dong-ngoai-hoi-va-hoat-dong-kinh-doanh-vang",
+      "status": "200",
+      "error": ""
+    }
+  ],
+  "outputs": {
+    "csv": "C:\\Users\\admin\\Documents\\Lab Workplace\\vn-gold-market-analysis\\data\\lake\\source_discovery\\sbv_structures.csv",
+    "json": "C:\\Users\\admin\\Documents\\Lab Workplace\\vn-gold-market-analysis\\data\\lake\\source_discovery\\sbv_structures.json"
+  }
+}

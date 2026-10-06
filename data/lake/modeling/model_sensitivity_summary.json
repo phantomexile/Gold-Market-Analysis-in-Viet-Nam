@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-07-15T18:09:21.715252+00:00",
+  "dependency_availability": {
+    "lightgbm": true,
+    "xgboost": true,
+    "catboost": true,
+    "torch": true,
+    "pytorch_forecasting": true,
+    "gluonts": true
+  },
+  "boosting_status": {
+    "lightgbm": "available",
+    "xgboost": "available",
+    "catboost": "available"
+  },
+  "deep_learning_status": "ready_for_experiment",
+  "feature_set_variants": [
+    {
+      "variant": "current_all_features",
+      "status": "trained_in_main_runner",
+      "rows": 5485,
+      "premium_non_null_share": 1.0,
+      "news_feature_columns": 312,
+      "latest_main_summary_date": "2026-07-15T18:09:01.954783"
+    },
+    {
+      "variant": "no_premium",
+      "status": "ready_for_training",
+      "rows": 5485,
+      "reason": "Drop premium/global_gold_vnd derived columns for sensitivity training."
+    },
+    {
+      "variant": "premium_high_quality_only",
+      "status": "ready_for_training",
+      "rows": 5485,
+      "high_quality_rows": 3769
+    },
+    {
+      "variant": "strict_news_only",
+      "status": "blocked_low_strict_news_coverage",
+      "strict_realtime_news_share": 0.14240046498111014
+    },
+    {
+      "variant": "no_news",
+      "status": "ready_for_training",
+      "reason": "Drop raw_news_* columns to quantify backfill sensitivity."
+    }
+  ],
+  "blockers": [
+    "Strict real-time news coverage is too low for a reliable news-only backtest."
+  ]
+}

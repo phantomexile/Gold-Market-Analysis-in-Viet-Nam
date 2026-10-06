@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-07-15T17:21:07.834230+00:00",
+  "rows": 3441,
+  "valid_published_at_rows": 3441,
+  "valid_availability_rows": 3441,
+  "strict_realtime_verified_rows": 490,
+  "strict_realtime_verified_share": 0.14240046498111014,
+  "backfilled_not_realtime_rows": 2951,
+  "provider_counts": {
+    "google_news_rss": 3441
+  },
+  "date_min": "2010-11-01",
+  "date_max": "2026-07-11",
+  "blockers": [
+    "Most news rows are backfilled, so strict real-time paper trading should not use them for historical signals."
+  ]
+}
