@@ -120,6 +120,57 @@
       </div>
     </section>
 
+    <!-- AI Decision Support & Buy/Sell Recommendation Section -->
+    <section class="decision-panel glass-panel" id="decisionSupportSection">
+      <div class="decision-panel-header">
+        <div class="decision-title-group">
+          <div class="decision-badge-pulse">
+            <span class="pulse-dot"></span>
+            <span>AI QUANT MODEL</span>
+          </div>
+          <h2>🎯 Đề Xuất & Tín Hiệu Mua / Bán Vàng (Decision Support System)</h2>
+        </div>
+        <div class="decision-meta">
+          <span id="decisionSnapshotDate" class="snapshot-badge">Snapshot: Đang tải...</span>
+          <span class="model-badge">Quantile Q10 • Net of SJC Spread</span>
+        </div>
+      </div>
+
+      <!-- Executive Recommendation Banner -->
+      <div class="executive-banner" id="executiveBanner">
+        <div class="exec-signal-box" id="execSignalBox">
+          <span class="exec-label">TÍN HIỆU ĐIỀU HÀNH</span>
+          <div class="exec-action" id="execActionText">—</div>
+          <span class="exec-badge" id="execBadge">Chờ tính toán</span>
+        </div>
+        <div class="exec-content">
+          <div class="exec-heading">Khuyến nghị chiến lược tổng thể</div>
+          <p class="exec-text" id="execSummaryText">Đang tổng hợp dữ liệu từ mô hình học máy...</p>
+        </div>
+      </div>
+
+      <!-- 3 Horizon Recommendation Cards Grid -->
+      <div class="horizon-grid" id="horizonGrid">
+        <!-- Rendered by JavaScript -->
+      </div>
+
+      <!-- Decision Methodology Footnotes -->
+      <div class="decision-footer">
+        <div class="rule-tag">
+          <span class="tag-icon">⚖️</span>
+          <span><strong>Khấu trừ Spread SJC:</strong> Toàn bộ lợi nhuận ròng đã trừ chênh lệch Mua - Bán (~3.000.000 ₫/lượng).</span>
+        </div>
+        <div class="rule-tag">
+          <span class="tag-icon">🛡️</span>
+          <span><strong>Kiểm soát rủi ro đuôi Q10:</strong> Chỉ mở vị thế khi P(lãi) ≥ 50% và rủi ro sụt giảm kịch bản xấu Q10 ≥ -10%.</span>
+        </div>
+        <div class="rule-tag">
+          <span class="tag-icon">🧠</span>
+          <span><strong>Mô hình học máy:</strong> Random Forest + Gradient Boosting Quantile (Q10) trên 5.400+ phiên (2010 - 2026).</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Navigation Bar & Time Toolbar -->
     <nav class="controls-toolbar glass-panel" id="controlsToolbar">
       <!-- Chart View Tabs -->

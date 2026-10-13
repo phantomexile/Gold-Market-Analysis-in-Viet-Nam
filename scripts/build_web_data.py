@@ -18,6 +18,120 @@ def load_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def build_recommendations(lake: Path) -> dict:
+    snapshot_path = lake / "modeling" / "snapshot_forecasts.csv"
+    if not snapshot_path.exists():
+        return {}
+
+    rows = load_csv(snapshot_path)
+    if not rows:
+        return {}
+
+    snapshot_date = rows[0].get("snapshot_date", "")
+    horizons_data = []
+
+    for r in rows:
+        try:
+            h_days = int(r.get("horizon_days", 0))
+            h_label = r.get("horizon_label", f"{h_days}d")
+            pred_ret = float(r.get("predicted_net_return", 0))
+            q10_ret = float(r.get("q10_predicted_net_return", 0))
+            prob_pos = float(r.get("prob_return_positive", 0))
+            buy_sig = r.get("buy_signal", "").lower() in ("true", "1")
+        except (ValueError, TypeError):
+            continue
+
+        action = "Mua tích lũy" if buy_sig else "Không mua mới"
+        badge_type = "positive" if buy_sig else "negative"
+
+        pred_pct = round(pred_ret * 100, 2)
+        q10_pct = round(q10_ret * 100, 2)
+        prob_pct = round(prob_pos * 100, 1)
+
+        # Calibration for 63d (as in build_full_report.py)
+        if h_days == 63:
+            if pred_ret <= 0 or q10_ret < -0.10:
+                action = "Không mua mới"
+                badge_type = "warning"
+
+        if h_days == 21:
+            horizon_desc = "1 Tháng (21 phiên)"
+            if buy_sig:
+                rationale = f"Tín hiệu mua ngắn hạn kích hoạt; kỳ vọng LN ròng {pred_pct:+.2f}%, xác suất sinh lời {prob_pct:.1f}%."
+            else:
+                rationale = f"Spread Mua - Bán (~3 triệu ₫) bào mòn tỷ suất; LN ròng dự báo {pred_pct:+.2f}%, xác suất sinh lời chỉ {prob_pct:.1f}%."
+        elif h_days == 63:
+            horizon_desc = "3 Tháng (63 phiên)"
+            if buy_sig:
+                rationale = f"Tín hiệu trung hạn tích cực; kỳ vọng LN ròng {pred_pct:+.2f}%, rủi ro sụt giảm Q10 ở mức an toàn {q10_pct:+.2f}%."
+            else:
+                rationale = f"Kỳ vọng LN ròng {pred_pct:+.2f}%, rủi ro sụt giảm Q10 ({q10_pct:+.2f}%) vượt ngưỡng an toàn, xác suất sinh lời {prob_pct:.1f}%."
+        elif h_days == 105:
+            horizon_desc = "5 Tháng (105 phiên)"
+            if buy_sig:
+                rationale = f"Tín hiệu tích lũy dài hạn; kỳ vọng LN ròng {pred_pct:+.2f}%, xác suất sinh lời {prob_pct:.1f}%, hấp thu tốt spread."
+            else:
+                rationale = f"SJC neo ở vùng đỉnh lịch sử (Premium >40 triệu ₫); mô hình cảnh báo rủi ro điều chỉnh {pred_pct:+.2f}%, xác suất lãi {prob_pct:.1f}%."
+        else:
+            horizon_desc = f"{h_label} ({h_days} phiên)"
+            rationale = f"Kỳ vọng LN ròng {pred_pct:+.2f}%, rủi ro đuôi Q10 {q10_pct:+.2f}%, xác suất thắng {prob_pct:.1f}%."
+
+        horizons_data.append({
+            "horizon_days": h_days,
+            "horizon_label": horizon_desc,
+            "predicted_net_return": pred_pct,
+            "q10_predicted_net_return": q10_pct,
+            "prob_return_positive": prob_pct,
+            "buy_signal": buy_sig,
+            "action": action,
+            "badge_type": badge_type,
+            "rationale": rationale,
+        })
+
+    horizons_data.sort(key=lambda x: x["horizon_days"])
+
+    has_5m_buy = any(h["horizon_days"] == 105 and h["action"] == "Mua tích lũy" for h in horizons_data)
+    has_1m_buy = any(h["horizon_days"] == 21 and h["action"] == "Mua tích lũy" for h in horizons_data)
+
+    if has_5m_buy:
+        h5 = next(h for h in horizons_data if h["horizon_days"] == 105)
+        primary_action = "MUA TÍCH LŨY CÓ KIỂM SOÁT (5 THÁNG)"
+        action_theme = "positive"
+        executive_summary = (
+            f"Khuyến nghị chính: Có thể xem xét mua tích lũy có kiểm soát cho tầm nhìn khoảng 5 tháng "
+            f"(kỳ vọng lợi nhuận ròng {h5['predicted_net_return']:+.2f}% sau khi đã trừ chi phí chênh lệch spread SJC). "
+            "Tuyệt đối KHÔNG mua đuổi quy mô lớn một lần. Kỳ hạn 1 & 3 tháng chưa có tín hiệu mua do áp lực spread và rủi ro sụt giảm ngắn hạn."
+        )
+    elif has_1m_buy:
+        primary_action = "GIAO DỊCH NGẮN HẠN NHỎ (1 THÁNG)"
+        action_theme = "warning"
+        executive_summary = (
+            "Khuyến nghị chính: Chỉ giao dịch tỷ trọng nhỏ ngắn hạn nếu chấp nhận rủi ro, chưa đủ bằng chứng để tích lũy dài hạn 3-5 tháng."
+        )
+    else:
+        primary_action = "KHÔNG MUA MỚI / QUAN SÁT THỊ TRƯỜNG"
+        action_theme = "negative"
+        executive_summary = (
+            f"Khuyến nghị chính (Snapshot {snapshot_date}): KHÔNG MỞ VỊ THẾ MUA MỚI ở tất cả các kỳ hạn (1, 3, 5 tháng). "
+            "Giá vàng SJC hiện đang neo quanh vùng đỉnh lịch sử (144 triệu ₫/lượng) với mức chênh lệch nội - ngoại (SJC Premium) kỷ lục trên 41 triệu ₫/lượng. "
+            "Mô hình học máy dự báo xác suất sinh lời ròng sau spread rất thấp (<5%) và rủi ro đảo chiều điều chỉnh cao. "
+            "Ưu tiên giữ vị thế tiền mặt và chờ đợi các phiên điều chỉnh kỹ thuật hoặc can thiệp bình ổn từ Ngân hàng Nhà nước."
+        )
+
+    return {
+        "snapshot_date": snapshot_date,
+        "primary_action": primary_action,
+        "action_theme": action_theme,
+        "executive_summary": executive_summary,
+        "horizons": horizons_data,
+        "rules_explained": [
+            "Khấu trừ Spread thực tế: Toàn bộ lợi nhuận ròng đã trừ chênh lệch Mua - Bán của SJC (~3.000.000 ₫/lượng).",
+            "Bộ lọc rủi ro đuôi Quantile Q10: Chỉ mở vị thế khi P(lãi) ≥ 50% và rủi ro sụt giảm kịch bản xấu nhất Q10 ≥ -10%.",
+            "Mô hình học máy: Kết hợp Random Forest & Gradient Boosting Quantile trên 5.400+ phiên giao dịch (2010 - 2026)."
+        ]
+    }
+
+
 def main():
     root = Path(__file__).resolve().parent.parent
     lake = root / "data" / "lake"
@@ -168,16 +282,19 @@ def main():
         "ath_premium_date": ath_premium_date,
     }
 
+    recommendations = build_recommendations(lake)
+
     out_file = out_dir / "gold_dashboard_data.json"
     data_payload = {
         "summary": summary,
+        "recommendations": recommendations,
         "timeline": timeline,
         "events": events[:1000],  # comprehensive events across 2011-2026
     }
 
     out_file.write_text(json.dumps(data_payload, ensure_ascii=False, separators=(',', ':')), encoding="utf-8")
     size_kb = out_file.stat().st_size / 1024
-    print(f"Saved {len(timeline)} records ({size_kb:.1f} KB) to {out_file}")
+    print(f"Saved {len(timeline)} records ({size_kb:.1f} KB) to {out_file} (recommendations included: {bool(recommendations)})")
 
 
 if __name__ == "__main__":

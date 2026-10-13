@@ -105,6 +105,7 @@ async function loadData() {
     state.data = await response.json();
     
     updateKpiCards();
+    renderDecisionSupport();
     updateStatisticsPanel();
     renderEventList();
     filterDataByRange();
@@ -114,6 +115,75 @@ async function loadData() {
   } catch (err) {
     console.error('Error loading data:', err);
     showToast('Lỗi nạp dữ liệu: ' + err.message, '❌');
+  }
+}
+
+function renderDecisionSupport() {
+  const rec = state.data.recommendations;
+  const sec = document.getElementById('decisionSupportSection');
+  if (!rec || !rec.horizons || rec.horizons.length === 0) {
+    if (sec) sec.style.display = 'none';
+    return;
+  }
+  if (sec) sec.style.display = 'block';
+
+  // Snapshot date
+  const snapshotDateEl = document.getElementById('decisionSnapshotDate');
+  if (snapshotDateEl && rec.snapshot_date) {
+    snapshotDateEl.textContent = `Snapshot: ${rec.snapshot_date}`;
+  }
+
+  // Executive Signal Box
+  const execBox = document.getElementById('execSignalBox');
+  const execAction = document.getElementById('execActionText');
+  const execBadge = document.getElementById('execBadge');
+  const execText = document.getElementById('execSummaryText');
+
+  if (execBox && execAction) {
+    execBox.className = 'exec-signal-box ' + (rec.action_theme || 'positive');
+    execAction.textContent = rec.primary_action || 'QUAN SÁT THỊ TRƯỜNG';
+  }
+  if (execBadge) {
+    execBadge.textContent = rec.action_theme === 'positive' ? 'Khuyến nghị Tích lũy' : (rec.action_theme === 'warning' ? 'Thận trọng' : 'Quan sát');
+  }
+  if (execText && rec.executive_summary) {
+    execText.textContent = rec.executive_summary;
+  }
+
+  // Horizon Cards
+  const gridEl = document.getElementById('horizonGrid');
+  if (gridEl) {
+    gridEl.innerHTML = rec.horizons.map((h) => {
+      const retClass = h.predicted_net_return > 0 ? 'positive' : (h.predicted_net_return < 0 ? 'negative' : 'warning');
+      const q10Class = h.q10_predicted_net_return >= -10 ? 'positive' : 'negative';
+      const probClass = h.prob_return_positive >= 50 ? 'positive' : 'negative';
+
+      return `
+        <div class="horizon-card ${h.badge_type}">
+          <div class="horizon-header">
+            <span class="horizon-title">${h.horizon_label}</span>
+            <span class="action-pill ${h.badge_type}">${h.action}</span>
+          </div>
+          <div class="horizon-metrics">
+            <div class="h-metric">
+              <span class="h-metric-label">LN Ròng Dự Báo</span>
+              <span class="h-metric-val ${retClass}">${h.predicted_net_return > 0 ? '+' : ''}${h.predicted_net_return.toFixed(2)}%</span>
+            </div>
+            <div class="h-metric">
+              <span class="h-metric-label">Rủi Ro Đuôi Q10</span>
+              <span class="h-metric-val ${q10Class}">${h.q10_predicted_net_return > 0 ? '+' : ''}${h.q10_predicted_net_return.toFixed(2)}%</span>
+            </div>
+            <div class="h-metric">
+              <span class="h-metric-label">Xác Suất Lãi P(>0)</span>
+              <span class="h-metric-val ${probClass}">${h.prob_return_positive.toFixed(1)}%</span>
+            </div>
+          </div>
+          <div class="horizon-rationale">
+            ${h.rationale}
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 }
 
