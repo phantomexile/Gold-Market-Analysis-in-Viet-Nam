@@ -1,4 +1,4 @@
 generated_at,snapshot_date,horizon_days,horizon_label,point_model,q10_model,train_rows,feature_count,predicted_net_return,q10_predicted_net_return,prob_return_positive,buy_signal,status
-2026-10-13T06:17:43.840733+00:00,2026-10-06,21,1 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5537,120,-0.04292730547573708,-0.05410384129250091,0.01800323213267019,False,ok
-2026-10-13T06:19:17.775702+00:00,2026-10-06,63,3 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5495,120,-0.04064675833286209,-0.058315343567128086,0.04914227244420588,False,ok
-2026-10-13T06:20:20.566201+00:00,2026-10-06,105,5 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5453,120,-0.11150669263507948,-0.1327401959792508,0.0001323573797387123,False,ok
+2026-10-20T07:37:09.969405+00:00,2026-10-20,21,1 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5549,120,-0.0427939712081828,-0.042042779814591646,0.015106360414817166,False,ok
+2026-10-20T07:37:47.727152+00:00,2026-10-20,63,3 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5507,120,0.03239447778849417,-0.04111401472933396,0.9070731363949263,True,ok
+2026-10-20T07:38:21.263068+00:00,2026-10-20,105,5 tháng,random_forest_snapshot_top120_features,gradient_boosting_quantile_q10_snapshot_top120_features,5465,120,-0.008485384984150909,-0.10352949253361808,0.38642530294511257,False,ok

@@ -4211,3 +4211,13 @@ gold_futures_front_continuous,2026-10-02,2026-10-01,4202.2998046875,4202.2998046
 gold_futures_front_continuous,2026-10-03,2026-10-02,4162.2998046875,4162.2998046875,no_shares_outstanding,4162.2998046875,GC=F,yfinance_ticker_v2,usd_per_share,4162.2998046875,0.0
 gold_futures_front_continuous,2026-10-06,2026-10-05,4156.7998046875,4156.7998046875,no_shares_outstanding,4156.7998046875,GC=F,yfinance_ticker_v2,usd_per_share,4156.7998046875,0.0
 gold_futures_front_continuous,2026-10-07,2026-10-06,4157.2998046875,4157.2998046875,no_shares_outstanding,4157.2998046875,GC=F,yfinance_ticker_v2,usd_per_share,4157.2998046875,0.0
+gold_futures_front_continuous,2026-10-08,2026-10-07,4140.7001953125,4140.7001953125,no_shares_outstanding,4140.7001953125,GC=F,yfinance_ticker_v2,usd_per_share,4140.7001953125,0.0
+gold_futures_front_continuous,2026-10-09,2026-10-08,4157.0,4157.0,no_shares_outstanding,4157.0,GC=F,yfinance_ticker_v2,usd_per_share,4157.0,0.0
+gold_futures_front_continuous,2026-10-10,2026-10-09,4216.2998046875,4216.2998046875,no_shares_outstanding,4216.2998046875,GC=F,yfinance_ticker_v2,usd_per_share,4216.2998046875,0.0
+gold_futures_front_continuous,2026-10-13,2026-10-12,4190.60009765625,4190.60009765625,no_shares_outstanding,4190.60009765625,GC=F,yfinance_ticker_v2,usd_per_share,4190.60009765625,0.0
+gold_futures_front_continuous,2026-10-14,2026-10-13,4177.2998046875,4177.2998046875,no_shares_outstanding,4177.2998046875,GC=F,yfinance_ticker_v2,usd_per_share,4177.2998046875,0.0
+gold_futures_front_continuous,2026-10-15,2026-10-14,4107.89990234375,4107.89990234375,no_shares_outstanding,4107.89990234375,GC=F,yfinance_ticker_v2,usd_per_share,4107.89990234375,0.0
+gold_futures_front_continuous,2026-10-16,2026-10-15,4170.10009765625,4170.10009765625,no_shares_outstanding,4170.10009765625,GC=F,yfinance_ticker_v2,usd_per_share,4170.10009765625,0.0
+gold_futures_front_continuous,2026-10-17,2026-10-16,4181.10009765625,4181.10009765625,no_shares_outstanding,4181.10009765625,GC=F,yfinance_ticker_v2,usd_per_share,4181.10009765625,0.0
+gold_futures_front_continuous,2026-10-20,2026-10-19,4160.10009765625,4160.10009765625,no_shares_outstanding,4160.10009765625,GC=F,yfinance_ticker_v2,usd_per_share,4160.10009765625,0.0
+gold_futures_front_continuous,2026-10-21,2026-10-20,4150.0,4150.0,no_shares_outstanding,4150.0,GC=F,yfinance_ticker_v2,usd_per_share,4150.0,0.0

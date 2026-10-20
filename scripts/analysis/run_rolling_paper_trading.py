@@ -208,6 +208,30 @@ def summarize(ledger: pd.DataFrame) -> dict[str, Any]:
     return summary
 
 
+def build_ledger_and_summary(
+    forecasts_path: Path,
+    prices_path: Path,
+    out_path: Path,
+    summary_path: Path,
+    *,
+    after: str,
+    model_version: str = "snapshot_forecast_v1",
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Ghi sổ giao dịch mô phỏng và tóm tắt từ một snapshot đã huấn luyện."""
+    # Chỉ lấy tín hiệu từ ngày snapshot cần cập nhật để không ghi lại dự báo cũ.
+    forecasts = load_forecasts(forecasts_path, after)
+    prices = load_price_curve(prices_path)
+    ledger = build_ledger(forecasts, prices, model_version)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    # Giữ các tín hiệu của những snapshot trước và thay thế bản ghi trùng mã giao dịch.
+    ledger = merge_existing(ledger, out_path)
+    ledger.to_csv(out_path, index=False, quoting=csv.QUOTE_MINIMAL)
+    summary = summarize(ledger)
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    return ledger, summary
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run rolling paper-trading ledger for VN gold signals.")
     parser.add_argument("--forecasts", default=str(DEFAULT_SNAPSHOT))
@@ -221,15 +245,11 @@ def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-    forecasts = load_forecasts(Path(args.forecasts), args.after)
-    prices = load_price_curve(Path(args.prices))
-    ledger = build_ledger(forecasts, prices, args.model_version)
     out_path = Path(args.out)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    ledger = merge_existing(ledger, out_path)
-    ledger.to_csv(out_path, index=False, quoting=csv.QUOTE_MINIMAL)
-    summary = summarize(ledger)
-    Path(args.summary).write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    ledger, summary = build_ledger_and_summary(
+        Path(args.forecasts), Path(args.prices), out_path, Path(args.summary),
+        after=args.after, model_version=args.model_version,
+    )
     print(json.dumps({"ledger_rows": len(ledger), "out": str(out_path)}, ensure_ascii=False, indent=2))
     return 0
 

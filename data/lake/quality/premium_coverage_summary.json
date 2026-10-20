@@ -1,16 +1,17 @@
 {
-  "generated_at": "2026-07-15T17:20:20.776994+00:00",
-  "rows": 5485,
+  "generated_at": "2026-10-20T07:30:54.449632+00:00",
+  "rows": 5570,
   "old_rows": 5485,
-  "old_premium_missing_rate": 0.312306289881495,
+  "old_premium_missing_rate": 0.0,
   "new_premium_missing_rate": 0.0,
   "target_missing_rate": 0.1,
   "target_met": true,
   "gold_tolerance_days": 4,
   "fx_tolerance_days": 4,
   "source_quality_counts": {
-    "proxy_exact": 3769,
-    "proxy_forward_filled": 1716
+    "proxy_exact": 3837,
+    "proxy_forward_filled": 1732,
+    "official_exact": 1
   },
   "blockers": []
 }

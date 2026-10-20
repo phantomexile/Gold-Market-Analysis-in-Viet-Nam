@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Luồng hoạt động của pipeline phân tích thị trường vàng Việt Nam</title>
+  <desc id="desc">Tám bước từ thu thập nguồn dữ liệu, kiểm tra, lưu vào data lake, tạo đặc trưng, huấn luyện mô hình, áp quy tắc tín hiệu, xuất JSON đến hiển thị dashboard.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop offset="0" stop-color="#091527"/>
+      <stop offset="1" stop-color="#102747"/>
+    </linearGradient>
+    <linearGradient id="gold" x2="1" y2="0">
+      <stop offset="0" stop-color="#e9bc62"/>
+      <stop offset="1" stop-color="#f5d997"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#020817" flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#e9bc62"/>
+    </marker>
+    <style>
+      .title{font:700 47px 'Segoe UI',Arial,sans-serif;fill:#f8fafc}
+      .subtitle{font:400 23px 'Segoe UI',Arial,sans-serif;fill:#b7c7dc}
+      .step{font:700 19px 'Segoe UI',Arial,sans-serif;fill:#14243a;text-anchor:middle;dominant-baseline:middle}
+      .head{font:700 27px 'Segoe UI',Arial,sans-serif;fill:#f8fafc}
+      .body{font:400 20px 'Segoe UI',Arial,sans-serif;fill:#cad5e5}
+      .small{font:400 17px 'Segoe UI',Arial,sans-serif;fill:#a9bdd5}
+      .note{font:600 21px 'Segoe UI',Arial,sans-serif;fill:#f6dfae}
+      .line{fill:none;stroke:#e9bc62;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+      .box{fill:#18314e;stroke:#31516e;stroke-width:2;rx:22;filter:url(#shadow)}
+      .badge{fill:url(#gold)}
+    </style>
+  </defs>
+  <!-- Tiêu đề và chú giải định hướng người xem đọc theo các số bước. -->
+  <rect width="1600" height="980" fill="url(#bg)"/>
+  <rect x="57" y="55" width="9" height="104" rx="4" fill="url(#gold)"/>
+  <text class="title" x="91" y="99">PIPELINE PHÂN TÍCH GIÁ VÀNG VIỆT NAM</text>
+  <text class="subtitle" x="92" y="141">Dữ liệu lịch sử → dự báo lợi suất sau spread → dashboard hỗ trợ quyết định</text>
+
+  <!-- Hàng trên: thu thập, kiểm tra, lưu trữ và tạo dữ liệu đầu vào cho mô hình. -->
+  <g transform="translate(50 220)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">1</text>
+    <text class="head" x="73" y="49">Thu thập nguồn</text>
+    <text class="body" x="28" y="104">Giá SJC; USD/VND; vàng thế giới</text>
+    <text class="body" x="28" y="140">Vĩ mô; sự kiện thị trường</text>
+    <text class="small" x="28" y="187">Collector và API → CSV thô</text>
+  </g>
+  <path class="line" d="M407 327 H424"/>
+  <g transform="translate(430 220)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">2</text>
+    <text class="head" x="73" y="49">Kiểm tra chất lượng</text>
+    <text class="body" x="28" y="104">Khớp ngày giao dịch; đủ giá</text>
+    <text class="body" x="28" y="140">mua/bán; loại bản ghi sai</text>
+    <text class="small" x="28" y="187">Nguồn lịch sử hợp lệ → nhãn</text>
+  </g>
+  <path class="line" d="M787 327 H804"/>
+  <g transform="translate(810 220)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">3</text>
+    <text class="head" x="73" y="49">Lưu vào data lake</text>
+    <text class="body" x="28" y="104">Dữ liệu theo ngày; bảng giá,</text>
+    <text class="body" x="28" y="140">tham chiếu và sự kiện</text>
+    <text class="small" x="28" y="187">data/lake/ → bảng đã chuẩn hóa</text>
+  </g>
+  <path class="line" d="M1167 327 H1184"/>
+  <g transform="translate(1190 220)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">4</text>
+    <text class="head" x="73" y="49">Tạo đặc trưng</text>
+    <text class="body" x="28" y="104">Ghép dữ liệu theo thời điểm</text>
+    <text class="body" x="28" y="140">Tạo độ trễ và cửa sổ trượt</text>
+    <text class="small" x="28" y="187">model_frame_daily.csv</text>
+  </g>
+
+  <!-- Hàng dưới đi từ phải sang trái để mũi tên nối liền bước 4 đến bước 8. -->
+  <path class="line" d="M1365 443 V540"/>
+  <g transform="translate(1190 550)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">5</text>
+    <text class="head" x="73" y="49">Huấn luyện mô hình</text>
+    <text class="body" x="28" y="104">Random Forest: lợi suất ròng</text>
+    <text class="body" x="28" y="140">Gradient Boosting: Q10</text>
+    <text class="small" x="28" y="187">21 / 63 / 105 quan sát</text>
+  </g>
+  <path class="line" d="M1183 657 H1167"/>
+  <g transform="translate(810 550)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">6</text>
+    <text class="head" x="73" y="49">Tạo tín hiệu</text>
+    <text class="body" x="28" y="104">P(lãi) ≥ 50% và Q10 ≥ −10%</text>
+    <text class="body" x="28" y="140">→ mua hoặc không mua mới</text>
+    <text class="small" x="28" y="187">snapshot_forecasts.csv</text>
+  </g>
+  <path class="line" d="M803 657 H787"/>
+  <g transform="translate(430 550)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">7</text>
+    <text class="head" x="73" y="49">Xuất dữ liệu web</text>
+    <text class="body" x="28" y="104">Gộp chỉ số, chuỗi giá, sự kiện</text>
+    <text class="body" x="28" y="140">và dự báo thành một JSON</text>
+    <text class="small" x="28" y="187">gold_dashboard_data.json</text>
+  </g>
+  <path class="line" d="M423 657 H407"/>
+  <g transform="translate(50 550)">
+    <rect class="box" width="350" height="215"/>
+    <circle class="badge" cx="38" cy="39" r="23"/><text class="step" x="38" y="40">8</text>
+    <text class="head" x="73" y="49">Dashboard web</text>
+    <text class="body" x="28" y="104">KPI, biểu đồ, tín hiệu,</text>
+    <text class="body" x="28" y="140">tra cứu và xuất CSV</text>
+    <text class="small" x="28" y="187">python web/server.py</text>
+  </g>
+
+  <!-- Ghi chú nghiệp vụ: cập nhật dữ liệu và huấn luyện dự báo là hai lệnh riêng. -->
+  <rect x="50" y="825" width="1490" height="91" rx="19" fill="#203b57" stroke="#4a6682" stroke-width="2"/>
+  <text class="note" x="77" y="863">KHI DEMO:</text>
+  <text class="body" x="230" y="863">Nút “Cập nhật dữ liệu” làm mới dữ liệu hiển thị; huấn luyện snapshot là lệnh riêng.</text>
+  <text class="small" x="77" y="895">Snapshot hiện có: 20/10/2026. Các kỳ hạn 21 / 63 / 105 là số quan sát, không phải tháng lịch chính xác.</text>
+</svg>

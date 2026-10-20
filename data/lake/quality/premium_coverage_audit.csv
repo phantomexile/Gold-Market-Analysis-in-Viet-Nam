@@ -14,6 +14,7 @@ segment,rows,premium_missing,premium_missing_rate,proxy_share,section
 2023,365,0.0,0.0,1.0,by_year
 2024,366,0.0,0.0,1.0,by_year
 2025,365,0.0,0.0,1.0,by_year
-2026,192,0.0,0.0,1.0,by_year
-proxy_exact,3769,,,,by_source_quality
-proxy_forward_filled,1716,,,,by_source_quality
+2026,277,0.0,0.0,0.9963898916967509,by_year
+official_exact,1,,,,by_source_quality
+proxy_exact,3837,,,,by_source_quality
+proxy_forward_filled,1732,,,,by_source_quality
