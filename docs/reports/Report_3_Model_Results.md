@@ -1,5 +1,10 @@
 # REPORT 3: MODEL & RESULTS
 
+> **Lưu ý phiên bản:** Đây là báo cáo lịch sử về kỳ hạn 21/63/105 quan sát và snapshot cũ. Phiên dự báo hiện hành đã đổi sang 1/3/5 tháng lịch; xem `data/lake/modeling/snapshot_forecasts.csv` và notebook mới để lấy kết quả hiện tại.
+
+> **Snapshot 20/10/2026 sau cập nhật sự kiện:** dự báo lợi suất ròng 1/3/5 tháng lần lượt là **−3,61% / +11,23% / +12,92%**; tín hiệu mua chỉ bật ở kỳ hạn 3 tháng. Dữ liệu GPR chính thức đến 19/10/2026 và tin RSS đến 21/10/2026; tin ngày 21/10 không nằm trong khung model kết thúc ngày 20/10. Các kết quả backtest bên dưới vẫn thuộc cấu hình lịch sử.
+
+
 ## Phát triển và đánh giá mô hình hỗ trợ quyết định mua vàng SJC tại Việt Nam
 
 **Loại tài liệu:** Báo cáo nghiên cứu thực nghiệm  

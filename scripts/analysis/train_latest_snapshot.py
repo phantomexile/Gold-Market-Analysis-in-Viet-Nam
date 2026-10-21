@@ -26,7 +26,7 @@ if str(SRC) not in sys.path:
 
 from gold_collectors.modeling import ModelingConfig, build_model_frame
 
-HORIZON_LABELS = {21: "1 tháng", 63: "3 tháng", 105: "5 tháng"}
+HORIZON_LABELS = {1: "1 tháng", 3: "3 tháng", 5: "5 tháng"}
 
 
 def main():
@@ -66,14 +66,15 @@ def main():
 
     rows: list[dict[str, Any]] = []
 
-    for horizon in [21, 63, 105]:
-        target_col = f"net_return_{horizon}d"
+    for horizon in [1, 3, 5]:
+        # Nhãn này dùng phiên SJC đầu tiên từ ngày tròn tháng, không dùng shift theo số dòng.
+        target_col = f"net_return_{horizon}m"
         if target_col not in data.columns:
             print(f"  [WARN] Missing target {target_col}, skipping...")
             continue
 
         train = data.dropna(subset=[target_col]).copy()
-        print(f"\n  [Horizon {horizon}d - {HORIZON_LABELS[horizon]}] Training rows: {len(train):,}")
+        print(f"\n  [Horizon {HORIZON_LABELS[horizon]}] Training rows: {len(train):,}")
 
         # Feature selection by correlation on training set
         scored: list[tuple[str, float]] = []
@@ -145,10 +146,12 @@ def main():
             {
                 "generated_at": datetime.now(timezone.utc).isoformat(),
                 "snapshot_date": latest_date_str,
-                "horizon_days": horizon,
+                "horizon_months": horizon,
                 "horizon_label": HORIZON_LABELS[horizon],
-                "point_model": "random_forest_snapshot_top120_features",
-                "q10_model": "gradient_boosting_quantile_q10_snapshot_top120_features",
+                "target_date": (latest["date"].iloc[0] + pd.DateOffset(months=horizon)).date().isoformat(),
+                "exit_rule": "first_valid_sjc_quote_on_or_after_target_date",
+                "point_model": "random_forest_snapshot_top120_calendar_months",
+                "q10_model": "gradient_boosting_quantile_q10_snapshot_top120_calendar_months",
                 "train_rows": int(len(train)),
                 "feature_count": int(len(selected)),
                 "predicted_net_return": pred,

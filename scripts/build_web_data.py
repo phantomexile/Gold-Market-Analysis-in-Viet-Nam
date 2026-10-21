@@ -32,8 +32,9 @@ def build_recommendations(lake: Path) -> dict:
 
     for r in rows:
         try:
-            h_days = int(r.get("horizon_days", 0))
-            h_label = r.get("horizon_label", f"{h_days}d")
+            h_months = int(r.get("horizon_months", 0))
+            h_label = r.get("horizon_label", f"{h_months} tháng")
+            target_date = r.get("target_date", "")
             pred_ret = float(r.get("predicted_net_return", 0))
             q10_ret = float(r.get("q10_predicted_net_return", 0))
             prob_pos = float(r.get("prob_return_positive", 0))
@@ -48,17 +49,19 @@ def build_recommendations(lake: Path) -> dict:
         q10_pct = round(q10_ret * 100, 2)
         prob_pct = round(prob_pos * 100, 1)
 
-        # Các kỳ hạn là số quan sát trong khung dữ liệu, không phải tháng lịch chính xác.
-        horizon_desc = f"{h_label} ({h_days} quan sát)"
+        # Kỳ hạn dùng tháng lịch; ngày thoát thực tế là phiên SJC đầu tiên từ target_date.
+        horizon_desc = h_label
         # Chỉ diễn giải số liệu có trong snapshot; không dùng giá hoặc premium viết cứng từ lần chạy cũ.
         rationale = (
             f"Lợi suất ròng dự báo {pred_pct:+.2f}%; Q10 {q10_pct:+.2f}%; "
-            f"xác suất lợi suất dương ước lượng {prob_pct:.1f}%."
+            f"xác suất lợi suất dương ước lượng {prob_pct:.1f}%. "
+            f"Ngày tròn {h_months} tháng: {target_date}; khi đánh giá dùng phiên SJC hợp lệ đầu tiên từ ngày này."
         )
 
         horizons_data.append({
-            "horizon_days": h_days,
+            "horizon_months": h_months,
             "horizon_label": horizon_desc,
+            "target_date": target_date,
             "predicted_net_return": pred_pct,
             "q10_predicted_net_return": q10_pct,
             "prob_return_positive": prob_pct,
@@ -68,13 +71,13 @@ def build_recommendations(lake: Path) -> dict:
             "rationale": rationale,
         })
 
-    horizons_data.sort(key=lambda x: x["horizon_days"])
+    horizons_data.sort(key=lambda x: x["horizon_months"])
 
     buy_horizons = [h for h in horizons_data if h["buy_signal"]]
     if buy_horizons:
-        # Bất kỳ kỳ hạn nào bật tín hiệu đều phải được nêu rõ; đặc biệt không bỏ sót kỳ hạn 63 quan sát.
-        labels = {21: "1 THÁNG", 63: "3 THÁNG", 105: "5 THÁNG"}
-        buy_names = ", ".join(labels.get(h["horizon_days"], h["horizon_label"]) for h in buy_horizons)
+        # Bất kỳ kỳ hạn nào bật tín hiệu đều phải được nêu rõ; đặc biệt không bỏ sót ba tháng.
+        labels = {1: "1 THÁNG", 3: "3 THÁNG", 5: "5 THÁNG"}
+        buy_names = ", ".join(labels.get(h["horizon_months"], h["horizon_label"]) for h in buy_horizons)
         primary_action = f"CÓ TÍN HIỆU MUA: {buy_names}"
         action_theme = "positive"
         executive_summary = (
@@ -99,7 +102,8 @@ def build_recommendations(lake: Path) -> dict:
         "rules_explained": [
             "Lợi suất ròng được tính từ giá bán khi mua đến giá mua khi thoát vị thế, nên đã tính chênh lệch mua - bán.",
             "Bộ lọc tín hiệu: P(lãi) ≥ 50% và Q10 ≥ -10%; Q10 là phân vị 10% ước lượng, không phải mức lỗ tối đa.",
-            "Dự báo điểm dùng Random Forest; Q10 dùng Gradient Boosting Quantile trên dữ liệu hiện có."
+            "Dự báo điểm dùng Random Forest; Q10 dùng Gradient Boosting Quantile trên dữ liệu hiện có.",
+            "Kỳ hạn là tháng lịch; ngày thoát là phiên SJC đầu tiên vào hoặc sau ngày tròn tháng.",
         ]
     }
 
@@ -114,7 +118,9 @@ def main():
     if not enriched_file.exists():
         enriched_file = lake / "gold_daily_enriched.csv"
 
-    events_file = lake / "event_regime_panel.csv"
+    # Dashboard và model phải cùng đọc bảng event đã được làm mới; bảng
+    # event_regime_panel.csv cũ không có các tin RSS mới thu thập.
+    events_file = lake / "pipeline_output_event_regime.csv"
 
     print(f"Reading enriched gold data from {enriched_file}...")
     enriched_rows = load_csv(enriched_file)
@@ -174,9 +180,6 @@ def main():
     # Load high-signal events across 2011 - 2026
     events = []
     curated_milestones = [
-        {"date": "2026-10-06", "type": "gold_price_move", "title": "Giá vàng SJC duy trì mốc 142.9 triệu VND/lượng, chênh lệch nội - ngoại quanh 41.5 triệu VND", "category": "price_move"},
-        {"date": "2026-09-30", "type": "macro_shock", "title": "SJC chốt quý 3/2026 ở mức 144.1 triệu VND/lượng; vàng thế giới neo trên 4.150 USD/oz", "category": "global"},
-        {"date": "2026-08-15", "type": "sbv_policy", "title": "Thị trường vàng trong nước ổn định biên độ; NHNN tiếp tục theo dõi sát tỷ giá và giá vàng", "category": "policy"},
         {"date": "2024-06-03", "type": "sbv_policy", "title": "NHNN chính thức triển khai bán vàng miếng trực tiếp qua 4 NHTM Nhà nước (Vietcombank, BIDV, VietinBank, Agribank) và SJC", "category": "policy"},
         {"date": "2024-05-23", "type": "policy_inspection", "title": "Thanh tra liên ngành việc chấp hành chính sách, pháp luật trong hoạt động kinh doanh vàng", "category": "policy"},
         {"date": "2024-04-23", "type": "policy_auction", "title": "NHNN tái khởi động các phiên đấu thầu vàng miếng SJC sau 11 năm tạm ngưng", "category": "policy"},
@@ -230,6 +233,10 @@ def main():
                     "title": note,
                     "channel": channel,
                     "category": category,
+                    # URL giúp người xem truy về bản tin; proxy không được
+                    # trình bày như quyết định chính thức của NHNN.
+                    "source_url": ev.get("source_url") or "",
+                    "is_proxy": ev.get("source") == "google_news_rss_event_proxy",
                 })
 
     # Sort events DESCENDING: Newest first (2026 -> 2025 -> 2024 -> ... -> 2011)

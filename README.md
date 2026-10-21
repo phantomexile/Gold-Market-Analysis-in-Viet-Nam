@@ -1,8 +1,14 @@
 # VN Gold Market Analysis
 
-Pipeline thu thập và xử lý dữ liệu giá vàng Việt Nam (SJC) và các yếu tố vĩ mô toàn cầu để forecasting đa kỳ hạn (1, 3, 5 năm).
+Pipeline thu thập và xử lý dữ liệu giá vàng Việt Nam (SJC) và các yếu tố vĩ mô toàn cầu để dự báo đa kỳ hạn (1, 3, 5 tháng).
 
 **Nguyên tắc cốt lõi**: Một record chỉ được chấp nhận làm dữ liệu huấn luyện lịch sử khi `requested_date == business_date` và cả giá mua/bán đều hợp lệ. Nguồn current-only KHÔNG bao giờ được trộn vào nhãn huấn luyện lịch sử.
+
+**Kỳ hạn dự báo hiện tại**: 1, 3 và 5 **tháng lịch** từ ngày snapshot. Nhãn huấn luyện dùng giá SJC mua vào của phiên hợp lệ đầu tiên vào hoặc sau ngày tròn tháng, chia cho giá SJC bán ra tại ngày dự báo, rồi trừ 1. Các độ trễ 21/63/105 trong đặc trưng vẫn là số dòng quá khứ; các backtest đã lưu trước khi đổi định nghĩa kỳ hạn là kết quả lịch sử và không xác nhận model tháng lịch mới.
+
+Để cập nhật dữ liệu và dự báo cùng một lượt, chạy `python scripts/pipeline/refresh_latest_forecast.py`. Nếu dữ liệu lake đã mới và chỉ cần dựng lại model, dùng `python scripts/pipeline/refresh_latest_forecast.py --skip-collect`. Nút **Cập nhật** của dashboard gọi cùng luồng này.
+
+Bước cập nhật sự kiện tải tin RSS có ngày xuất bản và chỉ số GPR ngày từ nguồn Caldara–Iacoviello. Tin mới được ghi vào `news_raw_headlines_vietnam_gold.csv`; event proxy từ tiêu đề được ghi vào `pipeline_output_event_regime.csv`. Metadata tách ngày đăng và ngày thu thập ở `data/lake/manifests/event_inputs_refresh.json`. Bảng chính sách NHNN chính thức chỉ được cập nhật khi có bài từ nguồn NHNN được xác minh; event proxy từ RSS không được coi là quyết định chính thức.
 
 ---
 

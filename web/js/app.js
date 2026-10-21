@@ -111,7 +111,7 @@ async function loadData() {
     filterDataByRange();
     renderCurrentChart();
     renderDataTable();
-    showToast('Tải thành công 5,558 phiên giao dịch vàng!', '✨');
+    showToast(`Tải thành công ${state.data.summary.total_records.toLocaleString('vi-VN')} phiên giao dịch vàng!`, '✨');
   } catch (err) {
     console.error('Error loading data:', err);
     showToast('Lỗi nạp dữ liệu: ' + err.message, '❌');
@@ -634,18 +634,43 @@ function renderEventList() {
   };
 
   matchedEvents.forEach((ev) => {
-    const catClass = ev.category || 'policy';
-    const tagLabel = tagLabels[catClass] || ev.type.replace(/_/g, ' ');
+    const catClass = Object.prototype.hasOwnProperty.call(tagLabels, ev.category) ? ev.category : 'other';
+    // Tin RSS chỉ được phân loại theo tiêu đề; nhãn này tránh hiểu nhầm
+    // chúng là thông báo hoặc quyết định chính thức của NHNN.
+    const tagLabel = ev.is_proxy ? '📰 Tin báo chí (sự kiện suy diễn)' : tagLabels[catClass];
 
     const card = document.createElement('div');
     card.className = `event-card ${catClass}`;
-    card.innerHTML = `
-      <div class="event-meta">
-        <span class="event-date">${ev.date}</span>
-        <span class="event-tag">${tagLabel}</span>
-      </div>
-      <div class="event-desc">${ev.title}</div>
-    `;
+    const meta = document.createElement('div');
+    meta.className = 'event-meta';
+    const eventDate = document.createElement('span');
+    eventDate.className = 'event-date';
+    eventDate.textContent = String(ev.date || '');
+    const tag = document.createElement('span');
+    tag.className = 'event-tag';
+    tag.textContent = tagLabel;
+    meta.append(eventDate, tag);
+    const description = document.createElement('div');
+    description.className = 'event-desc';
+    // Tiêu đề từ RSS là nội dung bên ngoài, nên đưa vào textContent để
+    // không thực thi HTML lạ khi mở bảng sự kiện.
+    description.textContent = String(ev.title || '');
+    card.append(meta, description);
+    if (ev.source_url) {
+      try {
+        const source = new URL(ev.source_url);
+        if (source.protocol === 'https:') {
+          const link = document.createElement('a');
+          link.href = source.href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = 'Xem nguồn tin';
+          card.appendChild(link);
+        }
+      } catch (_) {
+        // URL sai định dạng thì chỉ bỏ liên kết; nội dung sự kiện vẫn hiển thị.
+      }
+    }
     listEl.appendChild(card);
   });
 }
@@ -741,7 +766,8 @@ async function handleLiveUpdate() {
     const res = await fetch('/api/update', { method: 'POST' });
     if (res.ok) {
       const result = await res.json();
-      showToast(result.message || 'Cập nhật thành công!', '✅');
+      // Chỉ thông báo thành công nếu cả dữ liệu và dự báo tháng lịch đã được tạo lại.
+      showToast(result.message || 'Đã xử lý yêu cầu cập nhật.', result.status === 'ok' ? '✅' : '⚠️');
       await loadData();
     } else {
       showToast('Đang tải lại dữ liệu cục bộ...', 'ℹ️');

@@ -4,6 +4,7 @@ requests
 pandas
 pyarrow
 openpyxl
+xlrd
 python-dotenv
 pydantic
 yfinance

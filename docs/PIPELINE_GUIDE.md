@@ -1,5 +1,7 @@
 # Pipeline Guide — VN Gold Market Analysis
 
+> **Luồng cập nhật hiện hành (21/10/2026):** `scripts/pipeline/refresh_latest_forecast.py` chạy thu thập giá, tin RSS và GPR chính thức, sau đó dựng lại dự báo 1/3/5 tháng lịch. Tin có ngày đăng và URL được lưu trong `news_raw_headlines_vietnam_gold.csv`; event proxy từ tiêu đề vào `pipeline_output_event_regime.csv`. GPR chính thức đến 19/10/2026. Các trạng thái “Blocked” phía dưới ghi lại kế hoạch cũ và không phản ánh trạng thái đầu vào hiện hành.
+
 Hướng dẫn chi tiết từng bước chạy pipeline, ghi chú những gì mỗi bước đã làm, output sinh ra, và cách tái thí nghiệm.
 
 ---
@@ -24,6 +26,15 @@ Pipeline gồm **11 bước**, chia thành 3 nhóm:
 ---
 
 ## ⚡ Cập nhật dữ liệu mới hàng ngày (Incremental Update)
+
+Để cập nhật **cả dữ liệu lẫn phiên dự báo 1/3/5 tháng lịch**, dùng lệnh sau. Script sẽ thu thập phần dữ liệu mới, dựng lại bảng tham chiếu quốc tế và premium, huấn luyện snapshot, cập nhật sổ giao dịch mô phỏng rồi dựng JSON dashboard:
+
+```powershell
+$env:PYTHONUTF8 = "1"
+python scripts/pipeline/refresh_latest_forecast.py
+```
+
+Ngày mục tiêu cho từng kỳ hạn là `snapshot_date + 1/3/5 tháng lịch`. Nhãn lịch sử và sổ giao dịch mô phỏng chọn **phiên SJC hợp lệ đầu tiên vào hoặc sau ngày mục tiêu**. Khi chỉ cần dựng lại model từ lake hiện có, thêm `--skip-collect`. Các backtest đã lưu từ trước sử dụng 21/63/105 dòng quan sát và phải được đọc như kết quả lịch sử riêng.
 
 Để cập nhật dữ liệu mới nhất từ ngày cuối cùng trong database đến hôm nay mà **không cần crawl lại 15 năm từ đầu**:
 

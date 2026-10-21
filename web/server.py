@@ -58,29 +58,21 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
     def handle_api_update(self):
         root = Path(__file__).resolve().parent.parent
-        print("[API] Running incremental data update...")
+        print("[API] Running data and calendar-month forecast refresh...")
 
-        # 1. Run incremental update
-        res1 = subprocess.run(
-            [sys.executable, str(root / "scripts" / "pipeline" / "update_incremental.py")],
+        # Thu thập, dựng global/premium, huấn luyện lại ba kỳ hạn rồi mới báo thành công.
+        result = subprocess.run(
+            [sys.executable, str(root / "scripts" / "pipeline" / "refresh_latest_forecast.py")],
+            cwd=root,
             capture_output=True,
             text=True,
             encoding="utf-8",
         )
-
-        # 2. Rebuild dashboard JSON bundle
-        res2 = subprocess.run(
-            [sys.executable, str(root / "scripts" / "build_web_data.py")],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-        )
-
-        success = res1.returncode == 0 and res2.returncode == 0
+        success = result.returncode == 0
         response_payload = {
             "status": "ok" if success else "warning",
-            "message": "Dữ liệu thị trường vàng đã được cập nhật thành công!" if success else "Cập nhật hoàn tất với cảnh báo",
-            "log": res1.stdout[-300:] if res1.stdout else "",
+            "message": "Đã cập nhật dữ liệu và dự báo 1, 3, 5 tháng!" if success else "Không thể cập nhật đầy đủ dự báo",
+            "log": (result.stdout + result.stderr)[-1000:],
         }
 
         body = json.dumps(response_payload, ensure_ascii=False).encode("utf-8")

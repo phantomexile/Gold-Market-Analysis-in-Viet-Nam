@@ -1,4 +1,9 @@
 # Model Card: VN Gold Market Decision Support
+
+> Historical model card for the July 2026 observation-horizon evaluation. The current snapshot uses 1, 3 and 5 **calendar months** and a first-valid-SJC-quote exit rule; use `snapshot_forecasts.csv` and the updated notebook for current results.
+
+> **Cập nhật đầu vào 21/10/2026:** Snapshot hiện hành dùng GPR ngày chính thức của Caldara–Iacoviello đến 19/10/2026 và các tin RSS có ngày xuất bản đến 21/10/2026. Bảng dưới đây mô tả bản đánh giá tháng 7, không phải trạng thái đầu vào hiện hành. Event từ tiêu đề là proxy; bảng quyết định NHNN chính thức chưa được xác nhận có bản mới.
+
 **Version**: v2-pnj-fix  
 **Date**: 2026-07-13  
 **Data cutoff**: 2026-07-11 | **Models trained**: walk-forward 2011–2024, tested 2025–2026

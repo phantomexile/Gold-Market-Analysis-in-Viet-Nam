@@ -18,16 +18,16 @@ class SnapshotRecommendationTests(unittest.TestCase):
         modeling.mkdir(parents=True)
         path = modeling / "snapshot_forecasts.csv"
         fields = [
-            "snapshot_date", "horizon_days", "horizon_label", "predicted_net_return",
+            "snapshot_date", "horizon_months", "horizon_label", "predicted_net_return",
             "q10_predicted_net_return", "prob_return_positive", "buy_signal",
         ]
         with path.open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields)
             writer.writeheader()
-            for days, label, signal in zip((21, 63, 105), ("1 tháng", "3 tháng", "5 tháng"), signals):
+            for months, label, signal in zip((1, 3, 5), ("1 tháng", "3 tháng", "5 tháng"), signals):
                 writer.writerow({
                     "snapshot_date": "2026-10-20",
-                    "horizon_days": days,
+                    "horizon_months": months,
                     "horizon_label": label,
                     "predicted_net_return": 0.03 if signal else -0.04,
                     "q10_predicted_net_return": -0.04 if signal else -0.12,
@@ -36,7 +36,7 @@ class SnapshotRecommendationTests(unittest.TestCase):
                 })
 
     def test_three_month_buy_is_reflected_in_primary_action(self) -> None:
-        """Tín hiệu mua kỳ hạn 63 quan sát không được biến thành 'không mua mới'."""
+        """Tín hiệu mua kỳ hạn ba tháng phải xuất hiện trong khuyến nghị."""
         with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as temp_dir:
             lake = Path(temp_dir)
             self._write_snapshot(lake, (False, True, False))
@@ -76,8 +76,8 @@ class PaperTradingRefreshTests(unittest.TestCase):
             ledger_path = root / "ledger.csv"
             summary_path = root / "summary.json"
             forecast.write_text(
-                "snapshot_date,horizon_days,predicted_net_return,q10_predicted_net_return,prob_return_positive,buy_signal\n"
-                "2026-10-20,63,0.03,-0.04,0.75,True\n",
+                "snapshot_date,horizon_months,predicted_net_return,q10_predicted_net_return,prob_return_positive,buy_signal\n"
+                "2026-10-20,3,0.03,-0.04,0.75,True\n",
                 encoding="utf-8",
             )
             prices.write_text("date,buy,sell\n2026-10-20,139600000,142600000\n", encoding="utf-8")
@@ -90,6 +90,28 @@ class PaperTradingRefreshTests(unittest.TestCase):
             self.assertEqual(summary["open_rows"], 1)
             self.assertTrue(ledger_path.exists())
             self.assertTrue(summary_path.exists())
+
+    def test_exit_target_uses_calendar_months_and_first_available_quote(self) -> None:
+        """Ba tháng từ cuối tháng Một đến cuối tháng Tư, rồi chọn báo giá đầu tiên."""
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as temp_dir:
+            root = Path(temp_dir)
+            forecast = root / "forecast.csv"
+            prices = root / "prices.csv"
+            forecast.write_text(
+                "snapshot_date,horizon_months,predicted_net_return,q10_predicted_net_return,prob_return_positive,buy_signal\n"
+                "2024-01-31,3,0.03,-0.04,0.75,True\n",
+                encoding="utf-8",
+            )
+            prices.write_text(
+                "date,buy,sell\n2024-01-31,99,100\n2024-05-01,110,112\n",
+                encoding="utf-8",
+            )
+            ledger, _ = run_rolling_paper_trading.build_ledger_and_summary(
+                forecast, prices, root / "ledger.csv", root / "summary.json", after="2024-01-31"
+            )
+            self.assertEqual(ledger.iloc[0]["target_exit_date"], "2024-04-30")
+            self.assertEqual(ledger.iloc[0]["exit_date"], "2024-05-01")
+            self.assertAlmostEqual(ledger.iloc[0]["realized_net_return"], 0.10)
 
 
 if __name__ == "__main__":

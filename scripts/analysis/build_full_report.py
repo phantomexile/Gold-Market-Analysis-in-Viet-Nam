@@ -626,6 +626,13 @@ def train_snapshot_forecasts(frame: pd.DataFrame, feature_cols: list[str]) -> pd
 
     data = frame.copy()
     data["date"] = safe_date_series(data["date"])
+    # Trình tạo báo cáo này thuộc nhánh nghiên cứu cũ theo 21/63/105 quan sát.
+    # Khung model hiện hành chỉ có nhãn tháng lịch, nên tạo nhãn cũ tạm trong
+    # bộ nhớ và xuất sang tệp legacy riêng, tuyệt đối không đè snapshot mới.
+    for legacy_horizon in (21, 63, 105):
+        legacy_target = f"net_return_{legacy_horizon}d"
+        if legacy_target not in data:
+            data[legacy_target] = data["buy_price"].shift(-legacy_horizon) / data["sell_price"] - 1
     feature_cols = [c for c in feature_cols if c in data.columns]
     latest = data.sort_values("date").iloc[[-1]].copy()
     rows: list[dict[str, Any]] = []
@@ -719,7 +726,9 @@ def train_snapshot_forecasts(frame: pd.DataFrame, feature_cols: list[str]) -> pd
     out = pd.DataFrame(rows)
     if not out.empty:
         MODELING.mkdir(parents=True, exist_ok=True)
-        out.to_csv(MODELING / "snapshot_forecasts.csv", index=False)
+        # Báo cáo cũ vẫn dùng nhãn theo 21/63/105 quan sát. Lưu riêng để không
+        # ghi đè snapshot sản xuất đã chuyển sang 1/3/5 tháng lịch.
+        out.to_csv(MODELING / "snapshot_observation_horizons_legacy.csv", index=False)
     return out
 
 
@@ -1072,7 +1081,7 @@ def add_appendix(doc: Document, summary: dict[str, Any]) -> None:
         "data/lake/modeling/walk_forward_predictions.csv",
         "data/lake/modeling/decision_signals.csv",
         "data/lake/modeling/trading_signals.csv",
-        "data/lake/modeling/snapshot_forecasts.csv",
+        "data/lake/modeling/snapshot_observation_horizons_legacy.csv",
         "data/lake/source_discovery/sbv_structures.csv",
         "data/lake/events/sbv_gold_policy_events.csv",
         "data/lake/modeling/paper_trading_ledger.csv",
@@ -1132,7 +1141,7 @@ def main() -> None:
 
     doc.save(OUT)
     print(f"Saved report: {OUT}")
-    print(f"Snapshot forecast: {MODELING / 'snapshot_forecasts.csv'}")
+    print(f"Legacy observation-horizon forecast: {MODELING / 'snapshot_observation_horizons_legacy.csv'}")
 
 
 if __name__ == "__main__":
