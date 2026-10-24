@@ -6,11 +6,48 @@ Giải thích từng module code: cái nào làm gì, input/output, data flow.
 
 ## Cấu trúc source
 
+```text
+src/gold_collectors/          # Thư viện nghiệp vụ: collectors, parser, mô hình dữ liệu
+src/gold_collectors/modeling/ # Cấu hình, đặc trưng, nhãn, huấn luyện, đánh giá, báo cáo
+scripts/collection/          # Thu thập dữ liệu bên ngoài
+scripts/processing/          # Ghép bảng và làm giàu dữ liệu
+scripts/pipeline/            # Điều phối; các file còn lại chuyển tiếp đường dẫn cũ
+scripts/analysis/            # Phân tích, huấn luyện và giao dịch mô phỏng
+scripts/reporting/           # Kiểm toán, báo cáo và biểu đồ
+scripts/maintenance/         # Backup, phục hồi và công cụ lịch sử
+web/                         # Server và giao diện dashboard
+tests/                       # Kiểm thử
 ```
-src/gold_collectors/          # Shared library — collectors, parsers, models
-scripts/pipeline/             # Production CLIs — mỗi file = 1 pipeline stage
-tests/                        # Unit tests
-```
+
+## modeling/ — Các trách nhiệm riêng
+
+| Module | Trách nhiệm | Hàm/giá trị chính |
+|---|---|---|
+| `config.py` | Đường dẫn, kỳ hạn và cấu hình dùng chung | `ModelingConfig`, `HORIZONS`, `LAGS`, `LUONG_PER_OZ` |
+| `features.py` | Đọc bảng, ghép as-of, tạo độ trễ và thống kê quá khứ | `build_model_frame` |
+| `targets.py` | Giá mua phiên thoát so với giá bán tại ngày gốc, theo tháng lịch | `_add_calendar_month_targets` |
+| `training.py` | Huấn luyện theo fold, điền thiếu từ tập train | `train_baselines`, `train_econometric`, `train_ml_models` |
+| `evaluation.py` | Chia cửa sổ thời gian, tính sai số và áp dụng quy tắc quyết định | `make_walk_forward_splits`, `evaluate_decision_rules` |
+| `reporting.py` | Tổng hợp bảng xếp hạng, chẩn đoán và báo cáo | `summarize_outputs`, `write_report` |
+| `decision_support.py` | Điều phối phân tích, giữ API cũ cho script/notebook | `run_full_analysis` |
+
+Chiều phụ thuộc: cấu hình và nhãn → đặc trưng/đánh giá → huấn luyện/báo cáo → điều phối. Các module con không import ngược `decision_support.py`.
+
+## Vị trí script hiện tại
+
+`scripts/_bootstrap.py` thiết lập import dùng chung. `scripts/_compat.py` chuyển tiếp CLI và ánh xạ import cũ tới đúng đối tượng module mới. Những file chuyển tiếp không chứa nghiệp vụ.
+
+| Nhóm | File chính |
+|---|---|
+| `collection/` | `backfill_target.py`, `collect_deposit_rate_monitor.py`, `collect_enhanced_features.py`, `collect_external_features.py`, `collect_gpr_v2.py`, `collect_lbma.py`, `collect_news_sentiment.py`, `collect_sbv_gold_policy_events.py`, `crawl_raw_gold_history.py`, `crawl_vn_news_raw.py`, `discover_sbv_sources.py`, `fetch_article_bodies.py`, `refresh_event_inputs.py`, `rss_news_sentiment.py`, `v2_fallback_collector.py` |
+| `processing/` | `build_event_panel.py`, `build_master_panel.py`, `build_premium_decomposition.py`, `build_real_events.py`, `detect_price_events.py`, `expand_events.py`, `extract_vn_macro.py`, `improve_premium_coverage.py`, `integrate_news_events.py`, `integrate_pnj.py` |
+| `reporting/` | `audit.py`, `audit_news_availability.py`, `deliverables_report.py`, `quality_report.py`, `source_audit.py`, `eda_report.py`, `build_full_report.py`, `build_report3_artifacts.py`, `build_report4_figures.py` |
+| `maintenance/` | `_fix_flat.py`, `integrate_build_log.py`, `rebuild_with_pnj_fix.py`, `recover_widest_csv.py`, `recovery_hash_backup.py`, `scan_transcripts.py` |
+| `pipeline/` | `refresh_latest_forecast.py`, `update_incremental.py` |
+| `analysis/` | `run_decision_support_analysis.py`, `train_latest_snapshot.py`, `run_rolling_paper_trading.py`, `export_trading_signals.py`, `audit_model_sensitivity.py` |
+
+Khi sửa chức năng, sửa file trong nhóm mới. Điểm chạy cũ chỉ phục vụ tương thích. Hướng dẫn lệnh: [scripts/README.md](../scripts/README.md).
+
 
 ---
 
@@ -114,11 +151,11 @@ record pass historical-valid KHÍ:
 
 ---
 
-## scripts/pipeline/ — Pipeline Scripts
+## Chi tiết các stage và ghi chú lịch sử
 
-Mỗi script là 1 pipeline stage độc lập, chạy bằng `python scripts/pipeline/<name>.py [args]`.
+Mỗi stage nằm trong nhóm trách nhiệm ở bảng trên. Các mô tả dưới đây được kế thừa từ hướng dẫn trước khi tách file; đường dẫn không có trong checkout được đánh dấu là lịch sử.
 
-### pipeline/_bootstrap.py
+### _bootstrap.py
 
 Không chạy trực tiếp. Đảm bảo `src/gold_collectors` có thể import được từ bất kỳ working directory nào.
 
@@ -128,7 +165,7 @@ Không chạy trực tiếp. Đảm bảo `src/gold_collectors` có thể import
 
 ---
 
-### pipeline/source_audit.py → build_source_registry.py
+### reporting/source_audit.py → build_source_registry.py
 
 **Bộ đôi audit**: Chạy lần đầu hoặc khi có nguồn mới.
 
@@ -139,7 +176,7 @@ Không chạy trực tiếp. Đảm bảo `src/gold_collectors` có thể import
 
 ---
 
-### pipeline/crawl_raw_gold_history.py
+### collection/crawl_raw_gold_history.py
 
 **Input**: Date range, output dir, list sources
 **Output**: `data/lake/raw_gold_15y/normalized/raw_gold_history.csv` + per-source files
@@ -155,7 +192,7 @@ Không chạy trực tiếp. Đảm bảo `src/gold_collectors` có thể import
 
 ---
 
-### pipeline/backfill_target.py
+### collection/backfill_target.py
 
 **Input**: domestic_target_output_dir, date range
 **Output**: `domestic_gold_quotes.csv` (historical-valid only)
@@ -171,7 +208,7 @@ Không chạy trực tiếp. Đảm bảo `src/gold_collectors` có thể import
 
 ---
 
-### pipeline/collect_external_features.py (V1)
+### collection/collect_external_features.py (V1)
 
 **Input**: Date range, output dir
 **Output**: 4 CSV files trong `data/lake/market_data/v1/normalized/`
@@ -192,7 +229,7 @@ Mỗi function trả về list[dict] — mỗi dict = 1 record với `date`, `se
 
 ---
 
-### pipeline/collect_enhanced_features.py (V2)
+### collection/collect_enhanced_features.py (V2)
 
 **Input**: Date range, output dir
 **Output**: Files trong `data/lake/market_data/v2/normalized/`
@@ -221,7 +258,7 @@ frame = ticker.history(start=..., end=...)
 
 ---
 
-### pipeline/collect_lbma_proxy.py
+### pipeline/collect_lbma_proxy.py (lịch sử, file không có trong checkout)
 
 **Strategy cascade:**
 1. World Bank monthly PXGONGUSDM → 502 error (không dùng được)
@@ -232,7 +269,7 @@ frame = ticker.history(start=..., end=...)
 
 ---
 
-### pipeline/collect_vn_news_backfill.py
+### pipeline/collect_vn_news_backfill.py (lịch sử, file không có trong checkout)
 
 **Đã thử**: crawl4ai scrapedirect trên 4 VN news sites (vnexpress, tuoitre, thanhnien, vietnamnet).
 
@@ -242,7 +279,7 @@ frame = ticker.history(start=..., end=...)
 
 ---
 
-### pipeline/rule_sentiment.py
+### pipeline/rule_sentiment.py (lịch sử, file không có trong checkout)
 
 **Logic** (không cần external news — dùng market data có sẵn):
 
@@ -265,7 +302,7 @@ Bỏ qua ngày |score| < 0.1 (noise)
 
 ---
 
-### pipeline/build_event_panel.py
+### processing/build_event_panel.py
 
 **Logic — sinh events từ rules + known calendars:**
 
@@ -286,7 +323,7 @@ Bỏ qua ngày |score| < 0.1 (noise)
 
 ---
 
-### pipeline/build_premium_decomposition.py
+### processing/build_premium_decomposition.py
 
 **Input**: domestic_target (quotes) + market_data/v1 (FX + global)
 **Output**: `data/lake/gold_prices/normalized/gold_daily_enriched.csv`
@@ -304,7 +341,7 @@ consensus_mid = (buy + sell) / 2
 
 ---
 
-### pipeline/build_master_panel.py ⭐
+### processing/build_master_panel.py ⭐
 
 **Input**: TẤT CẢ normalized CSVs từ raw_gold_15y, domestic_target, market_data/v1, market_data/v2, gold_prices
 **Output**: 4 master tables trong `data/lake/enriched/master/normalized/`
@@ -350,7 +387,7 @@ consensus_mid = (buy + sell) / 2
 
 ---
 
-### pipeline/quality_report.py
+### reporting/quality_report.py
 
 **Đọc** `domestic_target/normalized/domestic_gold_quotes.csv`
 **In ra console:**
@@ -432,7 +469,7 @@ build_premium_decomposition.py ───────┘
 |---|---|---|
 | Frozen dataclass cho GoldPriceRecord | Immutable — record là evidence, không thay đổi | src/gold_collectors/models.py |
 | HTTP disk cache | Tránh re-crawl, tiết kiệm thời gian + bandwidth | src/gold_collectors/http.py |
-| Bootstrap pattern | Cho phép chạy `python scripts/pipeline/xxx.py` trực tiếp mà không cần package install | scripts/pipeline/_bootstrap.py |
+| Bootstrap pattern | Cho phép chạy `python scripts/pipeline/xxx.py` trực tiếp mà không cần package install | scripts/_bootstrap.py |
 | `available_from` join | Chống data leakage trong backtest — external data chỉ available sau release_date | reliability.py |
 | Rule-based sentiment fallback | crawl4ai bị anti-bot chặn trên VN sites — dùng market-driven signals thay | rule_sentiment.py |
 | GC=F proxy cho LBMA | World Bank monthly API 502 — GC=F là proxy acceptable theo báo cáo | collect_lbma_proxy.py |

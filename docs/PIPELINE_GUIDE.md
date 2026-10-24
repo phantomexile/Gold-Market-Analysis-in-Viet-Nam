@@ -1,5 +1,7 @@
 # Pipeline Guide — VN Gold Market Analysis
 
+> **Cấu trúc mã từ 24/10/2026:** thu thập trong `scripts/collection/`, xử lý trong `scripts/processing/`, kiểm toán/báo cáo trong `scripts/reporting/`, bảo trì trong `scripts/maintenance/`. `scripts/pipeline/` giữ điều phối và các điểm chạy cũ. Xem [hướng dẫn script](../scripts/README.md).
+
 > **Luồng cập nhật hiện hành (21/10/2026):** `scripts/pipeline/refresh_latest_forecast.py` chạy thu thập giá, tin RSS và GPR chính thức, sau đó dựng lại dự báo 1/3/5 tháng lịch. Tin có ngày đăng và URL được lưu trong `news_raw_headlines_vietnam_gold.csv`; event proxy từ tiêu đề vào `pipeline_output_event_regime.csv`. GPR chính thức đến 19/10/2026. Các trạng thái “Blocked” phía dưới ghi lại kế hoạch cũ và không phản ánh trạng thái đầu vào hiện hành.
 
 Hướng dẫn chi tiết từng bước chạy pipeline, ghi chú những gì mỗi bước đã làm, output sinh ra, và cách tái thí nghiệm.
@@ -59,7 +61,7 @@ Lệnh này sẽ:
 ### Bước 1 — Audit Sources
 
 ```powershell
-python scripts/pipeline/source_audit.py --out-dir data/experiments/audit_output
+python scripts/reporting/source_audit.py --out-dir data/experiments/audit_output
 ```
 
 **Đã làm gì:**
@@ -76,13 +78,13 @@ python scripts/pipeline/source_audit.py --out-dir data/experiments/audit_output
 ```powershell
 # Xóa audit cũ và chạy lại
 Remove-Item data/experiments/audit_output/* -Recurse
-python scripts/pipeline/source_audit.py --out-dir data/experiments/audit_output
+python scripts/reporting/source_audit.py --out-dir data/experiments/audit_output
 ```
 
 ### Bước 2 — Build Source Registry
 
 ```powershell
-python scripts/pipeline/build_source_registry.py --audit-json data/experiments/audit_output/source_audit.json
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/build_source_registry.py --audit-json data/experiments/audit_output/source_audit.json
 ```
 
 **Đã làm gì:**
@@ -92,14 +94,14 @@ python scripts/pipeline/build_source_registry.py --audit-json data/experiments/a
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/source_audit.py --out-dir data/experiments/audit_output
-python scripts/pipeline/build_source_registry.py --audit-json data/experiments/audit_output/source_audit.json
+python scripts/reporting/source_audit.py --out-dir data/experiments/audit_output
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/build_source_registry.py --audit-json data/experiments/audit_output/source_audit.json
 ```
 
 ### Bước 3 — Backfill Domestic Target (Historical-Valid Only)
 
 ```powershell
-python scripts/pipeline/backfill_target.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/domestic_target
+python scripts/collection/backfill_target.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/domestic_target
 ```
 
 **Đã làm gì:**
@@ -116,7 +118,7 @@ python scripts/pipeline/backfill_target.py --from 2011-07-06 --to 2026-07-11 --o
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/backfill_target.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/domestic_target
+python scripts/collection/backfill_target.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/domestic_target
 ```
 
 ### Bước 3.5 — Raw Full Crawl (có sẵn dữ liệu, không cần chạy lại)
@@ -131,13 +133,13 @@ python scripts/pipeline/backfill_target.py --from 2011-07-06 --to 2026-07-11 --o
 
 **Tái thí nghiệm (chỉ nếu cần re-crawl):**
 ```powershell
-python scripts/pipeline/crawl_raw_gold_history.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/raw_gold_15y --resume
+python scripts/collection/crawl_raw_gold_history.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/raw_gold_15y --resume
 ```
 
 ### Bước 4 — External Features V1
 
 ```powershell
-python scripts/pipeline/collect_external_features.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/market_data/v1
+python scripts/collection/collect_external_features.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/market_data/v1
 ```
 
 **Đã làm gì:**
@@ -153,7 +155,7 @@ python scripts/pipeline/collect_external_features.py --from 2011-07-06 --to 2026
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/collect_external_features.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/market_data/v1
+python scripts/collection/collect_external_features.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/market_data/v1
 ```
 
 ---
@@ -163,7 +165,7 @@ python scripts/pipeline/collect_external_features.py --from 2011-07-06 --to 2026
 ### Bước 5 — Enhanced Features V2
 
 ```powershell
-python scripts/pipeline/collect_enhanced_features.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
+python scripts/collection/collect_enhanced_features.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
 ```
 
 **Đã làm gì:**
@@ -185,13 +187,13 @@ python scripts/pipeline/collect_enhanced_features.py --from 2010-01-01 --to 2026
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/collect_enhanced_features.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
+python scripts/collection/collect_enhanced_features.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
 ```
 
 ### Bước 5.5 — LBMA Proxy Backfill
 
 ```powershell
-python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
 ```
 
 **Đã làm gì:**
@@ -204,13 +206,13 @@ python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
 ```
 
 ### Bước 6 — Premium Decomposition
 
 ```powershell
-python scripts/pipeline/build_premium_decomposition.py --audited-dir data/lake/domestic_target --external-dir data/lake/market_data/v1 --out-dir data/lake/gold_prices
+python scripts/processing/build_premium_decomposition.py --audited-dir data/lake/domestic_target --external-dir data/lake/market_data/v1 --out-dir data/lake/gold_prices
 ```
 
 **Đã làm gì:**
@@ -230,13 +232,13 @@ python scripts/pipeline/build_premium_decomposition.py --audited-dir data/lake/d
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/build_premium_decomposition.py --audited-dir data/lake/domestic_target --external-dir data/lake/market_data/v1 --out-dir data/lake/gold_prices
+python scripts/processing/build_premium_decomposition.py --audited-dir data/lake/domestic_target --external-dir data/lake/market_data/v1 --out-dir data/lake/gold_prices
 ```
 
 ### Bước 7 — Event Panel
 
 ```powershell
-python scripts/pipeline/build_event_panel.py --from 2010-01-01 --to 2027-12-31 --out-dir data/lake/gold_prices
+python scripts/processing/build_event_panel.py --from 2010-01-01 --to 2027-12-31 --out-dir data/lake/gold_prices
 ```
 
 **Đã làm gì:**
@@ -253,7 +255,7 @@ python scripts/pipeline/build_event_panel.py --from 2010-01-01 --to 2027-12-31 -
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/build_event_panel.py --from 2010-01-01 --to 2027-12-31 --out-dir data/lake/gold_prices
+python scripts/processing/build_event_panel.py --from 2010-01-01 --to 2027-12-31 --out-dir data/lake/gold_prices
 ```
 
 ---
@@ -263,7 +265,7 @@ python scripts/pipeline/build_event_panel.py --from 2010-01-01 --to 2027-12-31 -
 ### Bước 8 — Build Master Panel (4 Tables)
 
 ```powershell
-python scripts/pipeline/build_master_panel.py --tables all
+python scripts/processing/build_master_panel.py --tables all
 ```
 
 **Đã làm gì:**
@@ -285,19 +287,19 @@ python scripts/pipeline/build_master_panel.py --tables all
 
 **Có thể chạy 1 table riêng (nhanh hơn):**
 ```powershell
-python scripts/pipeline/build_master_panel.py --table global_reference_daily
-python scripts/pipeline/build_master_panel.py --table vn_macro_asof_panel
+python scripts/processing/build_master_panel.py --table global_reference_daily
+python scripts/processing/build_master_panel.py --table vn_macro_asof_panel
 ```
 
 **Tái thí nghiệm:**
 ```powershell
-python scripts/pipeline/build_master_panel.py --tables all
+python scripts/processing/build_master_panel.py --tables all
 ```
 
 ### Bước 9 — Quality Report
 
 ```powershell
-$env:PYTHONUTF8="1"; python scripts/pipeline/quality_report.py --data-lake data/lake/domestic_target --from 2011-07-06 --to 2026-07-11
+$env:PYTHONUTF8="1"; python scripts/reporting/quality_report.py --data-lake data/lake/domestic_target --from 2011-07-06 --to 2026-07-11
 ```
 
 **Đã làm gì:**

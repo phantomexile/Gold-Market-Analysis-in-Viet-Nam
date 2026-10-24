@@ -14,62 +14,45 @@ Bước cập nhật sự kiện tải tin RSS có ngày xuất bản và chỉ 
 
 ## Cấu trúc thư mục
 
+```text
+Gold-Market-Analysis-in-Viet-Nam/
+├── pyproject.toml                 # Cấu hình package và dependency
+├── requirements.txt
+├── run_all_pipelines.bat          # Launcher Windows, dùng thư mục hiện tại của dự án
+├── configs/                      # Danh sách và cấu hình nguồn dữ liệu
+├── src/gold_collectors/           # Thư viện nghiệp vụ dùng chung
+│   ├── collectors.py             # Thu thập giá từ các nguồn
+│   ├── parsing.py                # Chuẩn hóa ngày và số
+│   ├── http.py                   # HTTP, cache và giới hạn tần suất
+│   ├── reliability.py            # Kiểm tra độ tin cậy của nguồn
+│   ├── models.py                 # Cấu trúc bản ghi giá vàng
+│   ├── full_pipeline.py          # Ghi data lake và tiện ích pipeline
+│   └── modeling/
+│       ├── config.py             # Đường dẫn và tham số mô hình
+│       ├── features.py           # Ghép dữ liệu theo thời điểm và tạo đặc trưng
+│       ├── targets.py            # Nhãn lợi suất 1/3/5 tháng lịch
+│       ├── training.py           # Baseline, kinh tế lượng, học máy
+│       ├── evaluation.py         # Fold thời gian, chỉ số, quy tắc quyết định
+│       ├── reporting.py          # Tổng hợp kết quả và viết báo cáo
+│       └── decision_support.py   # Điều phối, giữ API import cũ
+├── scripts/
+│   ├── collection/               # Thu thập giá, tin, chỉ số và nguồn chính sách
+│   ├── processing/               # Ghép bảng, premium, sự kiện và dữ liệu vĩ mô
+│   ├── pipeline/                 # Điều phối cập nhật và điểm chạy tương thích cũ
+│   ├── analysis/                 # Huấn luyện, tín hiệu và giao dịch mô phỏng
+│   ├── reporting/                # Kiểm toán chất lượng, báo cáo và biểu đồ
+│   ├── maintenance/              # Backup, phục hồi và công cụ lịch sử
+│   ├── _bootstrap.py             # Thiết lập import dùng chung
+│   ├── _compat.py                # Chuyển tiếp các điểm chạy cũ
+│   └── build_web_data.py          # Dựng JSON dashboard
+├── web/                          # Server, HTML, CSS, JavaScript và JSON dashboard
+├── tests/                        # Kiểm thử nghiệp vụ và tương thích cấu trúc
+├── notebooks/                    # Notebook phân tích
+├── docs/                         # Hướng dẫn, bản đồ mã nguồn và báo cáo
+└── data/                         # Dữ liệu giữ nguyên vị trí hiện tại
 ```
-vn-gold-market-analysis/
-├── CLAUDE.md                  # Context file cho Claude Code (quy tắc nghiệp vụ)
-├── pyproject.toml             # Dependencies & build config
-├── requirements.txt           # Fallback deps
-├── .env                       # API keys (gitignored)
-├── .env.example               # Template cho API keys
-│
-├── configs/                   # Source registry đã audit
-│   ├── source_registry_audited.yaml
-│   └── source_registry_audited.csv
-│
-├── src/gold_collectors/       # Shared collectors, parsers, models
-│   ├── collectors.py          # SJC, PNJ, DOJI, WebGia collectors
-│   ├── parsing.py             # Date/number parsers cho VN format
-│   ├── http.py                # Cached HTTP client với throttling
-│   ├── reliability.py         # Source reliability audit logic
-│   ├── models.py              # GoldPriceRecord dataclass
-│   └── full_pipeline.py       # DataLakeWriter, bootstrap helpers
-│
-├── scripts/pipeline/          # Production collection & QA CLIs
-│   ├── crawl_raw_gold_history.py   # Crawl 15y raw gold từ mọi nguồn
-│   ├── collect_external_features.py # FX, yfinance, FRED, World Bank, GSO
-│   ├── collect_enhanced_features.py # FRED expanded, futures basis, GLD, events
-│   ├── collect_lbma_proxy.py        # LBMA AM/PM backfill (GC=F proxy)
-│   ├── collect_vn_news_backfill.py  # VN news crawl via crawl4ai
-│   ├── rule_sentiment.py            # Rule-based sentiment (fallback)
-│   ├── build_event_panel.py         # Tết, Thần Tài, wedding, policy events
-│   ├── build_premium_decomposition.py # premium = domestic - global(vnd/luong)
-│   ├── build_master_panel.py        # ⭐ Tích hợp 4 master tables
-│   ├── backfill_target.py          # Historical-valid target only
-│   ├── source_audit.py             # Audit source reliability
-│   ├── build_source_registry.py    # Rebuild registry sau audit
-│   ├── quality_report.py           # QA: leakage, coverage, outliers
-│   └── extract_vn_macro.py         # High-signal VN macro subset
-│
-├── tests/                     # Unit tests
-│   ├── test_collectors.py
-│   ├── test_full_pipeline.py
-│   └── test_reliability.py
-│
-├── docs/
-│   ├── deep-research-report.md      # Báo cáo nghiên cứu sâu (framework, model roadmap)
-│   ├── PIPELINE_GUIDE.md            # 📘 Hướng dẫn chạy pipeline
-│   ├── DATA_DICTIONARY.md           # 📖 Schema từng bảng dữ liệu
-│   └── SOURCE_CODE_MAP.md           # 📋 Giải thích từng module code
-│
-├── data/lake/                 # Runtime outputs (gitignored theo cấu trúc)
-│   ├── raw_gold_15y/normalized/    # Raw crawl 2010-2026, mọi nguồn
-│   ├── domestic_target/normalized/ # Historical-valid only (training labels)
-│   ├── market_data/v1/normalized/  # FX, yfinance, FRED, WB, GSO, vnstock
-│   ├── market_data/v2/normalized/  # FRED expanded, futures, ETF, events
-│   └── enriched/master/normalized/ # ⭐ 4 master tables (output cuối)
-│
-└── data/README.md             # Chính sách git-track cho data/
-```
+
+Xem [hướng dẫn script](scripts/README.md) và [bản đồ mã nguồn](docs/SOURCE_CODE_MAP.md). Các lệnh ở vị trí cũ vẫn được chuyển tiếp; khi thêm hoặc sửa chức năng, dùng file trong nhóm trách nhiệm mới.
 
 ---
 
@@ -128,52 +111,52 @@ $env:PYTHONUTF8 = "1"
 
 # ── Bước 1: Audit sources ──────────────────────────────────
 # Kiểm tra reliability của mọi nguồn crawl
-python scripts/pipeline/source_audit.py --out-dir data/experiments/audit_output
+python scripts/reporting/source_audit.py --out-dir data/experiments/audit_output
 
 # Xây registry mới từ kết quả audit
-python scripts/pipeline/build_source_registry.py --audit-json data/experiments/audit_output/source_audit.json
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/build_source_registry.py --audit-json data/experiments/audit_output/source_audit.json
 
 # ── Bước 2: Backfill domestic target (historical-valid only) ──
 # Chỉ giữ records có requested_date == business_date và cả 2 giá hợp lệ
-python scripts/pipeline/backfill_target.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/domestic_target
+python scripts/collection/backfill_target.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/domestic_target
 
 # ── Bước 3: Raw full crawl (resume-enabled) ──────────────────
 # Crawl lịch sử giá vàng từ mọi nguồn, có thể dừng/chạy lại
-python scripts/pipeline/crawl_raw_gold_history.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/raw_gold_15y --resume
+python scripts/collection/crawl_raw_gold_history.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/raw_gold_15y --resume
 
 # ── Bước 4: External features v1 ─────────────────────────────
 # FX rates (SBV + Vietcombank), global market series (yfinance + FRED),
 # Vietnam macro (World Bank + GSO), VNINDEX (vnstock)
-python scripts/pipeline/collect_external_features.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/market_data/v1
+python scripts/collection/collect_external_features.py --from 2011-07-06 --to 2026-07-11 --out-dir data/lake/market_data/v1
 
 # ── Bước 5: Enhanced features v2 ────────────────────────────
 # FRED expanded (DXY real yields, TIPS, stress indices),
 # futures basis (GC=F), GLD ETF, VN deposit rates, event panel, sentiment
-python scripts/pipeline/collect_enhanced_features.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
+python scripts/collection/collect_enhanced_features.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
 
 # ── Bước 6 (optional): LBMA proxy backfill ──────────────────
 # World Bank monthly gold + GC=F daily as LBMA proxy
-python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/collect_lbma_proxy.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/market_data/v2
 
 # ── Bước 7 (optional): Rule-based sentiment ─────────────────
 # Tín hiệu sentiment từ VIX + gold momentum + USD/VND + event anchor
-python scripts/pipeline/rule_sentiment.py --from 2010-01-01 --to 2026-07-11
+# Lịch sử, file không có trong checkout hiện tại: python scripts/pipeline/rule_sentiment.py --from 2010-01-01 --to 2026-07-11
 
 # ── Bước 8: Premium decomposition ───────────────────────────
 # Tính premium = SJC mid - (LBMA USD/oz × USD/VND × conversion_factor)
-python scripts/pipeline/build_premium_decomposition.py --audited-dir data/lake/domestic_target --external-dir data/lake/market_data/v1 --out-dir data/lake/gold_prices
+python scripts/processing/build_premium_decomposition.py --audited-dir data/lake/domestic_target --external-dir data/lake/market_data/v1 --out-dir data/lake/gold_prices
 
 # ── Bước 9: Event panel ──────────────────────────────────────
 # Sinh events: Tết proximity, Thần Tài, wedding season, policy, crisis
-python scripts/pipeline/build_event_panel.py --from 2010-01-01 --to 2027-12-31 --out-dir data/lake/gold_prices
+python scripts/processing/build_event_panel.py --from 2010-01-01 --to 2027-12-31 --out-dir data/lake/gold_prices
 
 # ── Bước 10: Build master panel (4 tables) ──────────────────
 # Tích hợp tất cả nguồn vào 4 bảng chuẩn
-python scripts/pipeline/build_master_panel.py --tables all
+python scripts/processing/build_master_panel.py --tables all
 
 # ── Bước 11: Quality report ──────────────────────────────────
 # Kiểm tra: leakage, coverage, outliers, source reliability
-python scripts/pipeline/quality_report.py --data-lake data/lake/domestic_target --from 2011-07-06 --to 2026-07-11
+python scripts/reporting/quality_report.py --data-lake data/lake/domestic_target --from 2011-07-06 --to 2026-07-11
 ```
 
 ---
@@ -193,7 +176,7 @@ python -c "import csv; rows=list(csv.DictReader(open('data/lake/enriched/master/
 python -c "import csv; rows=list(csv.DictReader(open('data/lake/gold_prices/normalized/gold_daily_enriched.csv',encoding='utf-8'))); has_prem=sum(1 for r in rows if r.get('premium')); print(f'Dates: {len(rows)}, With premium: {has_prem} ({has_prem/len(rows)*100:.0f}%)')"
 
 # Quality report
-$env:PYTHONUTF8="1"; python scripts/pipeline/quality_report.py --data-lake data/lake/domestic_target --from 2011-07-06 --to 2026-07-11
+$env:PYTHONUTF8="1"; python scripts/reporting/quality_report.py --data-lake data/lake/domestic_target --from 2011-07-06 --to 2026-07-11
 ```
 
 ---
@@ -212,10 +195,10 @@ git commit -m "data: backfill raw gold + domestic target + external features v1"
 python -m unittest discover -s tests
 
 # Crawl resume — dùng khi crawl bị gián đoạn
-python scripts/pipeline/crawl_raw_gold_history.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/raw_gold_15y --resume
+python scripts/collection/crawl_raw_gold_history.py --from 2010-01-01 --to 2026-07-11 --out-dir data/lake/raw_gold_15y --resume
 
 # Chạy 1 table master panel cụ thể (nhanh hơn --tables all)
-python scripts/pipeline/build_master_panel.py --table global_reference_daily
+python scripts/processing/build_master_panel.py --table global_reference_daily
 ```
 
 ---

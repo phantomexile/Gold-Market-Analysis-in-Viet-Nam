@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1660" viewBox="0 0 2000 1660" role="img" aria-labelledby="title desc">
+<title id="title">Pipeline phân tích thị trường vàng Việt Nam</title>
+<desc id="desc">Phần trên là chuẩn bị dữ liệu và đánh giá nghiên cứu. Phần dưới là cập nhật dữ liệu, huấn luyện snapshot, áp quy tắc và hiển thị dashboard.</desc>
+<rect width="2000" height="1660" fill="white"/>
+<text x="60" y="39" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#22384b" text-anchor="start" dominant-baseline="text-before-edge">PIPELINE PHÂN TÍCH THỊ TRƯỜNG VÀNG VIỆT NAM</text>
+<text x="61" y="94" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Dữ liệu SJC và yếu tố thị trường → dự báo lợi suất ròng 1, 3, 5 tháng lịch → dashboard</text>
+<rect x="50" y="165" width="1900" height="485" rx="24" fill="#f7f9fb" stroke="#a5b5c2" stroke-width="2"/>
+<text x="80" y="190" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#22384b" text-anchor="start" dominant-baseline="text-before-edge">OFFLINE — CHUẨN BỊ DỮ LIỆU &amp; ĐÁNH GIÁ NGHIÊN CỨU</text>
+<rect x="80" y="305" width="270" height="235" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="215.0" y="325" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Nguồn dữ liệu</text>
+<text x="215.0" y="366" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Giá SJC mua / bán</text>
+<text x="215.0" y="398" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Vàng thế giới · USD/VND</text>
+<text x="215.0" y="430" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Vĩ mô · GPR · tin tức</text>
+<text x="215.0" y="462" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Lịch sự kiện · chính sách</text>
+<rect x="400" y="305" width="285" height="235" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="542.5" y="325" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Thu thập &amp; chuẩn hóa</text>
+<text x="542.5" y="366" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Collector / API → Data Lake</text>
+<text x="542.5" y="398" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Chuẩn ngày · đơn vị · giá</text>
+<text x="542.5" y="430" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Đối chiếu ngày giao dịch</text>
+<text x="542.5" y="462" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Ghép vĩ mô theo ngày có tin</text>
+<rect x="740" y="270" width="310" height="130" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="895.0" y="290" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Tạo đặc trưng</text>
+<text x="895.0" y="331" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Độ trễ · biến động · premium</text>
+<text x="895.0" y="363" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Vĩ mô · sự kiện thị trường</text>
+<rect x="740" y="445" width="310" height="130" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="895.0" y="465" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Tạo nhãn 1 / 3 / 5 tháng</text>
+<text x="895.0" y="506" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Giá mua khi thoát /</text>
+<text x="895.0" y="538" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">giá bán khi vào − 1</text>
+<rect x="1110" y="300" width="350" height="250" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1285.0" y="320" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Huấn luyện &amp; đánh giá</text>
+<text x="1285.0" y="361" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Baseline · kinh tế lượng · ML</text>
+<text x="1285.0" y="393" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Walk-forward theo thời gian</text>
+<text x="1285.0" y="425" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Sai số · phân vị · quy tắc</text>
+<text x="1285.0" y="457" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Báo cáo so sánh mô hình</text>
+<rect x="1520" y="300" width="350" height="250" rx="16" fill="#edf5fb" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1695.0" y="320" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Kho dữ liệu &amp; kết quả</text>
+<text x="1695.0" y="361" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Các bảng master / model frame</text>
+<text x="1695.0" y="393" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Kết quả · dự báo ngoài mẫu</text>
+<text x="1695.0" y="425" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Tín hiệu nghiên cứu · báo cáo</text>
+<text x="1695.0" y="457" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">CSV · JSON · metadata nguồn</text>
+<polyline points="350,422 400,422" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="400,422 388.2941876694152,427.654551943446 388.2941876694152,416.345448056554" fill="#587b98"/>
+<polyline points="685,422 713,422 713,335 740,335" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="740,335 728.2941876694152,340.654551943446 728.2941876694152,329.345448056554" fill="#587b98"/>
+<polyline points="713,422 713,510 740,510" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="740,510 728.2941876694152,515.654551943446 728.2941876694152,504.345448056554" fill="#587b98"/>
+<polyline points="1050,335 1080,335 1080,390 1110,390" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1110,390 1098.2941876694151,395.654551943446 1098.2941876694151,384.345448056554" fill="#587b98"/>
+<polyline points="1050,510 1080,510 1080,460 1110,460" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1110,460 1098.2941876694151,465.654551943446 1098.2941876694151,454.345448056554" fill="#587b98"/>
+<polyline points="1460,422 1520,422" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1520,422 1508.2941876694151,427.654551943446 1508.2941876694151,416.345448056554" fill="#587b98"/>
+<text x="81" y="600" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Nhãn lịch sử: ngày yêu cầu = ngày giao dịch; đủ giá mua và bán hợp lệ. Kỳ hạn dùng phiên SJC đầu tiên từ ngày tròn tháng.</text>
+<text x="65" y="735" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#22384b" text-anchor="start" dominant-baseline="text-before-edge">CẬP NHẬT SNAPSHOT &amp; PHỤC VỤ DASHBOARD</text>
+<text x="65" y="780" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Nút Cập nhật / POST /api/update → refresh_latest_forecast.py</text>
+<rect x="70" y="850" width="540" height="555" rx="22" fill="#f0f6fb" stroke="#95b1c7" stroke-width="2"/>
+<rect x="730" y="850" width="540" height="555" rx="22" fill="#f5f2fa" stroke="#b6a6cb" stroke-width="2"/>
+<rect x="1390" y="850" width="540" height="555" rx="22" fill="#eff8f5" stroke="#8fb5aa" stroke-width="2"/>
+<text x="98" y="876" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="start" dominant-baseline="text-before-edge">01  LỚP DỮ LIỆU MỚI NHẤT</text>
+<text x="758" y="876" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="start" dominant-baseline="text-before-edge">02  LỚP DỰ BÁO SNAPSHOT</text>
+<text x="1418" y="876" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="start" dominant-baseline="text-before-edge">03  LỚP QUY TẮC &amp; HIỂN THỊ</text>
+<rect x="100" y="935" width="480" height="110" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="340.0" y="955" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Cập nhật đầu vào</text>
+<text x="340.0" y="996" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Giá mới · RSS / GPR · dữ liệu nguồn</text>
+<rect x="100" y="1090" width="480" height="110" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="340.0" y="1110" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Dựng lại bảng tham chiếu</text>
+<text x="340.0" y="1151" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Global reference → premium SJC</text>
+<rect x="100" y="1245" width="480" height="120" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="340.0" y="1265" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Tạo model frame mới nhất</text>
+<text x="340.0" y="1306" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Đặc trưng + nhãn đã có kết quả</text>
+<polyline points="340,1045 340,1090" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="340,1090 334.345448056554,1078.2941876694151 345.654551943446,1078.2941876694151" fill="#587b98"/>
+<polyline points="340,1200 340,1245" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="340,1245 334.345448056554,1233.2941876694151 345.654551943446,1233.2941876694151" fill="#587b98"/>
+<rect x="760" y="935" width="480" height="110" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1000.0" y="955" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Huấn luyện từng kỳ hạn</text>
+<text x="1000.0" y="996" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Bù thiếu bằng median · chọn ≤120 biến</text>
+<rect x="760" y="1090" width="480" height="130" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1000.0" y="1110" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Random Forest + Quantile GB</text>
+<text x="1000.0" y="1151" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Dự báo lợi suất ròng · Q10</text>
+<text x="1000.0" y="1183" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Ước lượng P(lợi suất dương)</text>
+<rect x="760" y="1265" width="480" height="100" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1000.0" y="1285" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Lưu snapshot_forecasts.csv</text>
+<text x="1000.0" y="1326" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">1 tháng · 3 tháng · 5 tháng</text>
+<polyline points="1000,1045 1000,1090" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1000,1090 994.345448056554,1078.2941876694151 1005.654551943446,1078.2941876694151" fill="#587b98"/>
+<polyline points="1000,1220 1000,1265" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1000,1265 994.345448056554,1253.2941876694151 1005.654551943446,1253.2941876694151" fill="#587b98"/>
+<polyline points="580,1305 670,1305 670,990 760,990" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="760,990 748.2941876694152,995.654551943446 748.2941876694152,984.345448056554" fill="#587b98"/>
+<text x="622" y="1055" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Đầu vào</text>
+<rect x="1420" y="935" width="480" height="110" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1660.0" y="955" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Tích hợp kết quả snapshot</text>
+<text x="1660.0" y="996" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Ngày dự báo · kỳ hạn · chỉ số dự báo</text>
+<rect x="1420" y="1090" width="480" height="130" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1660.0" y="1110" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Áp dụng quy tắc tín hiệu</text>
+<text x="1660.0" y="1151" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">P(lãi) ≥ 50% và Q10 ≥ −10%</text>
+<text x="1660.0" y="1183" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Mua tích lũy / Không mua mới</text>
+<rect x="1420" y="1265" width="480" height="100" rx="16" fill="white" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1660.0" y="1285" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Diễn giải &amp; xuất JSON</text>
+<text x="1660.0" y="1326" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Chỉ số · lý do · ngày mục tiêu</text>
+<polyline points="1660,1045 1660,1090" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1660,1090 1654.345448056554,1078.2941876694151 1665.654551943446,1078.2941876694151" fill="#587b98"/>
+<polyline points="1660,1220 1660,1265" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1660,1265 1654.345448056554,1253.2941876694151 1665.654551943446,1253.2941876694151" fill="#587b98"/>
+<polyline points="1240,1315 1330,1315 1330,990 1420,990" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1420,990 1408.2941876694151,995.654551943446 1408.2941876694151,984.345448056554" fill="#587b98"/>
+<text x="1285" y="1055" font-family="Arial, sans-serif" font-size="19" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Snapshot</text>
+<polyline points="1695,550 1695,695 35,695 35,825 340,825 340,850" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="340,850 334.345448056554,838.2941876694152 345.654551943446,838.2941876694152" fill="#587b98"/>
+<rect x="675" y="676" width="575" height="39" rx="0" fill="white" stroke="white" stroke-width="0"/>
+<text x="962" y="683" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#5c7080" text-anchor="middle" dominant-baseline="text-before-edge">Tái sử dụng Data Lake cho lần cập nhật tiếp theo</text>
+<rect x="760" y="1460" width="480" height="100" rx="16" fill="#f7f5fb" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1000.0" y="1480" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Theo dõi paper trading</text>
+<text x="1000.0" y="1521" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Sổ vị thế mô phỏng · kết quả theo dõi</text>
+<polyline points="1000,1365 1000,1460" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="1000,1460 994.345448056554,1448.2941876694151 1005.654551943446,1448.2941876694151" fill="#587b98"/>
+<rect x="1420" y="1460" width="480" height="100" rx="16" fill="#dcefe8" stroke="#a4b6c3" stroke-width="2"/>
+<text x="1660.0" y="1480" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">DASHBOARD THỊ TRƯỜNG VÀNG</text>
+<text x="1660.0" y="1521" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#22384b" text-anchor="middle" dominant-baseline="text-before-edge">Biểu đồ · lợi suất · Q10 · tín hiệu</text>
+<polyline points="1660,1365 1660,1460" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1660,1460 1654.345448056554,1448.2941876694151 1665.654551943446,1448.2941876694151" fill="#587b98"/>
+<polyline points="130,1505 255,1505" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="255,1505 243.2941876694152,1510.654551943446 243.2941876694152,1499.345448056554" fill="#587b98"/>
+<text x="275" y="1491" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Luồng xử lý</text>
+<polyline points="130,1550 255,1550" fill="none" stroke="#587b98" stroke-width="3" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="255,1550 243.2941876694152,1555.654551943446 243.2941876694152,1544.345448056554" fill="#587b98"/>
+<text x="275" y="1536" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Dữ liệu / kết quả dùng lại</text>
+<text x="65" y="1610" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#5c7080" text-anchor="start" dominant-baseline="text-before-edge">Sơ đồ theo mã nguồn hiện tại · Nhánh đánh giá nghiên cứu tách khỏi nhánh snapshot · Q10 là phân vị 10%, không phải mức lỗ tối đa</text>
+</svg>

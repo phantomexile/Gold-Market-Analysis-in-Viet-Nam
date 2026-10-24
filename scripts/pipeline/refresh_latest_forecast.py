@@ -30,10 +30,10 @@ def refresh(*, to_date: str | None = None, skip_collect: bool = False) -> str:
         run_step(ROOT / "scripts" / "pipeline" / "update_incremental.py", *arguments)
         # Tin RSS và GPR có ngày nguồn riêng; lỗi tải phải dừng luồng để tránh
         # dashboard báo đã cập nhật khi thực tế chỉ có giá vàng được làm mới.
-        run_step(ROOT / "scripts" / "pipeline" / "refresh_event_inputs.py")
+        run_step(ROOT / "scripts" / "collection" / "refresh_event_inputs.py")
 
     # Bảng global chuẩn phải được dựng lại trước khi tính premium và đặc trưng.
-    run_step(ROOT / "scripts" / "pipeline" / "build_master_panel.py", "--tables", "global_reference_daily")
+    run_step(ROOT / "scripts" / "processing" / "build_master_panel.py", "--tables", "global_reference_daily")
     global_panel = LAKE / "global_reference_daily.csv"
     if not global_panel.exists():
         raise FileNotFoundError(global_panel)
@@ -42,7 +42,7 @@ def refresh(*, to_date: str | None = None, skip_collect: bool = False) -> str:
     shutil.copyfile(global_panel, LAKE / "pipeline_output_global_reference.csv")
 
     # Giữ metadata về nguồn proxy và độ trễ khi ghép vàng thế giới với SJC.
-    run_step(ROOT / "scripts" / "pipeline" / "improve_premium_coverage.py")
+    run_step(ROOT / "scripts" / "processing" / "improve_premium_coverage.py")
     run_step(ROOT / "scripts" / "analysis" / "train_latest_snapshot.py")
 
     snapshot = pd.read_csv(LAKE / "modeling" / "snapshot_forecasts.csv")

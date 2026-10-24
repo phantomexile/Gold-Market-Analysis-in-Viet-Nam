@@ -1,74 +1,14 @@
-"""Fix flattened DataLakeWriter and path references in pipeline scripts."""
-import re
+"""Tương thích lệnh cũ; mã chính nằm ở ``scripts/maintenance/_fix_flat.py``."""
 
-# Map of file -> (old_pattern, new_line)
-FIXES = {
-    "scripts/pipeline/build_master_panel.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=\[\s*,\s*flat=True\)"csv"\]\)',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/build_event_panel.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=\[\s*,\s*flat=True\)"csv"\]\)',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/build_premium_decomposition.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=\[\s*,\s*flat=True\)"csv"\]\)',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/collect_enhanced_features.py": (
-        r'writer = DataLakeWriter\(',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/collect_external_features.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=args\.format\.split,\s*flat=True\)\(",""',
-        '        writer = DataLakeWriter(out_dir, formats=args.format.split(","), flat=True)'
-    ),
-    "scripts/pipeline/expand_events.py": (
-        r'writer = DataLakeWriter\(Path\(args\.out_dir\), formats=\["csv"\]\)',
-        '        writer = DataLakeWriter(Path(args.out_dir), formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/extract_vn_macro.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=\[\s*,\s*flat=True\)"csv"\]\)',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/rss_news_sentiment.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=\[\s*,\s*flat=True\)"csv"\]\)',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/v2_fallback_collector.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=\[\s*,\s*flat=True\)"csv"\]\)',
-        '        writer = DataLakeWriter(out_dir, formats=["csv"], flat=True)'
-    ),
-    "scripts/pipeline/crawl_raw_gold_history.py": (
-        r'writer = DataLakeWriter\(out_dir, formats=output_formats\)',
-        '        writer = DataLakeWriter(out_dir, formats=output_formats, flat=True)'
-    ),
-}
+from __future__ import annotations
 
-# Also fix: norm = out_dir / "normalized" -> not needed with flat=True
-# But keep it if script uses norm variable for output path
+import sys
+from pathlib import Path
 
-for fpath, (pattern, replacement) in FIXES.items():
-    with open(fpath, "r", encoding="utf-8") as fh:
-        content = fh.read()
+# Thêm thư mục gốc để tìm package scripts khi chạy bằng đường dẫn file.
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-    # Try regex substitution first
-    new_content, count = re.subn(pattern, replacement, content)
+from scripts._compat import forward_script
 
-    if count > 0:
-        with open(fpath, "w", encoding="utf-8") as fh:
-            fh.write(new_content)
-        print(f"Fixed ({count} match(es)): {fpath}")
-    else:
-        # Try literal match instead
-        if pattern in content:
-            new_content = content.replace(pattern, replacement)
-            with open(fpath, "w", encoding="utf-8") as fh:
-                fh.write(new_content)
-            print(f"Fixed (literal): {fpath}")
-        else:
-            print(f"No match found in: {fpath}")
-            # Show what's actually there
-            for i, line in enumerate(content.split('\n'), 1):
-                if 'DataLakeWriter' in line:
-                    print(f"  line {i}: {line.rstrip()}")
+forward_script(__name__, "scripts.maintenance._fix_flat")

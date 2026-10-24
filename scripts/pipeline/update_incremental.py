@@ -259,7 +259,7 @@ def run_premium_decomposition(lake_dir: Path) -> None:
     from subprocess import run
     cmd = [
         sys.executable,
-        "scripts/pipeline/build_premium_decomposition.py",
+        "scripts/processing/build_premium_decomposition.py",
         "--audited-dir", str(lake_dir / "domestic_target"),
         "--external-dir", str(lake_dir),
         "--out-dir", str(lake_dir / "gold_prices"),
