@@ -35,6 +35,7 @@ from scripts.analysis.snapshot_validation import (
 )
 
 HORIZON_LABELS = {1: "1 tháng", 3: "3 tháng", 5: "5 tháng"}
+from scripts.analysis.active_snapshot import refresh_active_pipeline
 
 
 def main():
@@ -61,6 +62,12 @@ def main():
         if cols_file.exists():
             feature_cols = json.loads(cols_file.read_text(encoding="utf-8"))
     print(f"  -> Total candidate features: {len(feature_cols)}")
+
+    # Một khi đã chọn pipeline có đối chứng baseline, mọi đầu ra CSV/web/sổ
+    # mô phỏng phải dùng đúng mô hình đó; không chạy RF cũ đè lên snapshot.
+    if refresh_active_pipeline(lake):
+        report_progress(95, 'Đã cập nhật dự báo đang kích hoạt và kiểm tra P/Q10.')
+        return
 
     print("\nStep 2: Training Random Forest & Quantile Gradient Boosting models...")
     data = frame.copy()

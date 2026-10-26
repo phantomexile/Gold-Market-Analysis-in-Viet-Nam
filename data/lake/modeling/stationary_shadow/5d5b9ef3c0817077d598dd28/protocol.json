@@ -1,0 +1,94 @@
+{
+  "candidate": "rf_small",
+  "margin": 0.01,
+  "source_id": "a8772d72443a0042ac75e677c71486aa4e5055099e963a9a02f83c3e1352d5da",
+  "initial_calibration_sha256": "ba128f0d96163454bae18d5985b838a8523bb1caa362283f3591feeea704ffb2",
+  "horizon_months": 3,
+  "refit": "monthly_5y_matured_only",
+  "calibration": "brier_weighted_oos_adaptive_q10_v2",
+  "policy": {
+    "version": "prospective_calendar_month_v1",
+    "min_matured_rows": 120,
+    "min_origin_span_days": 365,
+    "min_nonoverlapping_windows": 6,
+    "min_mae_improvement": 0.05,
+    "min_brier_improvement": 0.05,
+    "max_q10_breach_rate": 0.15,
+    "max_probability_ece": 0.1,
+    "probability_bins": 10
+  },
+  "selection_evidence": {
+    "candidate": "rf_small",
+    "improved_over_baseline": false,
+    "candidates": {
+      "rf_median": {
+        "mae": 0.10324708439085459,
+        "zero_mae": 0.09041024235877475,
+        "improvement": -0.14198437806569997,
+        "stable_years": 1,
+        "interval": {
+          "lower": -0.3221687761028889,
+          "upper": -0.005742198212953029,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "rf_small": {
+        "mae": 0.09345014747435931,
+        "zero_mae": 0.09041024235877475,
+        "improvement": -0.033623459425330626,
+        "stable_years": 2,
+        "interval": {
+          "lower": -0.18385548462296877,
+          "upper": 0.09782359404211233,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "zero": {
+        "mae": 0.09041024235877475,
+        "zero_mae": 0.09041024235877475,
+        "improvement": 0.0,
+        "stable_years": 0,
+        "interval": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      }
+    },
+    "selection_rows": 1277,
+    "cutoff": "2026-10-01",
+    "selection_last_exit_date": "2026-09-30",
+    "reason": "Dự báo ML riêng cho kỳ hạn này; baseline lợi suất 0 chỉ dùng làm đối chứng. Chưa đạt tiêu chí tốt hơn baseline; chưa chứng minh độ tin cậy giao dịch.",
+    "benchmark_winner": "zero",
+    "forecast_role": "research",
+    "baseline_candidate": "zero",
+    "point_comparison": {
+      "mae": 0.09345014747435931,
+      "zero_mae": 0.09041024235877475,
+      "improvement": -0.033623459425330626,
+      "stable_years": 2,
+      "interval": {
+        "lower": -0.18385548462296877,
+        "upper": 0.09782359404211233,
+        "block_months": 3,
+        "months": 42,
+        "confidence": 0.9
+      },
+      "qualified": false
+    }
+  },
+  "protocol_id": "5d5b9ef3c0817077d598dd28",
+  "created_at": "2026-10-26T14:31:26.970399+00:00",
+  "validation_start": "2026-10-27",
+  "mode": "shadow",
+  "checksum": "c6ac4514089a4017819d8e25d0cb4e64786d0e22441caf27475c71e4339debcf"
+}

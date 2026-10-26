@@ -20,8 +20,10 @@ def activate_candidate(modeling: Path, *, horizons=(3,)) -> dict:
     một mô hình đã khóa không làm thay đổi phương pháp của campaign đó.
     """
     entries = {}
+    corrected_pipeline = True
     for horizon in horizons:
         lock = read_lock(shadow_root(modeling, horizon))
+        corrected_pipeline = corrected_pipeline and lock.get('calibration') == 'brier_weighted_oos_adaptive_q10_v2'
         if lock.get('horizon_months', horizon) != horizon:
             raise ValueError('Bản khóa không đúng kỳ hạn kích hoạt.')
         entries[str(horizon)] = dict(mode='direct_forecast', horizon_months=horizon, candidate=lock['candidate'],
@@ -32,6 +34,8 @@ def activate_candidate(modeling: Path, *, horizons=(3,)) -> dict:
     # Đọc được cấu hình 3 tháng cũ; nhiều kỳ hạn dùng registry và ghi một lần
     # để giao diện không nhìn thấy trạng thái chỉ mới kích hoạt một phần.
     config = entries['3'] if tuple(horizons) == (3,) else dict(mode='direct_forecast', horizons=entries)
+    if corrected_pipeline and set(horizons) == {1,3,5}:
+        config['forecast_pipeline'] = 'reliability_v2'
     temporary = modeling/(ACTIVATION_FILE+'.tmp')
     write_json(temporary, config)
     temporary.replace(modeling/ACTIVATION_FILE)
@@ -83,4 +87,5 @@ def load_active_forecast(modeling: Path, expected_date: str, *, horizon=3) -> di
     probability = latest.get('prob_return_positive')
     if probability is not None and not 0 <= float(probability) <= 1:
         raise ValueError('Xác suất mô hình mới không hợp lệ.')
-    return {**latest, 'validation_policy': lock.get('policy', {})}
+    return {**latest, 'validation_policy': lock.get('policy', {}),
+            'forecast_selection':lock.get('selection_evidence',{})}

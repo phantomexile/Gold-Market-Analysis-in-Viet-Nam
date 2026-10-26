@@ -43,6 +43,7 @@ def model_source_fingerprint() -> str:
     # Việc đổi quy tắc premium hoặc availability cũng làm đợt kiểm định bắt đầu lại.
     paths = {ROOT / name for name in (
         'scripts/analysis/train_latest_snapshot.py', 'scripts/analysis/snapshot_calibration.py',
+        'scripts/analysis/active_snapshot.py',
         'scripts/analysis/snapshot_validation.py', 'scripts/pipeline/refresh_latest_forecast.py',
         'scripts/analysis/snapshot_historical.py',
         'scripts/pipeline/update_incremental.py',

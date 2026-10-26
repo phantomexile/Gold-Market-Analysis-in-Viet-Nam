@@ -27,6 +27,7 @@ import json
 import statistics
 from collections import Counter, defaultdict
 from pathlib import Path
+from gold_collectors.units import OZ_PER_LUONG
 
 # ── paths ────────────────────────────────────────────────────────────────────
 _SCRIPT_DIR = Path(__file__).resolve().parent
@@ -131,7 +132,7 @@ def audit_premium(_args: argparse.Namespace) -> None:
         g_usd = float(r["global_gold_usd_oz"])
         fx = float(r["usd_vnd"])
         stored = float(r["global_gold_vnd_per_luong"])
-        computed = g_usd * fx / 25.807 * 37.5
+        computed = g_usd * fx * OZ_PER_LUONG
         buy = float(r["buy_consensus"])
         sell = float(r["sell_consensus"])
         mid = float(r["mid_consensus"])
@@ -212,9 +213,9 @@ def audit_enriched(_args: argparse.Namespace) -> None:
     print(f"    global_vnd/luong={r0['global_gold_vnd_per_luong']}, premium={r0['premium']}")
     g_usd = float(r0["global_gold_usd_oz"])
     fx = float(r0["usd_vnd"])
-    computed = g_usd * fx / 25.807 * 37.5
+    computed = g_usd * fx * OZ_PER_LUONG
     stored = float(r0["global_gold_vnd_per_luong"])
-    print(f"    unit check: {g_usd}*{fx}/25.807*37.5 = {computed:,.0f} (stored {stored:,.0f}) match={abs(computed-stored)<1}")
+    print(f"    unit check: {g_usd}*{fx}*{OZ_PER_LUONG} = {computed:,.0f} (stored {stored:,.0f}) match={abs(computed-stored)<1}")
 
     # ── 2. event panel ────────────────────────────────────────────────────────
     print("\n" + "=" * 70)

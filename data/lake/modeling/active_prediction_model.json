@@ -4,29 +4,30 @@
     "1": {
       "mode": "direct_forecast",
       "horizon_months": 1,
-      "candidate": "rf_small",
-      "protocol_id": "0bd3d4833db21c28c540afd9",
-      "source_id": "56a7e05da009154253c9fd419ee9ef26ca7cee97257f2036e01e42725a69e4e6",
+      "candidate": "rf_median",
+      "protocol_id": "0f117be33931d956662e8a25",
+      "source_id": "a8772d72443a0042ac75e677c71486aa4e5055099e963a9a02f83c3e1352d5da",
       "margin": 0.01,
-      "activated_at": "2026-10-25T14:35:31.818163+00:00"
+      "activated_at": "2026-10-26T14:31:32.339066+00:00"
     },
     "3": {
       "mode": "direct_forecast",
       "horizon_months": 3,
       "candidate": "rf_small",
-      "protocol_id": "d5d092a16269717c3c7234e9",
-      "source_id": "56a7e05da009154253c9fd419ee9ef26ca7cee97257f2036e01e42725a69e4e6",
+      "protocol_id": "5d5b9ef3c0817077d598dd28",
+      "source_id": "a8772d72443a0042ac75e677c71486aa4e5055099e963a9a02f83c3e1352d5da",
       "margin": 0.01,
-      "activated_at": "2026-10-25T14:35:31.836693+00:00"
+      "activated_at": "2026-10-26T14:31:32.379207+00:00"
     },
     "5": {
       "mode": "direct_forecast",
       "horizon_months": 5,
       "candidate": "rf_small",
-      "protocol_id": "4b6e9cf220415f9d74eff28b",
-      "source_id": "56a7e05da009154253c9fd419ee9ef26ca7cee97257f2036e01e42725a69e4e6",
+      "protocol_id": "0fc356c6f274c9f7dd797220",
+      "source_id": "a8772d72443a0042ac75e677c71486aa4e5055099e963a9a02f83c3e1352d5da",
       "margin": 0.01,
-      "activated_at": "2026-10-25T14:35:31.855824+00:00"
+      "activated_at": "2026-10-26T14:31:32.418246+00:00"
     }
-  }
+  },
+  "forecast_pipeline": "reliability_v2"
 }

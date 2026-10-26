@@ -22,6 +22,67 @@ ROOT = Path(__file__).resolve().parents[2]
 LOCAL = timezone(timedelta(hours=7))
 
 
+def publication_quality(history: pd.DataFrame, cutoff: pd.Timestamp, *, horizon=3) -> dict:
+    """Kiểm tra riêng P(lãi) và Q10 trước khi đưa số liệu lên dashboard.
+
+    Chỉ chấm dự báo ngoài mẫu đã đáo hạn trước cutoff. Không dùng kết quả
+    này để cấp validated: kiểm chứng tiến cứu vẫn là một quy trình riêng.
+    Giữ metrics và lý do để việc không công bố chỉ số không che lỗi mô hình.
+    """
+    p = history.copy()
+    if not p.empty:
+        p['date'] = pd.to_datetime(p.date)
+        p['exit_date'] = pd.to_datetime(p.exit_date)
+        p = p.loc[p.date.ge('2023-01-01') & p.date.lt(cutoff) & p.exit_date.lt(cutoff) & np.isfinite(p.actual)]
+        if p.date.duplicated().any():
+            raise ValueError('Hiệu chỉnh cần đúng một dự báo ngoài mẫu mỗi ngày.')
+    policy = load_policy()
+    common = ('inputs_verified','enough_rows','enough_time_span','enough_nonoverlap')
+    messages = dict(inputs_verified='Bằng chứng chứa số liệu không hợp lệ.',
+        enough_rows='Chưa đủ số dự báo đã đáo hạn.', enough_time_span='Chưa đủ thời gian đánh giá.',
+        enough_nonoverlap='Chưa đủ cửa sổ không chồng lấn.',
+        brier_vs_baseline='Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.',
+        probability_calibration='Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép.',
+        q10_coverage='Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.',
+        q10_pinball_vs_baseline='Pinball của Q10 kém hơn baseline.')
+    results = {}
+    for kind, names, checks_to_use in (
+        ('probability', ['predicted','probability','baseline_probability'], common+('brier_vs_baseline','probability_calibration')),
+        ('q10', ['predicted','q10','baseline_q10'], common+('q10_coverage','q10_pinball_vs_baseline')),
+    ):
+        # P và Q10 có tập đủ dữ liệu riêng. Giá trị thay thế ở nhánh còn lại
+        # chỉ giúp tái dùng bộ chấm chung; tuyệt đối không dùng điểm của
+        # giá trị thay thế để quyết định hay báo cáo chất lượng chỉ số đó.
+        finite = np.isfinite(p[names].to_numpy(float)).all(axis=1) if not p.empty else np.array([],dtype=bool)
+        complete = bool(len(p)) and bool(finite.all())
+        rows = []
+        for r in p.loc[finite].itertuples() if len(p) else []:
+            rows.append(dict(horizon_months=horizon, snapshot_date=r.date.date().isoformat(),
+                exit_date=r.exit_date.date().isoformat(),actual=r.actual,predicted_net_return=r.predicted,
+                prob_return_positive=r.probability if kind=='probability' else .5,
+                baseline_probability=r.baseline_probability if kind=='probability' else .5,
+                q10_predicted_net_return=r.q10 if kind=='q10' else 0.,baseline_q10=r.baseline_q10 if kind=='q10' else 0.))
+        quality = evaluate_horizon(rows,horizon,policy)
+        checks = {key: quality['checks'].get(key) is True for key in checks_to_use}
+        reasons = [messages[key] for key, passed in checks.items() if not passed]
+        missing = len(p)-int(finite.sum())
+        if missing:
+            reasons.insert(0,f'{kind}: có {missing} dự báo thiếu hoặc sai chỉ số/baseline; chưa công bố.')
+        results[kind] = dict(qualified=complete and all(checks.values()),checks=checks,
+                             metrics=quality['metrics'],reasons=reasons,missing_rows=missing)
+    probability, quantile = results['probability'], results['q10']
+    metrics = {key: value for key,value in probability['metrics'].items()
+               if key not in ('q10_breach_rate','q10_pinball','baseline_q10_pinball')}
+    metrics.update({key:value for key,value in quantile['metrics'].items()
+                    if key in ('q10_breach_rate','q10_pinball','baseline_q10_pinball')})
+    metrics.update(probability_missing_rows=probability['missing_rows'],q10_missing_rows=quantile['missing_rows'],
+                   probability_rows=probability['metrics']['matured_rows'],q10_rows=quantile['metrics']['matured_rows'])
+    return dict(status='research_only',probability_qualified=probability['qualified'],q10_qualified=quantile['qualified'],
+                metrics=metrics,checks={'probability':probability['checks'],'q10':quantile['checks']},
+                probability_reasons=probability['reasons'],q10_reasons=quantile['reasons'],
+                reasons=list(dict.fromkeys(probability['reasons']+quantile['reasons'])))
+
+
 def shadow_root(modeling: Path, horizon: int = 3) -> Path:
     """Tách nhật ký theo kỳ hạn; giữ đường dẫn 3 tháng để đọc bản khóa cũ."""
     if horizon not in (1, 3, 5):
@@ -38,7 +99,8 @@ def algorithm_fingerprint() -> str:
     digest.update(model_source_fingerprint().encode('utf-8'))
     for name in ('stationary_features.py', 'stationary_research.py', 'stationary_evaluation.py',
                  'stationary_shadow.py', 'run_stationary_research.py', 'forecast_signals.py',
-                 'run_model_research.py', 'model_diagnostics.py', 'run_all_horizon_rf.py'):
+                  'run_model_research.py', 'model_diagnostics.py', 'run_all_horizon_rf.py', 'run_forecast_repair.py',
+                  'stationary_activation.py', 'active_snapshot.py', 'forecast_selection.py'):
         digest.update((ROOT/'scripts/analysis'/name).read_bytes())
     digest.update((ROOT/'configs/forecast_validation_policy.json').read_bytes())
     for package in ('numpy', 'pandas', 'scikit-learn', 'scipy', 'joblib'):
@@ -47,13 +109,19 @@ def algorithm_fingerprint() -> str:
 
 
 def create_lock(root: Path, calibration: Path, *, candidate: str, margin: float,
-                now: datetime, source_id: str | None = None, horizon=3) -> dict:
+                 now: datetime, source_id: str | None = None, horizon=3, selection_evidence: dict | None = None) -> dict:
     """Chụp bộ OOS ban đầu, khóa cấu hình và bắt đầu bằng chứng từ ngày kế tiếp."""
     if horizon not in (1, 3, 5) or now.tzinfo is None or candidate not in KINDS or margin not in (.005, .01, .02):
         raise ValueError('Cấu hình khóa không hợp lệ.')
     config = dict(candidate=candidate, margin=margin, source_id=source_id or algorithm_fingerprint(),
                   initial_calibration_sha256=file_hash(calibration), horizon_months=horizon,
-                  refit='monthly_5y_matured_only', calibration='sigmoid_oos_24m_residual_q10', policy=load_policy())
+                   refit='monthly_5y_matured_only', calibration='brier_weighted_oos_adaptive_q10_v2', policy=load_policy())
+    if selection_evidence is not None:
+        # Khóa cả bằng chứng lựa chọn để UI không tự gắn nhãn đủ chuẩn cho
+        # một ML chỉ đang được hiển thị phục vụ nghiên cứu.
+        if selection_evidence.get('candidate') != candidate:
+            raise ValueError('Bằng chứng lựa chọn không khớp ứng viên dự báo.')
+        config['selection_evidence'] = selection_evidence
     identity = _checksum(config)[:24]
     folder = root/identity
     folder.mkdir(parents=True, exist_ok=True)
@@ -159,7 +227,9 @@ def record_latest(modeling: Path, *, now: datetime | None = None, horizon=3) -> 
     target, exit_column = f'net_return_{horizon}m', f'exit_date_{horizon}m'
     frame_path = modeling/'model_frame_daily.csv'
     before = file_hash(frame_path)
-    f = pd.read_csv(frame_path, low_memory=False).sort_values('date').reset_index(drop=True)
+    # Giữ đủ chữ số khi đọc lại frame: mất một chữ số gần ngưỡng chia nhánh
+    # có thể làm RF dự báo khác lần fit trên chính frame trước khi lưu CSV.
+    f = pd.read_csv(frame_path, low_memory=False, float_precision='round_trip').sort_values('date').reset_index(drop=True)
     f['date'] = pd.to_datetime(f.date)
     f[exit_column] = pd.to_datetime(f[exit_column], errors='coerce')
     x = build_stationary_features(f)
@@ -173,19 +243,30 @@ def record_latest(modeling: Path, *, now: datetime | None = None, horizon=3) -> 
     if len(train) < 300:
         raise ValueError('Thiếu train cho ứng viên đã khóa.')
     predicted, selected = fit_predict(protocol['candidate'], train, latest, x.loc[train_mask], x.iloc[[-1]], horizon=horizon)
-    initial = pd.read_csv(root/protocol['protocol_id']/'calibration.csv', low_memory=False)
+    initial = pd.read_csv(root/protocol['protocol_id']/'calibration.csv', low_memory=False, float_precision='round_trip')
     if 'horizon_months' in initial and not initial.horizon_months.eq(horizon).all():
         raise ValueError('Bộ hiệu chỉnh không đúng kỳ hạn của bản khóa.')
     initial_records = [dict(snapshot_date=str(r.date)[:10], horizon_months=horizon, entry_sell_price=r.sell_price,
-                            predicted_net_return=r.predicted) for r in initial.itertuples()]
+                            predicted_net_return=r.predicted,
+                            prob_return_positive=getattr(r, 'probability', np.nan),
+                            q10_predicted_net_return=getattr(r, 'q10', np.nan),
+                            sigmoid_probability=getattr(r, 'sigmoid_probability', np.nan),
+                            baseline_probability=getattr(r, 'baseline_probability', np.nan),
+                            baseline_q10=getattr(r, 'baseline_q10', np.nan)) for r in initial.itertuples()]
     journal = read_records(root, protocol)
     matured = matured_forecasts(journal, f, as_of=origin.date().isoformat())
     pool = matured_forecasts(initial_records, f, as_of=origin.date().isoformat()) + matured
-    past = pd.DataFrame([dict(date=pd.Timestamp(r['snapshot_date']), exit_date=pd.Timestamp(r['exit_date']),
-                              actual=r['actual'], predicted=r['predicted_net_return']) for r in pool])
-    if not past.empty:
-        past = past.drop_duplicates('date').loc[lambda p: p.exit_date.lt(begin) & p.date.ge(begin-pd.DateOffset(years=2))]
-    calibrated = calibrate(past, predicted)
+    history = pd.DataFrame([dict(date=pd.Timestamp(r['snapshot_date']), exit_date=pd.Timestamp(r['exit_date']),
+                              actual=r['actual'], predicted=r['predicted_net_return'],
+                              probability=r.get('prob_return_positive', np.nan), q10=r.get('q10_predicted_net_return', np.nan),
+                              sigmoid_probability=r.get('sigmoid_probability', np.nan),
+                              baseline_probability=r.get('baseline_probability', np.nan),
+                              baseline_q10=r.get('baseline_q10', np.nan)) for r in pool])
+    if not history.empty:
+        history = history.drop_duplicates('date').sort_values('date')
+    past = history.loc[history.exit_date.lt(begin) & history.date.ge(begin-pd.DateOffset(years=2))] if not history.empty else history
+    prior = float((train[target]>0).mean())
+    calibrated = calibrate(past, predicted, baseline_probability=prior, cutoff=begin)
     finite = lambda value: float(value) if np.isfinite(value) else None
     row = dict(snapshot_date=origin.date().isoformat(), horizon_months=horizon, candidate=protocol['candidate'],
                predicted_net_return=float(predicted[0]), q10_predicted_net_return=finite(calibrated['q10'][0]),
@@ -194,7 +275,10 @@ def record_latest(modeling: Path, *, now: datetime | None = None, horizon=3) -> 
                train_last_exit_date=str(train[exit_column].max().date()), calibration_rows=calibrated['rows'],
                calibration_last_exit_date=str(calibrated['last_exit'].date()) if pd.notna(calibrated['last_exit']) else None,
                selected_features=selected, margin=protocol['margin'], probability_method='sigmoid_temporal_oos',
-               signal=direct_signal(predicted[0], latest.buy_price.iloc[0], latest.sell_price.iloc[0], margin=protocol['margin'])['signal'])
+                signal=direct_signal(predicted[0], latest.buy_price.iloc[0], latest.sell_price.iloc[0], margin=protocol['margin'])['signal'],
+                sigmoid_probability=finite(calibrated['sigmoid_probability'][0]),
+                probability_weight=calibrated['probability_weight'], q10_correction=calibrated['q10_correction'])
+    row['probability_method'] = 'temporal_oos_brier_weighted_v2'
     if file_hash(frame_path) != before:
         raise ValueError('Frame thay đổi trong lúc fit shadow; chưa ghi dự báo.')
     # Mã hoặc bộ hiệu chỉnh có thể đổi ngay trong lúc fit: đối chiếu lại
@@ -208,6 +292,16 @@ def record_latest(modeling: Path, *, now: datetime | None = None, horizon=3) -> 
     report = evaluate_horizon(evaluable, horizon, protocol['policy'])
     report.update(mode='shadow', protocol_id=protocol['protocol_id'], validation_start=protocol['validation_start'],
                   recorded_rows=len(records), matured_point_rows=len(matured))
-    write_json(root/'latest.json', {**row, 'mode': 'shadow', 'validation': report,
+    quality = publication_quality(history, begin, horizon=horizon)
+    # Nhật ký bất biến giữ đủ dự báo gốc để sau này kiểm định tiến cứu. Chỉ
+    # bản công bố mới che chỉ số chưa đạt, không sửa/xóa bằng chứng lịch sử.
+    published = dict(row, research_prob_return_positive=row['prob_return_positive'],
+                     research_q10_predicted_net_return=row['q10_predicted_net_return'], calibration_quality=quality)
+    if not quality['probability_qualified']:
+        published['prob_return_positive'] = None
+    if not quality['q10_qualified']:
+        published['q10_predicted_net_return'] = None
+    write_json(root/'latest.json', {**published, 'mode': 'shadow', 'validation': report,
+                                   'forecast_selection':protocol.get('selection_evidence',{}),
                                   'eligible_for_prospective': any(r['snapshot_date'] == row['snapshot_date'] for r in records)})
     return report

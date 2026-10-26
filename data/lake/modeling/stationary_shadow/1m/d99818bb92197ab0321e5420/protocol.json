@@ -1,0 +1,25 @@
+{
+  "candidate": "zero",
+  "margin": 0.01,
+  "source_id": "691cc21c253f23a84f0a4620a901d9fee31e4bc3e587a8063605d0f2214d06b2",
+  "initial_calibration_sha256": "4db86e990801a46743b207ed5505985a5758d4c7c7f4504d841efab8b324c40c",
+  "horizon_months": 1,
+  "refit": "monthly_5y_matured_only",
+  "calibration": "brier_weighted_oos_adaptive_q10_v2",
+  "policy": {
+    "version": "prospective_calendar_month_v1",
+    "min_matured_rows": 120,
+    "min_origin_span_days": 365,
+    "min_nonoverlapping_windows": 6,
+    "min_mae_improvement": 0.05,
+    "min_brier_improvement": 0.05,
+    "max_q10_breach_rate": 0.15,
+    "max_probability_ece": 0.1,
+    "probability_bins": 10
+  },
+  "protocol_id": "d99818bb92197ab0321e5420",
+  "created_at": "2026-10-26T13:00:49.814801+00:00",
+  "validation_start": "2026-10-27",
+  "mode": "shadow",
+  "checksum": "9b41ff559665764057933bb8c6773616cc200a16392f9834fd1f7efc2a58e5c3"
+}

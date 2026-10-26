@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "source_id": "691cc21c253f23a84f0a4620a901d9fee31e4bc3e587a8063605d0f2214d06b2",
+  "previous_sha256": {
+    "model_frame_daily.csv": "0b66202fd957f291b59a89c3ac24855a160991c6e6f836eb178afc77ac652308",
+    "snapshot_forecasts.csv": "8b116d2211a53f43c21504600b0c4adb2d9259a86cbc25ee3a10dec49a573ec3",
+    "active_prediction_model.json": "269339a7260043611c1bf70d19acfee09a64b3d21e98364124e3e68ad4dced67"
+  },
+  "frame_sha256": "0b66202fd957f291b59a89c3ac24855a160991c6e6f836eb178afc77ac652308",
+  "protocols": {
+    "1": "d99818bb92197ab0321e5420",
+    "3": "11dbbaa6998cfd70621a044d",
+    "5": "66ea6d0d5522d44e6604f41a"
+  },
+  "independent_validation": false,
+  "completed_at": "2026-10-26T13:00:59.087225+00:00"
+}

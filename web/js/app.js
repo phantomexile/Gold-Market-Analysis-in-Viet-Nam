@@ -89,6 +89,7 @@ function setupEventListeners() {
 
   const exportBtn = document.getElementById('btnExportCsv');
   if (exportBtn) exportBtn.addEventListener('click', exportCsv);
+
 }
 
 async function loadData() {
@@ -129,10 +130,32 @@ function renderDecisionSupport() {
   }
   if (sec) sec.style.display = 'block';
 
+  // Chỉ viết lại lời giải thích cho người xem; mọi con số và tín hiệu
+  // vẫn lấy từ backend, không tính lại quyết định Mua/Bán trên trình duyệt.
+  const percentText = (value, signed = true) => Number.isFinite(value)
+    ? `${signed && value > 0 ? '+' : ''}${value.toFixed(2).replace('.', ',')}%`
+    : 'Chưa đủ cơ sở';
+  const explainSignal = (h) => {
+    if (!h) return 'Chưa có đủ dữ liệu để đưa ra gợi ý.';
+    const period = h.horizon_label || `${h.horizon_months || 3} tháng`;
+    if (h.signal === 'buy' && Number.isFinite(h.predicted_net_return)) {
+      return `Nếu mua hôm nay và bán sau ${period}, mức lãi ước tính là ${percentText(h.predicted_net_return, false)}, sau chênh lệch giá mua–bán.`;
+    }
+    if (h.signal === 'sell' && Number.isFinite(h.predicted_hold_return)) {
+      return `Nếu đang giữ vàng, bán sau ${period} được ước tính thu về ít hơn bán ngay ${percentText(Math.abs(h.predicted_hold_return), false)}. Vì vậy, mô hình gợi ý Bán.`;
+    }
+    if (h.signal === 'observe' && Number.isFinite(h.predicted_net_return)) {
+      return h.predicted_net_return < 0
+        ? `Mua mới có thể lỗ khoảng ${percentText(Math.abs(h.predicted_net_return), false)} sau ${period}. Nếu đã có vàng, mô hình chưa gợi ý bán.`
+        : 'Mức lãi dự kiến chưa đủ để mua thêm, và chưa có tín hiệu giảm đủ mạnh để bán vàng đang giữ.';
+    }
+    return h.rationale || 'Chưa có đủ dữ liệu để đưa ra gợi ý.';
+  };
+
   // Snapshot date
   const snapshotDateEl = document.getElementById('decisionSnapshotDate');
   if (snapshotDateEl && rec.snapshot_date) {
-    snapshotDateEl.textContent = `Snapshot: ${rec.snapshot_date}`;
+    snapshotDateEl.textContent = `Dữ liệu đến: ${rec.snapshot_date.split('-').reverse().join('/')}`;
   }
 
   // Executive Signal Box
@@ -140,18 +163,28 @@ function renderDecisionSupport() {
   const execAction = document.getElementById('execActionText');
   const execBadge = document.getElementById('execBadge');
   const execText = document.getElementById('execSummaryText');
+  const execHeading = document.getElementById('execHeading');
+  // Phần tóm tắt dùng kỳ hạn mặc định của máy chủ; thẻ có lãi cao nhất
+  // chỉ được làm nổi bật để so sánh, không tự đổi quyết định của mô hình.
+  const selected = rec.horizons.find((h) => h.horizon_months === (rec.primary_horizon_months || 3))
+    || rec.horizons[0];
+  const selectedMonths = selected.horizon_months || rec.primary_horizon_months || 3;
+  const direct = rec.signal_mode === 'direct_forecast';
+  if (execHeading) execHeading.textContent = `Gợi ý cho kỳ hạn ${selectedMonths} tháng`;
 
   if (execBox && execAction) {
-    execBox.className = 'exec-signal-box ' + (rec.action_theme || 'positive');
-    execAction.textContent = rec.primary_action || 'QUAN SÁT THỊ TRƯỜNG';
+    execBox.className = 'exec-signal-box ' + (direct ? selected.badge_type || 'warning' : rec.action_theme || 'positive');
+    execAction.textContent = direct
+      ? (selected.action || 'Quan sát').toLocaleUpperCase('vi-VN')
+      : rec.primary_action || 'QUAN SÁT THỊ TRƯỜNG';
   }
   if (execBadge) {
     execBadge.textContent = rec.signal_mode === 'direct_forecast'
-      ? `${rec.primary_horizon_months || 3} tháng • ${rec.primary_model_label || 'Dự báo mô hình'}`
+      ? `${selectedMonths} tháng • ${(selected.model_label || rec.primary_model_label)?.includes('thử nghiệm') ? 'Dự báo thử nghiệm' : 'Dự báo mô hình'}`
       : (rec.action_theme === 'positive' ? 'Khuyến nghị Tích lũy' : (rec.action_theme === 'warning' ? 'Thận trọng' : 'Quan sát'));
   }
-  if (execText && rec.executive_summary) {
-    execText.textContent = rec.executive_summary;
+  if (execText) {
+    execText.textContent = direct ? explainSignal(selected) : rec.executive_summary || '';
   }
 
   // Horizon Cards
@@ -163,29 +196,48 @@ function renderDecisionSupport() {
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
     })[character]);
     if (rec.signal_mode === 'direct_forecast') {
+      // So sánh lợi nhuận mua mới trên toàn kỳ hạn, không coi đây là điểm
+      // tin cậy hay tự chuyển gợi ý. Nếu bằng nhau, đánh dấu các thẻ cùng mức.
+      const highestReturn = Math.max(0, ...rec.horizons
+        .map((h) => h.predicted_net_return).filter(Number.isFinite));
       // Tín hiệu do backend tính theo dự báo; không dùng kiểm định/P/Q10 để
       // đổi quyết định trên trình duyệt. Số liệu hiển thị sẵn dưới lý do để
       // người xem đối chiếu ngay, không cần mở một mục thu gọn.
-      const pct = (value) => Number.isFinite(value) ? `${value > 0 ? '+' : ''}${value.toFixed(2)}%` : 'Chưa đủ dữ liệu';
       gridEl.innerHTML = rec.horizons.map((h) => {
+        const period = safeText(h.horizon_label || `${h.horizon_months || 3} tháng`);
+        // Người xem chọn hiển thị số ước tính dù chưa qua cổng độ tin cậy.
+        // Ưu tiên số gốc của cùng kỳ hạn, không lấy số từ kỳ hạn khác hay bịa số khi thiếu.
+        const q10 = Number.isFinite(h.research_q10_predicted_net_return)
+          ? h.research_q10_predicted_net_return : h.q10_predicted_net_return;
+        const probability = Number.isFinite(h.research_prob_return_positive)
+          ? h.research_prob_return_positive : h.prob_return_positive;
+        const missing = [];
+        if (!Number.isFinite(probability)) missing.push('Khả năng có lãi');
+        if (!Number.isFinite(q10)) missing.push(missing.length ? 'kịch bản xấu' : 'Kịch bản xấu');
+        // Giữ lý do kỹ thuật trong dữ liệu kiểm định, không đưa thuật ngữ
+        // Brier/Pinball lên thẻ gợi ý dành cho người không chuyên.
+        const calibrationNote = missing.length
+          ? `${missing.join(' và ')} chưa có số ước tính trong dữ liệu mô hình.` : '';
         return `
-          <div class="horizon-card direct-signal-card ${safeText(h.badge_type || 'warning')}">
+          <div class="horizon-card direct-signal-card ${safeText(h.badge_type || 'warning')}${highestReturn > 0 && h.predicted_net_return === highestReturn ? ' highest-return-card' : ''}">
             <div class="horizon-header">
               <span class="horizon-title">${safeText(h.horizon_label)}</span>
               <span class="action-pill ${safeText(h.badge_type || 'warning')}">${safeText(h.action || 'Quan sát')}</span>
             </div>
+            ${highestReturn > 0 && h.predicted_net_return === highestReturn ? '<span class="highest-return-badge">Lãi dự báo cao nhất</span>' : ''}
             <div class="signal-reason">
               <div class="assessment-title">Lý do đề xuất</div>
-              <p class="direct-signal-reason">${safeText(h.rationale || 'Chưa có đủ dữ liệu để giải thích tín hiệu.')}</p>
+              <p class="direct-signal-reason">${safeText(explainSignal(h))}</p>
             </div>
             <div class="signal-details">
               <div class="assessment-title">Chi tiết dự báo</div>
               <div class="horizon-metrics direct-metrics">
-                <div class="h-metric"><span class="h-metric-label">Lợi suất mua mới</span><span class="h-metric-val">${pct(h.predicted_net_return)}</span></div>
-                <div class="h-metric"><span class="h-metric-label">Giữ thêm so với bán ngay</span><span class="h-metric-val">${pct(h.predicted_hold_return)}</span></div>
-                <div class="h-metric"><span class="h-metric-label">Rủi ro Q10</span><span class="h-metric-val">${pct(h.q10_predicted_net_return)}</span></div>
-                <div class="h-metric"><span class="h-metric-label">Xác suất lãi ước lượng</span><span class="h-metric-val">${pct(h.prob_return_positive)}</span></div>
+                <div class="h-metric"><span class="h-metric-label">Nếu mua vàng hôm nay</span><span class="h-metric-val">${percentText(h.predicted_net_return)}</span><span class="h-metric-help">Lãi/lỗ ước tính khi bán sau ${period}, đã trừ chênh lệch giá mua–bán.</span></div>
+                <div class="h-metric"><span class="h-metric-label">Nếu đang có vàng</span><span class="h-metric-val">${percentText(h.predicted_hold_return)}</span><span class="h-metric-help">Giá trị ước tính khi giữ thêm ${period}, so với bán ngay.</span></div>
+                <div class="h-metric"><span class="h-metric-label">Kịch bản xấu (Q10) ước tính</span><span class="h-metric-val">${percentText(q10)}</span><span class="h-metric-help">${Number.isFinite(q10) ? 'Khoảng 10% kết quả có thể thấp hơn mức này. Không phải mức lỗ tối đa.' : 'Chưa có số ước tính mức lãi/lỗ trong tình huống bất lợi.'}</span></div>
+                <div class="h-metric"><span class="h-metric-label">Khả năng có lãi ước tính</span><span class="h-metric-val">${percentText(probability, false)}</span><span class="h-metric-help">Ước tính cho người mua vàng hôm nay và bán sau ${period}.</span></div>
               </div>
+              ${calibrationNote ? `<p class="calibration-note">${safeText(calibrationNote)}</p>` : ''}
             </div>
           </div>`;
       }).join('');

@@ -36,6 +36,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from gold_collectors.units import CHI_PER_OZ, LUONG_PER_OZ
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -45,8 +46,6 @@ OUT_PREMIUM = LAKE / "pipeline_output_premium_enriched.csv"
 AUDIT_CSV = QUALITY / "premium_coverage_audit.csv"
 SUMMARY_JSON = QUALITY / "premium_coverage_summary.json"
 
-CHI_PER_OZ = 31.1034768 / 1.205
-LUONG_PER_OZ = CHI_PER_OZ / 37.5
 
 
 def read_csv(path: Path) -> pd.DataFrame:

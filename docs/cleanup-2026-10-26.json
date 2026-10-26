@@ -1,0 +1,233 @@
+{
+    "removed_at":  "2026-10-26T22:40:57.9589536+07:00",
+    "removed_files":  123,
+    "removed_bytes":  68516475,
+    "entries":  [
+                    {
+                        "path":  "catboost_info",
+                        "files":  4,
+                        "bytes":  63251
+                    },
+                    {
+                        "path":  "tmp",
+                        "files":  0,
+                        "bytes":  0
+                    },
+                    {
+                        "path":  "data/lake/gold_raw_history_all_sources_2010_2026.pre_final.csv",
+                        "files":  1,
+                        "bytes":  19654418
+                    },
+                    {
+                        "path":  "data/lake/gold_raw_history_all_sources_2010_2026.pre_pnj_fix.csv",
+                        "files":  1,
+                        "bytes":  19747478
+                    },
+                    {
+                        "path":  "data/lake/gold_raw_history_all_sources_2010_2026.pre_repair.csv",
+                        "files":  1,
+                        "bytes":  19654418
+                    },
+                    {
+                        "path":  "data/lake/modeling/research/2026-10-26-forecast-repair-v1",
+                        "files":  3,
+                        "bytes":  4025
+                    },
+                    {
+                        "path":  "data/lake/modeling/research/2026-10-26-horizon-forecasts-v3",
+                        "files":  4,
+                        "bytes":  5182465
+                    },
+                    {
+                        "path":  ".cache/all-horizon-rf-run.log",
+                        "files":  1,
+                        "bytes":  8144
+                    },
+                    {
+                        "path":  ".cache/all-horizon-rf-tests.log",
+                        "files":  1,
+                        "bytes":  1100
+                    },
+                    {
+                        "path":  ".cache/cleanup-unneeded.ps1",
+                        "files":  1,
+                        "bytes":  2624
+                    },
+                    {
+                        "path":  ".cache/dashboard-server.err.log",
+                        "files":  1,
+                        "bytes":  6104
+                    },
+                    {
+                        "path":  ".cache/dashboard-server.out.log",
+                        "files":  1,
+                        "bytes":  0
+                    },
+                    {
+                        "path":  ".cache/dashboard-update.log",
+                        "files":  1,
+                        "bytes":  9583
+                    },
+                    {
+                        "path":  ".cache/decision-horizon-selector.png",
+                        "files":  1,
+                        "bytes":  81389
+                    },
+                    {
+                        "path":  ".cache/decision-support-readable.png",
+                        "files":  1,
+                        "bytes":  99201
+                    },
+                    {
+                        "path":  ".cache/direct-signals-1440.png",
+                        "files":  1,
+                        "bytes":  114191
+                    },
+                    {
+                        "path":  ".cache/direct-signals-390.png",
+                        "files":  1,
+                        "bytes":  116862
+                    },
+                    {
+                        "path":  ".cache/forecast-estimates-visible.png",
+                        "files":  1,
+                        "bytes":  95225
+                    },
+                    {
+                        "path":  ".cache/forecast-repair-2026-10-26-v2.log",
+                        "files":  1,
+                        "bytes":  8675
+                    },
+                    {
+                        "path":  ".cache/forecast-repair-2026-10-26.log",
+                        "files":  1,
+                        "bytes":  1298
+                    },
+                    {
+                        "path":  ".cache/forecast-repair-refresh.log",
+                        "files":  1,
+                        "bytes":  5830
+                    },
+                    {
+                        "path":  ".cache/forecast-repair-tests-final.log",
+                        "files":  1,
+                        "bytes":  1753
+                    },
+                    {
+                        "path":  ".cache/forecast-repair-tests.log",
+                        "files":  1,
+                        "bytes":  3102
+                    },
+                    {
+                        "path":  ".cache/highest-return-cache-fixed.png",
+                        "files":  1,
+                        "bytes":  99617
+                    },
+                    {
+                        "path":  ".cache/highest-return-highlight.png",
+                        "files":  1,
+                        "bytes":  100171
+                    },
+                    {
+                        "path":  ".cache/horizon-forecast-refresh.log",
+                        "files":  1,
+                        "bytes":  5830
+                    },
+                    {
+                        "path":  ".cache/horizon-forecast-tests-final.log",
+                        "files":  1,
+                        "bytes":  1754
+                    },
+                    {
+                        "path":  ".cache/horizon-forecast-tests.log",
+                        "files":  1,
+                        "bytes":  1754
+                    },
+                    {
+                        "path":  ".cache/section21-page-11.png",
+                        "files":  1,
+                        "bytes":  389195
+                    },
+                    {
+                        "path":  ".cache/section21-page-12.png",
+                        "files":  1,
+                        "bytes":  290051
+                    },
+                    {
+                        "path":  ".cache/section21-updated-report.pdf",
+                        "files":  1,
+                        "bytes":  1885924
+                    },
+                    {
+                        "path":  ".cache/verify-all-horizon-rf.py",
+                        "files":  1,
+                        "bytes":  2031
+                    },
+                    {
+                        "path":  ".cache/verify-direct-signals.cjs",
+                        "files":  1,
+                        "bytes":  3030
+                    },
+                    {
+                        "path":  ".cache/__pycache__",
+                        "files":  1,
+                        "bytes":  73246
+                    },
+                    {
+                        "path":  "./scripts/__pycache__",
+                        "files":  4,
+                        "bytes":  47597
+                    },
+                    {
+                        "path":  "./scripts/analysis/__pycache__",
+                        "files":  17,
+                        "bytes":  234309
+                    },
+                    {
+                        "path":  "./scripts/collection/__pycache__",
+                        "files":  2,
+                        "bytes":  18067
+                    },
+                    {
+                        "path":  "./scripts/maintenance/__pycache__",
+                        "files":  2,
+                        "bytes":  10475
+                    },
+                    {
+                        "path":  "./scripts/pipeline/__pycache__",
+                        "files":  7,
+                        "bytes":  10782
+                    },
+                    {
+                        "path":  "./scripts/processing/__pycache__",
+                        "files":  3,
+                        "bytes":  55286
+                    },
+                    {
+                        "path":  "./scripts/reporting/__pycache__",
+                        "files":  2,
+                        "bytes":  9214
+                    },
+                    {
+                        "path":  "./src/gold_collectors/__pycache__",
+                        "files":  8,
+                        "bytes":  85522
+                    },
+                    {
+                        "path":  "./src/gold_collectors/modeling/__pycache__",
+                        "files":  11,
+                        "bytes":  108262
+                    },
+                    {
+                        "path":  "./tests/__pycache__",
+                        "files":  25,
+                        "bytes":  209571
+                    },
+                    {
+                        "path":  "./web/__pycache__",
+                        "files":  1,
+                        "bytes":  13651
+                    }
+                ],
+    "kept":  "Dữ liệu gốc hoàn chỉnh (lake), runtime RF modeling-deps, mô hình đang hoạt động (active), báo cáo hoàn tất và mã tái lập."
+}

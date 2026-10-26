@@ -1,0 +1,158 @@
+{
+  "1": {
+    "candidate": "zero",
+    "improved_over_baseline": false,
+    "candidates": {
+      "rf_median": {
+        "mae": 0.04213179053413821,
+        "zero_mae": 0.03690321093673287,
+        "improvement": -0.14168359513130846,
+        "stable_years": 2,
+        "interval": {
+          "lower": -0.2786351739027491,
+          "upper": -0.04060374626779966,
+          "block_months": 1,
+          "months": 44,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "rf_small": {
+        "mae": 0.043461671256069194,
+        "zero_mae": 0.03690321093673287,
+        "improvement": -0.17772058725676199,
+        "stable_years": 1,
+        "interval": {
+          "lower": -0.32952869396941376,
+          "upper": -0.05291859509092403,
+          "block_months": 1,
+          "months": 44,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "zero": {
+        "mae": 0.03690321093673287,
+        "zero_mae": 0.03690321093673287,
+        "improvement": 0.0,
+        "stable_years": 0,
+        "interval": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "block_months": 1,
+          "months": 44,
+          "confidence": 0.9
+        },
+        "qualified": false
+      }
+    },
+    "selection_rows": 1332,
+    "cutoff": "2026-10-01",
+    "selection_last_exit_date": "2026-09-30",
+    "reason": "Chưa có ứng viên cải thiện MAE đủ ổn định; dùng mốc lợi suất 0 làm dự phòng."
+  },
+  "3": {
+    "candidate": "zero",
+    "improved_over_baseline": false,
+    "candidates": {
+      "rf_median": {
+        "mae": 0.10324708439085459,
+        "zero_mae": 0.09041024235877475,
+        "improvement": -0.14198437806569997,
+        "stable_years": 1,
+        "interval": {
+          "lower": -0.3221687761028889,
+          "upper": -0.005742198212953029,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "rf_small": {
+        "mae": 0.09345014747435931,
+        "zero_mae": 0.09041024235877475,
+        "improvement": -0.033623459425330626,
+        "stable_years": 2,
+        "interval": {
+          "lower": -0.18385548462296877,
+          "upper": 0.09782359404211233,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "zero": {
+        "mae": 0.09041024235877475,
+        "zero_mae": 0.09041024235877475,
+        "improvement": 0.0,
+        "stable_years": 0,
+        "interval": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      }
+    },
+    "selection_rows": 1277,
+    "cutoff": "2026-10-01",
+    "selection_last_exit_date": "2026-09-30",
+    "reason": "Chưa có ứng viên cải thiện MAE đủ ổn định; dùng mốc lợi suất 0 làm dự phòng."
+  },
+  "5": {
+    "candidate": "zero",
+    "improved_over_baseline": false,
+    "candidates": {
+      "rf_median": {
+        "mae": 0.14351083293421385,
+        "zero_mae": 0.14057243706534778,
+        "improvement": -0.02090307268060032,
+        "stable_years": 3,
+        "interval": {
+          "lower": -0.2923835309580658,
+          "upper": 0.19735515979214552,
+          "block_months": 5,
+          "months": 40,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "rf_small": {
+        "mae": 0.14187588970784196,
+        "zero_mae": 0.14057243706534778,
+        "improvement": -0.00927246243791191,
+        "stable_years": 2,
+        "interval": {
+          "lower": -0.26107656535913104,
+          "upper": 0.16479219268119652,
+          "block_months": 5,
+          "months": 40,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "zero": {
+        "mae": 0.14057243706534778,
+        "zero_mae": 0.14057243706534778,
+        "improvement": 0.0,
+        "stable_years": 0,
+        "interval": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "block_months": 5,
+          "months": 40,
+          "confidence": 0.9
+        },
+        "qualified": false
+      }
+    },
+    "selection_rows": 1216,
+    "cutoff": "2026-10-01",
+    "selection_last_exit_date": "2026-09-30",
+    "reason": "Chưa có ứng viên cải thiện MAE đủ ổn định; dùng mốc lợi suất 0 làm dự phòng."
+  }
+}

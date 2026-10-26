@@ -15,7 +15,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261025-visible-details">
+  <!-- Đổi phiên bản cùng JavaScript khi sửa giao diện để trình duyệt tải đúng kiểu hiển thị mới. -->
+  <link rel="stylesheet" href="css/style.css?v=20261026-raw-estimates">
 </head>
 <body>
   <div class="app-container">
@@ -141,25 +142,24 @@
         <div class="decision-title-group">
           <div class="decision-badge-pulse">
             <span class="pulse-dot"></span>
-            <span>AI QUANT MODEL</span>
+            <span>DỰ BÁO GIÁ VÀNG</span>
           </div>
           <h2>🎯 Mua / Bán / Quan sát</h2>
         </div>
         <div class="decision-meta">
-          <span id="decisionSnapshotDate" class="snapshot-badge">Snapshot: Đang tải...</span>
+          <span id="decisionSnapshotDate" class="snapshot-badge">Dữ liệu đến: Đang tải...</span>
           <span class="model-badge">Tín hiệu từ dự báo mô hình</span>
         </div>
       </div>
 
-      <!-- Executive Recommendation Banner -->
       <div class="executive-banner" id="executiveBanner">
         <div class="exec-signal-box" id="execSignalBox">
-          <span class="exec-label">TÍN HIỆU CHÍNH</span>
+          <span class="exec-label">GỢI Ý THEO KỲ HẠN MẶC ĐỊNH</span>
           <div class="exec-action" id="execActionText">—</div>
           <span class="exec-badge" id="execBadge">Chờ tính toán</span>
         </div>
         <div class="exec-content">
-          <div class="exec-heading">Theo kỳ hạn 3 tháng</div>
+          <div class="exec-heading" id="execHeading">Gợi ý cho kỳ hạn 3 tháng</div>
           <p class="exec-text" id="execSummaryText">Đang tổng hợp dữ liệu từ mô hình học máy...</p>
         </div>
       </div>
@@ -169,22 +169,6 @@
         <!-- Rendered by JavaScript -->
       </div>
 
-      <!-- Decision Methodology Footnotes -->
-      <details class="decision-footer signal-methodology">
-        <summary>Cách tạo tín hiệu</summary>
-        <div class="rule-tag">
-          <span class="tag-icon">⚖️</span>
-          <span><strong>Mua:</strong> Lợi suất mua mới dự báo trên 1%, đã tính chênh lệch giá mua–bán.</span>
-        </div>
-        <div class="rule-tag">
-          <span class="tag-icon">🛡️</span>
-          <span><strong>Bán:</strong> Áp dụng cho vàng đang giữ khi giá bán lại dự báo thấp hơn bán ngay trên 1%. Còn lại là Quan sát.</span>
-        </div>
-        <div class="rule-tag">
-          <span class="tag-icon">🧠</span>
-          <span><strong>Dự báo trực tiếp:</strong> Kỳ hạn chính là 3 tháng. Ngưỡng 1% là vùng trung tính; các chỉ số và kết quả kiểm định nằm trong Chi tiết dự báo.</span>
-        </div>
-      </details>
     </section>
 
     <!-- Navigation Bar & Time Toolbar -->
@@ -330,6 +314,6 @@
   </div>
 
   <!-- Custom JavaScript Logic -->
-  <script src="js/app.js?v=20261025-active-model"></script>
+  <script src="js/app.js?v=20261026-raw-estimates"></script>
 </body>
 </html>

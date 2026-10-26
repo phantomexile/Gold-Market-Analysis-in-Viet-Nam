@@ -3,8 +3,8 @@
   "horizon_months": 3,
   "candidate": "rf_small",
   "predicted_net_return": 0.030826831328738313,
-  "q10_predicted_net_return": -0.1424673060716436,
-  "prob_return_positive": 0.6873926239579757,
+  "q10_predicted_net_return": null,
+  "prob_return_positive": null,
   "entry_sell_price": 141700000.0,
   "baseline_probability": 0.5795847750865052,
   "baseline_q10": -0.0825432236475181,
@@ -47,8 +47,65 @@
     "season_cos"
   ],
   "margin": 0.01,
-  "probability_method": "sigmoid_temporal_oos",
+  "probability_method": "temporal_oos_brier_weighted_v2",
   "signal": "buy",
+  "sigmoid_probability": 0.6873926239579756,
+  "probability_weight": 0.0,
+  "q10_correction": -0.10942481291525073,
+  "research_prob_return_positive": 0.5795847750865052,
+  "research_q10_predicted_net_return": -0.25189211898689434,
+  "calibration_quality": {
+    "status": "research_only",
+    "probability_qualified": false,
+    "q10_qualified": false,
+    "metrics": {
+      "matured_rows": 1277,
+      "nonoverlapping_windows": 14,
+      "origin_span_days": 1276,
+      "mae": 0.09345014747435931,
+      "zero_baseline_mae": 0.09041024235877475,
+      "brier": 0.2866808629424178,
+      "baseline_brier": 0.2504038514308064,
+      "probability_ece": 0.2735099266349162,
+      "q10_breach_rate": 0.12372748629600626,
+      "q10_pinball": 0.025644510614768155,
+      "baseline_q10_pinball": 0.023501598918464116,
+      "probability_missing_rows": 0,
+      "q10_missing_rows": 0,
+      "probability_rows": 1277,
+      "q10_rows": 1277
+    },
+    "checks": {
+      "probability": {
+        "inputs_verified": true,
+        "enough_rows": true,
+        "enough_time_span": true,
+        "enough_nonoverlap": true,
+        "brier_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "q10": {
+        "inputs_verified": true,
+        "enough_rows": true,
+        "enough_time_span": true,
+        "enough_nonoverlap": true,
+        "q10_coverage": true,
+        "q10_pinball_vs_baseline": false
+      }
+    },
+    "probability_reasons": [
+      "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+      "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+    ],
+    "q10_reasons": [
+      "Pinball của Q10 kém hơn baseline."
+    ],
+    "reasons": [
+      "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+      "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép.",
+      "Pinball của Q10 kém hơn baseline."
+    ]
+  },
   "mode": "shadow",
   "validation": {
     "horizon_months": 3,
@@ -75,10 +132,79 @@
       "Chưa đủ 6 cửa sổ lợi suất không chồng lấn."
     ],
     "mode": "shadow",
-    "protocol_id": "d5d092a16269717c3c7234e9",
-    "validation_start": "2026-10-26",
+    "protocol_id": "5d5b9ef3c0817077d598dd28",
+    "validation_start": "2026-10-27",
     "recorded_rows": 0,
     "matured_point_rows": 0
+  },
+  "forecast_selection": {
+    "candidate": "rf_small",
+    "improved_over_baseline": false,
+    "candidates": {
+      "rf_median": {
+        "mae": 0.10324708439085459,
+        "zero_mae": 0.09041024235877475,
+        "improvement": -0.14198437806569997,
+        "stable_years": 1,
+        "interval": {
+          "lower": -0.3221687761028889,
+          "upper": -0.005742198212953029,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "rf_small": {
+        "mae": 0.09345014747435931,
+        "zero_mae": 0.09041024235877475,
+        "improvement": -0.033623459425330626,
+        "stable_years": 2,
+        "interval": {
+          "lower": -0.18385548462296877,
+          "upper": 0.09782359404211233,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      },
+      "zero": {
+        "mae": 0.09041024235877475,
+        "zero_mae": 0.09041024235877475,
+        "improvement": 0.0,
+        "stable_years": 0,
+        "interval": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "block_months": 3,
+          "months": 42,
+          "confidence": 0.9
+        },
+        "qualified": false
+      }
+    },
+    "selection_rows": 1277,
+    "cutoff": "2026-10-01",
+    "selection_last_exit_date": "2026-09-30",
+    "reason": "Dự báo ML riêng cho kỳ hạn này; baseline lợi suất 0 chỉ dùng làm đối chứng. Chưa đạt tiêu chí tốt hơn baseline; chưa chứng minh độ tin cậy giao dịch.",
+    "benchmark_winner": "zero",
+    "forecast_role": "research",
+    "baseline_candidate": "zero",
+    "point_comparison": {
+      "mae": 0.09345014747435931,
+      "zero_mae": 0.09041024235877475,
+      "improvement": -0.033623459425330626,
+      "stable_years": 2,
+      "interval": {
+        "lower": -0.18385548462296877,
+        "upper": 0.09782359404211233,
+        "block_months": 3,
+        "months": 42,
+        "confidence": 0.9
+      },
+      "qualified": false
+    }
   },
   "eligible_for_prospective": false
 }

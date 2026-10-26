@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
+from gold_collectors.units import LUONG_PER_OZ
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -13,7 +14,6 @@ REPORTS = ROOT / "docs" / "reports"
 # Kỳ hạn dự báo là tháng lịch; các số 21/63/105 bên dưới chỉ là độ trễ đặc trưng.
 HORIZONS = (1, 3, 5)
 LAGS = (1, 5, 10, 21, 63, 105)
-LUONG_PER_OZ = (31.1034768 / 1.205) / 37.5
 
 
 # Đường dẫn và tham số mặc định giúp các bước phân tích dùng cùng một cấu hình.

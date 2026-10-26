@@ -1,0 +1,32 @@
+[
+  {
+    "horizon_months": 1,
+    "rows": 5574,
+    "matured_rows": 5548,
+    "pending_rows": 26,
+    "invalid_price_rows": 0,
+    "exit_mismatches": 0,
+    "return_mismatches": 0,
+    "scope": "internal_frame_consistency_only"
+  },
+  {
+    "horizon_months": 3,
+    "rows": 5574,
+    "matured_rows": 5497,
+    "pending_rows": 77,
+    "invalid_price_rows": 0,
+    "exit_mismatches": 0,
+    "return_mismatches": 0,
+    "scope": "internal_frame_consistency_only"
+  },
+  {
+    "horizon_months": 5,
+    "rows": 5574,
+    "matured_rows": 5437,
+    "pending_rows": 137,
+    "invalid_price_rows": 0,
+    "exit_mismatches": 0,
+    "return_mismatches": 0,
+    "scope": "internal_frame_consistency_only"
+  }
+]

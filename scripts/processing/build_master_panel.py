@@ -69,6 +69,7 @@ from typing import Any
 
 
 from gold_collectors.full_pipeline import DataLakeWriter  # noqa: E402
+from gold_collectors.units import CHI_PER_OZ, LUONG_PER_OZ, OZ_PER_LUONG
 
 # ── Constants ──────────────────────────────────────────────────────────────
 ROOT = Path(__file__).resolve().parents[2]  # project root
@@ -80,10 +81,8 @@ AUDITED = LAKE / "gold_quotes_sjc_historical.csv"
 EXT_V2 = LAKE
 OUT = LAKE  # flat output
 
-CHI_PER_OZ = 31.1034768 / 1.205  # 1 troy oz in chi
-LUONG_PER_OZ = CHI_PER_OZ / 37.5  # ~0.6886 troy oz per luong
-
-LBMA_USD_PER_LUONG = 1.0 / LUONG_PER_OZ  # USD/oz -> VND/luong equivalent should use USD/oz * rate/VND/luong
+# Giá USD/oz nhân số ounce trong một lượng rồi nhân tỷ giá mới ra VND/lượng.
+LBMA_USD_PER_LUONG = OZ_PER_LUONG
 
 SOURCE_QUALITY: dict[str, float] = {
     "sjc_official_history": 0.95,

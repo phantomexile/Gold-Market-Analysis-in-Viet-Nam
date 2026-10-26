@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "source_id": "a8772d72443a0042ac75e677c71486aa4e5055099e963a9a02f83c3e1352d5da",
+  "frame_sha256": "0b66202fd957f291b59a89c3ac24855a160991c6e6f836eb178afc77ac652308",
+  "source_predictions": {
+    "1": {
+      "path": "data\\lake\\modeling\\research\\2026-10-26-forecast-repair-v2\\predictions_1m.csv",
+      "sha256": "ac514fdd62e988ed3c27a36a1e95e85606a1ecebe870b40772451b8c3cb6b0cd",
+      "candidate": "rf_median"
+    },
+    "3": {
+      "path": "data\\lake\\modeling\\research\\2026-10-26-forecast-repair-v2\\predictions_3m.csv",
+      "sha256": "c388b41a595c2be47737a00d8070f47f335ea5317f39f20e84df1e67c0943bbe",
+      "candidate": "rf_small"
+    },
+    "5": {
+      "path": "data\\lake\\modeling\\research\\2026-10-26-forecast-repair-v2\\predictions_5m.csv",
+      "sha256": "0bf2bb023240a89b10d91c4c168ebcca2b0817f235c72a8cfbd1ac47e2dfb983",
+      "candidate": "rf_small"
+    }
+  },
+  "selection_only": true,
+  "latest_recomputed_and_matched": true,
+  "independent_validation": false,
+  "completed_at": "2026-10-26T14:31:56.831593+00:00"
+}

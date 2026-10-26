@@ -117,6 +117,7 @@ class AutomaticValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as folder:
             root = Path(folder)
             fixed = ['scripts/analysis/train_latest_snapshot.py', 'scripts/analysis/snapshot_calibration.py', 'scripts/analysis/snapshot_historical.py',
+                     'scripts/analysis/active_snapshot.py',
                      'scripts/analysis/snapshot_validation.py', 'scripts/pipeline/refresh_latest_forecast.py',
                      'scripts/pipeline/update_incremental.py']
             changing = ['scripts/processing/improve_premium_coverage.py',

@@ -12,10 +12,11 @@ from gold_collectors.modeling.decision_support import LUONG_PER_OZ, ModelingConf
 
 class ModelingDecisionSupportTests(unittest.TestCase):
     def test_luong_conversion_constant_matches_documented_formula(self):
-        expected = (31.1034768 / 1.205) / 37.5
+        """Kiểm tra bằng khối lượng chuẩn, không chép lại công thức của builder."""
+        expected = 31.1034768 / 37.5
         self.assertAlmostEqual(LUONG_PER_OZ, expected, places=10)
-        self.assertGreater(LUONG_PER_OZ, 0.68)
-        self.assertLess(LUONG_PER_OZ, 0.70)
+        self.assertGreater(LUONG_PER_OZ, 0.82)
+        self.assertLess(LUONG_PER_OZ, 0.84)
 
     def test_walk_forward_splits_are_chronological_and_non_overlapping(self):
         dates = pd.date_range("2011-07-06", "2026-07-11", freq="D").to_series()

@@ -15,6 +15,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+from scripts._bootstrap import bootstrap
+bootstrap()
+from gold_collectors.units import OZ_PER_LUONG
 
 
 def load_csv(path: Path) -> list[dict[str, str]]:
@@ -346,13 +349,30 @@ def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = No
             def percent(key):
                 value = active.get(key) if active else None
                 return round(float(value)*100, 2) if value is not None else None
-            h.update(point_model=f"stationary_{active['candidate'] if active else 'unavailable'}_{h['horizon_months']}m", model_label='Mô hình cải tiến',
+            quality = active.get('calibration_quality', {}) if active else {}
+            selection = active.get('forecast_selection', {}) if active else {}
+            research_forecast = selection.get('forecast_role') == 'research'
+            calibration_note = ''
+            if quality and (not quality.get('probability_qualified') or not quality.get('q10_qualified')):
+                calibration_note = 'Chỉ số chưa đạt kiểm tra lịch sử được để trống. ' + ' '.join(quality.get('reasons', []))
+            h.update(point_model=f"stationary_{active['candidate'] if active else 'unavailable'}_{h['horizon_months']}m",
+                     model_label=('Mốc tham chiếu lợi suất 0' if active and active.get('candidate') == 'zero' else
+                                  'Mô hình dự báo thử nghiệm' if research_forecast else 'Mô hình cải tiến'),
+                     forecast_note=selection.get('reason',''),
+                     forecast_selection=selection,
+                     calibration_note=calibration_note,
+                     calibration_quality=quality,
                      probability_method=active.get('probability_method') if active else None,
                      calibration_rows=active.get('calibration_rows',0) if active else 0,
-                     q10_model='temporal_oos_residual_q10',
+                     q10_model='adaptive_temporal_oos_q10_v2' if quality else 'temporal_oos_residual_q10',
                      predicted_net_return=percent('predicted_net_return'),
                      q10_predicted_net_return=percent('q10_predicted_net_return'),
                      prob_return_positive=percent('prob_return_positive'),
+                     # Số ước tính gốc dùng riêng cho giao diện theo yêu cầu người xem.
+                     # Đổi từ tỷ lệ sang phần trăm; không cấp trạng thái validated
+                     # hoặc dùng các số này để thay cờ giao dịch đã kiểm định.
+                     research_q10_predicted_net_return=percent('research_q10_predicted_net_return'),
+                     research_prob_return_positive=percent('research_prob_return_positive'),
                      status=state, buy_signal=False, simulation_buy_signal=False,
                      validation_protocol_id=validation.get('protocol_id',''),
                      blocked_reasons=[str(reason) for reason in validation.get('reasons',[])],
@@ -399,7 +419,7 @@ def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = No
                primary_signal=primary['signal'] if primary else 'observe',
                primary_action=primary['action'].upper() if primary else 'QUAN SÁT',
                action_theme=primary['badge_type'] if primary else 'warning',
-               executive_summary=f"Theo dự báo kỳ hạn {PRIMARY_HORIZON_MONTHS} tháng: {primary['rationale']}" if primary else 'Chưa có dự báo hợp lệ cho kỳ hạn chính.',
+                executive_summary=f"Theo dự báo kỳ hạn {PRIMARY_HORIZON_MONTHS} tháng: {primary['rationale']}" if primary else 'Chưa có dự báo hợp lệ cho kỳ hạn chính.',
                rules_explained=[
                    f'Mua khi lợi suất mua mới dự báo lớn hơn {NEUTRAL_MARGIN*100:g}%, đã tính chênh lệch giá mua–bán.',
                    f'Bán áp dụng cho vàng đang giữ: giá mua lại dự báo thấp hơn giá mua lại hiện tại trên {NEUTRAL_MARGIN*100:g}%.',
@@ -416,9 +436,13 @@ def main():
     out_dir = root / "web" / "data"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    enriched_file = lake / "gold_prices" / "gold_daily_enriched.csv"
+    # Dùng bảng vừa dựng cùng model frame; bản sao gold_prices cũ có thể
+    # vẫn chứa phép quy đổi sai dù pipeline đã sửa dữ liệu chuẩn.
+    enriched_file = lake / "pipeline_output_premium_enriched.csv"
     if not enriched_file.exists():
-        enriched_file = lake / "gold_daily_enriched.csv"
+        enriched_file = lake / "gold_prices" / "gold_daily_enriched.csv"
+        if not enriched_file.exists():
+            enriched_file = lake / "gold_daily_enriched.csv"
 
     # Dashboard và model phải cùng đọc bảng event đã được làm mới; bảng
     # event_regime_panel.csv cũ không có các tin RSS mới thu thập.
@@ -451,6 +475,16 @@ def main():
         premium = parse_f(r.get("premium"))
         premium_pct = parse_f(r.get("premium_pct"))
         usd_vnd = parse_f(r.get("usd_vnd"))
+
+        # Tính lại từ USD/oz và tỷ giá để bản sao legacy không mang hệ số
+        # khối lượng sai lên UI. Premium của biểu đồ giữ nghĩa giá SJC
+        # trung bình mua/bán trừ tham chiếu, khác premium giá bán của model.
+        valid_reference = all(value is not None and math.isfinite(value) and value > 0
+                              for value in (global_usd, usd_vnd))
+        global_vnd = global_usd * usd_vnd * OZ_PER_LUONG if valid_reference else None
+        valid_quote = all(value is not None and math.isfinite(value) and value > 0 for value in (buy,sell))
+        premium = (buy+sell)/2-global_vnd if valid_quote and global_vnd is not None else None
+        premium_pct = premium/global_vnd if premium is not None else None
 
         if premium is not None and premium > ath_premium:
             ath_premium = premium

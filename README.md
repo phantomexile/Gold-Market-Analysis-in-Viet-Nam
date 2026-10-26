@@ -6,7 +6,13 @@ Pipeline thu thập và xử lý dữ liệu giá vàng Việt Nam (SJC) và cá
 
 **Kỳ hạn dự báo hiện tại**: 1, 3 và 5 **tháng lịch** từ ngày snapshot. Nhãn huấn luyện dùng giá SJC mua vào của phiên hợp lệ đầu tiên vào hoặc sau ngày tròn tháng, chia cho giá SJC bán ra tại ngày dự báo, rồi trừ 1. Các độ trễ 21/63/105 trong đặc trưng vẫn là số dòng quá khứ; các backtest đã lưu trước khi đổi định nghĩa kỳ hạn là kết quả lịch sử và không xác nhận model tháng lịch mới.
 
-**Mô hình dashboard đang áp dụng**: RF cải tiến cho cả 1/3/5 tháng, với nhãn, hiệu chỉnh xác suất/Q10 và bản khóa riêng từng kỳ hạn. Registry nằm ở `data/lake/modeling/active_prediction_model.json`; bước cập nhật tự huấn luyện lại dự báo theo cửa sổ đã khóa. Tín hiệu Mua/Bán/Quan sát phản ánh trực tiếp dự báo, còn trạng thái kiểm định được theo dõi riêng. Xem [kết quả áp dụng](docs/all-horizon-rf-2026-10-25.md).
+**Mô hình dashboard đang áp dụng**: giữ dự báo ML riêng cho 1/3/5 tháng, chọn từ RF cũ và RF học trung vị lợi suất ròng trên các nhãn đã đáo hạn. Mốc lợi suất 0 chỉ làm đối chứng, không thay cả ba dự báo bằng 0 khi ML chưa đạt. Dự báo trực tiếp chưa vượt đối chứng có nhãn thử nghiệm và ghi rõ giới hạn; không tự cấp validated. Registry nằm ở `data/lake/modeling/active_prediction_model.json`. P(lãi) và Q10 vẫn được kiểm tra riêng trước khi công bố; chỉ số chưa đạt để trống kèm lý do, số liệu nghiên cứu được giữ để kiểm toán. Xem [kết quả sửa độ tin cậy](docs/forecast-reliability-2026-10-26.md); [báo cáo RF 25/10](docs/all-horizon-rf-2026-10-25.md) là tham chiếu trước sửa.
+
+**Quy đổi giá thế giới**: `USD/oz × USD/VND × 37,5 / 31,1034768`, dùng hằng số chung trong `src/gold_collectors/units.py`. Một lượng bằng 37,5 gram; không nhân thêm hệ số 1,205. Kết quả lịch sử dựng trước khi sửa đơn vị cần được đọc theo phiên bản của báo cáo đó.
+
+**Điều chỉnh dự báo riêng kỳ hạn:** baseline không thay đầu ra ML bằng 0. Snapshot 24/10/2026 hiện có lợi suất dự báo 1/3/5 tháng lần lượt −0,66% / +3,08% / +8,47%; vẫn `validation_pending`. Xem [nguyên nhân và kết quả sửa](docs/horizon-forecasts-2026-10-26.md).
+
+Để dựng lại premium và so sánh mô hình trên dữ liệu lake hiện có, chạy `python scripts/analysis/run_forecast_repair.py --output data/lake/modeling/research/<ten-luot-moi>`. Mỗi lượt dùng thư mục mới, giữ kết quả cũ. Lệnh `run_all_horizon_rf.py --output ...` chuyển tiếp cùng quy trình có đối chứng. Sau khi registry chọn `forecast_pipeline = reliability_v2`, cập nhật thường ngày ghi cùng dự báo đang dùng vào CSV, sổ mô phỏng và dashboard; không chạy RF cũ đè lên snapshot.
 
 Để cập nhật dữ liệu và dự báo cùng một lượt, chạy `python scripts/pipeline/refresh_latest_forecast.py`. Nếu dữ liệu lake đã mới và chỉ cần dựng lại model, dùng `python scripts/pipeline/refresh_latest_forecast.py --skip-collect`. Nút **Cập nhật** của dashboard gọi cùng luồng này.
 
