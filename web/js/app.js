@@ -11,6 +11,7 @@ let state = {
   tablePage: 1,
   tablePageSize: 15,
   searchQuery: '',
+  updateRunning: false,
 };
 
 // Formatting Helpers
@@ -39,6 +40,7 @@ const fmtPct = (val) => {
 document.addEventListener('DOMContentLoaded', async () => {
   setupEventListeners();
   await loadData();
+  await restoreUpdateProgress();
 });
 
 function setupEventListeners() {
@@ -95,10 +97,10 @@ async function loadData() {
     // Try API first, fallback to static JSON
     let response;
     try {
-      response = await fetch('/api/data');
+      response = await fetch('/api/data', { cache: 'no-store' });
       if (!response.ok) throw new Error();
     } catch {
-      response = await fetch('data/gold_dashboard_data.json');
+      response = await fetch('data/gold_dashboard_data.json', { cache: 'no-store' });
     }
 
     if (!response.ok) throw new Error('Không thể tải file dữ liệu');
@@ -144,7 +146,9 @@ function renderDecisionSupport() {
     execAction.textContent = rec.primary_action || 'QUAN SÁT THỊ TRƯỜNG';
   }
   if (execBadge) {
-    execBadge.textContent = rec.action_theme === 'positive' ? 'Khuyến nghị Tích lũy' : (rec.action_theme === 'warning' ? 'Thận trọng' : 'Quan sát');
+    execBadge.textContent = rec.signal_mode === 'direct_forecast'
+      ? `${rec.primary_horizon_months || 3} tháng • ${rec.primary_model_label || 'Dự báo mô hình'}`
+      : (rec.action_theme === 'positive' ? 'Khuyến nghị Tích lũy' : (rec.action_theme === 'warning' ? 'Thận trọng' : 'Quan sát'));
   }
   if (execText && rec.executive_summary) {
     execText.textContent = rec.executive_summary;
@@ -153,33 +157,75 @@ function renderDecisionSupport() {
   // Horizon Cards
   const gridEl = document.getElementById('horizonGrid');
   if (gridEl) {
+    // Lý do kiểm định có thể chứa tên tệp hoặc dữ liệu lỗi; hiển thị nguyên
+    // văn tiếng Việt, không để nội dung đó trở thành HTML có thể thực thi.
+    const safeText = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    })[character]);
+    if (rec.signal_mode === 'direct_forecast') {
+      // Tín hiệu do backend tính theo dự báo; không dùng kiểm định/P/Q10 để
+      // đổi quyết định trên trình duyệt. Số liệu hiển thị sẵn dưới lý do để
+      // người xem đối chiếu ngay, không cần mở một mục thu gọn.
+      const pct = (value) => Number.isFinite(value) ? `${value > 0 ? '+' : ''}${value.toFixed(2)}%` : 'Chưa đủ dữ liệu';
+      gridEl.innerHTML = rec.horizons.map((h) => {
+        return `
+          <div class="horizon-card direct-signal-card ${safeText(h.badge_type || 'warning')}">
+            <div class="horizon-header">
+              <span class="horizon-title">${safeText(h.horizon_label)}</span>
+              <span class="action-pill ${safeText(h.badge_type || 'warning')}">${safeText(h.action || 'Quan sát')}</span>
+            </div>
+            <div class="signal-reason">
+              <div class="assessment-title">Lý do đề xuất</div>
+              <p class="direct-signal-reason">${safeText(h.rationale || 'Chưa có đủ dữ liệu để giải thích tín hiệu.')}</p>
+            </div>
+            <div class="signal-details">
+              <div class="assessment-title">Chi tiết dự báo</div>
+              <div class="horizon-metrics direct-metrics">
+                <div class="h-metric"><span class="h-metric-label">Lợi suất mua mới</span><span class="h-metric-val">${pct(h.predicted_net_return)}</span></div>
+                <div class="h-metric"><span class="h-metric-label">Giữ thêm so với bán ngay</span><span class="h-metric-val">${pct(h.predicted_hold_return)}</span></div>
+                <div class="h-metric"><span class="h-metric-label">Rủi ro Q10</span><span class="h-metric-val">${pct(h.q10_predicted_net_return)}</span></div>
+                <div class="h-metric"><span class="h-metric-label">Xác suất lãi ước lượng</span><span class="h-metric-val">${pct(h.prob_return_positive)}</span></div>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+      return;
+    }
     gridEl.innerHTML = rec.horizons.map((h) => {
-      const retClass = h.predicted_net_return > 0 ? 'positive' : (h.predicted_net_return < 0 ? 'negative' : 'warning');
-      const q10Class = h.q10_predicted_net_return >= -10 ? 'positive' : 'negative';
-      const probClass = h.prob_return_positive >= 50 ? 'positive' : 'negative';
+      // Snapshot thiếu hiệu chỉnh trả null thay vì bịa xác suất; không gọi
+      // toFixed trên null và không tô màu xanh cho số liệu chưa tồn tại.
+      const hasReturn = Number.isFinite(h.predicted_net_return);
+      const hasQ10 = Number.isFinite(h.q10_predicted_net_return);
+      const hasProbability = Number.isFinite(h.prob_return_positive);
+      const retClass = hasReturn && h.predicted_net_return > 0 ? 'positive' : (hasReturn && h.predicted_net_return < 0 ? 'negative' : 'warning');
+      const q10Class = !hasQ10 ? 'warning' : (h.q10_predicted_net_return >= -10 ? 'positive' : 'negative');
+      const probClass = !hasProbability ? 'warning' : (h.prob_return_positive >= 50 ? 'positive' : 'negative');
+      // Cả JSON cũ và chế độ trực tiếp cùng giải thích tín hiệu bằng rationale;
+      // không lặp lại các bảng kiểm định/mô phỏng trong thẻ đề xuất.
 
       return `
         <div class="horizon-card ${h.badge_type}">
           <div class="horizon-header">
-            <span class="horizon-title">${h.horizon_label}</span>
-            <span class="action-pill ${h.badge_type}">${h.action}</span>
+            <span class="horizon-title">${safeText(h.horizon_label)}</span>
+            <span class="action-pill ${h.badge_type}">${safeText(h.action)}</span>
           </div>
           <div class="horizon-metrics">
             <div class="h-metric">
               <span class="h-metric-label">LN Ròng Dự Báo</span>
-              <span class="h-metric-val ${retClass}">${h.predicted_net_return > 0 ? '+' : ''}${h.predicted_net_return.toFixed(2)}%</span>
+              <span class="h-metric-val ${retClass}">${hasReturn ? `${h.predicted_net_return > 0 ? '+' : ''}${h.predicted_net_return.toFixed(2)}%` : 'Chưa đủ dữ liệu'}</span>
             </div>
             <div class="h-metric">
               <span class="h-metric-label">Rủi Ro Đuôi Q10</span>
-              <span class="h-metric-val ${q10Class}">${h.q10_predicted_net_return > 0 ? '+' : ''}${h.q10_predicted_net_return.toFixed(2)}%</span>
+              <span class="h-metric-val ${q10Class}">${hasQ10 ? `${h.q10_predicted_net_return > 0 ? '+' : ''}${h.q10_predicted_net_return.toFixed(2)}%` : 'Chưa đủ dữ liệu'}</span>
             </div>
             <div class="h-metric">
               <span class="h-metric-label">Xác Suất Lãi P(>0)</span>
-              <span class="h-metric-val ${probClass}">${h.prob_return_positive.toFixed(1)}%</span>
+              <span class="h-metric-val ${probClass}">${hasProbability ? `${h.prob_return_positive.toFixed(1)}%` : 'Chưa đủ dữ liệu'}</span>
             </div>
           </div>
-          <div class="horizon-rationale">
-            ${h.rationale}
+          <div class="signal-reason">
+            <div class="assessment-title">Lý do đề xuất</div>
+            <p class="direct-signal-reason">${safeText(h.rationale || 'Chưa có đủ dữ liệu để giải thích tín hiệu.')}</p>
           </div>
         </div>
       `;
@@ -757,27 +803,115 @@ function exportCsv() {
 }
 
 /* Live Data Refresh Trigger */
-async function handleLiveUpdate() {
+function setUpdateBusy(busy) {
+  // Khóa nút trong tab này; server cũng chặn chạy trùng từ các tab khác.
+  state.updateRunning = busy;
   const btn = document.getElementById('btnRefreshData');
-  if (btn) btn.classList.add('loading');
+  if (btn) {
+    btn.disabled = busy;
+    btn.classList.toggle('loading', busy);
+    btn.setAttribute('aria-busy', String(busy));
+  }
+}
+
+function renderUpdateProgress(result) {
+  // Phần trăm chỉ đổi khi pipeline báo mốc mới, không giả lập theo thời gian.
+  const panel = document.getElementById('updateProgressPanel');
+  if (!panel || result.status === 'idle') return;
+  const progress = Math.max(0, Math.min(100, Number(result.progress) || 0));
+  panel.hidden = false;
+  panel.dataset.status = result.status;
+  document.getElementById('updateProgressMessage').textContent = result.message;
+  document.getElementById('updateProgressPercent').textContent = `${progress}%`;
+  document.getElementById('updateProgressFill').style.width = `${progress}%`;
+  const track = document.getElementById('updateProgressTrack');
+  track.setAttribute('aria-valuenow', String(progress));
+  track.setAttribute('aria-valuetext', `${progress}% — ${result.message}`);
+  const seconds = Math.max(0, Math.floor(Number(result.elapsed_seconds) || 0));
+  document.getElementById('updateProgressElapsed').textContent =
+    `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+  document.getElementById('updateProgressDetail').textContent = result.status === 'ok'
+    ? (result.snapshot_date ? `Snapshot: ${result.snapshot_date} · Dự báo 1, 3 và 5 tháng đã sẵn sàng.` : 'Dữ liệu và dự báo đã sẵn sàng.')
+    : result.connection_lost
+      ? 'Lượt cập nhật trên máy chủ có thể vẫn đang chạy. Tải lại trang để nối lại tiến trình.'
+    : result.status === 'warning'
+      ? 'Lượt cập nhật chưa hoàn tất. Bạn có thể thử lại.'
+      : 'Tiến độ theo từng bước; huấn luyện mô hình có thể cần vài phút.';
+}
+
+async function trackUpdateProgress(result) {
+  // Hỏi tuần tự để không tạo nhiều yêu cầu chồng nhau khi mạng hoặc server chậm.
+  let failures = 0;
+  renderUpdateProgress(result);
+  while (result.status === 'running') {
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    try {
+      const res = await fetch('/api/update/status', { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const next = await res.json();
+      if (next.status === 'idle') throw new Error('Lượt cập nhật không còn trên máy chủ');
+      result = next;
+      failures = 0;
+      renderUpdateProgress(result);
+    } catch (err) {
+      // Thử nối lại để một lỗi mạng ngắn không kết thúc việc theo dõi.
+      if (++failures < 3) continue;
+      throw err;
+    }
+  }
+  if (result.status === 'ok') await loadData();
+  if (result.status === 'warning') console.error('Lỗi cập nhật dữ liệu:', result.log);
+  showToast(result.message, result.status === 'ok' ? '✅' : '⚠️');
+}
+
+async function restoreUpdateProgress() {
+  // Tải lại trang chỉ nối vào lượt đang chạy, không gửi thêm yêu cầu cập nhật.
+  try {
+    const res = await fetch('/api/update/status', { cache: 'no-store' });
+    if (!res.ok) return;
+    const result = await res.json();
+    if (state.updateRunning) return; // Người dùng vừa bấm cập nhật thì dùng bộ theo dõi đã mở.
+    renderUpdateProgress(result);
+    // Lượt cập nhật có thể vừa xong sau yêu cầu tải dữ liệu đầu tiên của trang.
+    // Nạp lại bản hoàn tất để thanh 100% không nằm trên dashboard còn dữ liệu cũ.
+    if (result.status === 'ok') await loadData();
+    if (result.status === 'running') {
+      setUpdateBusy(true);
+      try { await trackUpdateProgress(result); } finally { setUpdateBusy(false); }
+    }
+  } catch (err) {
+    console.error('Không khôi phục được tiến trình cập nhật:', err);
+    if (document.getElementById('updateProgressPanel')?.dataset.status === 'running') {
+      document.getElementById('updateProgressMessage').textContent = 'Mất kết nối theo dõi. Tải lại trang để kiểm tra tiến trình.';
+    }
+  }
+}
+
+async function handleLiveUpdate() {
+  if (state.updateRunning) return;
+  setUpdateBusy(true);
+  renderUpdateProgress({ status: 'running', progress: 0, message: 'Đang khởi động cập nhật…' });
   showToast('Đang chạy trình thu thập dữ liệu mới...', '🔄');
 
   try {
     const res = await fetch('/api/update', { method: 'POST' });
     if (res.ok) {
       const result = await res.json();
-      // Chỉ thông báo thành công nếu cả dữ liệu và dự báo tháng lịch đã được tạo lại.
-      showToast(result.message || 'Đã xử lý yêu cầu cập nhật.', result.status === 'ok' ? '✅' : '⚠️');
-      await loadData();
+      await trackUpdateProgress(result);
     } else {
-      showToast('Đang tải lại dữ liệu cục bộ...', 'ℹ️');
-      await loadData();
+      // HTTP lỗi không có nghĩa dữ liệu mới đã được thu thập thành công.
+      const message = `Cập nhật thất bại (HTTP ${res.status}). Snapshot chưa được cập nhật.`;
+      renderUpdateProgress({ status: 'warning', progress: 0, message });
+      showToast(message, '⚠️');
     }
   } catch (err) {
-    showToast('Tải lại dữ liệu cục bộ...', 'ℹ️');
-    await loadData();
+    console.error('Không kết nối được bộ cập nhật:', err);
+    const message = 'Mất kết nối theo dõi. Tải lại trang để kiểm tra tiến trình cập nhật.';
+    const progress = Number(document.getElementById('updateProgressTrack')?.getAttribute('aria-valuenow')) || 0;
+    renderUpdateProgress({ status: 'warning', progress, message, connection_lost: true });
+    showToast(message, '⚠️');
   } finally {
-    if (btn) btn.classList.remove('loading');
+    setUpdateBusy(false);
   }
 }
 

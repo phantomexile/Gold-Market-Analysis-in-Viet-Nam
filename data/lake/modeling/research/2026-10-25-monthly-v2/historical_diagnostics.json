@@ -1,0 +1,1489 @@
+{
+  "status": "research_only",
+  "excluded_nonfinite_rows": 0,
+  "regime_definition": "past_63_observations_sell_return_above_3pct_below_minus3pct",
+  "by_horizon": [
+    {
+      "horizon_months": 1,
+      "rows": 1351,
+      "mae": 0.062291349304333436,
+      "zero_mae": 0.036968990070835914,
+      "bias": -0.018053612583275307,
+      "actual_mean": -0.0001015139737146298,
+      "predicted_mean": -0.018155126556989934,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 361,
+          "mean_probability": 0.005772979457189905,
+          "realized_profit_rate": 0.7894736842105263
+        },
+        {
+          "bin": 1,
+          "rows": 1,
+          "mean_probability": 0.1524216524216524,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 2,
+          "rows": 243,
+          "mean_probability": 0.25301890890732226,
+          "realized_profit_rate": 0.18518518518518517
+        },
+        {
+          "bin": 3,
+          "rows": 145,
+          "mean_probability": 0.3545280141669536,
+          "realized_profit_rate": 0.4689655172413793
+        },
+        {
+          "bin": 4,
+          "rows": 46,
+          "mean_probability": 0.4533895676983191,
+          "realized_profit_rate": 0.4782608695652174
+        },
+        {
+          "bin": 5,
+          "rows": 43,
+          "mean_probability": 0.5517858700687218,
+          "realized_profit_rate": 0.5116279069767442
+        },
+        {
+          "bin": 6,
+          "rows": 147,
+          "mean_probability": 0.6649531095220926,
+          "realized_profit_rate": 0.4013605442176871
+        },
+        {
+          "bin": 7,
+          "rows": 308,
+          "mean_probability": 0.739493704900267,
+          "realized_profit_rate": 0.3409090909090909
+        },
+        {
+          "bin": 8,
+          "rows": 34,
+          "mean_probability": 0.8398692810457516,
+          "realized_profit_rate": 0.14705882352941177
+        },
+        {
+          "bin": 9,
+          "rows": 23,
+          "mean_probability": 0.9661216400346836,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.39008139108661677,
+      "brier": 0.43360365929109956,
+      "q10_breach_rate": 0.19837157660991858
+    },
+    {
+      "horizon_months": 3,
+      "rows": 1300,
+      "mae": 0.12435208304515417,
+      "zero_mae": 0.0897067820292503,
+      "bias": -0.03546012168351735,
+      "actual_mean": 0.041396557309846475,
+      "predicted_mean": 0.005936435626329115,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 181,
+          "mean_probability": 0.0615405831702881,
+          "realized_profit_rate": 0.9779005524861878
+        },
+        {
+          "bin": 1,
+          "rows": 50,
+          "mean_probability": 0.11104524180967233,
+          "realized_profit_rate": 0.9
+        },
+        {
+          "bin": 2,
+          "rows": 5,
+          "mean_probability": 0.2689547581903276,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 3,
+          "rows": 57,
+          "mean_probability": 0.3699375376330843,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 530,
+          "mean_probability": 0.4558984892414564,
+          "realized_profit_rate": 0.5641509433962264
+        },
+        {
+          "bin": 5,
+          "rows": 93,
+          "mean_probability": 0.5226044445003607,
+          "realized_profit_rate": 0.6344086021505376
+        },
+        {
+          "bin": 6,
+          "rows": 25,
+          "mean_probability": 0.6387083658346334,
+          "realized_profit_rate": 0.76
+        },
+        {
+          "bin": 7,
+          "rows": 30,
+          "mean_probability": 0.7537500000000001,
+          "realized_profit_rate": 0.8333333333333334
+        },
+        {
+          "bin": 8,
+          "rows": 125,
+          "mean_probability": 0.8297462948517939,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 9,
+          "rows": 204,
+          "mean_probability": 0.9785873787892692,
+          "realized_profit_rate": 0.10784313725490197
+        }
+      ],
+      "ece": 0.3976789196567863,
+      "brier": 0.4346326050544611,
+      "q10_breach_rate": 0.21307692307692308
+    },
+    {
+      "horizon_months": 5,
+      "rows": 1240,
+      "mae": 0.16706717197899712,
+      "zero_mae": 0.14071011407430278,
+      "bias": -0.0552644142385629,
+      "actual_mean": 0.09079540392401463,
+      "predicted_mean": 0.035530989685451715,
+      "probability_bins": [
+        {
+          "bin": 4,
+          "rows": 365,
+          "mean_probability": 0.4286464617786926,
+          "realized_profit_rate": 0.7808219178082192
+        },
+        {
+          "bin": 6,
+          "rows": 120,
+          "mean_probability": 0.6372219988882933,
+          "realized_profit_rate": 0.5416666666666666
+        },
+        {
+          "bin": 7,
+          "rows": 512,
+          "mean_probability": 0.7456659026785182,
+          "realized_profit_rate": 0.826171875
+        },
+        {
+          "bin": 8,
+          "rows": 75,
+          "mean_probability": 0.860748416810593,
+          "realized_profit_rate": 0.96
+        },
+        {
+          "bin": 9,
+          "rows": 168,
+          "mean_probability": 0.9860828221467848,
+          "realized_profit_rate": 0.16666666666666666
+        }
+      ],
+      "ece": 0.26317380806922297,
+      "brier": 0.28783927108196167,
+      "q10_breach_rate": 0.20080645161290323
+    }
+  ],
+  "by_year": [
+    {
+      "horizon_months": 1,
+      "year": 2023,
+      "rows": 365,
+      "mae": 0.011852363325739716,
+      "zero_mae": 0.013081717724495795,
+      "bias": -0.00713488650277369,
+      "actual_mean": -0.0024681476388719818,
+      "predicted_mean": -0.009603034141645672,
+      "probability_bins": [
+        {
+          "bin": 2,
+          "rows": 234,
+          "mean_probability": 0.25207578916566076,
+          "realized_profit_rate": 0.19230769230769232
+        },
+        {
+          "bin": 3,
+          "rows": 130,
+          "mean_probability": 0.35207944694392623,
+          "realized_profit_rate": 0.45384615384615384
+        },
+        {
+          "bin": 4,
+          "rows": 1,
+          "mean_probability": 0.4322396576319544,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.0761182654915678,
+      "brier": 0.19334328772531365,
+      "q10_breach_rate": 0.09315068493150686
+    },
+    {
+      "horizon_months": 1,
+      "year": 2024,
+      "rows": 366,
+      "mae": 0.03775888961347627,
+      "zero_mae": 0.03496428588993509,
+      "bias": 0.02216862109194172,
+      "actual_mean": -0.013457225089870404,
+      "predicted_mean": 0.008711396002071312,
+      "probability_bins": [
+        {
+          "bin": 2,
+          "rows": 9,
+          "mean_probability": 0.2775400221905215,
+          "realized_profit_rate": 0.0
+        },
+        {
+          "bin": 3,
+          "rows": 15,
+          "mean_probability": 0.3757489300998573,
+          "realized_profit_rate": 0.6
+        },
+        {
+          "bin": 4,
+          "rows": 45,
+          "mean_probability": 0.45385956569979397,
+          "realized_profit_rate": 0.4666666666666667
+        },
+        {
+          "bin": 5,
+          "rows": 42,
+          "mean_probability": 0.5525779498675362,
+          "realized_profit_rate": 0.5
+        },
+        {
+          "bin": 6,
+          "rows": 139,
+          "mean_probability": 0.6631020433296729,
+          "realized_profit_rate": 0.4028776978417266
+        },
+        {
+          "bin": 7,
+          "rows": 116,
+          "mean_probability": 0.753197402725171,
+          "realized_profit_rate": 0.4051724137931034
+        }
+      ],
+      "ece": 0.2327549246587623,
+      "brier": 0.30595717944087664,
+      "q10_breach_rate": 0.22404371584699453
+    },
+    {
+      "horizon_months": 1,
+      "year": 2025,
+      "rows": 365,
+      "mae": 0.124077893174075,
+      "zero_mae": 0.046827808131399674,
+      "bias": -0.124077893174075,
+      "actual_mean": 0.03866182672342858,
+      "predicted_mean": -0.08541606645064644,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 361,
+          "mean_probability": 0.005772979457189905,
+          "realized_profit_rate": 0.7894736842105263
+        },
+        {
+          "bin": 1,
+          "rows": 1,
+          "mean_probability": 0.1524216524216524,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 5,
+          "rows": 1,
+          "mean_probability": 0.5185185185185185,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 7,
+          "rows": 2,
+          "mean_probability": 0.7264957264957266,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.7802521172384187,
+      "brier": 0.7740823465562958,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 1,
+      "year": 2026,
+      "rows": 255,
+      "mae": 0.0812600615262344,
+      "zero_mae": 0.05992627455914207,
+      "bias": 0.060347132009388904,
+      "actual_mean": -0.033029387691996294,
+      "predicted_mean": 0.027317744317392628,
+      "probability_bins": [
+        {
+          "bin": 6,
+          "rows": 8,
+          "mean_probability": 0.6971153846153846,
+          "realized_profit_rate": 0.375
+        },
+        {
+          "bin": 7,
+          "rows": 190,
+          "mean_probability": 0.731264057579847,
+          "realized_profit_rate": 0.29473684210526313
+        },
+        {
+          "bin": 8,
+          "rows": 34,
+          "mean_probability": 0.8398692810457516,
+          "realized_profit_rate": 0.14705882352941177
+        },
+        {
+          "bin": 9,
+          "rows": 23,
+          "mean_probability": 0.9661216400346836,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.5148762638958717,
+      "brier": 0.47336415495736195,
+      "q10_breach_rate": 0.596078431372549
+    },
+    {
+      "horizon_months": 3,
+      "year": 2023,
+      "rows": 365,
+      "mae": 0.03358554108797042,
+      "zero_mae": 0.03163837820680581,
+      "bias": -0.03186005454173768,
+      "actual_mean": 0.02451542758287253,
+      "predicted_mean": -0.0073446269588651565,
+      "probability_bins": [
+        {
+          "bin": 4,
+          "rows": 365,
+          "mean_probability": 0.4438056506849315,
+          "realized_profit_rate": 0.589041095890411
+        }
+      ],
+      "ece": 0.14523544520547949,
+      "brier": 0.2611607381742294,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 3,
+      "year": 2024,
+      "rows": 366,
+      "mae": 0.05981842183981317,
+      "zero_mae": 0.0641948331286703,
+      "bias": -0.0016448026829302088,
+      "actual_mean": 0.014241388315922325,
+      "predicted_mean": 0.012596585632992117,
+      "probability_bins": [
+        {
+          "bin": 3,
+          "rows": 25,
+          "mean_probability": 0.3763125,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 156,
+          "mean_probability": 0.48336338141025637,
+          "realized_profit_rate": 0.4807692307692308
+        },
+        {
+          "bin": 5,
+          "rows": 92,
+          "mean_probability": 0.5219429347826088,
+          "realized_profit_rate": 0.6304347826086957
+        },
+        {
+          "bin": 6,
+          "rows": 24,
+          "mean_probability": 0.6375651041666667,
+          "realized_profit_rate": 0.75
+        },
+        {
+          "bin": 7,
+          "rows": 30,
+          "mean_probability": 0.7537500000000001,
+          "realized_profit_rate": 0.8333333333333334
+        },
+        {
+          "bin": 8,
+          "rows": 39,
+          "mean_probability": 0.8056891025641024,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.10557974726775952,
+      "brier": 0.2285496646068135,
+      "q10_breach_rate": 0.2568306010928962
+    },
+    {
+      "horizon_months": 3,
+      "year": 2025,
+      "rows": 365,
+      "mae": 0.2210584706398705,
+      "zero_mae": 0.16261295923871946,
+      "bias": -0.2210584706398705,
+      "actual_mean": 0.16199708344633112,
+      "predicted_mean": -0.05906138719353939,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 181,
+          "mean_probability": 0.0615405831702881,
+          "realized_profit_rate": 0.9779005524861878
+        },
+        {
+          "bin": 1,
+          "rows": 50,
+          "mean_probability": 0.11104524180967233,
+          "realized_profit_rate": 0.9
+        },
+        {
+          "bin": 2,
+          "rows": 5,
+          "mean_probability": 0.2689547581903276,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 3,
+          "rows": 32,
+          "mean_probability": 0.36495709828393136,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 9,
+          "mean_probability": 0.470272144219102,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 5,
+          "rows": 1,
+          "mean_probability": 0.5834633385335414,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 6,
+          "rows": 1,
+          "mean_probability": 0.6661466458658346,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 8,
+          "rows": 86,
+          "mean_probability": 0.8406559518194678,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.6808411514542774,
+      "brier": 0.5818247812510324,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 3,
+      "year": 2026,
+      "rows": 204,
+      "mae": 0.22950539845424936,
+      "zero_mae": 0.10893024286919278,
+      "bias": 0.22950539845424936,
+      "actual_mean": -0.09546024581611018,
+      "predicted_mean": 0.13404515263813918,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 204,
+          "mean_probability": 0.9785873787892692,
+          "realized_profit_rate": 0.10784313725490197
+        }
+      ],
+      "ece": 0.8707442415343671,
+      "brier": 0.8513896800710057,
+      "q10_breach_rate": 0.8970588235294118
+    },
+    {
+      "horizon_months": 5,
+      "year": 2023,
+      "rows": 365,
+      "mae": 0.08264843857068115,
+      "zero_mae": 0.07041220042245044,
+      "bias": -0.08263730262517284,
+      "actual_mean": 0.06651233987007302,
+      "predicted_mean": -0.01612496275509983,
+      "probability_bins": [
+        {
+          "bin": 4,
+          "rows": 365,
+          "mean_probability": 0.4286464617786926,
+          "realized_profit_rate": 0.7808219178082192
+        }
+      ],
+      "ece": 0.3521754560295266,
+      "brier": 0.29498037253347037,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 5,
+      "year": 2024,
+      "rows": 366,
+      "mae": 0.08965897704024783,
+      "zero_mae": 0.10245265922988103,
+      "bias": -0.042937755489283344,
+      "actual_mean": 0.0705123953479971,
+      "predicted_mean": 0.027574639858713747,
+      "probability_bins": [
+        {
+          "bin": 6,
+          "rows": 102,
+          "mean_probability": 0.6338345355413323,
+          "realized_profit_rate": 0.46078431372549017
+        },
+        {
+          "bin": 7,
+          "rows": 165,
+          "mean_probability": 0.7390694509865494,
+          "realized_profit_rate": 0.49696969696969695
+        },
+        {
+          "bin": 8,
+          "rows": 75,
+          "mean_probability": 0.860748416810593,
+          "realized_profit_rate": 0.96
+        },
+        {
+          "bin": 9,
+          "rows": 24,
+          "mean_probability": 0.9129245826137017,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.1834187453400908,
+      "brier": 0.22597245635359983,
+      "q10_breach_rate": 0.28688524590163933
+    },
+    {
+      "horizon_months": 5,
+      "year": 2025,
+      "rows": 365,
+      "mae": 0.2290069010972132,
+      "zero_mae": 0.23815951940577737,
+      "bias": -0.22806561196437392,
+      "actual_mean": 0.23775351869085995,
+      "predicted_mean": 0.009687906726486008,
+      "probability_bins": [
+        {
+          "bin": 6,
+          "rows": 18,
+          "mean_probability": 0.6564176245210729,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 7,
+          "rows": 347,
+          "mean_probability": 0.7488025439729702,
+          "realized_profit_rate": 0.9827089337175793
+        }
+      ],
+      "ece": 0.2393150684931508,
+      "brier": 0.0740527991790595,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 5,
+      "year": 2026,
+      "rows": 144,
+      "mae": 0.4207910324891964,
+      "zero_mae": 0.16912632247705442,
+      "bias": 0.4207910324891964,
+      "actual_mean": -0.1685991264328427,
+      "predicted_mean": 0.2521919060563538,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 144,
+          "mean_probability": 0.9982758620689653,
+          "realized_profit_rate": 0.027777777777777776
+        }
+      ],
+      "ece": 0.9704980842911876,
+      "brier": 0.9688727044523715,
+      "q10_breach_rate": 1.0
+    }
+  ],
+  "by_regime": [
+    {
+      "horizon_months": 1,
+      "regime": "down",
+      "rows": 207,
+      "mae": 0.05732228609334418,
+      "zero_mae": 0.04438712259562379,
+      "bias": 0.04924266615940279,
+      "actual_mean": -0.03201038452974495,
+      "predicted_mean": 0.017232281629657824,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 5,
+          "mean_probability": 0.05185185185185178,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 1,
+          "rows": 1,
+          "mean_probability": 0.1524216524216524,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 5,
+          "rows": 1,
+          "mean_probability": 0.5185185185185185,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 6,
+          "rows": 15,
+          "mean_probability": 0.6940383633203416,
+          "realized_profit_rate": 0.6666666666666666
+        },
+        {
+          "bin": 7,
+          "rows": 157,
+          "mean_probability": 0.7476616040996318,
+          "realized_profit_rate": 0.267515923566879
+        },
+        {
+          "bin": 8,
+          "rows": 24,
+          "mean_probability": 0.837903608736942,
+          "realized_profit_rate": 0.125
+        },
+        {
+          "bin": 9,
+          "rows": 4,
+          "mean_probability": 0.9672364672364672,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.4968206779800984,
+      "brier": 0.4526798803342671,
+      "q10_breach_rate": 0.4492753623188406
+    },
+    {
+      "horizon_months": 1,
+      "regime": "sideways",
+      "rows": 438,
+      "mae": 0.033908288089875845,
+      "zero_mae": 0.017753471649388494,
+      "bias": -0.004728438679868531,
+      "actual_mean": -0.002372292766499824,
+      "predicted_mean": -0.007100731446368356,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 55,
+          "mean_probability": 0.006759906759906677,
+          "realized_profit_rate": 0.9272727272727272
+        },
+        {
+          "bin": 2,
+          "rows": 167,
+          "mean_probability": 0.2592617902568614,
+          "realized_profit_rate": 0.07784431137724551
+        },
+        {
+          "bin": 3,
+          "rows": 128,
+          "mean_probability": 0.35167394793152634,
+          "realized_profit_rate": 0.4453125
+        },
+        {
+          "bin": 4,
+          "rows": 1,
+          "mean_probability": 0.4322396576319544,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 6,
+          "rows": 16,
+          "mean_probability": 0.6784058487874465,
+          "realized_profit_rate": 0.5
+        },
+        {
+          "bin": 7,
+          "rows": 46,
+          "mean_probability": 0.7483188798080569,
+          "realized_profit_rate": 0.3695652173913043
+        },
+        {
+          "bin": 8,
+          "rows": 6,
+          "mean_probability": 0.8611111111111112,
+          "realized_profit_rate": 0.16666666666666666
+        },
+        {
+          "bin": 9,
+          "rows": 19,
+          "mean_probability": 0.96588693957115,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.3111280814578126,
+      "brier": 0.32690317791655327,
+      "q10_breach_rate": 0.11643835616438356
+    },
+    {
+      "horizon_months": 1,
+      "regime": "up",
+      "rows": 706,
+      "mae": 0.0813570389595844,
+      "zero_mae": 0.046715227515542544,
+      "bias": -0.046051850358667,
+      "actual_mean": 0.010662986474356465,
+      "predicted_mean": -0.03538886388431052,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 301,
+          "mean_probability": 0.004827214129539632,
+          "realized_profit_rate": 0.760797342192691
+        },
+        {
+          "bin": 2,
+          "rows": 76,
+          "mean_probability": 0.23930099857346643,
+          "realized_profit_rate": 0.42105263157894735
+        },
+        {
+          "bin": 3,
+          "rows": 17,
+          "mean_probability": 0.37601745405722914,
+          "realized_profit_rate": 0.6470588235294118
+        },
+        {
+          "bin": 4,
+          "rows": 45,
+          "mean_probability": 0.45385956569979397,
+          "realized_profit_rate": 0.4666666666666667
+        },
+        {
+          "bin": 5,
+          "rows": 42,
+          "mean_probability": 0.5525779498675362,
+          "realized_profit_rate": 0.5
+        },
+        {
+          "bin": 6,
+          "rows": 116,
+          "mean_probability": 0.6593365350805461,
+          "realized_profit_rate": 0.35344827586206895
+        },
+        {
+          "bin": 7,
+          "rows": 105,
+          "mean_probability": 0.7234144837568518,
+          "realized_profit_rate": 0.4380952380952381
+        },
+        {
+          "bin": 8,
+          "rows": 4,
+          "mean_probability": 0.8198005698005697,
+          "realized_profit_rate": 0.25
+        }
+      ],
+      "ece": 0.4482623095147494,
+      "brier": 0.49420710558871384,
+      "q10_breach_rate": 0.17563739376770537
+    },
+    {
+      "horizon_months": 3,
+      "regime": "down",
+      "rows": 186,
+      "mae": 0.15749110419741108,
+      "zero_mae": 0.08830484818658582,
+      "bias": 0.10276734930170506,
+      "actual_mean": -0.022619287250717258,
+      "predicted_mean": 0.08014806205098778,
+      "probability_bins": [
+        {
+          "bin": 3,
+          "rows": 1,
+          "mean_probability": 0.358814352574103,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 31,
+          "mean_probability": 0.49213709677419354,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 5,
+          "rows": 30,
+          "mean_probability": 0.5034375000000001,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 8,
+          "rows": 17,
+          "mean_probability": 0.8265838648251812,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 9,
+          "rows": 107,
+          "mean_probability": 0.9770802047035153,
+          "realized_profit_rate": 0.018691588785046728
+        }
+      ],
+      "ece": 0.7353627249928707,
+      "brier": 0.6265530422012038,
+      "q10_breach_rate": 0.5645161290322581
+    },
+    {
+      "horizon_months": 3,
+      "regime": "sideways",
+      "rows": 410,
+      "mae": 0.05994295475923874,
+      "zero_mae": 0.056769920188598874,
+      "bias": -0.03477900128515774,
+      "actual_mean": 0.038830108879633625,
+      "predicted_mean": 0.004051107594475871,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 1,
+          "mean_probability": 0.0686427457098284,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 3,
+          "rows": 16,
+          "mean_probability": 0.36485959438377535,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 308,
+          "mean_probability": 0.4471321427938286,
+          "realized_profit_rate": 0.512987012987013
+        },
+        {
+          "bin": 5,
+          "rows": 9,
+          "mean_probability": 0.5315972222222223,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 6,
+          "rows": 4,
+          "mean_probability": 0.6341147864664587,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 7,
+          "rows": 12,
+          "mean_probability": 0.7214843750000001,
+          "realized_profit_rate": 0.75
+        },
+        {
+          "bin": 8,
+          "rows": 42,
+          "mean_probability": 0.8330614831736127,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 9,
+          "rows": 18,
+          "mean_probability": 0.9733922690240944,
+          "realized_profit_rate": 0.16666666666666666
+        }
+      ],
+      "ece": 0.14373350162665044,
+      "brier": 0.25460015676743586,
+      "q10_breach_rate": 0.041463414634146344
+    },
+    {
+      "horizon_months": 3,
+      "regime": "up",
+      "rows": 704,
+      "mae": 0.1531076010322359,
+      "zero_mae": 0.10925915851987912,
+      "bias": -0.07237712305649863,
+      "actual_mean": 0.05980449899259099,
+      "predicted_mean": -0.012572624063907654,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 180,
+          "mean_probability": 0.06150112671173509,
+          "realized_profit_rate": 0.9777777777777777
+        },
+        {
+          "bin": 1,
+          "rows": 50,
+          "mean_probability": 0.11104524180967233,
+          "realized_profit_rate": 0.9
+        },
+        {
+          "bin": 2,
+          "rows": 5,
+          "mean_probability": 0.2689547581903276,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 3,
+          "rows": 40,
+          "mean_probability": 0.37224679455928233,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 191,
+          "mean_probability": 0.4641531377878152,
+          "realized_profit_rate": 0.5759162303664922
+        },
+        {
+          "bin": 5,
+          "rows": 54,
+          "mean_probability": 0.5317539507135841,
+          "realized_profit_rate": 0.37037037037037035
+        },
+        {
+          "bin": 6,
+          "rows": 21,
+          "mean_probability": 0.6395833333333334,
+          "realized_profit_rate": 0.7142857142857143
+        },
+        {
+          "bin": 7,
+          "rows": 18,
+          "mean_probability": 0.7752604166666668,
+          "realized_profit_rate": 0.8888888888888888
+        },
+        {
+          "bin": 8,
+          "rows": 66,
+          "mean_probability": 0.8284511948659765,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 9,
+          "rows": 79,
+          "mean_probability": 0.9818124370544444,
+          "realized_profit_rate": 0.21518987341772153
+        }
+      ],
+      "ece": 0.4811133802773986,
+      "brier": 0.48877479608910074,
+      "q10_breach_rate": 0.22017045454545456
+    },
+    {
+      "horizon_months": 5,
+      "regime": "down",
+      "rows": 127,
+      "mae": 0.22183870398197034,
+      "zero_mae": 0.14145479493010923,
+      "bias": 0.08176103838368412,
+      "actual_mean": 0.02327309298522792,
+      "predicted_mean": 0.10503413136891204,
+      "probability_bins": [
+        {
+          "bin": 6,
+          "rows": 36,
+          "mean_probability": 0.6271828823642296,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 7,
+          "rows": 34,
+          "mean_probability": 0.7320047154112672,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 8,
+          "rows": 9,
+          "mean_probability": 0.8729610439455,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 9,
+          "rows": 48,
+          "mean_probability": 0.9982758620689655,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.5637310857850826,
+      "brier": 0.4366014952492035,
+      "q10_breach_rate": 0.3779527559055118
+    },
+    {
+      "horizon_months": 5,
+      "regime": "sideways",
+      "rows": 409,
+      "mae": 0.1070725228002107,
+      "zero_mae": 0.09760205062122942,
+      "bias": -0.0743104709581296,
+      "actual_mean": 0.08286770027541077,
+      "predicted_mean": 0.008557229317281149,
+      "probability_bins": [
+        {
+          "bin": 4,
+          "rows": 289,
+          "mean_probability": 0.43203590488313576,
+          "realized_profit_rate": 0.7231833910034602
+        },
+        {
+          "bin": 6,
+          "rows": 4,
+          "mean_probability": 0.6226252158894646,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 7,
+          "rows": 69,
+          "mean_probability": 0.7532018101484664,
+          "realized_profit_rate": 0.8985507246376812
+        },
+        {
+          "bin": 8,
+          "rows": 13,
+          "mean_probability": 0.880430450378637,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 9,
+          "rows": 34,
+          "mean_probability": 0.954486910004309,
+          "realized_profit_rate": 0.5882352941176471
+        }
+      ],
+      "ece": 0.2681837574821417,
+      "brier": 0.25439837072120264,
+      "q10_breach_rate": 0.05134474327628362
+    },
+    {
+      "horizon_months": 5,
+      "regime": "up",
+      "rows": 704,
+      "mae": 0.19204135798715913,
+      "zero_mae": 0.16562009061353516,
+      "bias": -0.06891838481345294,
+      "actual_mean": 0.10758200091478863,
+      "predicted_mean": 0.03866361610133567,
+      "probability_bins": [
+        {
+          "bin": 4,
+          "rows": 76,
+          "mean_probability": 0.41575765839469137,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 6,
+          "rows": 80,
+          "mean_probability": 0.6424694404740634,
+          "realized_profit_rate": 0.3125
+        },
+        {
+          "bin": 7,
+          "rows": 409,
+          "mean_probability": 0.7455302125847776,
+          "realized_profit_rate": 0.7995110024449877
+        },
+        {
+          "bin": 8,
+          "rows": 53,
+          "mean_probability": 0.8538469058559,
+          "realized_profit_rate": 0.9433962264150944
+        },
+        {
+          "bin": 9,
+          "rows": 86,
+          "mean_probability": 0.9917688116418955,
+          "realized_profit_rate": 0.09302325581395349
+        }
+      ],
+      "ece": 0.24846072165283353,
+      "brier": 0.2804309270170621,
+      "q10_breach_rate": 0.2556818181818182
+    }
+  ],
+  "worst_months": [
+    {
+      "horizon_months": 1,
+      "month": "2025-03",
+      "rows": 31,
+      "mae": 0.2130785496991125,
+      "zero_mae": 0.13540091922648606,
+      "bias": -0.2130785496991125,
+      "actual_mean": 0.13540091922648606,
+      "predicted_mean": -0.07767763047262644,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 31,
+          "mean_probability": 0.005698005698005601,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.9943019943019944,
+      "brier": 0.9886364558729237,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 1,
+      "month": "2026-09",
+      "rows": 19,
+      "mae": 0.19512722971466573,
+      "zero_mae": 0.041580453577431495,
+      "bias": 0.19512722971466573,
+      "actual_mean": -0.041580453577431495,
+      "predicted_mean": 0.15354677613723425,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 19,
+          "mean_probability": 0.9672364672364672,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9672364672364672,
+      "brier": 0.9355463835520815,
+      "q10_breach_rate": 0.631578947368421
+    },
+    {
+      "horizon_months": 1,
+      "month": "2025-09",
+      "rows": 30,
+      "mae": 0.17120758998175298,
+      "zero_mae": 0.07531296745835701,
+      "bias": -0.17120758998175298,
+      "actual_mean": 0.07531296745835701,
+      "predicted_mean": -0.09589462252339596,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 30,
+          "mean_probability": 0.003893637226970494,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.9961063627730294,
+      "brier": 0.9922320706271326,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 1,
+      "month": "2024-05",
+      "rows": 31,
+      "mae": 0.15706571339277212,
+      "zero_mae": 0.1504161653205171,
+      "bias": 0.15706571339277212,
+      "actual_mean": -0.1504161653205171,
+      "predicted_mean": 0.0066495480722550526,
+      "probability_bins": [
+        {
+          "bin": 4,
+          "rows": 8,
+          "mean_probability": 0.44240370898716114,
+          "realized_profit_rate": 0.0
+        },
+        {
+          "bin": 6,
+          "rows": 22,
+          "mean_probability": 0.6561405783945016,
+          "realized_profit_rate": 0.0
+        },
+        {
+          "bin": 7,
+          "rows": 1,
+          "mean_probability": 0.7146932952924394,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.6028714739312504,
+      "brier": 0.37291001613490743,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 1,
+      "month": "2025-08",
+      "rows": 31,
+      "mae": 0.15080952915820967,
+      "zero_mae": 0.05036822770187023,
+      "bias": -0.15080952915820967,
+      "actual_mean": 0.05036822770187023,
+      "predicted_mean": -0.10044130145633944,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 31,
+          "mean_probability": 0.0038139876849553615,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.9961860123150447,
+      "brier": 0.9923904183852722,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 3,
+      "month": "2025-02",
+      "rows": 28,
+      "mae": 0.35913886574733545,
+      "zero_mae": 0.3003752179910533,
+      "bias": -0.35913886574733545,
+      "actual_mean": 0.3003752179910533,
+      "predicted_mean": -0.058763647756282185,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 15,
+          "mean_probability": 0.058034321372854844,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 2,
+          "rows": 1,
+          "mean_probability": 0.2542901716068643,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 3,
+          "rows": 4,
+          "mean_probability": 0.34672386895475815,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 4,
+          "rows": 1,
+          "mean_probability": 0.4680187207488299,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 5,
+          "rows": 1,
+          "mean_probability": 0.5834633385335414,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 8,
+          "rows": 6,
+          "mean_probability": 0.8372334893395736,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.6933363048807667,
+      "brier": 0.5782579731983574,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 3,
+      "month": "2026-03",
+      "rows": 31,
+      "mae": 0.3194958800075289,
+      "zero_mae": 0.1905280194740101,
+      "bias": 0.3194958800075289,
+      "actual_mean": -0.1905280194740101,
+      "predicted_mean": 0.12896786053351883,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 31,
+          "mean_probability": 0.9752402999345781,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9752402999345781,
+      "brier": 0.951115584757254,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 3,
+      "month": "2025-03",
+      "rows": 31,
+      "mae": 0.3091531099175011,
+      "zero_mae": 0.2198405395807736,
+      "bias": -0.3091531099175011,
+      "actual_mean": 0.2198405395807736,
+      "predicted_mean": -0.08931257033672761,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 17,
+          "mean_probability": 0.07212994402129025,
+          "realized_profit_rate": 1.0
+        },
+        {
+          "bin": 1,
+          "rows": 14,
+          "mean_probability": 0.11622464898595937,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.9079563182527302,
+      "brier": 0.8250738323025953,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 3,
+      "month": "2026-04",
+      "rows": 30,
+      "mae": 0.2896833202256062,
+      "zero_mae": 0.16393471003620094,
+      "bias": 0.2896833202256062,
+      "actual_mean": -0.16393471003620094,
+      "predicted_mean": 0.12574861018940522,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 30,
+          "mean_probability": 0.9715548621944877,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9715548621944877,
+      "brier": 0.9439661767437939,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 3,
+      "month": "2025-11",
+      "rows": 30,
+      "mae": 0.2815023377869501,
+      "zero_mae": 0.17835031117755346,
+      "bias": -0.2815023377869501,
+      "actual_mean": 0.17835031117755346,
+      "predicted_mean": -0.10315202660939675,
+      "probability_bins": [
+        {
+          "bin": 0,
+          "rows": 30,
+          "mean_probability": 0.047841913676547006,
+          "realized_profit_rate": 1.0
+        }
+      ],
+      "ece": 0.952158086323453,
+      "brier": 0.9068625709146934,
+      "q10_breach_rate": 0.0
+    },
+    {
+      "horizon_months": 5,
+      "month": "2026-03",
+      "rows": 31,
+      "mae": 0.45150448118215736,
+      "zero_mae": 0.20693366547885084,
+      "bias": 0.45150448118215736,
+      "actual_mean": -0.20693366547885084,
+      "predicted_mean": 0.24457081570330652,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 31,
+          "mean_probability": 0.9982758620689655,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9982758620689655,
+      "brier": 0.9965546967895367,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 5,
+      "month": "2026-02",
+      "rows": 28,
+      "mae": 0.44949808763451127,
+      "zero_mae": 0.20199026869207634,
+      "bias": 0.44949808763451127,
+      "actual_mean": -0.20199026869207634,
+      "predicted_mean": 0.24750781894243493,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 28,
+          "mean_probability": 0.9982758620689655,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9982758620689655,
+      "brier": 0.9965546967895366,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 5,
+      "month": "2026-04",
+      "rows": 30,
+      "mae": 0.4111573287568694,
+      "zero_mae": 0.16613623562732965,
+      "bias": 0.4111573287568694,
+      "actual_mean": -0.16613623562732965,
+      "predicted_mean": 0.24502109312953982,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 30,
+          "mean_probability": 0.9982758620689655,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9982758620689655,
+      "brier": 0.9965546967895366,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 5,
+      "month": "2026-01",
+      "rows": 31,
+      "mae": 0.39475377029454756,
+      "zero_mae": 0.12112820109615562,
+      "bias": 0.39475377029454756,
+      "actual_mean": -0.118679290439172,
+      "predicted_mean": 0.27607447985537553,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 31,
+          "mean_probability": 0.9982758620689655,
+          "realized_profit_rate": 0.12903225806451613
+        }
+      ],
+      "ece": 0.8692436040044493,
+      "brier": 0.8679673775459327,
+      "q10_breach_rate": 1.0
+    },
+    {
+      "horizon_months": 5,
+      "month": "2026-05",
+      "rows": 24,
+      "mae": 0.3933015235914182,
+      "zero_mae": 0.147685749194692,
+      "bias": 0.3933015235914182,
+      "actual_mean": -0.147685749194692,
+      "predicted_mean": 0.24561577439672624,
+      "probability_bins": [
+        {
+          "bin": 9,
+          "rows": 24,
+          "mean_probability": 0.9982758620689656,
+          "realized_profit_rate": 0.0
+        }
+      ],
+      "ece": 0.9982758620689656,
+      "brier": 0.9965546967895363,
+      "q10_breach_rate": 1.0
+    }
+  ]
+}

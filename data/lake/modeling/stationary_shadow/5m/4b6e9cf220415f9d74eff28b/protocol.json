@@ -1,0 +1,25 @@
+{
+  "candidate": "rf_small",
+  "margin": 0.01,
+  "source_id": "56a7e05da009154253c9fd419ee9ef26ca7cee97257f2036e01e42725a69e4e6",
+  "initial_calibration_sha256": "474a49111027703b297774d6c61504073118366759c76b0737b0054667b1ca0b",
+  "horizon_months": 5,
+  "refit": "monthly_5y_matured_only",
+  "calibration": "sigmoid_oos_24m_residual_q10",
+  "policy": {
+    "version": "prospective_calendar_month_v1",
+    "min_matured_rows": 120,
+    "min_origin_span_days": 365,
+    "min_nonoverlapping_windows": 6,
+    "min_mae_improvement": 0.05,
+    "min_brier_improvement": 0.05,
+    "max_q10_breach_rate": 0.15,
+    "max_probability_ece": 0.1,
+    "probability_bins": 10
+  },
+  "protocol_id": "4b6e9cf220415f9d74eff28b",
+  "created_at": "2026-10-25T14:35:30.590689+00:00",
+  "validation_start": "2026-10-26",
+  "mode": "shadow",
+  "checksum": "3a55a57c02b88b37bd5d0074a7d9027bf3f3218765c87e9f8cc86c64b504b111"
+}

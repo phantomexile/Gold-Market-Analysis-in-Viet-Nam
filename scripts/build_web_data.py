@@ -7,8 +7,14 @@ from __future__ import annotations
 
 import csv
 import json
+import math
+import sys
 from datetime import datetime
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 
 def load_csv(path: Path) -> list[dict[str, str]]:
@@ -18,7 +24,12 @@ def load_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def build_recommendations(lake: Path) -> dict:
+def _build_validated_recommendations(lake: Path, *, expected_snapshot_date: str | None = None) -> dict:
+    """Chỉ cho phép mua khi snapshot đồng bộ dữ liệu và đã qua kiểm định.
+
+    `ok` chỉ nói script chạy xong, không chứng minh mô hình đáng tin cậy.
+    Thiếu ngày dữ liệu đối chiếu, kỳ hạn hoặc metadata mới đều giữ quan sát.
+    """
     snapshot_path = lake / "modeling" / "snapshot_forecasts.csv"
     if not snapshot_path.exists():
         return {}
@@ -29,34 +40,143 @@ def build_recommendations(lake: Path) -> dict:
 
     snapshot_date = rows[0].get("snapshot_date", "")
     horizons_data = []
+    dataset_reasons = []
+    # Nhãn validated trong CSV phải có báo cáo cùng ngày, cùng giao thức
+    # và đủ tất cả tiêu chí. Không tự tin một nhãn có thể được sửa bằng tay.
+    report_path = lake / "modeling" / "snapshot_validation_report.json"
+    report, validation_details = {}, {}
+    try:
+        candidate = json.loads(report_path.read_text(encoding="utf-8"))
+        details = candidate.get("horizons", []) if isinstance(candidate, dict) else []
+        if (isinstance(details, list) and len(details) == 3
+                and all(isinstance(item, dict) and type(item.get("horizon_months")) is int for item in details)
+                and sorted(item["horizon_months"] for item in details) == [1, 3, 5]):
+            report = candidate
+            validation_details = {item["horizon_months"]: item for item in details}
+    except (OSError, ValueError, TypeError):
+        # Báo cáo thiếu/hỏng không được làm cổng mua mở lại hoặc làm dashboard lỗi.
+        pass
+    required_checks = (
+        "inputs_verified", "enough_rows", "enough_time_span", "enough_nonoverlap",
+        "mae_vs_zero", "brier_vs_baseline", "q10_coverage", "q10_pinball_vs_baseline", "probability_calibration",
+    )
+    history_report, history_details = {}, {}
+    try:
+        candidate = json.loads((lake / 'modeling' / 'snapshot_historical_report.json').read_text(encoding='utf-8'))
+        details = candidate.get('horizons', []) if isinstance(candidate, dict) else []
+        if (isinstance(details, list) and len(details) == 3
+                and all(isinstance(item, dict) and type(item.get('horizon_months')) is int for item in details)
+                and sorted(item['horizon_months'] for item in details) == [1, 3, 5]
+                and candidate.get('evaluation_kind') == 'historical_screening'
+                and candidate.get('independent_validation') is False):
+            history_report = candidate
+            history_details = {item['horizon_months']: item for item in details}
+    except (OSError, ValueError, TypeError):
+        pass
+    try:
+        datetime.strptime(expected_snapshot_date or "", "%Y-%m-%d")
+    except ValueError:
+        dataset_reasons.append("Không có ngày dữ liệu hợp lệ để đối chiếu snapshot.")
+    if not expected_snapshot_date or any(r.get("snapshot_date") != expected_snapshot_date for r in rows):
+        dataset_reasons.append("Ngày snapshot không khớp ngày dữ liệu dashboard.")
+    if sorted(str(r.get("horizon_months") or "") for r in rows) != ["1", "3", "5"]:
+        dataset_reasons.append("Snapshot phải có đủ và duy nhất ba kỳ hạn 1, 3, 5 tháng.")
+
+    def finite_number(value: str | None) -> float | None:
+        """Đổi số lỗi, NaN và vô cực thành null để JSON luôn đọc được trên trình duyệt."""
+        try:
+            number = float(value)
+            return number if math.isfinite(number) else None
+        except (ValueError, TypeError):
+            return None
 
     for r in rows:
         try:
             h_months = int(r.get("horizon_months", 0))
             h_label = r.get("horizon_label", f"{h_months} tháng")
             target_date = r.get("target_date", "")
-            pred_ret = float(r.get("predicted_net_return", 0))
-            q10_ret = float(r.get("q10_predicted_net_return", 0))
-            prob_pos = float(r.get("prob_return_positive", 0))
-            buy_sig = r.get("buy_signal", "").lower() in ("true", "1")
+            pred_ret = finite_number(r.get("predicted_net_return"))
+            q10_ret = finite_number(r.get("q10_predicted_net_return"))
+            prob_pos = finite_number(r.get("prob_return_positive"))
+            buy_sig = str(r.get("buy_signal") or "").strip().lower() in ("true", "1")
         except (ValueError, TypeError):
             continue
 
-        action = "Mua tích lũy" if buy_sig else "Không mua mới"
-        badge_type = "positive" if buy_sig else "negative"
+        reasons = list(dataset_reasons)
+        if r.get("status") != "validated":
+            reasons.append("Mô hình chưa vượt qua kiểm định chất lượng độc lập.")
+        evidence = validation_details.get(h_months, {})
+        checks = evidence.get("checks", {})
+        report_matches = (bool(r.get("validation_protocol_id"))
+                          and r.get("validation_protocol_id") == report.get("protocol_id")
+                          and report.get("snapshot_date") == expected_snapshot_date == r.get("snapshot_date"))
+        if (not report_matches or evidence.get("status") != "validated" or not isinstance(checks, dict)
+                or not all(checks.get(name) is True for name in required_checks)):
+            reasons.append("Chưa có báo cáo kiểm định đạt đầy đủ tiêu chí, cùng ngày và cùng giao thức.")
+            if report_matches and isinstance(evidence.get("reasons"), list):
+                reasons.extend(message for message in evidence["reasons"] if isinstance(message, str))
+        calibration_rows = finite_number(r.get("calibration_rows"))
+        calibrated = (r.get("probability_method") == "temporal_oos_empirical_laplace"
+                      and calibration_rows is not None and calibration_rows >= 60)
+        if not calibrated:
+            reasons.append("Chưa đủ sai số dự báo ngoài mẫu để ước lượng xác suất lãi.")
+            # Không tiếp tục hiển thị xác suất cũ suy ra từ sai số trong mẫu.
+            prob_pos = None
+        if pred_ret is None or q10_ret is None or prob_pos is None or not 0 <= prob_pos <= 1:
+            reasons.append("Số liệu dự báo hoặc xác suất không hợp lệ.")
+            if prob_pos is not None and not 0 <= prob_pos <= 1:
+                prob_pos = None
+        # Bật tín hiệu phải đồng thời qua cổng kiểm định và đúng ngưỡng nghiệp vụ;
+        # không tin cờ buy_signal cũ nếu xác suất hoặc Q10 đã không còn thỏa điều kiện.
+        buy_sig = bool(not reasons and buy_sig and prob_pos >= 0.50 and q10_ret >= -0.10)
+        action = "Quan sát — chưa đủ điều kiện" if reasons else ("Mua tích lũy" if buy_sig else "Không mua mới")
+        badge_type = "warning" if reasons else ("positive" if buy_sig else "negative")
 
-        pred_pct = round(pred_ret * 100, 2)
-        q10_pct = round(q10_ret * 100, 2)
-        prob_pct = round(prob_pos * 100, 1)
+        pred_pct = round(pred_ret * 100, 2) if pred_ret is not None else None
+        q10_pct = round(q10_ret * 100, 2) if q10_ret is not None else None
+        prob_pct = round(prob_pos * 100, 1) if prob_pos is not None else None
 
         # Kỳ hạn dùng tháng lịch; ngày thoát thực tế là phiên SJC đầu tiên từ target_date.
         horizon_desc = h_label
         # Chỉ diễn giải số liệu có trong snapshot; không dùng giá hoặc premium viết cứng từ lần chạy cũ.
-        rationale = (
-            f"Lợi suất ròng dự báo {pred_pct:+.2f}%; Q10 {q10_pct:+.2f}%; "
-            f"xác suất lợi suất dương ước lượng {prob_pct:.1f}%. "
-            f"Ngày tròn {h_months} tháng: {target_date}; khi đánh giá dùng phiên SJC hợp lệ đầu tiên từ ngày này."
-        )
+        if pred_pct is not None and q10_pct is not None and prob_pct is not None:
+            rationale = (
+                f"Lợi suất ròng dự báo {pred_pct:+.2f}%; Q10 {q10_pct:+.2f}%; "
+                f"xác suất lợi suất dương ước lượng {prob_pct:.1f}%. "
+                f"Ngày tròn {h_months} tháng: {target_date}; khi đánh giá dùng phiên SJC hợp lệ đầu tiên từ ngày này."
+            )
+        else:
+            rationale = "Chưa đủ số liệu hợp lệ để trình bày đầy đủ dự báo và xác suất lãi."
+        if reasons:
+            rationale += " " + " ".join(reasons)
+
+        # Hai mức bằng chứng tách riêng: điểm lịch sử không mở cổng mua thực tế,
+        # và số mẫu lịch sử không được cộng vào tiến độ kiểm chứng tiến cứu.
+        historical = history_details.get(h_months, {})
+        history_matches = (history_report.get('snapshot_date') == expected_snapshot_date == r.get('snapshot_date')
+                           and bool(r.get('validation_protocol_id'))
+                           and history_report.get('protocol_id') == r.get('validation_protocol_id'))
+        history_status = historical.get('status') if history_matches else 'historical_insufficient'
+        if history_status not in ('historical_passed', 'historical_failed', 'historical_insufficient'):
+            history_status = 'historical_insufficient'
+        history_checks = historical.get('checks', {})
+        if history_status == 'historical_passed' and (not isinstance(history_checks, dict)
+                                                     or not all(history_checks.get(name) is True for name in required_checks)):
+            history_status = 'historical_insufficient'
+        history_metrics = historical.get('metrics', {}) if history_matches else {}
+        if not isinstance(history_metrics, dict):
+            history_metrics = {}
+        prospective_status = r.get('status') if report_matches and evidence.get('status') == r.get('status') else 'unvalidated'
+        if prospective_status == 'validated' and (not isinstance(checks, dict)
+                                                 or not all(checks.get(name) is True for name in required_checks)):
+            prospective_status = 'validation_failed'
+        prospective_metrics = evidence.get('metrics', {}) if report_matches else {}
+        if not isinstance(prospective_metrics, dict):
+            prospective_metrics = {}
+        policy = report.get('policy', {}) if report_matches and isinstance(report.get('policy'), dict) else {}
+        simulation_buy = bool(history_status == 'historical_passed' and not dataset_reasons and calibrated
+                              and pred_ret is not None and q10_ret is not None and prob_pos is not None
+                              and 0.5 <= prob_pos <= 1 and q10_ret >= -0.1)
 
         horizons_data.append({
             "horizon_months": h_months,
@@ -69,6 +189,25 @@ def build_recommendations(lake: Path) -> dict:
             "action": action,
             "badge_type": badge_type,
             "rationale": rationale,
+            "status": r.get("status", "unvalidated"),
+            "validation_protocol_id": r.get("validation_protocol_id", ""),
+            "blocked_reasons": reasons,
+            "simulation_buy_signal": simulation_buy,
+            "historical": {
+                "status": history_status,
+                "label": {'historical_passed': 'Đạt đánh giá lịch sử', 'historical_failed': 'Chưa đạt đánh giá lịch sử',
+                          'historical_insufficient': 'Chưa đủ dữ liệu lịch sử'}[history_status],
+                "metrics": {key: finite_number(history_metrics.get(key)) for key in ('matured_rows', 'mae', 'zero_baseline_mae', 'brier', 'q10_breach_rate')},
+                "notice": 'Sàng lọc nghiên cứu trên lịch sử đã xem; không thay thế kiểm chứng thực tế.',
+            },
+            "prospective": {
+                "status": prospective_status,
+                "label": {'validated': 'Đạt kiểm chứng thực tế', 'validation_failed': 'Chưa đạt kiểm chứng thực tế',
+                          'validation_pending': 'Đang tích lũy bằng chứng thực tế'}.get(prospective_status, 'Chưa đủ bằng chứng thực tế'),
+                "metrics": {key: finite_number(prospective_metrics.get(key)) for key in ('matured_rows', 'nonoverlapping_windows', 'origin_span_days')},
+                "targets": {key: finite_number(policy.get(key)) for key in ('min_matured_rows', 'min_nonoverlapping_windows', 'min_origin_span_days')},
+                "validation_start": report.get('validation_start', '') if report_matches else '',
+            },
         })
 
     horizons_data.sort(key=lambda x: x["horizon_months"])
@@ -92,9 +231,16 @@ def build_recommendations(lake: Path) -> dict:
             f"Snapshot {snapshot_date}: mô hình không bật tín hiệu mua ở các kỳ hạn đã tính. "
             "Xem lợi suất ròng, Q10 và xác suất lãi ước lượng của từng kỳ hạn ở bên dưới."
         )
+        if any(h["blocked_reasons"] for h in horizons_data):
+            action_theme = "warning"
+            executive_summary = (
+                f"Snapshot {snapshot_date}: giữ trạng thái quan sát vì chưa đủ điều kiện kiểm định, "
+                "hiệu chỉnh xác suất hoặc đồng bộ ngày dữ liệu. Các dự báo chỉ dùng để theo dõi nghiên cứu."
+            )
 
     return {
         "snapshot_date": snapshot_date,
+        "primary_signal": "buy" if buy_horizons else "observe",
         "primary_action": primary_action,
         "action_theme": action_theme,
         "executive_summary": executive_summary,
@@ -104,8 +250,164 @@ def build_recommendations(lake: Path) -> dict:
             "Bộ lọc tín hiệu: P(lãi) ≥ 50% và Q10 ≥ -10%; Q10 là phân vị 10% ước lượng, không phải mức lỗ tối đa.",
             "Dự báo điểm dùng Random Forest; Q10 dùng Gradient Boosting Quantile trên dữ liệu hiện có.",
             "Kỳ hạn là tháng lịch; ngày thoát là phiên SJC đầu tiên vào hoặc sau ngày tròn tháng.",
+            "Chỉ bật tín hiệu khi mô hình đã kiểm định và snapshot khớp ngày dữ liệu; thiếu bằng chứng thì giữ quan sát.",
+            "Xác suất lãi ước lượng từ sai số dự báo ngoài mẫu theo thời gian; không dùng sai số huấn luyện và không phải cam kết lợi nhuận.",
+            "Đánh giá lịch sử phục vụ nghiên cứu; chỉ kiểm chứng thực tế đạt mới cho phép bật tín hiệu mua. Tín hiệu mô phỏng không tạo vị thế giao dịch.",
         ]
     }
+
+
+def _snapshot_quote(lake: Path, snapshot_date: str) -> tuple[float | None, float | None]:
+    """Lấy giá đúng ngày từ frame đã dùng dự báo; không dùng giá mới ghép dự báo cũ.
+
+    Đọc tuần tự thay vì nạp toàn bộ bảng hàng trăm cột vào RAM. Frame vắng
+    thì dùng bảng SJC gốc cùng ngày; frame có nhưng thiếu ngày thì trả thiếu,
+    để không trộn hai phiên dữ liệu khác nhau một cách âm thầm.
+    """
+    frame = lake / 'modeling/model_frame_daily.csv'
+    source = frame if frame.exists() else lake / 'gold_quotes_sjc_historical.csv'
+    if not source.exists():
+        return None, None
+    buy_col, sell_col = ('buy_price', 'sell_price') if source == frame else ('buy', 'sell')
+    quote, last_time = (None, None), ''
+    with source.open(encoding='utf-8', newline='') as stream:
+        for row in csv.DictReader(stream):
+            if row.get('date', '')[:10] != snapshot_date:
+                continue
+            try:
+                buy, sell = float(row[buy_col]), float(row[sell_col])
+            except (KeyError, TypeError, ValueError):
+                continue
+            stamp = row.get('timestamp') or ''
+            if math.isfinite(buy) and math.isfinite(sell) and 0 < buy <= sell and stamp >= last_time:
+                quote, last_time = (buy, sell), stamp
+    return quote
+
+
+def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = None,
+                          signal_mode: str = 'direct') -> dict:
+    """Đưa tín hiệu dự báo trực tiếp lên UI; kiểm định vẫn là metadata riêng.
+
+    Người dùng đã chọn bỏ cổng kiểm định đối với tín hiệu hiển thị. Chế độ
+    validated giữ hành vi cũ để đối chiếu; không sửa status hoặc sổ giao dịch
+    và không tự biến tín hiệu dự báo thành bằng chứng validated.
+    """
+    if signal_mode not in ('direct', 'validated'):
+        raise ValueError('Chế độ tín hiệu không hợp lệ.')
+    rec = _build_validated_recommendations(lake, expected_snapshot_date=expected_snapshot_date)
+    if not rec or signal_mode == 'validated':
+        return rec
+    from scripts.analysis.forecast_signals import direct_signal, NEUTRAL_MARGIN, PRIMARY_HORIZON_MONTHS
+    rows = load_csv(lake / 'modeling/snapshot_forecasts.csv')
+    buy, sell = _snapshot_quote(lake, rec['snapshot_date'])
+    dataset_valid = (bool(expected_snapshot_date)
+                     and all(r.get('snapshot_date') == expected_snapshot_date for r in rows)
+                     and sorted(str(r.get('horizon_months') or '') for r in rows) == ['1', '3', '5'])
+    try:
+        datetime.strptime(expected_snapshot_date or '', '%Y-%m-%d')
+    except ValueError:
+        dataset_valid = False
+    originals = {int(r['horizon_months']): r for r in rows if str(r.get('horizon_months', '')).isdigit()}
+    activated = {}
+    # Mỗi kỳ hạn có bản khóa và hiệu chỉnh riêng. Cấu hình lỗi thì tất cả
+    # kỳ hạn Quan sát; lỗi một dự báo chỉ chặn kỳ hạn tương ứng.
+    if (lake/'modeling/active_prediction_model.json').exists():
+        try:
+            from scripts.analysis.stationary_activation import load_active_forecast
+            config = json.loads((lake/'modeling/active_prediction_model.json').read_text(encoding='utf-8'))
+            if not isinstance(config, dict):
+                raise ValueError('Cấu hình phải là một đối tượng JSON.')
+            horizons = [int(key) for key in config['horizons']] if 'horizons' in config else [int(config['horizon_months'])]
+            if not horizons or any(h not in (1,3,5) for h in horizons):
+                raise ValueError('Danh sách kỳ hạn kích hoạt không hợp lệ.')
+        except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
+            horizons = (1,3,5)
+            activated = {h: (None, f'Cấu hình mô hình cải tiến không hợp lệ: {exc}') for h in horizons}
+        for horizon in horizons:
+            if horizon in activated:
+                continue
+            try:
+                activated[horizon] = (load_active_forecast(lake/'modeling', expected_snapshot_date or '', horizon=horizon), None)
+            except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
+                activated[horizon] = (None, f'Chưa có dự báo hợp lệ từ mô hình cải tiến: {exc}')
+    for h in rec['horizons']:
+        active, activation_error = activated.get(h['horizon_months'], (None, None))
+        row = originals.get(h['horizon_months'], {})
+        reasons = []
+        if active is not None or activation_error is not None:
+            row = {**row, **(active or {}), 'predicted_net_return': active.get('predicted_net_return') if active else None}
+            validation = active.get('validation', {}) if active else {}
+            state = validation.get('status', 'unvalidated')
+            checks = validation.get('checks', {})
+            from scripts.analysis.snapshot_validation import REQUIRED_CHECKS
+            verified = state == 'validated' and isinstance(checks, dict) and all(checks.get(name) is True for name in REQUIRED_CHECKS)
+            if state == 'validated' and not verified:
+                state = 'validation_failed'
+            def percent(key):
+                value = active.get(key) if active else None
+                return round(float(value)*100, 2) if value is not None else None
+            h.update(point_model=f"stationary_{active['candidate'] if active else 'unavailable'}_{h['horizon_months']}m", model_label='Mô hình cải tiến',
+                     probability_method=active.get('probability_method') if active else None,
+                     calibration_rows=active.get('calibration_rows',0) if active else 0,
+                     q10_model='temporal_oos_residual_q10',
+                     predicted_net_return=percent('predicted_net_return'),
+                     q10_predicted_net_return=percent('q10_predicted_net_return'),
+                     prob_return_positive=percent('prob_return_positive'),
+                     status=state, buy_signal=False, simulation_buy_signal=False,
+                     validation_protocol_id=validation.get('protocol_id',''),
+                     blocked_reasons=[str(reason) for reason in validation.get('reasons',[])],
+                     historical={'status':'historical_insufficient','label':'Xem báo cáo mô hình cải tiến', 'metrics':{}},
+                     prospective={'status':state,'label':{'validation_pending':'Đang tích lũy bằng chứng thực tế',
+                        'validation_failed':'Chưa đạt kiểm chứng thực tế','validated':'Đạt kiểm chứng thực tế'}.get(state,'Chưa đủ bằng chứng thực tế'),
+                        'metrics':validation.get('metrics',{}),'targets':{
+                            key:(active or {}).get('validation_policy',{}).get(key) for key in
+                            ('min_matured_rows','min_nonoverlapping_windows','min_origin_span_days')},
+                        'validation_start':validation.get('validation_start','')})
+            # Giữ cờ kiểm định khác cờ hiển thị trực tiếp, kể cả sau khi đổi model.
+            h['buy_signal'] = bool(verified and active and active.get('prob_return_positive') is not None
+                                  and active['prob_return_positive'] >= .5 and active.get('q10_predicted_net_return') is not None
+                                  and active['q10_predicted_net_return'] >= -.1)
+            if activation_error:
+                reasons.append(activation_error)
+        if not dataset_valid:
+            reasons.append('Ngày dự báo không khớp dữ liệu hoặc thiếu ba kỳ hạn 1, 3, 5 tháng.')
+        if buy is None or sell is None:
+            reasons.append('Chưa có giá mua/bán hợp lệ đúng ngày dự báo.')
+        # Giá đầu vào phải có và khớp, kể cả khi frame có đủ giá: nếu thiếu
+        # mẫu số gốc thì không chứng minh được phép đổi sang lợi suất giữ vàng.
+        try:
+            entry = float(row.get('entry_sell_price'))
+            if sell is None or not math.isfinite(entry) or entry <= 0 or not math.isclose(entry, sell, rel_tol=1e-9):
+                reasons.append('Giá bán đầu vào không khớp snapshot.')
+        except (ValueError, TypeError):
+            reasons.append('Giá bán đầu vào snapshot thiếu hoặc không hợp lệ.')
+        band = active['margin'] if active is not None else NEUTRAL_MARGIN
+        decision = direct_signal(row.get('predicted_net_return') if not reasons else None, buy, sell, margin=band)
+        if not reasons and decision['predicted_hold_return'] is None:
+            reasons.append(decision['reason'])
+        h['validated_buy_signal'] = h['buy_signal']
+        h['validation_reasons'] = h['blocked_reasons']
+        h.update(signal=decision['signal'], action=decision['action'], badge_type=decision['badge_type'],
+                 signal_margin_pct=band*100,
+                 buy_signal=decision['signal'] == 'buy', sell_signal=decision['signal'] == 'sell',
+                 predicted_hold_return=round(decision['predicted_hold_return'] * 100, 2) if decision['predicted_hold_return'] is not None else None,
+                 rationale=' '.join(reasons) if reasons else decision['reason'], blocked_reasons=reasons)
+    primary = next((h for h in rec['horizons'] if h['horizon_months'] == PRIMARY_HORIZON_MONTHS), None)
+    rec.update(signal_mode='direct_forecast', neutral_margin_pct=primary.get('signal_margin_pct',NEUTRAL_MARGIN*100) if primary else NEUTRAL_MARGIN*100,
+               primary_model_label=primary.get('model_label','Dự báo mô hình') if primary else 'Dự báo mô hình',
+               primary_horizon_months=PRIMARY_HORIZON_MONTHS,
+               primary_signal=primary['signal'] if primary else 'observe',
+               primary_action=primary['action'].upper() if primary else 'QUAN SÁT',
+               action_theme=primary['badge_type'] if primary else 'warning',
+               executive_summary=f"Theo dự báo kỳ hạn {PRIMARY_HORIZON_MONTHS} tháng: {primary['rationale']}" if primary else 'Chưa có dự báo hợp lệ cho kỳ hạn chính.',
+               rules_explained=[
+                   f'Mua khi lợi suất mua mới dự báo lớn hơn {NEUTRAL_MARGIN*100:g}%, đã tính chênh lệch giá mua–bán.',
+                   f'Bán áp dụng cho vàng đang giữ: giá mua lại dự báo thấp hơn giá mua lại hiện tại trên {NEUTRAL_MARGIN*100:g}%.',
+                   'Còn lại Quan sát; đây là vùng trung tính nghiệp vụ, không phải ngưỡng tối ưu đã kiểm định.',
+                   'Tín hiệu phản ánh trực tiếp dự báo; xác suất, Q10 và kết quả kiểm định nằm trong Chi tiết.',
+                   f'Tín hiệu chính dùng kỳ hạn {PRIMARY_HORIZON_MONTHS} tháng; từng kỳ hạn có tín hiệu riêng.',
+               ])
+    return rec
 
 
 def main():
@@ -261,7 +563,7 @@ def main():
         "ath_premium_date": ath_premium_date,
     }
 
-    recommendations = build_recommendations(lake)
+    recommendations = build_recommendations(lake, expected_snapshot_date=summary["end_date"])
 
     out_file = out_dir / "gold_dashboard_data.json"
     data_payload = {

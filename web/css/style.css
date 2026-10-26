@@ -198,6 +198,34 @@ body {
 }
 
 /* Header Controls */
+.update-progress { padding: 16px 20px; margin-bottom: 24px; }
+.update-progress[hidden] { display: none; }
+.update-progress-heading, .update-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.update-progress-heading { font-size: 14px; font-weight: 600; }
+.update-progress-heading strong { color: var(--gold-primary); white-space: nowrap; }
+.update-progress-track { height: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); margin: 12px 0 9px; overflow: hidden; }
+.update-progress-fill { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d97706, var(--gold-primary)); transition: width 0.4s ease; }
+.update-progress-meta { color: var(--text-muted); font-size: 12px; }
+#updateProgressElapsed { font-family: var(--font-mono); white-space: nowrap; }
+.update-progress[data-status="ok"] .update-progress-fill { background: var(--emerald-success); }
+.update-progress[data-status="ok"] strong { color: var(--emerald-success); }
+.update-progress[data-status="warning"] .update-progress-fill { background: #fb7185; }
+.update-progress[data-status="warning"] strong { color: #fb7185; }
+.btn:disabled { cursor: wait; opacity: 0.65; }
+@media (max-width: 600px) {
+  .update-progress { padding: 14px; }
+  .update-progress-heading { font-size: 13px; gap: 10px; }
+  .update-progress-meta { align-items: flex-start; gap: 10px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .update-progress-fill { transition: none; }
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -635,6 +663,17 @@ body {
   padding-top: 10px;
 }
 
+/* Hai mức đánh giá luôn nằm riêng để mẫu lịch sử không bị hiểu là bằng chứng thực tế. */
+.assessment-levels { display: grid; gap: 10px; margin: 14px 0; }
+.assessment-level { border: 1px solid var(--border-subtle); border-radius: 9px; padding: 12px; min-width: 0; }
+.assessment-title { color: var(--text-main); font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+.assessment-status { font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+.assessment-status.positive { color: var(--emerald-success); }
+.assessment-status.negative { color: var(--rose-danger); }
+.assessment-status.warning { color: var(--gold-light); }
+.assessment-detail, .assessment-simulation { color: var(--text-muted); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.assessment-simulation { padding: 8px 0; border-top: 1px solid var(--border-subtle); }
+
 /* Footer rules tags */
 .decision-footer {
   display: flex;
@@ -1059,3 +1098,25 @@ body {
   font-size: 13px;
   font-weight: 500;
 }
+/* Tín hiệu và số liệu dự báo cùng hiển thị sẵn để đối chiếu ngay. */
+.signal-reason {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+  background: var(--gold-subtle);
+}
+.signal-reason .assessment-title { margin-bottom: 8px; color: var(--gold-light); }
+.signal-reason .direct-signal-reason {
+  margin: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.signal-details { margin-top: auto; border-top: 1px solid var(--border-color, rgba(255,255,255,.12)); padding-top: 12px; }
+.signal-details > .assessment-title { margin-bottom: 16px; }
+.signal-methodology summary { cursor: pointer; font-weight: 600; line-height: 1.5; }
+.signal-methodology summary:focus-visible { outline: 2px solid #f6c453; outline-offset: 4px; }
+.direct-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.direct-metrics .h-metric { min-width: 0; overflow-wrap: anywhere; }
+.signal-methodology { display: block; }
+.signal-methodology[open] .rule-tag { margin-top: 12px; }

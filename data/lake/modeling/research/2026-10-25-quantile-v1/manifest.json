@@ -1,0 +1,59 @@
+{
+  "status": "research_only",
+  "started_at": "2026-10-25T13:56:16.568264+00:00",
+  "parameters": {
+    "lightgbm_quantile": {
+      "n_estimators": 200,
+      "learning_rate": 0.04,
+      "max_depth": 4,
+      "num_leaves": 15,
+      "min_child_samples": 40,
+      "reg_lambda": 5.0,
+      "random_state": 42,
+      "n_jobs": 4
+    },
+    "catboost_multiquantile": {
+      "iterations": 200,
+      "learning_rate": 0.04,
+      "depth": 4,
+      "l2_leaf_reg": 5.0,
+      "random_seed": 42,
+      "thread_count": 4
+    }
+  },
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "point": "q50_after_monotone_rearrangement",
+  "signal_margin": 0.01,
+  "active_algorithm_fingerprint": "b1c956f698e9b8c777f61414eb5d4dd544f743f2a977c2d47322e9126358d79d",
+  "sha256": {
+    "data/lake/modeling/model_frame_daily.csv": "e3c8051aad8a095420c66ba71d20987462ad75ae2b74d1186b7a24a388894b4a",
+    "data/lake/modeling/snapshot_forecasts.csv": "8b116d2211a53f43c21504600b0c4adb2d9259a86cbc25ee3a10dec49a573ec3",
+    "data/lake/modeling/active_prediction_model.json": "7288f747b091b600627e03c1494bdb11f57446e60058935b54e76537a45cacbc",
+    "data/lake/modeling/paper_trading_ledger.csv": "d7e90071afb754c2281a8ee5455a0d9ac6598deb350eb1894e46178bdded2f54",
+    "web/data/gold_dashboard_data.json": "aa3b66651c1f5c23c838fca38db969c34a8a221efc63baa0683b0b979f7b7865",
+    "data/lake/modeling/stationary_shadow/active.json": "620d76e88b6f32908117a2b733515c26090fe538d547eba5f3e2ef7ca6ab5b89",
+    "data/lake/modeling/stationary_shadow/latest.json": "dd1b50889209ce9927d9df036499f695339da2cc31e3f197f5f5f81c0f375f3b",
+    "data/lake/modeling/stationary_shadow/48c1c3496a4d9389e98cfa80/calibration.csv": "b36cca0d74fa24853ec262944b98ca396724e2c55c2e9bcb030289bdf0ed1cae",
+    "data/lake/modeling/stationary_shadow/48c1c3496a4d9389e98cfa80/protocol.json": "5633a0175dfccdbefedb17504d32ca2c7749951d0e16f12d40595273cf4764f3",
+    "data/lake/modeling/stationary_shadow/9a00600ea79882241950320f/calibration.csv": "d381845d026053c7864ee00dfcb0339374029f5b8de1b1867669236eecb365ac",
+    "data/lake/modeling/stationary_shadow/9a00600ea79882241950320f/protocol.json": "4bfc49a753aac785cb5943a3f2aab87a9cef81b6af081c3425ac9706e11fe79f",
+    "data/lake/modeling/research/2026-10-25-stationary-v2/predictions.csv": "428dce18d69017e1976468b759e17d986111f4b9fed91edd0d285f5e796ea04b",
+    "data/lake/modeling/research/2026-10-25-stationary-v2/manifest.json": "81a464fd08501f9e49c97dee58ea347927136b34c223613a863c45c585ad6921",
+    "scripts/analysis/run_quantile_challengers.py": "c2b8639e62c2d508332fb763c04702dbdb91ab963fde585c3e8e793d72d3f2da",
+    "scripts/analysis/quantile_challengers.py": "78c9f53c2d733bc21d7e867cb222b344b5cfef47be3ee52114f65472931b3de6"
+  },
+  "versions": {
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "completed_at": "2026-10-25T13:57:31.812665+00:00",
+  "protected_artifacts_unchanged": true
+}

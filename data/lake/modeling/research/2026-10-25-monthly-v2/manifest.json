@@ -1,0 +1,117 @@
+{
+  "status": "research_only",
+  "started_at": "2026-10-25T04:39:17.016844+00:00",
+  "input_and_source_sha256": {
+    "data/lake/modeling/model_frame_daily.csv": "e3c8051aad8a095420c66ba71d20987462ad75ae2b74d1186b7a24a388894b4a",
+    "data/lake/modeling/feature_columns.json": "74bbd11f976b890308db70078d80a25b57ce6fcd92a24b342c8822bf56b7249a",
+    "data/lake/modeling/snapshot_historical_predictions.csv": "e8de7647bea83ebd43a01a00244b6b47a84aa427a906c4f7d163a82ef23f2998",
+    "data/lake/modeling/snapshot_historical_report.json": "8e8e06c51200f1d496dee24c3d9eda711206d286aa579a59a42a0e1e87984da7",
+    "scripts/analysis/run_model_research.py": "d0cfcdbf44f60a0ba3702b81b981210295350459435521a62ea18bbcc83d9d46",
+    "scripts/analysis/model_diagnostics.py": "23a3d2fcb68232f4f3ea70266812a18ef99058378ff71d03f3043d3eb051b3e3",
+    "scripts/analysis/model_research.py": "4c02ae672da9df94430fceb4c664700a0da50fa182210eb0a35c5f4af7ddc2aa",
+    "scripts/analysis/snapshot_calibration.py": "9f7054315f63afc2eaddcfa6000c012d2bd7e5ed726925eed2d2398bb5a6ab57",
+    "src/gold_collectors/modeling/features.py": "61f5278add8a2ba8314f1a4f5d74507900872f1b4c97632548f5da4415e2952c",
+    "src/gold_collectors/modeling/config.py": "0fbb7d7c372deb987d1fc2f836dd0f97d0487bdb2affef4fd9d0bdfd06d5bf22",
+    "configs/forecast_validation_policy.json": "074c86659f254a2f2c12af3407bdd6b983d7ba9131e65bc1856d10f837d73c96",
+    "data/lake/modeling/snapshot_forecasts.csv": "cc91655bed19f46f0e8355dd06e22a935fb742ea6ccaa45b295b80a746bcebcb",
+    "data/lake/modeling/snapshot_validation_report.json": "afa10edf66bc3c70521d0c4655132e7f49bbb46df069949543f58c65b92d2dfa",
+    "data/lake/modeling/paper_trading_ledger.csv": "e9050a3eac63c45702c67e78068a85cf6c7b9fdcb2c4be49131f05d7ec089550",
+    "web/data/gold_dashboard_data.json": "e68f0af49d30649f3fdcc2abc5fff9b1d86d26311f063d285b14910c45e37695"
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "candidate_registry": [
+    {
+      "name": "zero",
+      "kind": "zero",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": null
+    },
+    {
+      "name": "median_all",
+      "kind": "median",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": null
+    },
+    {
+      "name": "median_3y",
+      "kind": "median",
+      "top_k": 20,
+      "window_years": 3,
+      "drop_group": null
+    },
+    {
+      "name": "ridge20_all",
+      "kind": "ridge",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": null
+    },
+    {
+      "name": "ridge20_3y",
+      "kind": "ridge",
+      "top_k": 20,
+      "window_years": 3,
+      "drop_group": null
+    },
+    {
+      "name": "ridge20_without_domestic",
+      "kind": "ridge",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": "domestic"
+    },
+    {
+      "name": "ridge20_without_global",
+      "kind": "ridge",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": "global"
+    },
+    {
+      "name": "ridge20_without_calendar",
+      "kind": "ridge",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": "calendar"
+    },
+    {
+      "name": "rf20_all",
+      "kind": "rf",
+      "top_k": 20,
+      "window_years": null,
+      "drop_group": null
+    },
+    {
+      "name": "rf20_3y",
+      "kind": "rf",
+      "top_k": 20,
+      "window_years": 3,
+      "drop_group": null
+    },
+    {
+      "name": "rf120_reference",
+      "kind": "reference",
+      "top_k": 120,
+      "window_years": null,
+      "drop_group": null
+    }
+  ],
+  "warmup_start": "2021-01-01",
+  "evaluation_start": "2023-01-01",
+  "refit_frequency": "monthly",
+  "selection_frequency": "annual",
+  "selection_lookback_months": 24,
+  "selection_min_months": 6,
+  "selection_min_rows": 120,
+  "scope": "approved_steps_1_to_3_point_forecasts_only",
+  "completed_at": "2026-10-25T04:47:03.438838+00:00",
+  "protected_artifacts_unchanged": true,
+  "snapshot_date": "2026-10-24"
+}

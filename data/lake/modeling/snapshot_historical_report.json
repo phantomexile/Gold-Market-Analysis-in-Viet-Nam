@@ -1,0 +1,147 @@
+{
+  "snapshot_date": "2026-10-24",
+  "protocol_id": "c794c5fb63ebfb5994e1ba8f",
+  "evaluation_kind": "historical_screening",
+  "independent_validation": false,
+  "notice": "Dữ liệu lịch sử đã được xem khi phát triển mô hình. Kết quả chỉ phục vụ nghiên cứu, không cấp validated hay khuyến nghị mua thực tế.",
+  "policy": {
+    "version": "prospective_calendar_month_v1",
+    "min_matured_rows": 120,
+    "min_origin_span_days": 365,
+    "min_nonoverlapping_windows": 6,
+    "min_mae_improvement": 0.05,
+    "min_brier_improvement": 0.05,
+    "max_q10_breach_rate": 0.15,
+    "max_probability_ece": 0.1,
+    "probability_bins": 10
+  },
+  "horizons": [
+    {
+      "horizon_months": 1,
+      "status": "historical_failed",
+      "metrics": {
+        "matured_rows": 1351,
+        "nonoverlapping_windows": 45,
+        "origin_span_days": 1362,
+        "mae": 0.06229134930433348,
+        "zero_baseline_mae": 0.03696899007083596,
+        "brier": 0.43360365929109956,
+        "baseline_brier": 0.26688042509738014,
+        "q10_breach_rate": 0.19837157660991858,
+        "q10_pinball": 0.012940054336766196,
+        "baseline_q10_pinball": 0.011983115574335427,
+        "probability_ece": 0.3900813910866169
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": true,
+        "enough_time_span": true,
+        "enough_nonoverlap": true,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+        "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+        "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+        "Pinball của Q10 kém hơn baseline.",
+        "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+      ],
+      "evaluation_start": "2023-01-01",
+      "evaluation_end": "2026-09-24"
+    },
+    {
+      "horizon_months": 3,
+      "status": "historical_failed",
+      "metrics": {
+        "matured_rows": 1300,
+        "nonoverlapping_windows": 15,
+        "origin_span_days": 1300,
+        "mae": 0.12435208304515422,
+        "zero_baseline_mae": 0.08970678202925034,
+        "brier": 0.4346326050544611,
+        "baseline_brier": 0.2772738586117834,
+        "q10_breach_rate": 0.21307692307692308,
+        "q10_pinball": 0.031085553261475322,
+        "baseline_q10_pinball": 0.021641030328480925,
+        "probability_ece": 0.3976789196567863
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": true,
+        "enough_time_span": true,
+        "enough_nonoverlap": true,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+        "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+        "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+        "Pinball của Q10 kém hơn baseline.",
+        "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+      ],
+      "evaluation_start": "2023-01-01",
+      "evaluation_end": "2026-07-24"
+    },
+    {
+      "horizon_months": 5,
+      "status": "historical_failed",
+      "metrics": {
+        "matured_rows": 1240,
+        "nonoverlapping_windows": 9,
+        "origin_span_days": 1239,
+        "mae": 0.16706717197899718,
+        "zero_baseline_mae": 0.1407101140743028,
+        "brier": 0.28783927108196167,
+        "baseline_brier": 0.26851782845118927,
+        "q10_breach_rate": 0.20080645161290323,
+        "q10_pinball": 0.04365837283597281,
+        "baseline_q10_pinball": 0.028832484935743925,
+        "probability_ece": 0.26317380806922297
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": true,
+        "enough_time_span": true,
+        "enough_nonoverlap": true,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+        "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+        "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+        "Pinball của Q10 kém hơn baseline.",
+        "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+      ],
+      "evaluation_start": "2023-01-01",
+      "evaluation_end": "2026-05-24"
+    }
+  ],
+  "input_diagnostics": {
+    "event_availability_verified": true,
+    "event_features_policy": "known_calendar_only",
+    "events_input_rows": 2316,
+    "events_excluded_rows": 530,
+    "events_used_rows": 1786,
+    "news_input_rows": 3922,
+    "news_used_rows": 490,
+    "raw_news_availability_verified": true,
+    "news_excluded_rows": 3432,
+    "raw_news_headline_rows": 490,
+    "raw_news_headline_unique_days": 1,
+    "raw_news_headline_coverage": 0.0001794043774668102,
+    "raw_news_modeling_status": "included_verified_availability_asof_lagged"
+  },
+  "generated_at": "2026-10-25T08:25:01.248588+00:00"
+}

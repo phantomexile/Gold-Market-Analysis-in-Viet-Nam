@@ -15,7 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20261025-visible-details">
 </head>
 <body>
   <div class="app-container">
@@ -38,6 +38,21 @@
         </button>
       </div>
     </header>
+
+    <!-- Tiến trình được lấy từ server để vẫn theo dõi được sau khi tải lại trang. -->
+    <section id="updateProgressPanel" class="update-progress glass-panel" hidden aria-label="Tiến trình cập nhật dữ liệu">
+      <div class="update-progress-heading">
+        <span id="updateProgressMessage" role="status" aria-live="polite">Đang khởi động cập nhật…</span>
+        <strong id="updateProgressPercent">0%</strong>
+      </div>
+      <div id="updateProgressTrack" class="update-progress-track" role="progressbar" aria-label="Tiến độ theo các bước cập nhật" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="updateProgressFill" class="update-progress-fill"></div>
+      </div>
+      <div class="update-progress-meta">
+        <span id="updateProgressDetail">Tiến độ theo từng bước; huấn luyện mô hình có thể cần vài phút.</span>
+        <span id="updateProgressElapsed">00:00</span>
+      </div>
+    </section>
 
     <!-- KPI Metric Cards Ribbon -->
     <section class="kpi-grid" id="kpiRibbon">
@@ -128,23 +143,23 @@
             <span class="pulse-dot"></span>
             <span>AI QUANT MODEL</span>
           </div>
-          <h2>🎯 Đề Xuất & Tín Hiệu Mua / Bán Vàng (Decision Support System)</h2>
+          <h2>🎯 Mua / Bán / Quan sát</h2>
         </div>
         <div class="decision-meta">
           <span id="decisionSnapshotDate" class="snapshot-badge">Snapshot: Đang tải...</span>
-          <span class="model-badge">Quantile Q10 • Net of SJC Spread</span>
+          <span class="model-badge">Tín hiệu từ dự báo mô hình</span>
         </div>
       </div>
 
       <!-- Executive Recommendation Banner -->
       <div class="executive-banner" id="executiveBanner">
         <div class="exec-signal-box" id="execSignalBox">
-          <span class="exec-label">TÍN HIỆU ĐIỀU HÀNH</span>
+          <span class="exec-label">TÍN HIỆU CHÍNH</span>
           <div class="exec-action" id="execActionText">—</div>
           <span class="exec-badge" id="execBadge">Chờ tính toán</span>
         </div>
         <div class="exec-content">
-          <div class="exec-heading">Khuyến nghị chiến lược tổng thể</div>
+          <div class="exec-heading">Theo kỳ hạn 3 tháng</div>
           <p class="exec-text" id="execSummaryText">Đang tổng hợp dữ liệu từ mô hình học máy...</p>
         </div>
       </div>
@@ -155,20 +170,21 @@
       </div>
 
       <!-- Decision Methodology Footnotes -->
-      <div class="decision-footer">
+      <details class="decision-footer signal-methodology">
+        <summary>Cách tạo tín hiệu</summary>
         <div class="rule-tag">
           <span class="tag-icon">⚖️</span>
-          <span><strong>Khấu trừ Spread SJC:</strong> Toàn bộ lợi nhuận ròng đã trừ chênh lệch Mua - Bán (~3.000.000 ₫/lượng).</span>
+          <span><strong>Mua:</strong> Lợi suất mua mới dự báo trên 1%, đã tính chênh lệch giá mua–bán.</span>
         </div>
         <div class="rule-tag">
           <span class="tag-icon">🛡️</span>
-          <span><strong>Kiểm soát rủi ro đuôi Q10:</strong> Chỉ mở vị thế khi P(lãi) ≥ 50% và rủi ro sụt giảm kịch bản xấu Q10 ≥ -10%.</span>
+          <span><strong>Bán:</strong> Áp dụng cho vàng đang giữ khi giá bán lại dự báo thấp hơn bán ngay trên 1%. Còn lại là Quan sát.</span>
         </div>
         <div class="rule-tag">
           <span class="tag-icon">🧠</span>
-          <span><strong>Mô hình học máy:</strong> Random Forest + Gradient Boosting Quantile (Q10) trên 5.400+ phiên (2010 - 2026).</span>
+          <span><strong>Dự báo trực tiếp:</strong> Kỳ hạn chính là 3 tháng. Ngưỡng 1% là vùng trung tính; các chỉ số và kết quả kiểm định nằm trong Chi tiết dự báo.</span>
         </div>
-      </div>
+      </details>
     </section>
 
     <!-- Navigation Bar & Time Toolbar -->
@@ -314,6 +330,6 @@
   </div>
 
   <!-- Custom JavaScript Logic -->
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=20261025-active-model"></script>
 </body>
 </html>

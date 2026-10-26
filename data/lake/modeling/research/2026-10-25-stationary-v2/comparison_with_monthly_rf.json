@@ -1,0 +1,8 @@
+{
+  "rows": 1300,
+  "old_mae": 0.10024163837475905,
+  "new_mae": 0.09330031144598477,
+  "relative_improvement": 0.06924594451283539,
+  "old_predictions_sha256": "44011a7b46e73d8eba5abfd0fc52657109266666f47ed23ae034f128be917784",
+  "new_predictions_sha256": "428dce18d69017e1976468b759e17d986111f4b9fed91edd0d285f5e796ea04b"
+}

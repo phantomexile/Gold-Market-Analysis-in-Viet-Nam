@@ -1,0 +1,36 @@
+{
+  "status": "research_only",
+  "source_id": "b1c956f698e9b8c777f61414eb5d4dd544f743f2a977c2d47322e9126358d79d",
+  "started_at": "2026-10-25T08:54:05.706976+00:00",
+  "protected_sha256": {
+    "data/lake/modeling/model_frame_daily.csv": "e3c8051aad8a095420c66ba71d20987462ad75ae2b74d1186b7a24a388894b4a",
+    "data/lake/modeling/snapshot_forecasts.csv": "8b116d2211a53f43c21504600b0c4adb2d9259a86cbc25ee3a10dec49a573ec3",
+    "data/lake/modeling/snapshot_validation_report.json": "0df18256c2cc55f6d295e8f6d54ea5a52b8e7bd8584e6b52ca0c4f34af792b4e",
+    "data/lake/modeling/paper_trading_ledger.csv": "d7e90071afb754c2281a8ee5455a0d9ac6598deb350eb1894e46178bdded2f54",
+    "web/data/gold_dashboard_data.json": "835be6c33ebedeb4f846bee6eb9b544e6950afe91735c88f06eaccef863081b4"
+  },
+  "candidates": [
+    "zero",
+    "no_price_change",
+    "median",
+    "ridge",
+    "elasticnet",
+    "rf_small",
+    "boosting"
+  ],
+  "horizon_months": 3,
+  "warmup_start": "2021-01-01",
+  "evaluation_start": "2023-01-01",
+  "margins": [
+    0.005,
+    0.01,
+    0.02
+  ],
+  "selection": "monthly_24m_matured_oos_5pct_improvement",
+  "activation": "shadow_only",
+  "calibration": "sigmoid_oos_24m_residual_q10",
+  "completed_at": "2026-10-25T08:56:13.729843+00:00",
+  "protected_artifacts_unchanged": true,
+  "shadow_protocol_id": "9a00600ea79882241950320f",
+  "validation_start": "2026-10-26"
+}

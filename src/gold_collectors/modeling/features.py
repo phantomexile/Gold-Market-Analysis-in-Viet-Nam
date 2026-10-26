@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from datetime import timedelta, timezone
 from typing import Any
 import numpy as np
 import pandas as pd
@@ -232,9 +233,25 @@ def _event_path(config: ModelingConfig) -> Path:
 
 
 # Đưa tác động sự kiện vào đặc trưng ngày theo quy tắc khả dụng hiện có.
-def _merge_events(frame: pd.DataFrame, config: ModelingConfig) -> pd.DataFrame:
+def _merge_events(frame: pd.DataFrame, config: ModelingConfig, diagnostics: dict[str, Any] | None = None) -> pd.DataFrame:
+    """Chỉ tạo đặc trưng từ lịch biết trước; không dùng chính sách/proxy hồi cứu chưa xác minh."""
+    diagnostics = diagnostics if diagnostics is not None else {}
     events = _read_csv(_event_path(config))
     frame = frame.copy()
+    diagnostics['event_availability_verified'] = True
+    diagnostics['event_features_policy'] = 'known_calendar_only'
+    diagnostics['events_input_rows'] = int(len(events))
+    # Phải lọc trước groupby/dummies/rolling để tin đã loại không còn ảnh hưởng
+    # tới tổng số sự kiện, mức độ nghiêm trọng hoặc các kênh tác động phái sinh.
+    if not events.empty:
+        kinds = events.get('event_type', pd.Series('', index=events.index)).astype(str).str.lower()
+        sources = events.get('source', pd.Series('', index=events.index)).astype(str).str.lower()
+        safe = kinds.isin(['tet_proximity', 'than_tai', 'wedding_season']) & sources.isin(['rule_generated', 'calendar'])
+        diagnostics['events_excluded_rows'] = int((~safe).sum())
+        events = events.loc[safe].copy()
+    else:
+        diagnostics['events_excluded_rows'] = 0
+    diagnostics['events_used_rows'] = int(len(events))
     if events.empty:
         return frame
 
@@ -290,15 +307,40 @@ def _merge_events(frame: pd.DataFrame, config: ModelingConfig) -> pd.DataFrame:
 
 # Chỉ ghép tin đáp ứng độ phủ và thời điểm khả dụng; ghi lý do loại nguồn vào chẩn đoán.
 def _maybe_merge_news(frame: pd.DataFrame, config: ModelingConfig, diagnostics: dict[str, Any]) -> pd.DataFrame:
+    """Dùng tin có bằng chứng ngày thu thập/khả dụng, tuyệt đối không hồi tố ngày đăng."""
     raw_news = _read_csv(_path(config, "news_raw_headlines_vietnam_gold.csv"))
-    if not raw_news.empty and "event_date" in raw_news.columns:
+    diagnostics['news_input_rows'] = int(len(raw_news))
+    diagnostics['news_used_rows'] = 0
+    diagnostics['raw_news_availability_verified'] = True
+    required = {'feature_mode_strict', 'availability_from', 'published_at', 'fetched_at'}
+    if raw_news.empty or not required.issubset(raw_news.columns):
+        diagnostics['news_excluded_rows'] = int(len(raw_news))
+        diagnostics['raw_news_modeling_status'] = 'excluded_missing_availability_evidence'
+        # Không chuyển sang news_sentiment.csv: bảng fallback chưa có bằng chứng
+        # khả dụng cũng có thể tái đưa tin hồi cứu vào huấn luyện.
+        return frame
+    available = pd.to_datetime(raw_news['availability_from'], errors='coerce', utc=True)
+    published = pd.to_datetime(raw_news['published_at'], errors='coerce', utc=True)
+    fetched = pd.to_datetime(raw_news['fetched_at'], errors='coerce', utc=True)
+    verified = (raw_news['feature_mode_strict'].eq('strict_realtime_verified')
+                & available.notna() & published.notna() & fetched.notna()
+                & available.ge(published) & available.ge(fetched))
+    diagnostics['news_excluded_rows'] = int((~verified).sum())
+    raw_news = raw_news.loc[verified].copy()
+    # Chuyển ngày khả dụng về giờ Việt Nam rồi dùng trễ một ngày; ngày đăng
+    # và ngày event chỉ còn là metadata, không quyết định thời điểm đưa vào model.
+    raw_news['news_available_date'] = available.loc[verified].dt.tz_convert(timezone(timedelta(hours=7))).dt.tz_localize(None).dt.normalize()
+    raw_news = raw_news.loc[raw_news['news_available_date'] <= frame['date'].max()]
+    diagnostics['news_used_rows'] = int(len(raw_news))
+    if raw_news.empty:
+        diagnostics['raw_news_modeling_status'] = 'excluded_no_verified_available_news'
+        return frame
+    if not raw_news.empty:
         raw_news = raw_news.copy()
-        raw_news["news_event_date"] = _date_series(raw_news["event_date"])
+        raw_news["news_event_date"] = raw_news['news_available_date']
         raw_news = raw_news.dropna(subset=["news_event_date"])
         text = (
             raw_news.get("headline", pd.Series("", index=raw_news.index)).fillna("")
-            + " "
-            + raw_news.get("body_text", pd.Series("", index=raw_news.index)).fillna("")
             + " "
             + raw_news.get("category", pd.Series("", index=raw_news.index)).fillna("")
         ).str.lower()
@@ -330,6 +372,10 @@ def _maybe_merge_news(frame: pd.DataFrame, config: ModelingConfig, diagnostics: 
             .sum()
             .sort_values("news_event_date")
         )
+        # Những ngày không có tin có số đếm bằng 0; tránh giữ nguyên số tin
+        # của lần crawl cuối và làm rolling 7/30 thành số ngày có tin thay vì ngày lịch.
+        calendar = pd.date_range(daily['news_event_date'].min(), frame['date'].max(), freq='D')
+        daily = daily.set_index('news_event_date').reindex(calendar, fill_value=0).rename_axis('news_event_date').reset_index()
         for col in [c for c in daily.columns if c != "news_event_date"]:
             daily[f"{col}_ma7"] = daily[col].rolling(7, min_periods=1).mean()
             daily[f"{col}_ma30"] = daily[col].rolling(30, min_periods=1).mean()
@@ -338,11 +384,7 @@ def _maybe_merge_news(frame: pd.DataFrame, config: ModelingConfig, diagnostics: 
         diagnostics["raw_news_headline_rows"] = int(len(raw_news))
         diagnostics["raw_news_headline_unique_days"] = int(raw_news["news_event_date"].nunique())
         diagnostics["raw_news_headline_coverage"] = float(coverage)
-        diagnostics["raw_news_modeling_status"] = "included_event_date_asof_lagged"
-        diagnostics["raw_news_leakage_caveat"] = (
-            "Google RSS was backfilled in 2026; event_date is treated as article publication date and lagged t-1, "
-            "but strict real-time crawl availability is not proven."
-        )
+        diagnostics["raw_news_modeling_status"] = "included_verified_availability_asof_lagged"
 
         left = frame.sort_values("date").copy()
         left["news_cutoff_date"] = left["date"] - pd.Timedelta(days=1)
@@ -357,20 +399,7 @@ def _maybe_merge_news(frame: pd.DataFrame, config: ModelingConfig, diagnostics: 
         merged[news_cols] = merged[news_cols].fillna(0)
         return merged
 
-    news = _read_csv(_path(config, "news_sentiment.csv"))
-    if news.empty:
-        diagnostics["news_modeling_status"] = "skipped_missing_file"
-        return frame
-    news["date"] = _date_series(news["date"])
-    news["value"] = pd.to_numeric(news["value"], errors="coerce")
-    coverage = news["date"].nunique() / max(frame["date"].nunique(), 1)
-    diagnostics["news_sentiment_coverage"] = coverage
-    if coverage < config.include_news_if_coverage_at_least:
-        diagnostics["news_modeling_status"] = "skipped_low_coverage"
-        return frame
-    news_daily = news.groupby("date", as_index=False)["value"].mean().rename(columns={"value": "news_sentiment_score"})
-    diagnostics["news_modeling_status"] = "included"
-    return frame.merge(news_daily, on="date", how="left")
+    return frame
 
 
 
@@ -467,7 +496,7 @@ def build_model_frame(config: ModelingConfig | None = None) -> pd.DataFrame:
     frame = _merge_gpr_asof(frame, config)
     frame = _merge_macro_asof(frame, config)
     frame = _merge_deposit_asof(frame, config)
-    frame = _merge_events(frame, config)
+    frame = _merge_events(frame, config, diagnostics)
     frame = _maybe_merge_news(frame, config, diagnostics)
     frame = _add_calendar_month_targets(frame, config.horizons)
     for horizon in config.horizons:

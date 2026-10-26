@@ -1,0 +1,18 @@
+{
+  "protocol_id": "eda67908d2c77eb16c7379c8",
+  "source_id": "0834b00bf31512f00869bbcf4307de7a09f91ba1669a903988dbab9be9395d0d",
+  "policy": {
+    "version": "prospective_calendar_month_v1",
+    "min_matured_rows": 120,
+    "min_origin_span_days": 365,
+    "min_nonoverlapping_windows": 6,
+    "min_mae_improvement": 0.05,
+    "min_brier_improvement": 0.05,
+    "max_q10_breach_rate": 0.15,
+    "max_probability_ece": 0.1,
+    "probability_bins": 10
+  },
+  "created_at": "2026-10-25T04:07:17.580385+00:00",
+  "validation_start": "2026-10-26",
+  "checksum": "6e66a54399c19e90a22f366e4216883803b69e7ad75a8ff2fddebd4acf96f73c"
+}

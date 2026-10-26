@@ -1,0 +1,193 @@
+{
+  "removed_at": "2026-10-25T21:33:22.5109544+07:00",
+  "removed_files": 157.0,
+  "removed_bytes": 369307394.0,
+  "entries": [
+    {
+      "path": ".cache/challenger-deps",
+      "files": 108,
+      "bytes": 357343038.0
+    },
+    {
+      "path": ".cache/original_cli",
+      "files": 4,
+      "bytes": 30572.0
+    },
+    {
+      "path": "data/lake/modeling/research/2026-10-25-monthly-v1",
+      "files": 3,
+      "bytes": 45996.0
+    },
+    {
+      "path": "data/lake/modeling/research/2026-10-25-stationary-v1",
+      "files": 9,
+      "bytes": 10508882.0
+    },
+    {
+      "path": ".cache/modeling_ast_before.json",
+      "files": 1,
+      "bytes": 205148.0
+    },
+    {
+      "path": ".cache/original_decision_support.py",
+      "files": 1,
+      "bytes": 57367.0
+    },
+    {
+      "path": ".cache/original_scripts.json",
+      "files": 1,
+      "bytes": 567078.0
+    },
+    {
+      "path": ".cache/restructure_project.py",
+      "files": 1,
+      "bytes": 15676.0
+    },
+    {
+      "path": ".cache/script_moves.json",
+      "files": 1,
+      "bytes": 3620.0
+    },
+    {
+      "path": ".cache/update_structure_docs.py",
+      "files": 1,
+      "bytes": 8813.0
+    },
+    {
+      "path": ".cache/verify_restructure.py",
+      "files": 1,
+      "bytes": 6265.0
+    },
+    {
+      "path": ".cache/verify-dual-assessments.cjs",
+      "files": 1,
+      "bytes": 2561.0
+    },
+    {
+      "path": ".cache/extend_rf_horizons.py",
+      "files": 1,
+      "bytes": 5605.0
+    },
+    {
+      "path": ".cache/activation-tests-final.log",
+      "files": 1,
+      "bytes": 1003.0
+    },
+    {
+      "path": ".cache/activation-tests.log",
+      "files": 1,
+      "bytes": 1003.0
+    },
+    {
+      "path": ".cache/challenger-full-tests.log",
+      "files": 1,
+      "bytes": 1003.0
+    },
+    {
+      "path": ".cache/challenger-install.log",
+      "files": 1,
+      "bytes": 638.0
+    },
+    {
+      "path": ".cache/challenger-run.log",
+      "files": 1,
+      "bytes": 3566.0
+    },
+    {
+      "path": ".cache/challenger-tests.log",
+      "files": 1,
+      "bytes": 101.0
+    },
+    {
+      "path": ".cache/diff-check-warnings.log",
+      "files": 1,
+      "bytes": 6286.0
+    },
+    {
+      "path": ".cache/direct-signals-1440.png",
+      "files": 1,
+      "bytes": 114381.0
+    },
+    {
+      "path": ".cache/direct-signals-390.png",
+      "files": 1,
+      "bytes": 116785.0
+    },
+    {
+      "path": ".cache/direct-signals-tests.log",
+      "files": 1,
+      "bytes": 1002.0
+    },
+    {
+      "path": ".cache/dual-assessments-1440.png",
+      "files": 1,
+      "bytes": 176866.0
+    },
+    {
+      "path": ".cache/dual-assessments-390.png",
+      "files": 1,
+      "bytes": 56043.0
+    },
+    {
+      "path": ".cache/model-research-run.log",
+      "files": 1,
+      "bytes": 6968.0
+    },
+    {
+      "path": ".cache/model-research-tests.log",
+      "files": 1,
+      "bytes": 1002.0
+    },
+    {
+      "path": ".cache/progress-tests.log",
+      "files": 1,
+      "bytes": 157.0
+    },
+    {
+      "path": ".cache/progress-training-diagnostic.log",
+      "files": 1,
+      "bytes": 2346.0
+    },
+    {
+      "path": ".cache/refresh-after-fix.log",
+      "files": 1,
+      "bytes": 5007.0
+    },
+    {
+      "path": ".cache/refresh-diagnostic-utf8.log",
+      "files": 1,
+      "bytes": 4052.0
+    },
+    {
+      "path": ".cache/refresh-diagnostic.log",
+      "files": 1,
+      "bytes": 1427.0
+    },
+    {
+      "path": ".cache/stationary-full-tests.log",
+      "files": 1,
+      "bytes": 1003.0
+    },
+    {
+      "path": ".cache/stationary-run-v2.log",
+      "files": 1,
+      "bytes": 2942.0
+    },
+    {
+      "path": ".cache/stationary-run.log",
+      "files": 1,
+      "bytes": 2942.0
+    },
+    {
+      "path": ".cache/stationary-tests.log",
+      "files": 1,
+      "bytes": 102.0
+    },
+    {
+      "path": ".cache/update-tests.log",
+      "files": 1,
+      "bytes": 148.0
+    }
+  ],
+  "kept": "Dữ liệu gốc, runtime RF modeling-deps, báo cáo hoàn tất, nhật ký kiểm định và mã tái lập."
+}

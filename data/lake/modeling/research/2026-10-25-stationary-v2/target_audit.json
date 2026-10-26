@@ -1,0 +1,12 @@
+[
+  {
+    "horizon_months": 3,
+    "rows": 5574,
+    "matured_rows": 5497,
+    "pending_rows": 77,
+    "invalid_price_rows": 0,
+    "exit_mismatches": 0,
+    "return_mismatches": 0,
+    "scope": "internal_frame_consistency_only"
+  }
+]

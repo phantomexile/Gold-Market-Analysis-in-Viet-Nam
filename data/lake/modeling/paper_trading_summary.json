@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-21T15:12:18.114767+00:00",
-  "rows": 3,
+  "generated_at": "2026-10-25T08:25:01.362686+00:00",
+  "rows": 6,
   "buy_rows": 1,
   "open_rows": 1,
   "closed_rows": 0,
-  "no_position_rows": 2,
+  "no_position_rows": 5,
   "date_min": "2026-10-20",
-  "date_max": "2026-10-20",
+  "date_max": "2026-10-24",
   "by_horizon": [
     {
       "horizon_months": 1,
-      "rows": 1,
+      "rows": 2,
       "buy_rows": 0,
       "open_rows": 0,
       "closed_rows": 0,
@@ -19,7 +19,7 @@
     },
     {
       "horizon_months": 3,
-      "rows": 1,
+      "rows": 2,
       "buy_rows": 1,
       "open_rows": 1,
       "closed_rows": 0,
@@ -28,7 +28,7 @@
     },
     {
       "horizon_months": 5,
-      "rows": 1,
+      "rows": 2,
       "buy_rows": 0,
       "open_rows": 0,
       "closed_rows": 0,

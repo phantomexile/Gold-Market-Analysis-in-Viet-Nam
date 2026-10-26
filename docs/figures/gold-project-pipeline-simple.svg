@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="920" viewBox="0 0 1800 920">
+<title>Vietnam Gold Market Analysis Pipeline</title>
+<rect width="1800" height="920" fill="white"/>
+<text x="900" y="48" font-family="Arial,sans-serif" font-size="38" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">VIETNAM GOLD MARKET ANALYSIS</text>
+<text x="900" y="108" font-family="Arial,sans-serif" font-size="25" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Data → Forecast → Decision Support</text>
+<rect x="60" y="200" width="480" height="610" rx="22" fill="#eff6fb" stroke="#9db9ce" stroke-width="2"/>
+<text x="300" y="232" font-family="Arial,sans-serif" font-size="26" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">DATA PROCESSING</text>
+<rect x="95" y="310" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="300" y="334" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Collect Data</text>
+<text x="300" y="380" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">SJC · Global gold · FX · Macro · News</text>
+<rect x="95" y="478" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="300" y="502" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Clean &amp; Integrate</text>
+<text x="300" y="548" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Validate prices and align dates</text>
+<rect x="95" y="646" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="300" y="670" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Build Features</text>
+<text x="300" y="716" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Lags · Volatility · Premium · Events</text>
+<path d="M300 428 L300 478" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="300,478 293,465 307,465" fill="#5b7b95"/>
+<path d="M300 596 L300 646" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="300,646 293,633 307,633" fill="#5b7b95"/>
+<rect x="660" y="200" width="480" height="610" rx="22" fill="#f4f1fa" stroke="#b7a7cc" stroke-width="2"/>
+<text x="900" y="232" font-family="Arial,sans-serif" font-size="26" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">FORECASTING</text>
+<rect x="695" y="310" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="900" y="334" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Train Models</text>
+<text x="900" y="380" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Random Forest · Quantile Boosting</text>
+<rect x="695" y="478" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="900" y="502" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Generate Forecasts</text>
+<text x="900" y="548" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">1, 3 and 5 calendar months</text>
+<rect x="695" y="646" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="900" y="670" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Save Forecast Results</text>
+<text x="900" y="716" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Net return · Q10 · P(profit)</text>
+<path d="M900 428 L900 478" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="900,478 893,465 907,465" fill="#5b7b95"/>
+<path d="M900 596 L900 646" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="900,646 893,633 907,633" fill="#5b7b95"/>
+<rect x="1260" y="200" width="480" height="610" rx="22" fill="#edf7f3" stroke="#95b9aa" stroke-width="2"/>
+<text x="1500" y="232" font-family="Arial,sans-serif" font-size="26" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">DECISION SUPPORT</text>
+<rect x="1295" y="310" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="1500" y="334" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Load Forecast Results</text>
+<text x="1500" y="380" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Latest snapshot by horizon</text>
+<rect x="1295" y="478" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="1500" y="502" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Apply Signal Rules</text>
+<text x="1500" y="548" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">P(profit) ≥ 50% and Q10 ≥ −10%</text>
+<rect x="1295" y="646" width="410" height="118" rx="18" fill="white" stroke="#a5bac9" stroke-width="2"/>
+<text x="1500" y="670" font-family="Arial,sans-serif" font-size="25" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge" fill="#263e50">Display Dashboard</text>
+<text x="1500" y="716" font-family="Arial,sans-serif" font-size="21" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge" fill="#607484">Charts · Signals · Key metrics</text>
+<path d="M1500 428 L1500 478" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="1500,478 1493,465 1507,465" fill="#5b7b95"/>
+<path d="M1500 596 L1500 646" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="1500,646 1493,633 1507,633" fill="#5b7b95"/>
+<path d="M540 505 L660 505" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="660,505 647,498 647,512" fill="#5b7b95"/>
+<path d="M1140 505 L1260 505" stroke="#5b7b95" stroke-width="3" fill="none"/>
+<polygon points="1260,505 1247,498 1247,512" fill="#5b7b95"/>
+</svg>

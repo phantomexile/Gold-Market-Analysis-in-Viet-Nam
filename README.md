@@ -6,7 +6,11 @@ Pipeline thu thập và xử lý dữ liệu giá vàng Việt Nam (SJC) và cá
 
 **Kỳ hạn dự báo hiện tại**: 1, 3 và 5 **tháng lịch** từ ngày snapshot. Nhãn huấn luyện dùng giá SJC mua vào của phiên hợp lệ đầu tiên vào hoặc sau ngày tròn tháng, chia cho giá SJC bán ra tại ngày dự báo, rồi trừ 1. Các độ trễ 21/63/105 trong đặc trưng vẫn là số dòng quá khứ; các backtest đã lưu trước khi đổi định nghĩa kỳ hạn là kết quả lịch sử và không xác nhận model tháng lịch mới.
 
+**Mô hình dashboard đang áp dụng**: RF cải tiến cho cả 1/3/5 tháng, với nhãn, hiệu chỉnh xác suất/Q10 và bản khóa riêng từng kỳ hạn. Registry nằm ở `data/lake/modeling/active_prediction_model.json`; bước cập nhật tự huấn luyện lại dự báo theo cửa sổ đã khóa. Tín hiệu Mua/Bán/Quan sát phản ánh trực tiếp dự báo, còn trạng thái kiểm định được theo dõi riêng. Xem [kết quả áp dụng](docs/all-horizon-rf-2026-10-25.md).
+
 Để cập nhật dữ liệu và dự báo cùng một lượt, chạy `python scripts/pipeline/refresh_latest_forecast.py`. Nếu dữ liệu lake đã mới và chỉ cần dựng lại model, dùng `python scripts/pipeline/refresh_latest_forecast.py --skip-collect`. Nút **Cập nhật** của dashboard gọi cùng luồng này.
+
+Dashboard hiển thị thanh tiến trình theo các mốc thực tế, tên bước và thời gian đã chạy. Phần trăm thể hiện tiến độ theo bước, không phải ước lượng thời gian còn lại. Lượt cập nhật chạy nền và dùng chung giữa các tab; tải lại trang sẽ tiếp tục theo dõi lượt đang chạy. API `POST /api/update` trả HTTP 202 khi nhận việc, còn `GET /api/update/status` trả trạng thái `idle`, `running`, `ok` hoặc `warning`. Chỉ đạt 100% khi toàn bộ pipeline và kiểm tra ngày snapshot thành công.
 
 Bước cập nhật sự kiện tải tin RSS có ngày xuất bản và chỉ số GPR ngày từ nguồn Caldara–Iacoviello. Tin mới được ghi vào `news_raw_headlines_vietnam_gold.csv`; event proxy từ tiêu đề được ghi vào `pipeline_output_event_regime.csv`. Metadata tách ngày đăng và ngày thu thập ở `data/lake/manifests/event_inputs_refresh.json`. Bảng chính sách NHNN chính thức chỉ được cập nhật khi có bài từ nguồn NHNN được xác minh; event proxy từ RSS không được coi là quyết định chính thức.
 

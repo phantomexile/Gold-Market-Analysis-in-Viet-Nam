@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-10-25T08:25:01.178521+00:00",
+  "snapshot_date": "2026-10-24",
+  "protocol_id": "c794c5fb63ebfb5994e1ba8f",
+  "validation_start": "2026-10-26",
+  "policy": {
+    "version": "prospective_calendar_month_v1",
+    "min_matured_rows": 120,
+    "min_origin_span_days": 365,
+    "min_nonoverlapping_windows": 6,
+    "min_mae_improvement": 0.05,
+    "min_brier_improvement": 0.05,
+    "max_q10_breach_rate": 0.15,
+    "max_probability_ece": 0.1,
+    "probability_bins": 10
+  },
+  "horizons": [
+    {
+      "horizon_months": 1,
+      "status": "validation_pending",
+      "metrics": {
+        "matured_rows": 0,
+        "nonoverlapping_windows": 0,
+        "origin_span_days": 0
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": false,
+        "enough_time_span": false,
+        "enough_nonoverlap": false,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Chưa đủ 120 dự báo mới đã đáo hạn.",
+        "Chưa đủ 365 ngày phát dự báo độc lập.",
+        "Chưa đủ 6 cửa sổ lợi suất không chồng lấn."
+      ]
+    },
+    {
+      "horizon_months": 3,
+      "status": "validation_pending",
+      "metrics": {
+        "matured_rows": 0,
+        "nonoverlapping_windows": 0,
+        "origin_span_days": 0
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": false,
+        "enough_time_span": false,
+        "enough_nonoverlap": false,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Chưa đủ 120 dự báo mới đã đáo hạn.",
+        "Chưa đủ 365 ngày phát dự báo độc lập.",
+        "Chưa đủ 6 cửa sổ lợi suất không chồng lấn."
+      ]
+    },
+    {
+      "horizon_months": 5,
+      "status": "validation_pending",
+      "metrics": {
+        "matured_rows": 0,
+        "nonoverlapping_windows": 0,
+        "origin_span_days": 0
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": false,
+        "enough_time_span": false,
+        "enough_nonoverlap": false,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Chưa đủ 120 dự báo mới đã đáo hạn.",
+        "Chưa đủ 365 ngày phát dự báo độc lập.",
+        "Chưa đủ 6 cửa sổ lợi suất không chồng lấn."
+      ]
+    }
+  ]
+}

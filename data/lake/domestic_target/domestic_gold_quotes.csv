@@ -5569,3 +5569,7 @@ date,source,provider,gold_type,buy,sell,spread,currency,unit,business_date,quote
 2026-10-17,sjc_official_history,sjc,sjc_gold_bar,140600000.0,143600000.0,3000000.0,VND,VND/luong,2026-10-17,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"
 2026-10-19,sjc_official_history,sjc,sjc_gold_bar,140100000.0,143100000.0,3000000.0,VND,VND/luong,2026-10-19,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"
 2026-10-20,sjc_official_history,sjc,sjc_gold_bar,139600000.0,142600000.0,3000000.0,VND,VND/luong,2026-10-20,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"
+2026-10-21,sjc_official_history,sjc,sjc_gold_bar,139300000.0,142300000.0,3000000.0,VND,VND/luong,2026-10-21,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"
+2026-10-22,sjc_official_history,sjc,sjc_gold_bar,139300000.0,142300000.0,3000000.0,VND,VND/luong,2026-10-22,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"
+2026-10-23,sjc_official_history,sjc,sjc_gold_bar,139000000.0,142000000.0,3000000.0,VND,VND/luong,2026-10-23,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"
+2026-10-24,sjc_official_history,sjc,sjc_gold_bar,138700000.0,141700000.0,3000000.0,VND,VND/luong,2026-10-24,,"{""sources"": [""domestic_gold_quotes""], ""transform"": ""audited_reliable""}"

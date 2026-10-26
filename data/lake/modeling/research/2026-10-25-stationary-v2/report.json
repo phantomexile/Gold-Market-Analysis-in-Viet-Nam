@@ -1,0 +1,1235 @@
+{
+  "status": "research_only",
+  "independent_validation": false,
+  "snapshot_date": "2026-10-24",
+  "candidates": {
+    "boosting": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": false,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": true,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.09460537100923869,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": -0.05460667375618411,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.03171680826571524,
+          "zero_mae": 0.03163837820680581,
+          "improvement": -0.0024789532003433035
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.06199045345328611,
+          "zero_mae": 0.0641948331286703,
+          "improvement": 0.034338895639245526
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.1593224406025854,
+          "zero_mae": 0.16261295923871946,
+          "improvement": 0.020235279227060254
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.1498487770155776,
+          "zero_mae": 0.10893024286919278,
+          "improvement": -0.37563979541954406
+        }
+      ],
+      "block_interval": {
+        "lower": -0.23700891523408313,
+        "upper": 0.10202392888253457,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.09460537100923869,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.3313864181737133,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.14923076923076922,
+          "q10_pinball": 0.026900463632297283,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.32153165779197435
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": true,
+          "q10_pinball_vs_baseline": false,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Pinball của Q10 kém hơn baseline.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.46534259925027643,
+        "max_drawdown": -0.29058009579563593,
+        "buys": 4,
+        "sells": 4,
+        "completed_trades": 4,
+        "open_position": false,
+        "signal_switches": 14,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -0.6141176706147908,
+        "observations": 1377,
+        "last_signal": "observe"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 7,
+          "favorable_rate": 0.42857142857142855,
+          "mean_counterfactual_return": 0.009749250254461097
+        },
+        "sell": {
+          "windows": 3,
+          "favorable_rate": 0.0,
+          "mean_counterfactual_return": -0.1496174181548869
+        },
+        "observe": {
+          "windows": 5,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.6,
+          "missed_beneficial_sell_rate": 0.2
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.34726931432102864
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.3313864181737133
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.14923076923076922,
+          "pinball": 0.026900463632297283
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    },
+    "elasticnet": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": false,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": true,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.11442038358309232,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": -0.275493123204261,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.04338907232073561,
+          "zero_mae": 0.03163837820680581,
+          "improvement": -0.3714063355940944
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.08452720991584234,
+          "zero_mae": 0.0641948331286703,
+          "improvement": -0.3167291789109943
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.16794432471105286,
+          "zero_mae": 0.16261295923871946,
+          "improvement": -0.03278561252001344
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.19937671525597525,
+          "zero_mae": 0.10893024286919278,
+          "improvement": -0.8303155304206356
+        }
+      ],
+      "block_interval": {
+        "lower": -0.5880876390188018,
+        "upper": -0.05755846907090676,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.11442038358309232,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.33186979323735327,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.19692307692307692,
+          "q10_pinball": 0.031186882659720822,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.2805732399113652
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": false,
+          "q10_pinball_vs_baseline": false,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+          "Pinball của Q10 kém hơn baseline.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.5913668048982172,
+        "max_drawdown": -0.29058009579563593,
+        "buys": 3,
+        "sells": 2,
+        "completed_trades": 2,
+        "open_position": true,
+        "signal_switches": 9,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -0.48809346496685,
+        "observations": 1377,
+        "last_signal": "buy"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 9,
+          "favorable_rate": 0.5555555555555556,
+          "mean_counterfactual_return": 0.02412479671737989
+        },
+        "sell": {
+          "windows": 3,
+          "favorable_rate": 0.0,
+          "mean_counterfactual_return": -0.081158138001118
+        },
+        "observe": {
+          "windows": 3,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.6666666666666666,
+          "missed_beneficial_sell_rate": 0.3333333333333333
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.3790706153557612
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.33186979323735327
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.19692307692307692,
+          "pinball": 0.031186882659720822
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    },
+    "median": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": true,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": true,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.09011379280644015,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": -0.004537123815868682,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.03065063750571439,
+          "zero_mae": 0.03163837820680581,
+          "improvement": 0.031219700789813176
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.06229534805804633,
+          "zero_mae": 0.0641948331286703,
+          "improvement": 0.029589376248033816
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.15411281826708992,
+          "zero_mae": 0.16261295923871946,
+          "improvement": 0.05227222363717732
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.13190770540222385,
+          "zero_mae": 0.10893024286919278,
+          "improvement": -0.21093740294532526
+        }
+      ],
+      "block_interval": {
+        "lower": -0.06532449536076726,
+        "upper": 0.044580875762711504,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.09011379280644015,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.28292802349995766,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.20076923076923076,
+          "q10_pinball": 0.025985871541526692,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.2223940002117471
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": false,
+          "q10_pinball_vs_baseline": false,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+          "Pinball của Q10 kém hơn baseline.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.7713920817369093,
+        "max_drawdown": -0.29058009579563593,
+        "buys": 1,
+        "sells": 0,
+        "completed_trades": 0,
+        "open_position": true,
+        "signal_switches": 5,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -0.30806818812815795,
+        "observations": 1377,
+        "last_signal": "buy"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 7,
+          "favorable_rate": 0.5714285714285714,
+          "mean_counterfactual_return": -0.004407874075194884
+        },
+        "sell": {
+          "windows": 0,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null
+        },
+        "observe": {
+          "windows": 8,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.75,
+          "missed_beneficial_sell_rate": 0.0
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.293657964421321
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.28292802349995766
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.20076923076923076,
+          "pinball": 0.025985871541526692
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    },
+    "no_price_change": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": false,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": false,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.09680505652447904,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": -0.07912751226450476,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.03607821087251016,
+          "zero_mae": 0.03163837820680581,
+          "improvement": -0.14033060217825222
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.07552602944679325,
+          "zero_mae": 0.0641948331286703,
+          "improvement": -0.1765125909029317
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.17957667754215353,
+          "zero_mae": 0.16261295923871946,
+          "improvement": -0.10431959656137213
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.09553927663207928,
+          "zero_mae": 0.10893024286919278,
+          "improvement": 0.12293157422951706
+        }
+      ],
+      "block_interval": {
+        "lower": -0.14949578240555159,
+        "upper": -0.01766602365271536,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.09680505652447904,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.31766025318078783,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.18846153846153846,
+          "q10_pinball": 0.02284435145367709,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.2730608584546075
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": false,
+          "q10_pinball_vs_baseline": true,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.0,
+        "max_drawdown": 0.0,
+        "buys": 0,
+        "sells": 0,
+        "completed_trades": 0,
+        "open_position": false,
+        "signal_switches": 0,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -1.0794602698650673,
+        "observations": 1377,
+        "last_signal": "observe"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 0,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null
+        },
+        "sell": {
+          "windows": 0,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null
+        },
+        "observe": {
+          "windows": 15,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.6,
+          "missed_beneficial_sell_rate": 0.2
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.2985898123669325
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.31766025318078783
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.18846153846153846,
+          "pinball": 0.02284435145367709
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    },
+    "rf_small": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": false,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": true,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.09330031144598477,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": -0.040058614693845085,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.026913535723906253,
+          "zero_mae": 0.03163837820680581,
+          "improvement": 0.14933895953880416
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.06845061733302334,
+          "zero_mae": 0.0641948331286703,
+          "improvement": -0.06629480905142104
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.16021020668011782,
+          "zero_mae": 0.16261295923871946,
+          "improvement": 0.014775898365359419
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.13694761254129842,
+          "zero_mae": 0.10893024286919278,
+          "improvement": -0.25720469296804804
+        }
+      ],
+      "block_interval": {
+        "lower": -0.20709305170441353,
+        "upper": 0.09514008745046125,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.09330031144598477,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.3269916077224254,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.1723076923076923,
+          "q10_pinball": 0.023746236016119526,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.3052588481097654
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": false,
+          "q10_pinball_vs_baseline": false,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+          "Pinball của Q10 kém hơn baseline.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.5230763922982122,
+        "max_drawdown": -0.29058009579563593,
+        "buys": 3,
+        "sells": 2,
+        "completed_trades": 2,
+        "open_position": true,
+        "signal_switches": 10,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -0.556383877566855,
+        "observations": 1377,
+        "last_signal": "buy"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 9,
+          "favorable_rate": 0.4444444444444444,
+          "mean_counterfactual_return": 0.01366711799222228
+        },
+        "sell": {
+          "windows": 2,
+          "favorable_rate": 0.0,
+          "mean_counterfactual_return": -0.1716402034786647
+        },
+        "observe": {
+          "windows": 4,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.75,
+          "missed_beneficial_sell_rate": 0.0
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.3425702651838933
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.3269916077224254
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.1723076923076923,
+          "pinball": 0.023746236016119526
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    },
+    "ridge": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": false,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": true,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.11582314976227949,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": -0.2911303598485291,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.04358886371201868,
+          "zero_mae": 0.03163837820680581,
+          "improvement": -0.37772117859828125
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.08975198902630602,
+          "zero_mae": 0.0641948331286703,
+          "improvement": -0.39811858138815737
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.16481801866527448,
+          "zero_mae": 0.16261295923871946,
+          "improvement": -0.013560170338687172
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.20417820901776138,
+          "zero_mae": 0.10893024286919278,
+          "improvement": -0.8743941410554428
+        }
+      ],
+      "block_interval": {
+        "lower": -0.643670208143437,
+        "upper": -0.06332811191932018,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.11582314976227949,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.3301522802566609,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.1930769230769231,
+          "q10_pinball": 0.03190393791988162,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.2706762588208973
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": false,
+          "q10_pinball_vs_baseline": false,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+          "Pinball của Q10 kém hơn baseline.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.5016799473967282,
+        "max_drawdown": -0.29058009579563593,
+        "buys": 3,
+        "sells": 2,
+        "completed_trades": 2,
+        "open_position": true,
+        "signal_switches": 14,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -0.5777803224683391,
+        "observations": 1377,
+        "last_signal": "buy"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 9,
+          "favorable_rate": 0.5555555555555556,
+          "mean_counterfactual_return": 0.02412479671737989
+        },
+        "sell": {
+          "windows": 3,
+          "favorable_rate": 0.0,
+          "mean_counterfactual_return": -0.081158138001118
+        },
+        "observe": {
+          "windows": 3,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.6666666666666666,
+          "missed_beneficial_sell_rate": 0.3333333333333333
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.3754428814049092
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.3301522802566609
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.1930769230769231,
+          "pinball": 0.03190393791988162
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    },
+    "zero": {
+      "status": "research_only",
+      "independent_validation": false,
+      "development_qualified": false,
+      "checks": {
+        "quality_all": false,
+        "calibration_coverage": true,
+        "stable_years": false,
+        "positive_block_lower": false,
+        "portfolio_vs_cash": false,
+        "portfolio_vs_buy_hold": false,
+        "portfolio_drawdown": true,
+        "enough_completed_trades": false
+      },
+      "rows": 1377,
+      "matured_rows": 1300,
+      "calibrated_rows": 1300,
+      "mae": 0.0897067820292503,
+      "zero_mae": 0.0897067820292503,
+      "mae_improvement": 0.0,
+      "by_year": [
+        {
+          "year": 2023,
+          "rows": 365,
+          "mae": 0.03163837820680581,
+          "zero_mae": 0.03163837820680581,
+          "improvement": 0.0
+        },
+        {
+          "year": 2024,
+          "rows": 366,
+          "mae": 0.0641948331286703,
+          "zero_mae": 0.0641948331286703,
+          "improvement": 0.0
+        },
+        {
+          "year": 2025,
+          "rows": 365,
+          "mae": 0.16261295923871946,
+          "zero_mae": 0.16261295923871946,
+          "improvement": 0.0
+        },
+        {
+          "year": 2026,
+          "rows": 204,
+          "mae": 0.10893024286919278,
+          "zero_mae": 0.10893024286919278,
+          "improvement": 0.0
+        }
+      ],
+      "block_interval": {
+        "lower": 0.0,
+        "upper": 0.0,
+        "block_months": 3,
+        "months": 43,
+        "confidence": 0.9
+      },
+      "quality": {
+        "horizon_months": 3,
+        "status": "research_failed",
+        "metrics": {
+          "matured_rows": 1300,
+          "nonoverlapping_windows": 15,
+          "origin_span_days": 1300,
+          "mae": 0.0897067820292503,
+          "zero_baseline_mae": 0.0897067820292503,
+          "brier": 0.290422839961803,
+          "baseline_brier": 0.25270266899313126,
+          "q10_breach_rate": 0.18846153846153846,
+          "q10_pinball": 0.023405303594369087,
+          "baseline_q10_pinball": 0.023153347916455097,
+          "probability_ece": 0.23740766844117633
+        },
+        "checks": {
+          "inputs_verified": true,
+          "enough_rows": true,
+          "enough_time_span": true,
+          "enough_nonoverlap": true,
+          "mae_vs_zero": false,
+          "brier_vs_baseline": false,
+          "q10_coverage": false,
+          "q10_pinball_vs_baseline": false,
+          "probability_calibration": false
+        },
+        "reasons": [
+          "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+          "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+          "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+          "Pinball của Q10 kém hơn baseline.",
+          "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+        ]
+      },
+      "portfolio": {
+        "total_return": 0.0,
+        "max_drawdown": 0.0,
+        "buys": 0,
+        "sells": 0,
+        "completed_trades": 0,
+        "open_position": false,
+        "signal_switches": 0,
+        "buy_hold_return": 1.0794602698650673,
+        "buy_hold_max_drawdown": -0.29058009579563604,
+        "cash_return": 0.0,
+        "excess_vs_buy_hold": -1.0794602698650673,
+        "observations": 1377,
+        "last_signal": "observe"
+      },
+      "signal_diagnostics": {
+        "buy": {
+          "windows": 0,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null
+        },
+        "sell": {
+          "windows": 0,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null
+        },
+        "observe": {
+          "windows": 15,
+          "favorable_rate": null,
+          "mean_counterfactual_return": null,
+          "missed_profitable_buy_rate": 0.6,
+          "missed_beneficial_sell_rate": 0.2
+        }
+      },
+      "calibration_comparison": {
+        "raw_probability": {
+          "rows": 1300,
+          "brier": 0.2901657561699337
+        },
+        "probability": {
+          "rows": 1300,
+          "brier": 0.290422839961803
+        },
+        "q10": {
+          "rows": 1300,
+          "breach_rate": 0.18846153846153846,
+          "pinball": 0.023405303594369087
+        },
+        "q10_gbr": {
+          "rows": 1300,
+          "breach_rate": 0.2453846153846154,
+          "pinball": 0.026451029597895782
+        }
+      }
+    }
+  },
+  "nested": {
+    "status": "research_only",
+    "independent_validation": false,
+    "development_qualified": false,
+    "checks": {
+      "quality_all": false,
+      "calibration_coverage": true,
+      "stable_years": false,
+      "positive_block_lower": false,
+      "portfolio_vs_cash": true,
+      "portfolio_vs_buy_hold": false,
+      "portfolio_drawdown": true,
+      "enough_completed_trades": false
+    },
+    "rows": 1377,
+    "matured_rows": 1300,
+    "calibrated_rows": 1300,
+    "mae": 0.09810251565280675,
+    "zero_mae": 0.0897067820292503,
+    "mae_improvement": -0.09359084601673584,
+    "by_year": [
+      {
+        "year": 2023,
+        "rows": 365,
+        "mae": 0.03163837820680581,
+        "zero_mae": 0.03163837820680581,
+        "improvement": 0.0
+      },
+      {
+        "year": 2024,
+        "rows": 366,
+        "mae": 0.06584826839989086,
+        "zero_mae": 0.0641948331286703,
+        "improvement": -0.025756516383592
+      },
+      {
+        "year": 2025,
+        "rows": 365,
+        "mae": 0.18596460271697918,
+        "zero_mae": 0.16261295923871946,
+        "improvement": -0.14360259838810863
+      },
+      {
+        "year": 2026,
+        "rows": 204,
+        "mae": 0.11768488273091783,
+        "zero_mae": 0.10893024286919278,
+        "improvement": -0.08036923108890814
+      }
+    ],
+    "block_interval": {
+      "lower": -0.17666497284035232,
+      "upper": -0.028020616029392112,
+      "block_months": 3,
+      "months": 43,
+      "confidence": 0.9
+    },
+    "quality": {
+      "horizon_months": 3,
+      "status": "research_failed",
+      "metrics": {
+        "matured_rows": 1300,
+        "nonoverlapping_windows": 15,
+        "origin_span_days": 1300,
+        "mae": 0.09810251565280675,
+        "zero_baseline_mae": 0.0897067820292503,
+        "brier": 0.287996302062236,
+        "baseline_brier": 0.25270266899313126,
+        "q10_breach_rate": 0.19,
+        "q10_pinball": 0.024586111510922395,
+        "baseline_q10_pinball": 0.023153347916455097,
+        "probability_ece": 0.2744765432802753
+      },
+      "checks": {
+        "inputs_verified": true,
+        "enough_rows": true,
+        "enough_time_span": true,
+        "enough_nonoverlap": true,
+        "mae_vs_zero": false,
+        "brier_vs_baseline": false,
+        "q10_coverage": false,
+        "q10_pinball_vs_baseline": false,
+        "probability_calibration": false
+      },
+      "reasons": [
+        "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+        "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+        "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+        "Pinball của Q10 kém hơn baseline.",
+        "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+      ]
+    },
+    "portfolio": {
+      "total_return": 0.1664633269313751,
+      "max_drawdown": -0.29058009579563604,
+      "buys": 2,
+      "sells": 1,
+      "completed_trades": 1,
+      "open_position": true,
+      "signal_switches": 6,
+      "buy_hold_return": 1.0794602698650673,
+      "buy_hold_max_drawdown": -0.29058009579563604,
+      "cash_return": 0.0,
+      "excess_vs_buy_hold": -0.9129969429336922,
+      "observations": 1377,
+      "last_signal": "observe"
+    },
+    "signal_diagnostics": {
+      "buy": {
+        "windows": 0,
+        "favorable_rate": null,
+        "mean_counterfactual_return": null
+      },
+      "sell": {
+        "windows": 2,
+        "favorable_rate": 0.0,
+        "mean_counterfactual_return": -0.1716402034786647
+      },
+      "observe": {
+        "windows": 13,
+        "favorable_rate": null,
+        "mean_counterfactual_return": null,
+        "missed_profitable_buy_rate": 0.5384615384615384,
+        "missed_beneficial_sell_rate": 0.23076923076923078
+      }
+    },
+    "calibration_comparison": {
+      "raw_probability": {
+        "rows": 1300,
+        "brier": 0.3429609248816767
+      },
+      "probability": {
+        "rows": 1300,
+        "brier": 0.287996302062236
+      },
+      "q10": {
+        "rows": 1300,
+        "breach_rate": 0.19,
+        "pinball": 0.024586111510922395
+      },
+      "q10_gbr": {
+        "rows": 1300,
+        "breach_rate": 0.2453846153846154,
+        "pinball": 0.026451029597895782
+      }
+    }
+  },
+  "current_selection": {
+    "candidate": "zero",
+    "scores": {
+      "boosting": 0.14398265861568596,
+      "elasticnet": 0.1592965779920699,
+      "median": 0.13474519500132168,
+      "no_price_change": 0.14250561031467565,
+      "rf_small": 0.13928131763313992,
+      "ridge": 0.15800913708584863,
+      "zero": 0.13391325868514045
+    },
+    "selection_rows": 638,
+    "selection_last_exit_date": "2026-09-30"
+  },
+  "frozen_candidate": "rf_small",
+  "frozen_margin": 0.01,
+  "existing_model_reference": {
+    "horizon_months": 3,
+    "status": "historical_failed",
+    "metrics": {
+      "matured_rows": 1300,
+      "nonoverlapping_windows": 15,
+      "origin_span_days": 1300,
+      "mae": 0.12435208304515422,
+      "zero_baseline_mae": 0.08970678202925034,
+      "brier": 0.4346326050544611,
+      "baseline_brier": 0.2772738586117834,
+      "q10_breach_rate": 0.21307692307692308,
+      "q10_pinball": 0.031085553261475322,
+      "baseline_q10_pinball": 0.021641030328480925,
+      "probability_ece": 0.3976789196567863
+    },
+    "checks": {
+      "inputs_verified": true,
+      "enough_rows": true,
+      "enough_time_span": true,
+      "enough_nonoverlap": true,
+      "mae_vs_zero": false,
+      "brier_vs_baseline": false,
+      "q10_coverage": false,
+      "q10_pinball_vs_baseline": false,
+      "probability_calibration": false
+    },
+    "reasons": [
+      "Sai số MAE chưa tốt hơn baseline lợi suất 0 theo ngưỡng đã khóa.",
+      "Brier của xác suất chưa tốt hơn baseline theo ngưỡng đã khóa.",
+      "Tỷ lệ lợi suất xuyên Q10 vượt ngưỡng cho phép.",
+      "Pinball của Q10 kém hơn baseline.",
+      "Sai lệch hiệu chỉnh xác suất vượt ngưỡng cho phép."
+    ],
+    "evaluation_start": "2023-01-01",
+    "evaluation_end": "2026-07-24"
+  },
+  "existing_model_reference_notice": "Mô hình cũ đóng băng năm, chỉ là tham chiếu; đối chứng chính cùng lịch tháng nằm trong candidates."
+}
