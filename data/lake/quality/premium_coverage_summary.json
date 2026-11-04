@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-26T14:34:30.478053+00:00",
-  "rows": 5574,
+  "generated_at": "2026-11-04T14:49:11.591254+00:00",
+  "rows": 5583,
   "old_rows": 5574,
   "old_premium_missing_rate": 0.0,
   "new_premium_missing_rate": 0.0,
@@ -9,8 +9,8 @@
   "gold_tolerance_days": 4,
   "fx_tolerance_days": 4,
   "source_quality_counts": {
-    "proxy_exact": 3837,
-    "proxy_forward_filled": 1736,
+    "proxy_exact": 3848,
+    "proxy_forward_filled": 1734,
     "official_exact": 1
   },
   "blockers": []

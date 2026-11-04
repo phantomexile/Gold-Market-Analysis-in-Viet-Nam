@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-26T14:34:42.789112+00:00",
-  "snapshot_date": "2026-10-24",
+  "generated_at": "2026-11-04T14:49:21.165324+00:00",
+  "snapshot_date": "2026-11-04",
   "protocol_id": "449e81f53ba21f303c49c3d0",
   "horizon_protocols": {
     "1": "0f117be33931d956662e8a25",
@@ -36,7 +36,7 @@
       "mode": "shadow",
       "protocol_id": "0f117be33931d956662e8a25",
       "validation_start": "2026-10-27",
-      "recorded_rows": 0,
+      "recorded_rows": 1,
       "matured_point_rows": 0
     },
     {
@@ -66,7 +66,7 @@
       "mode": "shadow",
       "protocol_id": "5d5b9ef3c0817077d598dd28",
       "validation_start": "2026-10-27",
-      "recorded_rows": 0,
+      "recorded_rows": 1,
       "matured_point_rows": 0
     },
     {
@@ -96,7 +96,7 @@
       "mode": "shadow",
       "protocol_id": "0fc356c6f274c9f7dd797220",
       "validation_start": "2026-10-27",
-      "recorded_rows": 0,
+      "recorded_rows": 1,
       "matured_point_rows": 0
     }
   ]

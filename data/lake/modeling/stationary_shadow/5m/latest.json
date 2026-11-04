@@ -1,16 +1,16 @@
 {
-  "snapshot_date": "2026-10-24",
+  "snapshot_date": "2026-11-04",
   "horizon_months": 5,
   "candidate": "rf_small",
-  "predicted_net_return": 0.08473780167325251,
+  "predicted_net_return": 0.0761392318327756,
   "q10_predicted_net_return": null,
   "prob_return_positive": null,
-  "entry_sell_price": 141700000.0,
-  "baseline_probability": 0.6180514046622834,
-  "baseline_q10": -0.06338028169014087,
-  "train_last_exit_date": "2026-09-30",
+  "entry_sell_price": 142400000.0,
+  "baseline_probability": 0.5995218170950388,
+  "baseline_q10": -0.07219442458899217,
+  "train_last_exit_date": "2026-10-31",
   "calibration_rows": 577,
-  "calibration_last_exit_date": "2026-09-30",
+  "calibration_last_exit_date": "2026-10-31",
   "selected_features": [
     "spread_ratio",
     "gold_return_1",
@@ -49,31 +49,31 @@
   "margin": 0.01,
   "probability_method": "temporal_oos_brier_weighted_v2",
   "signal": "buy",
-  "sigmoid_probability": 0.8223726540354721,
+  "sigmoid_probability": 0.7812437612801029,
   "probability_weight": 0.0,
-  "q10_correction": -0.3158423417925901,
-  "research_prob_return_positive": 0.6180514046622834,
-  "research_q10_predicted_net_return": -0.584718341503746,
+  "q10_correction": -0.33895198762238743,
+  "research_prob_return_positive": 0.5995218170950388,
+  "research_q10_predicted_net_return": -0.6417467620725952,
   "calibration_quality": {
     "status": "research_only",
     "probability_qualified": false,
     "q10_qualified": false,
     "metrics": {
-      "matured_rows": 1216,
-      "nonoverlapping_windows": 8,
-      "origin_span_days": 1215,
-      "mae": 0.14187588970784196,
-      "zero_baseline_mae": 0.14057243706534778,
-      "brier": 0.252426570824318,
-      "baseline_brier": 0.22500289383323716,
-      "probability_ece": 0.20355872210787815,
-      "q10_breach_rate": 0.12582236842105263,
-      "q10_pinball": 0.0452701688010651,
-      "baseline_q10_pinball": 0.02832315353239716,
+      "matured_rows": 1247,
+      "nonoverlapping_windows": 9,
+      "origin_span_days": 1246,
+      "mae": 0.14491908620203317,
+      "zero_baseline_mae": 0.1406627273499259,
+      "brier": 0.26659875112100434,
+      "baseline_brier": 0.23127069890840002,
+      "probability_ece": 0.22104244398078143,
+      "q10_breach_rate": 0.1475541299117883,
+      "q10_pinball": 0.050179237871178076,
+      "baseline_q10_pinball": 0.029974027897108704,
       "probability_missing_rows": 0,
       "q10_missing_rows": 0,
-      "probability_rows": 1216,
-      "q10_rows": 1216
+      "probability_rows": 1247,
+      "q10_rows": 1247
     },
     "checks": {
       "probability": {
@@ -134,7 +134,7 @@
     "mode": "shadow",
     "protocol_id": "0fc356c6f274c9f7dd797220",
     "validation_start": "2026-10-27",
-    "recorded_rows": 0,
+    "recorded_rows": 1,
     "matured_point_rows": 0
   },
   "forecast_selection": {
@@ -206,5 +206,5 @@
       "qualified": false
     }
   },
-  "eligible_for_prospective": false
+  "eligible_for_prospective": true
 }
