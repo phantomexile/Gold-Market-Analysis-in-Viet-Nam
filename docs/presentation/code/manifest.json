@@ -1,0 +1,44 @@
+{
+  "01_targets.py": {
+    "source": "src/gold_collectors/modeling/targets.py",
+    "source_sha256": "d0ed65d12e6bbe8957a7361bfc3ff7e3d34cbec14f0bcae072aff51363c35cc0",
+    "annotated_sha256": "ca5295549575252febba0a1cc2305377aa9a4d0cf70efb0abc37e0055a120ac1",
+    "ast_identical": true
+  },
+  "02_stationary_features.py": {
+    "source": "scripts/analysis/stationary_features.py",
+    "source_sha256": "cabb0b00b155e5495cf1543a3528bac0f3c508b9dcd75c058d9406cfe4fb397b",
+    "annotated_sha256": "1e0534a27fa2c6175a647b12e03b1ac9086d99128b3a7be4d27b6b7e12386c9e",
+    "ast_identical": true
+  },
+  "03_stationary_research.py": {
+    "source": "scripts/analysis/stationary_research.py",
+    "source_sha256": "cdf262cedaf472a2e895171f7c2ebc0af3168b41548efa602917d17dfc04fff7",
+    "annotated_sha256": "682bc39332da916420752dc90dbb8e66941e7bede12f4f145b92bb5f8cb7f657",
+    "ast_identical": true
+  },
+  "04_snapshot_validation.py": {
+    "source": "scripts/analysis/snapshot_validation.py",
+    "source_sha256": "0682dc203646baec64dd6e01a67bb5b551a5f5fa7b57f6490c850b3b5c770524",
+    "annotated_sha256": "aa71518d8e0bcaf18720020f78c249290c8b23db809d5ba3f83e3f2116f63a59",
+    "ast_identical": true
+  },
+  "05_refresh_pipeline.py": {
+    "source": "scripts/pipeline/refresh_latest_forecast.py",
+    "source_sha256": "b0aeeb04b8c64912a651c97de1432b1e6ca485c70586655c7e53b6c7246f7536",
+    "annotated_sha256": "9f8bddeedbb3cd3fa026a1d81ed24b3f9200d7edab26d92dcdcb44823127ef97",
+    "ast_identical": true
+  },
+  "06_active_snapshot.py": {
+    "source": "scripts/analysis/active_snapshot.py",
+    "source_sha256": "c0c2e6450a3d3942b9519ee3f2707d76ebddf6fe919a47ac8a95e0c362bae328",
+    "annotated_sha256": "da023c377e580a2384de9f24cb9acea62e192fd82061ebf07aaa8e7b96655d1e",
+    "ast_identical": true
+  },
+  "07_build_model_frame.py": {
+    "source": "src/gold_collectors/modeling/features.py",
+    "source_sha256": "61f5278add8a2ba8314f1a4f5d74507900872f1b4c97632548f5da4415e2952c",
+    "annotated_sha256": "e4f733ea7f8c347ccb0eca9d5c50d0cb0baae039a30f58de78f2118ae43e8789",
+    "ast_identical": true
+  }
+}

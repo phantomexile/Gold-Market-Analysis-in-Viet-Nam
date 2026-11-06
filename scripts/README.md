@@ -2,6 +2,8 @@
 
 Chạy lệnh từ thư mục gốc của dự án. Các thư mục ở đây có cùng độ sâu để đường dẫn dữ liệu giữ nguyên sau khi chuyển file.
 
+Để giải thích dự án, đọc [tài liệu thuyết trình](../docs/presentation/00_BAT_DAU.md) và [phân nhóm analysis](analysis/README.md). Tạo lại bản mã có chú thích bằng `python scripts/reporting/prepare_presentation_sources.py`; lệnh này chỉ ghi tài liệu trong `docs/presentation/code/`, không chạy pipeline hoặc thay mô hình.
+
 | Thư mục | Trách nhiệm | Điểm chạy tiêu biểu |
 |---|---|---|
 | `collection/` | Tải dữ liệu giá, thị trường, tin tức và nguồn chính sách | `refresh_event_inputs.py`, `crawl_raw_gold_history.py` |

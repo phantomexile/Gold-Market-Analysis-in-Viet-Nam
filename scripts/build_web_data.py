@@ -295,6 +295,8 @@ def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = No
     validated giữ hành vi cũ để đối chiếu; không sửa status hoặc sổ giao dịch
     và không tự biến tín hiệu dự báo thành bằng chứng validated.
     """
+    # direct diễn giải dấu/biên lợi suất dự báo để hiển thị. validated yêu cầu
+    # cổng bằng chứng độc lập; hai chế độ không được dùng thay thế ý nghĩa nhau.
     if signal_mode not in ('direct', 'validated'):
         raise ValueError('Chế độ tín hiệu không hợp lệ.')
     rec = _build_validated_recommendations(lake, expected_snapshot_date=expected_snapshot_date)
@@ -303,6 +305,8 @@ def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = No
     from scripts.analysis.forecast_signals import direct_signal, NEUTRAL_MARGIN, PRIMARY_HORIZON_MONTHS
     rows = load_csv(lake / 'modeling/snapshot_forecasts.csv')
     buy, sell = _snapshot_quote(lake, rec['snapshot_date'])
+    # Thiếu kỳ hạn, lặp kỳ hạn hoặc lệch ngày làm mất tính nhất quán của cả
+    # snapshot; không ghép dự báo cũ vào giá mới chỉ để giao diện đủ ba ô.
     dataset_valid = (bool(expected_snapshot_date)
                      and all(r.get('snapshot_date') == expected_snapshot_date for r in rows)
                      and sorted(str(r.get('horizon_months') or '') for r in rows) == ['1', '3', '5'])
@@ -343,10 +347,14 @@ def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = No
             state = validation.get('status', 'unvalidated')
             checks = validation.get('checks', {})
             from scripts.analysis.snapshot_validation import REQUIRED_CHECKS
+            # Không tin riêng nhãn status: mỗi phép kiểm tra bắt buộc cũng phải
+            # True, tránh tệp bị sửa tay hoặc thiếu bằng chứng vẫn nhận validated.
             verified = state == 'validated' and isinstance(checks, dict) and all(checks.get(name) is True for name in REQUIRED_CHECKS)
             if state == 'validated' and not verified:
                 state = 'validation_failed'
             def percent(key):
+                # Dữ liệu mô hình dùng tỷ lệ thập phân (0,03); JSON hiển thị
+                # phần trăm (3,00). Chỉ chuyển đổi tại lớp trình bày này.
                 value = active.get(key) if active else None
                 return round(float(value)*100, 2) if value is not None else None
             quality = active.get('calibration_quality', {}) if active else {}
@@ -431,6 +439,9 @@ def build_recommendations(lake: Path, *, expected_snapshot_date: str | None = No
 
 
 def main():
+    # Điểm xuất dữ liệu giao diện: đọc lake và snapshot, tổng hợp JSON.
+    # Nhánh mô hình đang kích hoạt còn có thể gọi loader để fit lại RF theo
+    # bản khóa và ghi dữ liệu shadow; vì vậy dựng JSON không luôn là chỉ đọc.
     root = Path(__file__).resolve().parent.parent
     lake = root / "data" / "lake"
     out_dir = root / "web" / "data"

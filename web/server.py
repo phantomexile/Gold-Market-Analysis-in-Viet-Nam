@@ -28,6 +28,8 @@ class RefreshJob:
     """Giữ một lượt cập nhật chung để nhiều tab cùng theo dõi, tránh chạy trùng model."""
 
     def __init__(self, root: Path, *, script: Path | None = None):
+        # root xác định dữ liệu và pipeline của dự án; lock bảo vệ trạng thái
+        # dùng chung giữa luồng HTTP và luồng cập nhật chạy nền.
         self.root = root
         self.script = script or root / "scripts" / "pipeline" / "refresh_latest_forecast.py"
         self.lock = threading.Lock()
@@ -111,6 +113,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(web_dir), **kwargs)
 
     def do_GET(self):
+        # GET chỉ đọc JSON/trạng thái hoặc phục vụ HTML, CSS, JavaScript.
+        # Việc cập nhật dữ liệu được tách sang POST vì nó khởi động công việc mới.
         if self.path == "/api/data":
             self.serve_api_data()
         elif self.path == "/api/update/status":
@@ -119,12 +123,16 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             super().do_GET()
 
     def do_POST(self):
+        # Chỉ endpoint cập nhật được hỗ trợ; URL khác trả 404 để người gọi
+        # không hiểu nhầm rằng một yêu cầu sai đường dẫn đã được xử lý.
         if self.path == "/api/update":
             self.handle_api_update()
         else:
             self.send_error(404, "Endpoint not found")
 
     def serve_api_data(self):
+        # JSON có sẵn giúp demo đọc đúng snapshot đã chuẩn bị. Nếu chưa có,
+        # server thử dựng dữ liệu; lỗi cuối cùng trả 500 thay vì một bảng trống giả.
         data_file = Path(__file__).resolve().parent / "data" / "gold_dashboard_data.json"
         if not data_file.exists():
             # Trigger build if file not present
@@ -132,6 +140,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
             subprocess.run([sys.executable, str(root / "scripts" / "build_web_data.py")], check=False)
 
         if data_file.exists():
+            # Độ dài tính theo byte UTF-8 để tiếng Việt có dấu được truyền đủ.
+            # no-cache yêu cầu trình duyệt kiểm tra lại dữ liệu khi tải dashboard.
             content = data_file.read_bytes()
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -148,6 +158,8 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
 
     def send_json(self, payload: dict, *, status: int = 200):
         """Không cache trạng thái để thanh tiến trình luôn phản ánh lượt đang chạy."""
+        # Giữ nguyên dấu tiếng Việt trong thông báo; status 202 nghĩa là đã
+        # nhận việc, còn kết quả thành công/thất bại được đọc ở API tiến trình.
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")

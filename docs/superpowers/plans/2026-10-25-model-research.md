@@ -46,7 +46,7 @@
 
 ## Task 3: Chạy và xuất báo cáo nghiên cứu
 
-**Files:** Create `scripts/analysis/run_model_research.py`, `docs/model-research-2026-10-25.md`; outputs dưới `data/lake/modeling/research/`.
+**Files:** Create `scripts/analysis/run_model_research.py`, `docs/reports/modeling/model-research-2026-10-25.md`; outputs dưới `data/lake/modeling/research/`.
 - [x] RED: xuất manifest, bảo vệ thư mục đã tồn tại, JSON không NaN và trạng thái nghiên cứu.
 - [x] CLI chụp hash trước chạy, ghi cấu hình và phiên bản thư viện, lưu audit/diagnostics/predictions/selections/report.
 - [x] Chạy thật lake hiện có, ghi kết quả kể cả thất bại; so sánh cùng lịch tháng, tách khỏi RF đóng băng năm hiện tại.
@@ -63,4 +63,4 @@
 - Final review: reviewer độc lập không phát hiện lỗi quan trọng; hai đề nghị test biên đã bổ sung và đạt. Mã nguồn được giữ nguyên trong lúc chạy để đối chiếu hash cuối.
 - Task 3: complete — v2 hoàn tất, hash trước/sau của dữ liệu/mã/chính sách và snapshot/validation report/ledger/dashboard khớp. 69 tests OK, 2 skipped; 11 tests nghiên cứu mới đạt.
 - Result: RF tháng có MAE 5,39/10,02/15,06 so với RF năm 6,23/12,44/16,71. Chuỗi lựa chọn trước năm có MAE 3,77/11,12/13,88, chưa đạt giảm 5% so với baseline 3,70/8,97/14,07. Không thay mô hình vận hành hoặc nới ngưỡng.
-- Handoff: xem docs/model-research-2026-10-25.md; ưu tiên nghiên cứu đặc trưng dạng tỷ lệ/biến động và độ thích ứng trước khi đưa xác suất/Q10 mới vào vận hành. Chưa chạy thêm cấu hình sau khi xem kết quả.
+- Handoff: xem docs/reports/modeling/model-research-2026-10-25.md; ưu tiên nghiên cứu đặc trưng dạng tỷ lệ/biến động và độ thích ứng trước khi đưa xác suất/Q10 mới vào vận hành. Chưa chạy thêm cấu hình sau khi xem kết quả.

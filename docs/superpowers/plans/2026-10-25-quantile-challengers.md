@@ -28,4 +28,4 @@
 - Lượt quantile-v1 hoàn tất với 2.107 dòng mỗi ứng viên, 1.300 dòng đã đáo hạn/chấm và đủ calibration. Bốn ứng viên cùng ngày/actual; tất cả train/calibration exit <foldstart.
 - Kết quả MAE: RF9,33, CatBoost9,78, LightGBM9,97, zero8,97 điểm %. NativeQ10–Q90 coverage Cat15,8%/LGBM25,1% so mục tiêu80%; không chọn hai ứng viên.
 - Rà soát độc lập tự chạy 4 tests và kiểm tra artifact/hash, không phát hiện lỗi quan trọng. Chỉ so toàn phương pháp, không quy mọi khác biệt cho họ thuật toán.
-- Bộ 91 tests: 89pass/2skipped. Báo cáo docs/quantile-challengers-results-2026-10-25.md; giữ active model/dashboard/campaign nguyên trạng, không commit/deploy.
+- Bộ 91 tests: 89pass/2skipped. Báo cáo docs/reports/modeling/quantile-challengers-results-2026-10-25.md; giữ active model/dashboard/campaign nguyên trạng, không commit/deploy.

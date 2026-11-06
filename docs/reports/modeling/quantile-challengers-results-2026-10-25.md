@@ -43,6 +43,6 @@ Nếu dùng cùng công thức Q10 residual như RF, tỷ lệ xuyên Q10 giảm
 - Giữ RF cải tiến đang áp dụng cho ba tháng; 1/5 tháng không đổi.
 - Hai cấu hình đã thử chưa tạo mô hình đáng tin cậy. Kết quả này không khẳng định mọi cấu hình LightGBM/CatBoost đều kém; chỉ phản ánh lượt thử đã khóa.
 - Chưa chọn thêm cấu hình hoặc hạ ngưỡng để làm đẹp kết quả. Hướng nghiên cứu tiếp theo nên kiểm tra khả năng thay đổi phân phối/nguồn dữ liệu và hiệu chỉnh khoảng dự báo, thay vì mặc định thuật toán phức tạp hơn sẽ thắng.
-- Báo cáo chi tiết: [report.md](../data/lake/modeling/research/2026-10-25-quantile-v1/report.md); cùng thư mục có `report.json`, `predictions.csv`, `manifest.json` và audit nhãn.
+- Báo cáo chi tiết: [report.md](../../../data/lake/modeling/research/2026-10-25-quantile-v1/report.md); cùng thư mục có `report.json`, `predictions.csv`, `manifest.json` và audit nhãn.
 - 91 bài kiểm thử: 89 đạt, 2 bài nguồn trực tiếp bỏ qua; gồm chạy thật cả hai adapter CPU. Rà soát độc lập không phát hiện lỗi quan trọng.
 - Hash dữ liệu, reference, active model, dashboard và các file campaign giữ nguyên. Không commit/deploy hoặc kích hoạt hai ứng viên.

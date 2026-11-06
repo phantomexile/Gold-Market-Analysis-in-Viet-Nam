@@ -2,6 +2,21 @@
 
 Giải thích từng module code: cái nào làm gì, input/output, data flow.
 
+## Đọc nhanh để thuyết trình
+
+Mở [bộ tài liệu theo thứ tự](presentation/00_BAT_DAU.md) và [bảy bản mã có chú thích](presentation/code/README.md). Bản đồ bên dưới mô tả cả thư viện phân tích tổng quát và các công cụ lịch sử; tuyến snapshot hiện chọn bằng registry `reliability_v2` cần đọc theo bảng sau.
+
+| Bước hiện hành | Mã vận hành | Ý nghĩa |
+|---|---|---|
+| Điều phối | scripts/pipeline/refresh_latest_forecast.py | Thu thập, xử lý, dựng snapshot và kiểm tra ngày |
+| Dựng frame | src/gold_collectors/modeling/features.py, targets.py | Ghép as-of và nhãn 1/3/5 tháng lịch |
+| Chọn tuyến xuất | scripts/analysis/train_latest_snapshot.py, active_snapshot.py | Đi theo registry, dùng cùng dự báo cho các đầu ra |
+| Mô hình và đặc trưng | scripts/analysis/stationary_features.py, stationary_research.py | Đầu vào tỷ lệ và RF riêng từng kỳ hạn |
+| Khóa/kiểm định | scripts/analysis/stationary_activation.py, stationary_shadow.py, snapshot_validation.py | Đối chiếu protocol, theo dõi dự báo mới và kiểm tra chất lượng |
+| Dashboard | scripts/build_web_data.py, web/server.py | JSON, tín hiệu trực tiếp, API dữ liệu và tiến trình |
+
+Sơ đồ nhóm `training.py` bên dưới là thư viện phân tích/so sánh, không có nghĩa mọi thuật toán trong đó đều đang phát dự báo chính. Xem [phân nhóm analysis](../scripts/analysis/README.md).
+
 ---
 
 ## Cấu trúc source

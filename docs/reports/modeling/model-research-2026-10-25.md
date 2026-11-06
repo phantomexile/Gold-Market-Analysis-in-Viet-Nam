@@ -53,7 +53,7 @@ Nếu nhìn toàn bộ giai đoạn rồi chọn ứng viên tốt nhất, Ridge
 
 ## Bằng chứng và chạy lại
 
-- Báo cáo đầy đủ: [report.md](../data/lake/modeling/research/2026-10-25-monthly-v2/report.md).
+- Báo cáo đầy đủ: [report.md](../../../data/lake/modeling/research/2026-10-25-monthly-v2/report.md).
 - `manifest.json`: cấu hình khóa, hash dữ liệu/mã/chính sách, phiên bản thư viện, thời điểm bắt đầu/kết thúc và xác nhận artifact vận hành giữ nguyên.
 - `target_audit.json`, `input_quality.json`, `historical_diagnostics.json`: kiểm tra nhãn, phạm vi đầu vào, lỗi theo năm/xu hướng, nhóm xác suất và tháng sai nhiều.
 - `predictions_1m.csv`, `predictions_3m.csv`, `predictions_5m.csv`: từng dự báo, mốc train, số mẫu train và tên đặc trưng được chọn.

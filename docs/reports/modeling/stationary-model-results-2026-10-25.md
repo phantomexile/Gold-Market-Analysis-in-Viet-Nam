@@ -59,7 +59,7 @@ So với báo cáo mô hình cũ, Brier giảm từ 0,435 và tỷ lệ xuyên Q
 
 ## Bằng chứng và kiểm tra
 
-- Lượt cuối: [báo cáo nghiên cứu](../data/lake/modeling/research/2026-10-25-stationary-v2/report.md), `report.json`, `predictions.csv`, `selected_path.csv`, `selections.json`, `manifest.json` trong cùng thư mục.
+- Lượt cuối: [báo cáo nghiên cứu](../../../data/lake/modeling/research/2026-10-25-stationary-v2/report.md), `report.json`, `predictions.csv`, `selected_path.csv`, `selections.json`, `manifest.json` trong cùng thư mục.
 - `target_audit.json`: không phát hiện lỗi nhãn lợi suất/ngày thoát/giá trong frame; chưa xác minh độc lập mọi báo giá nguồn.
 - Thư mục `data/lake/modeling/stationary_shadow/`: `active.json`, protocol đã khóa, OOS ban đầu, `latest.json` và nhật ký dự báo mới. Đã chạy thành công `--record-only` trên snapshot hiện tại.
 - V1 giữ để kiểm toán. Sau rà soát, fingerprint được mở rộng để bao gồm mã dùng chung; v2 chạy lại cùng mô hình/tham số và là bản cuối. Không dùng protocol v1 cho bằng chứng mới.
